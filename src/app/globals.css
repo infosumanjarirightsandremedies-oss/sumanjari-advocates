@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+SC:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e8c660;
+  --gold-pale: #f0d080;
+  --navy-deep: #0a0e1a;
+  --navy-mid: #0f1628;
+  --navy-light: #141e38;
+  --cream: #f5f0e8;
+  --parchment: #ede8dc;
+  /* Light: high-contrast ink on warm paper */
+  --page-bg: #f2efe8;
+  --page-fg: #0a0f18;
+  --page-muted: rgba(10, 15, 24, 0.68);
+}
+
+.dark {
+  --page-bg: #0a0e1a;
+  --page-fg: #f5f0e8;
+  --page-muted: rgba(245, 240, 232, 0.55);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--page-bg);
+  color: var(--page-fg);
+  font-family: 'EB Garamond', Georgia, serif;
+  overflow-x: hidden;
+}
+
+.font-display {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-caps {
+  font-family: 'Cormorant SC', Georgia, serif;
+}
+
+.font-body {
+  font-family: 'EB Garamond', Georgia, serif;
+}
+
+/* Gold gradient accent (readable on both themes) */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #a8893d 0%, #c9a84c 40%, #d4af56 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dark .text-gold-gradient {
+  background: linear-gradient(135deg, #c9a84c 0%, #f0d080 50%, #c9a84c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtle noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.22;
+}
+
+.dark body::before {
+  opacity: 0.4;
+}
+
+/* Gold divider line */
+.divider-gold {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0 auto;
+}
+
+/* Animated gold border */
+.border-gold-animated {
+  position: relative;
+}
+.border-gold-animated::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.4s ease;
+}
+.border-gold-animated:hover::after {
+  width: 100%;
+}
+
+/* Scroll ticker */
+.ticker-wrap {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ticker-inner {
+  display: inline-flex;
+  animation: scroll 30s linear infinite;
+}
+
+/* Section fade-in on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* WhatsApp float button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 999;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+}
+
+/* Card hover glow */
+.card-glow {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-glow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(201, 168, 76, 0.18);
+}
+
+.dark .card-glow:hover {
+  box-shadow: 0 20px 60px rgba(201, 168, 76, 0.12);
+}
+
+/* Input styles */
+.input-luxury {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  color: var(--navy-mid);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark .input-luxury {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  color: var(--cream);
+}
+
+.input-luxury:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+}
+
+.dark .input-luxury:focus {
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
+}
+
+.input-luxury::placeholder {
+  color: rgba(15, 22, 40, 0.38);
+}
+
+.dark .input-luxury::placeholder {
+  color: rgba(245, 240, 232, 0.3);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #e8e4dc;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: var(--navy-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 3px;
+}
+
+/* Button shine effect */
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #c9a84c, #e8c660, #c9a84c);
+  background-size: 200% 200%;
+  transition: background-position 0.5s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+.btn-gold:hover {
+  background-position: right center;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(201, 168, 76, 0.4);
+}
+.btn-gold::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: rgba(255,255,255,0.2);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+.btn-gold:hover::after {
+  left: 130%;
+}
+
+/* Glass card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(10, 15, 24, 0.08);
+  box-shadow: 0 4px 24px rgba(10, 15, 24, 0.06), 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+}
+
+.dark .glass-card {
+  background: rgba(20, 30, 56, 0.6);
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  box-shadow: none;
+}
+
+/* Service tab active state */
+.tab-active {
+  color: var(--gold);
+  border-bottom: 2px solid var(--gold);
+}
