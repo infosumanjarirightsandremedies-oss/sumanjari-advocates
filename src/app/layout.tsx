@@ -12,10 +12,10 @@ export const metadata: Metadata = {
     'Sumanjari & Co Advocates, Allahabad High Court Lucknow, chamber Block D-311 Lucknow High Court, civil criminal family property lawyer Lucknow Bench',
 
   icons: {
-    icon: '/images/favicon.ico',
-    shortcut: '/images/favicon.ico',
-    apple: '/images/favicon.ico',
-  },
+  icon: "/images/favicon.png",
+  shortcut: "/images/favicon.png",
+  apple: "/images/favicon.png",
+},
 
   openGraph: {
     title: 'Sumanjari & Co. Advocates',
