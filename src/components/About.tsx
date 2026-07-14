@@ -90,7 +90,7 @@ export default function About() {
             </p>  */}
 
             <p className="font-body text-navy-700/85 dark:text-cream/60 text-lg leading-relaxed mb-10">
-              Visit <strong className="text-navy-900 dark:text-cream">www.sumanjarirightandremedies.com</strong>
+              Visit <strong className="text-navy-900 dark:text-cream">https://www.sumanjariadvocates.com/</strong>
               <br></br>
                •{' '}
               <strong>Dedicated to protecting your rights & delivering justice.</strong>
