@@ -1,4 +1,4 @@
-# Sangam & Sagar Law Office LLP — Website
+# Sumanjari & Co. — Website
 
 A premium law firm website built with **Next.js 14**, **Tailwind CSS**, and **Resend** for email.
 
@@ -68,7 +68,7 @@ The contact form sends two emails:
 1. **To your office** (`sslawoffice01@gmail.com`) — full client details
 2. **To the client** — professional confirmation with WhatsApp CTA
 
-> **Important:** Resend's free plan sends from `onboarding@resend.dev`. To send from your own domain (e.g. `info.sangamsagar.com`), add your domain at [resend.com/domains](https://resend.com/domains) and update the `from` field in `src/app/api/contact/route.ts`.
+> **Important:** Resend's free plan sends from `onboarding@resend.dev`. To send from your own domain (e.g. `(https://www.sumanjariadvocates.com/#home)`), add your domain at [resend.com/domains](https://resend.com/domains) and update the `from` field in `src/app/api/contact/route.ts`.
 
 ---
 
