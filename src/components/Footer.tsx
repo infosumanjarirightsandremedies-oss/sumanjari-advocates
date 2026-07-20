@@ -1,12 +1,15 @@
 'use client'
-import { Scale, Instagram,  Phone, Mail, MapPin } from 'lucide-react'
+import { Scale, Instagram, Phone, Mail, MapPin } from 'lucide-react'
 
 const services = [
+  'Property & Land Matters',
   'Civil Matters',
   'Criminal Matters',
-  'Family & Divorce Matters',
-  'Property Matters',
+  'Family & Matrimonial Matters',
   'Service & Employment Matters',
+  'Consumer & Motor Accident Matters',
+  'Constitutional & Writ Matters',
+  'Drafting & Legal Opinions',
 ]
 
 const links = [
@@ -16,7 +19,7 @@ const links = [
   { label: 'Contact Us', href: '#contact' },
 ]
 
-const WEBSITE = 'https://www.sumanjarirightandremedies.com'
+const WEBSITE = 'https://www.sumanjaririadvocates.com'
 
 const social = [
   {
@@ -46,25 +49,25 @@ export default function Footer() {
               <div className="font-display text-gold-700 dark:text-gold-300 text-sm font-semibold leading-tight">Sumanjari & Co.</div>
               <div className="font-caps text-gold-600/75 dark:text-gold-500/60 text-[10px] tracking-widest uppercase">Advocates</div>
             </div>
-          </div><p className="font-body text-navy-700/70 dark:text-cream/40 text-sm leading-relaxed mb-6">
-  Trusted legal counsel with integrity, dedication, and excellence.
-  <br />
-  Representing clients before the Allahabad High Court (Principal Bench &amp; Lucknow Bench) and courts across Uttar Pradesh.
-  <br />
-  <span className="font-semibold tracking-wide uppercase">
-    Your Right. Our Resolve.
-  </span>
-</p>
+          </div>
+          <p className="font-body text-navy-700/70 dark:text-cream/60 text-sm leading-relaxed mb-6">
+            Trusted legal counsel with integrity, dedication, and excellence.
+            <br />
+            Representing clients before the Allahabad High Court (Principal Bench &amp; Lucknow Bench) and courts across Uttar Pradesh.
+            <br />
+            <span className="font-semibold tracking-wide uppercase text-navy-800 dark:text-cream/85">
+              Your Right. Our Resolve.
+            </span>
+          </p>
           {/* Social */}
           <div className="flex flex-wrap gap-2">
             {social.map(({ icon: Icon, href, label }) => (
               <a
-                key={label}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="w-9 h-9 rounded-sm border border-gold-500/30 flex items-center justify-center text-gold-600/70 hover:text-gold-600 hover:border-gold-500/50 hover:bg-gold-500/10 dark:border-gold-500/20 dark:text-gold-500/60 dark:hover:text-gold-400 transition-all"
+                className="w-9 h-9 rounded-sm border border-gold-500/30 flex items-center justify-center text-gold-600/70 hover:text-gold-600 hover:border-gold-500/50 hover:bg-gold-500/10 dark:border-gold-500/25 dark:text-gold-400/80 dark:hover:text-gold-400 transition-all"
               >
                 <Icon className="w-4 h-4" />
               </a>
@@ -80,8 +83,8 @@ export default function Footer() {
           <ul className="space-y-3">
             {services.map(s => (
               <li key={s}>
-                <a href="#services" className="font-body text-navy-700/75 dark:text-cream/40 text-sm hover:text-gold-600 dark:hover:text-gold-400 transition-colors flex items-center gap-2">
-                  <span className="w-1 h-1 rounded-full bg-gold-500/45 dark:bg-gold-500/40" />
+                <a href="#services" className="font-body text-navy-700/75 dark:text-cream/60 text-sm hover:text-gold-600 dark:hover:text-gold-400 transition-colors flex items-center gap-2">
+                  <span className="w-1 h-1 rounded-full bg-gold-500/45 dark:bg-gold-500/55" />
                   {s}
                 </a>
               </li>
@@ -97,8 +100,8 @@ export default function Footer() {
           <ul className="space-y-3">
             {links.map(({ label, href }) => (
               <li key={label}>
-                <a href={href} className="font-body text-navy-700/75 dark:text-cream/40 text-sm hover:text-gold-600 dark:hover:text-gold-400 transition-colors flex items-center gap-2">
-                  <span className="w-1 h-1 rounded-full bg-gold-500/45 dark:bg-gold-500/40" />
+                <a href={href} className="font-body text-navy-700/75 dark:text-cream/60 text-sm hover:text-gold-600 dark:hover:text-gold-400 transition-colors flex items-center gap-2">
+                  <span className="w-1 h-1 rounded-full bg-gold-500/45 dark:bg-gold-500/55" />
                   {label}
                 </a>
               </li>
@@ -112,28 +115,26 @@ export default function Footer() {
             Contact
           </h4>
           <ul className="space-y-4">
-            {/* FIXED: Jitendra's correct number */}
             <li>
-              <a href="tel:+918299086204" className="flex items-start gap-3 text-navy-700/75 dark:text-cream/40 hover:text-gold-600 dark:hover:text-gold-400 transition-colors group">
+              <a href="tel:+918299086204" className="flex items-start gap-3 text-navy-700/75 dark:text-cream/60 hover:text-gold-600 dark:hover:text-gold-400 transition-colors group">
                 <Phone className="w-4 h-4 mt-0.5 flex-shrink-0 group-hover:text-gold-600 dark:group-hover:text-gold-400" />
                 <span className="font-body text-sm">+91 82990 86204 · Adv Jitendra Tiwari</span>
               </a>
             </li>
-            {/* FIXED: Aishwarya's correct number */}
             <li>
-              <a href="tel:+918302471764" className="flex items-start gap-3 text-navy-700/75 dark:text-cream/40 hover:text-gold-600 dark:hover:text-gold-400 transition-colors group">
+              <a href="tel:+918302471764" className="flex items-start gap-3 text-navy-700/75 dark:text-cream/60 hover:text-gold-600 dark:hover:text-gold-400 transition-colors group">
                 <Phone className="w-4 h-4 mt-0.5 flex-shrink-0 group-hover:text-gold-600 dark:group-hover:text-gold-400" />
                 <span className="font-body text-sm">+91 83024 71764 · Aishwarya Pandey</span>
               </a>
             </li>
             <li>
-              <a href="mailto:info.sumanjarirightsandremedies@gmail.com" className="flex items-start gap-3 text-navy-700/75 dark:text-cream/40 hover:text-gold-600 dark:hover:text-gold-400 transition-colors group">
+              <a href="mailto:info.sumanjarirightsandremedies@gmail.com" className="flex items-start gap-3 text-navy-700/75 dark:text-cream/60 hover:text-gold-600 dark:hover:text-gold-400 transition-colors group">
                 <Mail className="w-4 h-4 mt-0.5 flex-shrink-0 group-hover:text-gold-600 dark:group-hover:text-gold-400" />
                 <span className="font-body text-sm">info.sumanjarirightsandremedies@gmail.com</span>
               </a>
             </li>
             <li>
-              <div className="flex items-start gap-3 text-navy-700/75 dark:text-cream/40">
+              <div className="flex items-start gap-3 text-navy-700/75 dark:text-cream/60">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-gold-600 dark:text-gold-400" />
                 <span className="font-body text-sm">High Court Lucknow · Chamber Block D · D-311</span>
               </div>
@@ -142,11 +143,11 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* ADDED: Mandatory Disclaimer bar */}
-      <div className="border-t border-gold-500/15 dark:border-gold-500/10 bg-gold-500/5 dark:bg-gold-500/5">
+      {/* Mandatory Disclaimer bar */}
+      <div className="border-t border-gold-500/15 dark:border-gold-500/12 bg-gold-500/5 dark:bg-gold-500/8">
         <div className="max-w-7xl mx-auto px-6 py-4 text-center">
-          <p className="font-body text-black dark:text-black text-xs leading-relaxed">
-            <span className="font-semibold text-navy-700/80 dark:text-cream/50">Mandatory Disclaimer: </span>
+          <p className="font-body text-navy-900 dark:text-cream/85 text-xs leading-relaxed">
+            <span className="font-semibold text-navy-700/80 dark:text-cream/70">Mandatory Disclaimer: </span>
             This website is for informational purposes only and does not constitute solicitation or advertisement.
             As per Bar Council of India Rules, advocates are not permitted to solicit work or advertise.
           </p>
@@ -156,13 +157,12 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-gold-500/18 dark:border-gold-500/10">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="font-caps text-navy-600/65 dark:text-cream/30 text-[10px] tracking-widest">
+          <p className="font-caps text-navy-600/65 dark:text-cream/50 text-[10px] tracking-widest">
             © 2026 Sumanjari & Co. Advocates. All rights reserved.
           </p>
-          <div className="flex gap-5 font-caps text-navy-600/65 dark:text-cream/30 text-[10px] tracking-widest">
+          <div className="flex gap-5 font-caps text-navy-600/65 dark:text-cream/50 text-[10px] tracking-widest">
             <a href="#" className="hover:text-gold-600 dark:hover:text-gold-400 transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-gold-600 dark:hover:text-gold-400 transition-colors">Terms</a>
-           {/* <a href="#" className="hover:text-gold-600 dark:hover:text-gold-400 transition-colors">Disclaimer</a> */}
           </div>
         </div>
       </div>

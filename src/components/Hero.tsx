@@ -66,8 +66,11 @@ export default function Hero() {
       {/* Live badge */}
       <div className="absolute top-28 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full border border-gold-500/35 bg-white/85 px-4 py-1.5 shadow-md backdrop-blur-md dark:border-gold-400/30 dark:bg-navy-900/85 dark:shadow-lg dark:shadow-black/40">
         <span className="h-2 w-2 animate-pulse rounded-full bg-gold-500" />
-        <span className="font-caps text-xs uppercase tracking-widest text-gold-800 dark:text-gold-200">
-          Live Legal Services
+
+       <span className="font-caps font-semibold text-xs uppercase tracking-widest text-gold-800 dark:text-gold-200">Currently Accepting Consultations
+       {/* <span className="font-caps bold  text-xs uppercase tracking-widest text-gold-800 dark:text-gold-200">/*}
+          Currently Accepting Consultations
+         {  /*Live Legal Services*/}
         </span>
       </div>
 
@@ -79,7 +82,7 @@ export default function Hero() {
             <div className="mb-6 flex items-center gap-4">
               <div className="h-px w-12 bg-gold-500" />
               <span className="hidden sm:block font-caps text-xs uppercase tracking-[0.3em] text-[#6b5420] dark:text-gold-400">
-             www.sumanjarirightandremedies.com
+             www.sumanjarirightsandremedies.com
               </span>
             </div>
 

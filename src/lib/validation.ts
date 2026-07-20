@@ -1,4 +1,4 @@
-import { isValidPhoneNumber, type CountryCode } from 'libphonenumber-js'
+﻿import { isValidPhoneNumber, type CountryCode } from 'libphonenumber-js'
 
 export function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())

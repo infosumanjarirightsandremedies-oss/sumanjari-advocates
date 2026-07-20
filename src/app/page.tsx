@@ -8,6 +8,7 @@ import Testimonials from '@/components/Testimonials'
 import Footer from '@/components/Footer'
 import WhatsAppFloat from '@/components/WhatsAppFloat'
 import Team from '@/components/Team'
+
 import InternshipPage from './internship/page'
 
 export default function Home() {

@@ -1,13 +1,14 @@
-'use client'
+﻿'use client'
 import { MessageCircle, X, Phone } from 'lucide-react'
 import { useState } from 'react'
 
-const WHATSAPP_NUMBER = '8299086204'  //Jitendra Tiwari
+const WHATSAPP_DIGITS = '8299086204'  // Jitendra Tiwari - raw digits, no spaces
+const WHATSAPP_DISPLAY = '82990 86204'  // grouped for display - keep in sync with Footer.tsx / Contact.tsx
 
 export default function WhatsAppFloat() {
   const [expanded, setExpanded] = useState(false)
 
-  const whatsappUrl = `https://wa.me/91${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello, I need legal consultation. Please connect me with an advocate.')}`
+  const whatsappUrl = `https://wa.me/91${WHATSAPP_DIGITS}?text=${encodeURIComponent('Hello, I need legal consultation. Please connect me with an advocate.')}`
   
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
@@ -33,17 +34,17 @@ export default function WhatsAppFloat() {
               <MessageCircle className="w-5 h-5 text-green-400" />
               <div>
                 <div className="font-caps text-green-400 text-[10px] tracking-widest uppercase">WhatsApp</div>
-                <div className="font-body text-navy-800/80 dark:text-cream/70 text-xs">+91 {WHATSAPP_NUMBER}</div>
+                <div className="font-body text-navy-800/80 dark:text-cream/70 text-xs">+91 {WHATSAPP_DISPLAY}</div>
               </div>
             </a>
             <a
-              href="tel:+9182990 86204"
+              href={`tel:+91${WHATSAPP_DIGITS}`}
               className="flex items-center gap-3 px-4 py-3 bg-gold-500/12 border border-gold-500/25 rounded-sm hover:bg-gold-500/18 dark:bg-gold-500/10 dark:border-gold-500/20 dark:hover:bg-gold-500/20 transition-colors"
             >
               <Phone className="w-5 h-5 text-gold-600 dark:text-gold-400" />
               <div>
                 <div className="font-caps text-gold-700 dark:text-gold-400 text-[10px] tracking-widest uppercase">Call Now</div>
-                <div className="font-body text-navy-800/80 dark:text-cream/70 text-xs">+91  8299086204</div>
+                <div className="font-body text-navy-800/80 dark:text-cream/70 text-xs">+91 {WHATSAPP_DISPLAY}</div>
               </div>
             </a>
           </div>

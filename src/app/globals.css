@@ -110,14 +110,129 @@ body::before {
   width: 100%;
 }
 
+
+/* ----------------------------
+
+Ticker before edit: */
 /* Scroll ticker */
-.ticker-wrap {
+/* .ticker-wrap {
   overflow: hidden;
   white-space: nowrap;
 }
 .ticker-inner {
   display: inline-flex;
   animation: scroll 30s linear infinite;
+} */
+
+/* ------------------------- */
+
+
+/* ==========================================
+   Responsive Infinite Ticker
+   ========================================== */
+
+.ticker-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+/* Optional fade effect on both sides */
+.ticker-wrap::before,
+.ticker-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 60px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ticker-wrap::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    var(--page-bg),
+    transparent
+  );
+}
+
+.ticker-wrap::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    var(--page-bg),
+    transparent
+  );
+}
+
+.dark .ticker-wrap::before {
+  background: linear-gradient(
+    to right,
+    var(--navy-deep),
+    transparent
+  );
+}
+
+.dark .ticker-wrap::after {
+  background: linear-gradient(
+    to left,
+    var(--navy-deep),
+    transparent
+  );
+}
+
+.ticker-inner {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  flex-shrink: 0;
+  will-change: transform;
+  animation: ticker-scroll 55s linear infinite;
+}
+
+.ticker-wrap:hover .ticker-inner {
+  animation-play-state: paused;
+}
+
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Slower ticker on mobile */
+
+@media (max-width: 768px) {
+  .ticker-inner {
+    animation-duration: 70s;
+  }
+}
+
+/* Respect accessibility settings */
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-inner {
+    animation: none;
+  }
+}
+
+/* Hide scrollbar utility */
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Section fade-in on scroll */

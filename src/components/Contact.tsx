@@ -123,8 +123,12 @@ export default function Contact() {
             <span className="font-caps text-gold-600 dark:text-gold-400 text-xs tracking-[0.3em] uppercase">Get In Touch</span>
             <div className="w-12 h-px bg-gold-500" />
           </div>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-navy-900 dark:text-cream mb-4">
+          {/* <h2 className="font-display text-4xl md:text-5xl font-bold text-navy-900 dark:text-cream mb-4">
             Book a <em className="text-gold-gradient">Consultation</em>
+          </h2> */}
+
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-navy-900 dark:text-cream mb-4">
+            Contact <em className="text-gold-gradient">Us</em>
           </h2>
           <p className="font-body text-navy-700 text-lg max-w-xl mx-auto leading-relaxed dark:text-cream/50">
             Fill out the form or reach us directly. We respond within 24 hours.
