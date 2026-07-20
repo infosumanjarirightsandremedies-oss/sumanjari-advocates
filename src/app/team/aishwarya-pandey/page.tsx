@@ -46,7 +46,7 @@ export default function AishwaryaPandeyPage() {
               <div>
                 <div className="font-caps text-[11px] tracking-widest uppercase text-navy-600/60 dark:text-cream/40 mb-0.5">Email</div>
                 <a href="mailto:info.sumanjarirightsandremedies@gmail.com" className="font-body text-navy-800 dark:text-cream/85 hover:text-gold-600 dark:hover:text-gold-400 transition-colors">
-                  Write To Me
+                  info.sumanjarirightsandremedies@gmail.com
                 </a>
               </div>
             </div>
