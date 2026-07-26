@@ -82,7 +82,7 @@ export default function Hero() {
             <div className="mb-6 flex items-center gap-4">
               <div className="h-px w-12 bg-gold-500" />
               <span className="hidden sm:block font-caps text-xs uppercase tracking-[0.3em] text-[#6b5420] dark:text-gold-400">
-             www.sumanjarirightsandremedies.com
+             www.sumanjariadvocates.com
               </span>
             </div>
 
@@ -106,7 +106,7 @@ export default function Hero() {
                 href="#contact"
                 className="btn-gold rounded-sm px-8 py-4 font-caps text-sm font-semibold uppercase tracking-widest text-navy-950"
               >
-                Consult an Advocate
+                Get In Touch
               </a>
               <a
                 href="#services"

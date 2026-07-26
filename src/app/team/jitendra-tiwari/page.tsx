@@ -1,5 +1,21 @@
-﻿import Link from 'next/link'
+import Link from 'next/link'
 import { ArrowLeft, Phone, Mail, GraduationCap } from 'lucide-react'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Adv. Jitendra Tiwari — Property, Civil & Revenue Matters',
+  description:
+    'Jitendra Tiwari is an Advocate with over 8 years of practice before the Allahabad High Court, Lucknow Bench, focused on property, civil, and revenue litigation.',
+  alternates: {
+    canonical: '/team/jitendra-tiwari',
+  },
+  openGraph: {
+    title: 'Adv. Jitendra Tiwari | Sumanjari & Co. Advocates',
+    description:
+      'Advocate with over 8 years of practice before the Allahabad High Court, Lucknow Bench, focused on property, civil, and revenue litigation.',
+    url: '/team/jitendra-tiwari',
+  },
+}
 
 const expertise = [
   {
@@ -152,14 +168,11 @@ export default function JitendraTiwariPage() {
                 </a>
               </div>
             </div>
-            <div className="flex items-start gap-3">
-              <Mail className="w-4 h-4 mt-0.5 text-gold-600 dark:text-gold-400 flex-shrink-0" />
-              <div>
-                <div className="font-caps text-[11px] tracking-widest uppercase text-navy-600/60 dark:text-cream/40 mb-0.5">Email</div>
-                <a href="mailto:info.sumanjarirightsandremedies@gmail.com" className="font-body text-navy-800 dark:text-cream/85 hover:text-gold-600 dark:hover:text-gold-400 transition-colors">
-                 info.sumanjarirightsandremedies@gmail.com
-                </a>
-              </div>
+            <div className="flex items-center gap-3">
+              <Mail className="w-4 h-4 text-gold-600 dark:text-gold-400 flex-shrink-0" />
+              <a href="mailto:info.sumanjarirightsandremedies@gmail.com" className="font-body text-navy-800 dark:text-cream/85 hover:text-gold-600 dark:hover:text-gold-400 transition-colors">
+                Write To Me
+              </a>
             </div>
           </div>
           <div>

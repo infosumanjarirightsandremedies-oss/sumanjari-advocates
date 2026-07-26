@@ -1,6 +1,7 @@
 
 'use client'
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
+import { supabase, type PublicationRow } from '@/lib/supabase'
 import {
   BookMarked,
   Send,
@@ -42,45 +43,24 @@ type Publication = {
   fileUrl?: string // hosted file (e.g. Supabase storage) for direct download
 }
 
-// Placeholder gallery data — replace with entries pulled from your
-// datastore (e.g. a Supabase table, since next.config.js already
-// whitelists your Supabase project for images) once submissions
-// are wired up to a real backend.
-const samplePublications: Publication[] = [
-  {
-    id: '1',
-    title: 'Evolving Contours of Bail Jurisprudence Under the BNSS',
-    author: 'Adv. Ramesh Sagar',
-    type: 'Journal Publication',
-    outlet: 'Allahabad Law Review',
-    date: 'March 2026',
-    excerpt:
-      'An analysis of how bail provisions have shifted under the Bharatiya Nagarik Suraksha Sanhita and their impact on undertrial detention.',
-    href: '#',
-  },
-  {
-    id: '2',
-    title: 'Arbitrability of Fraud in Commercial Contracts',
-    author: 'Priya Nair',
-    type: 'Research Article',
-    outlet: 'NLU Journal of Commercial Law',
-    date: 'January 2026',
-    excerpt:
-      'Examines the tension between arbitration clauses and fraud allegations in light of recent Supreme Court rulings.',
-    href: '#',
-  },
-  {
-    id: '3',
-    title: 'Rethinking Consumer Protection in the Digital Marketplace',
-    author: 'Adv. Sangam Verma',
-    type: 'Thesis',
-    outlet: 'LLM Dissertation, Lucknow University',
-    date: 'November 2025',
-    excerpt:
-      'A doctrinal study of e-commerce liability frameworks and gaps in enforcement under the Consumer Protection Act, 2019.',
-    fileUrl: '#',
-  },
-]
+// Maps a Supabase row (snake_case, DB-shaped) to the Publication type
+// this page already renders (camelCase, view-shaped).
+function fromRow(row: PublicationRow): Publication {
+  return {
+    id: row.id,
+    title: row.title,
+    author: row.author,
+    type: row.type,
+    outlet: row.outlet ?? undefined,
+    date: new Date(row.created_at).toLocaleDateString('en-US', {
+      month: 'long',
+      year: 'numeric',
+    }),
+    excerpt: row.excerpt,
+    href: row.href ?? undefined,
+    fileUrl: row.file_url ?? undefined,
+  }
+}
 
 // Converts an ISO 3166-1 alpha-2 code (e.g. "IN") into its flag emoji
 function isoToFlag(iso: string): string {
@@ -123,6 +103,32 @@ export default function Publications() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [activeFilter, setActiveFilter] = useState('All')
   const [fieldErrors, setFieldErrors] = useState<{ email?: string; phone?: string }>({})
+  const [publications, setPublications] = useState<Publication[]>([])
+  const [galleryStatus, setGalleryStatus] = useState<'loading' | 'ready' | 'error'>('loading')
+
+  // RLS on the `publications` table only lets the anon key read rows with
+  // status = 'approved' — pending/rejected submissions never reach this page.
+  useEffect(() => {
+    let cancelled = false
+    supabase
+      .from('publications')
+      .select('*')
+      .eq('status', 'approved')
+      .order('created_at', { ascending: false })
+      .then(({ data, error }) => {
+        if (cancelled) return
+        if (error) {
+          console.error('Failed to load publications:', error)
+          setGalleryStatus('error')
+          return
+        }
+        setPublications((data ?? []).map(fromRow))
+        setGalleryStatus('ready')
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   const countryList = useMemo(() => buildCountryList(), [])
   const selectedCountry = countryList.find((c) => c.iso === country)
@@ -197,8 +203,8 @@ export default function Publications() {
 
   const filteredPublications =
     activeFilter === 'All'
-      ? samplePublications
-      : samplePublications.filter(p => p.type === activeFilter)
+      ? publications
+      : publications.filter(p => p.type === activeFilter)
 
   return (
     <section id="publications" className="py-24 md:py-32 relative scroll-mt-24">
@@ -549,7 +555,15 @@ export default function Publications() {
             </div>
           </div>
 
-          {filteredPublications.length === 0 ? (
+          {galleryStatus === 'loading' ? (
+            <p className="font-body text-navy-600/60 dark:text-cream/40 text-center py-16">
+              Loading publications…
+            </p>
+          ) : galleryStatus === 'error' ? (
+            <p className="font-body text-navy-600/60 dark:text-cream/40 text-center py-16">
+              Couldn&apos;t load publications right now. Please refresh the page.
+            </p>
+          ) : filteredPublications.length === 0 ? (
             <p className="font-body text-navy-600/60 dark:text-cream/40 text-center py-16">
               No works in this category yet.
             </p>

@@ -21,14 +21,14 @@ function applyDomTheme(theme: Theme) {
 }
 
 function readStoredTheme(): Theme {
-  if (typeof window === 'undefined') return 'light'
+  if (typeof window === 'undefined') return 'dark'// default to dark on server-side rendering.
   try {
     const stored = localStorage.getItem(STORAGE_KEY) as Theme | null
     if (stored === 'light' || stored === 'dark') return stored
   } catch {
     /* ignore */
   }
-  return 'light'
+  return 'dark'// default to dark if no stored value is found.
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {

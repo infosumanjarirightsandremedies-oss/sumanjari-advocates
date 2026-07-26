@@ -1,5 +1,21 @@
 ﻿import Link from 'next/link'
 import { ArrowLeft, Phone, Mail, GraduationCap } from 'lucide-react'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Adv. Aishwarya Pandey — Family, Matrimonial & Constitutional Matters',
+  description:
+    'Aishwarya Pandey is an Advocate with over 4 years of practice before the Allahabad High Court, Lucknow Bench, focused on family, constitutional, and corporate law matters.',
+  alternates: {
+    canonical: '/team/aishwarya-pandey',
+  },
+  openGraph: {
+    title: 'Adv. Aishwarya Pandey | Sumanjari & Co. Advocates',
+    description:
+      'Advocate with over 4 years of practice before the Allahabad High Court, Lucknow Bench, focused on family, constitutional, and corporate law matters.',
+    url: '/team/aishwarya-pandey',
+  },
+}
 
 const expertise = [
   'Family & Matrimonial Matters',
@@ -41,14 +57,11 @@ export default function AishwaryaPandeyPage() {
                 </a>
               </div>
             </div>
-            <div className="flex items-start gap-3">
-              <Mail className="w-4 h-4 mt-0.5 text-gold-600 dark:text-gold-400 flex-shrink-0" />
-              <div>
-                <div className="font-caps text-[11px] tracking-widest uppercase text-navy-600/60 dark:text-cream/40 mb-0.5">Email</div>
-                <a href="mailto:info.sumanjarirightsandremedies@gmail.com" className="font-body text-navy-800 dark:text-cream/85 hover:text-gold-600 dark:hover:text-gold-400 transition-colors">
-                  info.sumanjarirightsandremedies@gmail.com
-                </a>
-              </div>
+            <div className="flex items-center gap-3">
+              <Mail className="w-4 h-4 text-gold-600 dark:text-gold-400 flex-shrink-0" />
+              <a href="mailto:info.sumanjarirightsandremedies@gmail.com" className="font-body text-navy-800 dark:text-cream/85 hover:text-gold-600 dark:hover:text-gold-400 transition-colors">
+                Write To Me
+              </a>
             </div>
           </div>
           <div>

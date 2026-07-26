@@ -2,6 +2,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { isValidEmail, isValidPhone } from '@/lib/validation'
+import { supabase } from '@/lib/supabase'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -245,6 +246,32 @@ export async function POST(req: NextRequest) {
       badge(badgeText) +
       bodyFields +
       wrapperClose.replace('__FOOTER__', officeFooter)
+
+    // ---- Persist publication submissions so they can be approved later ----
+    // (contact/internship stay email-only — no gallery to publish them into)
+    if (formType === 'publication') {
+      const { error: dbError } = await supabase.from('publications').insert({
+        title,
+        author: name,
+        email,
+        type: pubType,
+        outlet: outlet || null,
+        href: link || null,
+        // Note: an uploaded file only reaches you as an email attachment —
+        // it has no public URL yet, so file_url stays null. To feature a
+        // work that arrived as a file rather than a link, upload it to
+        // Supabase Storage yourself and paste the public URL into this
+        // column when you approve the row.
+        file_url: null,
+        excerpt: description,
+        status: 'pending',
+      })
+      if (dbError) {
+        // Don't fail the whole request over this — the email notification
+        // below still goes out, so the submission isn't lost either way.
+        console.error('Supabase publication insert error:', dbError)
+      }
+    }
 
     const officeResult = await resend.emails.send({
       from: `Sumanjari & Co. Website <${SENDER_ADDRESS}>`,

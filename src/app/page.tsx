@@ -1,8 +1,8 @@
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import Ticker from '@/components/Ticker'
-import Services from '@/components/Services'
 import About from '@/components/About'
+import Services from '@/components/Services'
 import Contact from '@/components/Contact'
 import Testimonials from '@/components/Testimonials'
 import Footer from '@/components/Footer'
@@ -17,8 +17,8 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Ticker />
-      <Services />
       <About />
+      <Services />
       <Team />
       <Testimonials />
       <Contact />

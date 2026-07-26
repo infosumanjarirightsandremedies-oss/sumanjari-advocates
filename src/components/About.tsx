@@ -63,7 +63,7 @@ export default function About() {
               </div>
 
               <div className="mt-2 font-caps text-xs font-bold uppercase tracking-[0.22em] leading-relaxed text-navy-700 dark:text-cream/60">
-  D–311 Chamber · Block D
+               D–311 Chamber·Block D, Gomti Nagar, Lucknow, Uttar Pradesh
   <br />
 </div>
             </div>

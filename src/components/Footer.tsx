@@ -19,7 +19,7 @@ const links = [
   { label: 'Contact Us', href: '#contact' },
 ]
 
-const WEBSITE = 'https://www.sumanjaririadvocates.com'
+const WEBSITE = 'https://www.sumanjariadvocates.com'
 
 const social = [
   {
