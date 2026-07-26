@@ -11,11 +11,6 @@ const SITE_URL = 'https://www.sumanjariadvocates.com'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
   title: {
     default: 'Sumanjari & Co. Advocates | Allahabad High Court Lucknow Bench',
     // Child routes set their own `title` and it's slotted in here, so
