@@ -1,19 +1,19 @@
-﻿import Link from 'next/link'
+import Link from 'next/link'
 import { ArrowLeft, Mail, GraduationCap, Scale, Languages } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Adv. Priyesh Dwivedi — Associate Advocate',
+  title: 'Adv. Adarsh Pratap Singh — Associate Advocate',
   description:
-    'Priyesh Dwivedi is an Associate Advocate practising before the Allahabad High Court and subordinate courts, holding LL.B. and LL.M. degrees and enrolled with the Bar Council of Uttar Pradesh.',
+    'Adv. Adarsh Pratap Singh is an Associate Advocate practising before the Allahabad High Court and subordinate courts, holding LL.B. and LL.M. degrees and enrolled with the Bar Council of Uttar Pradesh.',
   alternates: {
-    canonical: '/team/priyesh-dwivedi',
+    canonical: '/team/adarsh-pratap-singh',
   },
   openGraph: {
-    title: 'Adv. Priyesh Dwivedi | Sumanjari & Co. Advocates',
+    title: 'Adv. Adarsh Pratap Singh | Sumanjari & Co. Advocates',
     description:
       'Associate Advocate practising before the Allahabad High Court and subordinate courts.',
-    url: '/team/priyesh-dwivedi',
+    url: '/team/adarsh-pratap-singh',
   },
 }
 
@@ -34,7 +34,7 @@ const courts = [
 
 const languages = ['Hindi', 'English']
 
-export default function PriyeshDwivediPage() {
+export default function AdarshPratapSinghPage() {
   return (
     <section className="py-20 md:py-28">
       <div className="max-w-4xl mx-auto px-6">
@@ -47,7 +47,7 @@ export default function PriyeshDwivediPage() {
 
         <div className="mb-10">
           <h1 className="font-display text-4xl md:text-5xl font-bold text-navy-900 dark:text-cream mb-2">
-            Priyesh Dwivedi <span className="text-navy-500/60 dark:text-cream/40 text-2xl font-normal">, Lucknow</span>
+            Adarsh Pratap Singh <span className="text-navy-500/60 dark:text-cream/40 text-2xl font-normal">, Lucknow</span>
           </h1>
           <p className="font-body text-gold-700 dark:text-gold-400 text-lg">
             Associate Advocate
@@ -59,7 +59,7 @@ export default function PriyeshDwivediPage() {
             <div className="flex items-center gap-3">
               <Mail className="w-4 h-4 text-gold-600 dark:text-gold-400 flex-shrink-0" />
               <a href="mailto:info.sumanjarirightsandremedies@gmail.com" className="font-body text-navy-800 dark:text-cream/85 hover:text-gold-600 dark:hover:text-gold-400 transition-colors">
-                info.sumanjarirightsandremedies@gmail.com
+                info.sumanjarirightsandremedies@gmail.com                 
               </a>
             </div>
             <div className="flex items-start gap-3">
@@ -68,8 +68,6 @@ export default function PriyeshDwivediPage() {
                 <div className="font-caps text-[11px] tracking-widest uppercase text-navy-600/60 dark:text-cream/40 mb-1">Enrolment</div>
                 <ul className="font-body text-navy-800 dark:text-cream/85 text-sm space-y-1">
                   <li>Bar Council of Uttar Pradesh</li>
-                  {/* <li>Enrolment No. UP12397/22</li> */}
-                  <li>Practising Advocate since 2022</li>
                 </ul>
               </div>
             </div>
@@ -80,8 +78,8 @@ export default function PriyeshDwivediPage() {
               <div>
                 <div className="font-caps text-[11px] tracking-widest uppercase text-navy-600/60 dark:text-cream/40 mb-1">Education</div>
                 <ul className="font-body text-navy-800 dark:text-cream/85 text-sm space-y-1">
-                  <li>LL.B.</li>
-                  <li>LL.M.</li>
+                  <li> BA LL.B.</li>
+                  <li> LL.M.</li>
                 </ul>
               </div>
             </div>
@@ -90,14 +88,14 @@ export default function PriyeshDwivediPage() {
 
         <div className="space-y-4 mb-14">
           <p className="font-body text-navy-800 dark:text-cream/75 leading-relaxed">
-            Priyesh Dwivedi is an Associate Advocate with a strong academic background and practical litigation experience. He holds both LL.B. and LL.M. degrees and is enrolled with the Bar Council of Uttar Pradesh.
+            Adarsh Pratap Singh is an Associate Advocate with a strong academic background and practical litigation experience.
           </p>
           <p className="font-body text-navy-800 dark:text-cream/75 leading-relaxed">
             He is actively engaged in representing clients before the High Court and subordinate courts, with a focus on providing strategic legal advice, effective advocacy, and practical legal solutions.
           </p>
         </div>
 
-        <div className="mb-14">
+        {/* <div className="mb-14">
           <h2 className="font-display text-2xl font-bold text-navy-900 dark:text-cream mb-6">Practice Areas</h2>
           <div className="grid sm:grid-cols-2 gap-3">
             {practiceAreas.map((item) => (
@@ -121,7 +119,7 @@ export default function PriyeshDwivediPage() {
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
 
         <div>
           <h2 className="font-display text-2xl font-bold text-navy-900 dark:text-cream mb-4 flex items-center gap-2">

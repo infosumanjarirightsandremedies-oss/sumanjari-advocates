@@ -60,7 +60,7 @@ export default function AishwaryaPandeyPage() {
             <div className="flex items-center gap-3">
               <Mail className="w-4 h-4 text-gold-600 dark:text-gold-400 flex-shrink-0" />
               <a href="mailto:info.sumanjarirightsandremedies@gmail.com" className="font-body text-navy-800 dark:text-cream/85 hover:text-gold-600 dark:hover:text-gold-400 transition-colors">
-                Write To Me
+                info.sumanjarirightsandremedies@gmail.com
               </a>
             </div>
           </div>

@@ -170,7 +170,7 @@ export async function POST(req: NextRequest) {
     if (formType === 'contact' && (!phone || !message)) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
-    if (formType === 'internship' && (!phone || !college || !area)) {
+    if (formType === 'internship' && (!phone || !college || !area || !file || file.size === 0)) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
     if (formType === 'publication' && (!pubType || !title || !description)) {
@@ -182,7 +182,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid phone number' }, { status: 400 })
     }
 
-    // ---- Attachments (publication only) ----
+    // ---- Attachments (internship resume, or publication file) ----
     const attachments: { filename: string; content: string }[] = []
     if (file && file.size > 0) {
       if (file.size > MAX_FILE_SIZE) {

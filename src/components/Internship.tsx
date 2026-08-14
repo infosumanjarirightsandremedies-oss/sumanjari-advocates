@@ -1,6 +1,6 @@
 'use client'
 import { useState, useMemo } from 'react'
-import { GraduationCap, Send, User, Phone, Mail, BookOpen, Briefcase } from 'lucide-react'
+import { GraduationCap, Send, User, Phone, Mail, BookOpen, Briefcase, UploadCloud } from 'lucide-react'
 import { getCountries, getCountryCallingCode, type CountryCode } from 'libphonenumber-js'
 import { isValidEmail, isValidPhone } from '@/lib/validation'
 
@@ -15,6 +15,7 @@ const areasOfInterest = [
   'Cyber Law & IT',
   'Constitutional Law',
   'Consumer Protection',
+  'Other Legal Areas',
 ]
 
 // Converts an ISO 3166-1 alpha-2 code (e.g. "IN") into its flag emoji
@@ -52,7 +53,12 @@ export default function Internship() {
   })
   const [country, setCountry] = useState<CountryCode>('IN')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const [fieldErrors, setFieldErrors] = useState<{ email?: string; phone?: string }>({})
+  const [fieldErrors, setFieldErrors] = useState<{ email?: string; phone?: string; resume?: string }>({})
+  const [resume, setResume] = useState<File | null>(null)
+
+  const handleResumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setResume(e.target.files?.[0] ?? null)
+  }
 
   const countryList = useMemo(() => buildCountryList(), [])
   const selectedCountry = countryList.find((c) => c.iso === country)
@@ -71,12 +77,13 @@ export default function Internship() {
   }
 
   const validate = () => {
-    const errors: { email?: string; phone?: string } = {}
+    const errors: { email?: string; phone?: string; resume?: string } = {}
     if (!isValidEmail(form.email)) errors.email = 'Enter a valid email address'
     if (!form.phone.trim()) errors.phone = 'Contact number is required'
     else if (!isValidPhone(form.phone, country)) {
       errors.phone = `Enter a valid phone number for ${selectedCountry?.name ?? 'the selected country'}`
     }
+    if (!resume) errors.resume = 'Please attach your resume'
     setFieldErrors(errors)
     return Object.keys(errors).length === 0
   }
@@ -94,6 +101,7 @@ export default function Internship() {
       Object.entries(form).forEach(([key, value]) => {
         payload.append(key, key === 'phone' ? fullPhone : value)
       })
+      if (resume) payload.append('file', resume)
 
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -104,6 +112,7 @@ export default function Internship() {
         setForm({ name: '', phone: '', email: '', college: '', area: '' })
         setCountry('IN')
         setFieldErrors({})
+        setResume(null)
       } else {
         setStatus('error')
       }
@@ -351,6 +360,33 @@ export default function Internship() {
                       </option>
                     ))}
                   </select>
+                </div>
+
+                {/* Resume */}
+                <div>
+                  <label className="block font-caps text-navy-600/80 dark:text-cream/50 text-[10px] tracking-widest uppercase mb-2">
+                    Resume (PDF / DOC) *
+                  </label>
+                  <label
+                    htmlFor="resume-upload"
+                    className={`input-luxury flex items-center gap-3 w-full pl-4 pr-4 py-3 rounded-sm font-body text-sm cursor-pointer ${fieldErrors.resume ? 'border-red-400/60' : ''}`}
+                  >
+                    <UploadCloud className="w-4 h-4 text-gold-600/60 dark:text-gold-400/50 flex-shrink-0" />
+                    <span className="truncate text-navy-700/70 dark:text-cream/40">
+                      {resume ? resume.name : 'Attach your resume'}
+                    </span>
+                  </label>
+                  <input
+                    id="resume-upload"
+                    name="resume"
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    onChange={handleResumeChange}
+                    className="hidden"
+                  />
+                  {fieldErrors.resume && (
+                    <p className="text-red-400 font-body text-xs mt-1.5">{fieldErrors.resume}</p>
+                  )}
                 </div>
 
                 {status === 'error' && (

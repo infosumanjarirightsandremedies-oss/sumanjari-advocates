@@ -18,8 +18,8 @@ const practiceAreas = [
   'Writ Petitions',
   'Company Matters',
   'Bail Matters',
+  'RERA Matters',
   'Other Legal Matters',
-  'Other',
 ]
 
 // Converts an ISO 3166-1 alpha-2 code (e.g. "IN") into its flag emoji

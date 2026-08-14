@@ -1,22 +1,16 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 // @ts-ignore
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import Disclaimer from '@/components/Disclaimer'
 
-// Single source of truth for the site's canonical domain — every URL,
-// canonical tag, and structured-data field below derives from this so
-// they can never drift out of sync with each other again.
 const SITE_URL = 'https://www.sumanjariadvocates.com'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Sumanjari & Co. Advocates | Allahabad High Court Lucknow Bench',
-    // Child routes set their own `title` and it's slotted in here, so
-    // every indexed page reads "<Page Title> | Sumanjari & Co. Advocates"
-    // instead of losing brand context in search results.
-    template: '%s | Sumanjari & Co. Advocates',
+    default: 'Sumanjari & Co. Advocates |8299086204,8302471764| Advocates in Lucknow,Allahabad, Kanpur & Prayagraj',
+    template: '%s | Sumanjari & Co. Advocates|8299086204,8302471764| Advocates in Lucknow,Allahabad, Kanpur & Prayagraj',
   },
  description:
 'Sumanjari & Co. Advocates practises before the Allahabad High Court, Lucknow Bench from Chamber Block D-311. We handle civil, criminal, family, property, constitutional and service matters across Lucknow, Ayodhya and Uttar Pradesh.',
@@ -24,9 +18,22 @@ keywords: [
   'Sumanjari & Co. Advocates',
   'Sumanjari Advocates',
   'Law Firm Lucknow',
+  'Jitendra Tiwari Advocate',
+  'Jitendra Tiwari Lawyer',
+  'Jitendra Tiwari Advocate Lucknow',
+  'Jitendra Tiwari',
+  'Law Firms Near me',
+  'law firms near me',
+  'Aishwarya Pandey Advocate',
+  'Aishwarya Pandey Lawyer',
+  'Aishwarya Pandey Advocate Lucknow',
+  'Aishwarya Pandey',
   'Law Firm Uttar Pradesh',
   'Advocate Lucknow',
   'Lawyer Lucknow',
+  'Advocate in Lucknow',
+  'Lawyer in Lucknow',
+  'Best Lawyer Lucknow',
   'High Court Advocate Lucknow',
   'Allahabad High Court Lucknow Bench',
   'Civil Lawyer Lucknow',
@@ -45,7 +52,26 @@ keywords: [
   'Best Advocate Lucknow',
   'Best Lawyer Lucknow',
   'Top Advocate Lucknow',
-  'Top Lawyer Lucknow'
+  'Top Lawyer Lucknow',
+  'Litigation Lawyer Lucknow',
+  'Lawyer in Prayagraj',
+  'Advocate Prayagraj',
+  'Law Firm Prayagraj',
+  'Lawyer Allahabad',
+  'Best Advocate Allahabad',
+  'High Court Lawyer Allahabad',
+  'Legal Services Prayagraj',
+  'Litigation Lawyer Uttar Pradesh',
+  'Best Litigation Advocate UP',
+  'Court Case Lawyer UP',
+  'Civil Lawyer Uttar Pradesh',
+  'Criminal Lawyer Uttar Pradesh',
+  'Property Dispute Lawyer UP',
+  'Family Court Lawyer Uttar Pradesh',
+  'Online Legal Consultation India',
+  'Legal Consultancy India',
+  'Legal Advice Online India',
+  'Best Legal Consultancy India',
 ],
   authors: [{ name: 'Sumanjari & Co. Advocates' }],
   creator: 'Sumanjari & Co. Advocates',
@@ -63,6 +89,12 @@ keywords: [
   alternates: {
     canonical: '/',
   },
+  other: {
+    'geo.placename': 'Lucknow, Uttar Pradesh, India',
+    'geo.region': 'IN-UP',
+    'geo.position': '26.8467;80.9462',
+    ICBM: '26.8467, 80.9462',
+  },
   openGraph: {
     title: 'Sumanjari & Co. Advocates',
     description:
@@ -73,10 +105,6 @@ keywords: [
     locale: 'en_IN',
     images: [
       {
-        // Real, existing site asset — not a placeholder. Ratio isn't
-        // the standard 1200x630, so most platforms will letterbox it;
-        // swap in a purpose-cropped 1200x630 brand image when you have
-        // one, this is just a legitimate stand-in until then.
         url: '/images/Lucknow-High-Court.jpg',
         width: 1200,
         height: 800,
@@ -93,21 +121,13 @@ keywords: [
   },
 }
 
-// ---------------------------------------------------------------------------
-// STRUCTURED DATA (schema.org JSON-LD)
-// ---------------------------------------------------------------------------
-// `LegalService` is the schema.org type Google's own structured-data
-// documentation recommends for a law firm (it's a LocalBusiness subtype),
-// as opposed to `Attorney`, which is meant for a single named practitioner.
-// Every field below is a fact already published elsewhere on this site
-// (Footer, team pages) — nothing here is invented for SEO purposes.
 const legalServiceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
   name: 'Sumanjari & Co. Advocates',
   url: SITE_URL,
   description:
-    'Sumanjari & Co. Advocates practises before the Allahabad High Court, Lucknow Bench, handling civil, criminal, family, and property matters.',
+    'Sumanjari & Co. Advocates practises before the Allahabad High Court, Lucknow Bench, serving clients across Lucknow, Kanpur, Ayodhya, Prayagraj, Sultanpur, Ambedkar Nagar, Noida, Gurugram, and Delhi — handling civil, criminal, family, and property matters.',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Chamber No. Block D – 311, Allahabad High Court, Lucknow Bench',
@@ -115,13 +135,27 @@ const legalServiceJsonLd = {
     addressRegion: 'Uttar Pradesh',
     addressCountry: 'IN',
   },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 26.8467,
+    longitude: 80.9462,
+  },
   email: 'info.sumanjarirightsandremedies@gmail.com',
   telephone: '+91-82990-86204',
   sameAs: ['https://www.instagram.com/thelastvedict'],
-  areaServed: {
-    '@type': 'State',
-    name: 'Uttar Pradesh',
-  },
+  areaServed: [
+    { '@type': 'City', name: 'Lucknow' },
+    { '@type': 'City', name: 'Kanpur' },
+    { '@type': 'City', name: 'Ayodhya' },
+    { '@type': 'City', name: 'Prayagraj' },
+    { '@type': 'City', name: 'Sultanpur' },
+    { '@type': 'City', name: 'Ambedkar Nagar' },
+    { '@type': 'City', name: 'Noida' },
+    { '@type': 'City', name: 'Gurugram' },
+    { '@type': 'City', name: 'Delhi' },
+    { '@type': 'State', name: 'Uttar Pradesh' },
+    { '@type': 'Country', name: 'India' },
+  ],
   priceRange: '$$',
 }
 
