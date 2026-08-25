@@ -138,9 +138,9 @@ export default function Internship() {
             </span>
             <div className="w-12 h-px bg-gold-500" />
           </div>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-navy-900 dark:text-cream mb-4">
+          <h1 className="font-display text-4xl md:text-5xl font-bold text-navy-900 dark:text-cream mb-4">
             Internship <em className="text-gold-gradient">Programme</em>
-          </h2>
+          </h1>
           <p className="font-body text-navy-700 text-lg max-w-xl mx-auto leading-relaxed dark:text-cream/50">
             Gain hands-on experience under seasoned advocates. Apply below and
             take your first step towards a distinguished legal career.

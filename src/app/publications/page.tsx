@@ -18,6 +18,8 @@ import {
 } from 'lucide-react'
 import { getCountries, getCountryCallingCode, type CountryCode } from 'libphonenumber-js'
 import { isValidEmail, isValidPhone } from '@/lib/validation'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 
 const publicationTypes = [
   'Thesis',
@@ -207,6 +209,8 @@ export default function Publications() {
       : publications.filter(p => p.type === activeFilter)
 
   return (
+    <>
+    <Navbar />
     <section id="publications" className="py-24 md:py-32 relative scroll-mt-24">
       {/* Decorative divider */}
       <div className="absolute left-1/2 top-0 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-gold-500/28 to-transparent dark:via-gold-500/30" />
@@ -223,9 +227,9 @@ export default function Publications() {
             </span>
             <div className="w-12 h-px bg-gold-500" />
           </div>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-navy-900 dark:text-cream mb-4">
+          <h1 className="font-display text-4xl md:text-5xl font-bold text-navy-900 dark:text-cream mb-4">
             Publications <em className="text-gold-gradient">& Articles</em>
-          </h2>
+          </h1>
           <p className="font-body text-navy-700 text-lg max-w-xl mx-auto leading-relaxed dark:text-cream/50">
             Share your thesis, research article, or publication with us —
             selected submissions are featured in our gallery below.
@@ -631,5 +635,7 @@ export default function Publications() {
         </div>
       </div>
     </section>
+    <Footer />
+    </>
   )
 } 

@@ -5,11 +5,11 @@ import { Menu, X, Scale } from 'lucide-react'
 import ThemeToggle from './ThemeToggle'
 
 const navLinks: { label: string; href: string; target: '_self' | '_blank' }[] = [
-  { label: 'Home', href: '#home', target: '_self' },
-  { label: 'Services', href: '#services', target: '_self' },
-  { label: 'About', href: '#about', target: '_self' },
-  { label: 'Team', href: '#team', target: '_self' },
-  { label: 'Contact', href: '#contact', target: '_self' },
+  { label: 'Home', href: '/#home', target: '_self' },
+  { label: 'Services', href: '/#services', target: '_self' },
+  { label: 'About', href: '/#about', target: '_self' },
+  { label: 'Team', href: '/#team', target: '_self' },
+  { label: 'Contact', href: '/#contact', target: '_self' },
   { label: 'Internship', href: '/internship', target: '_self' },
   { label: 'Publications', href: '/publications', target:'_self' },
   { label: 'Journey', href: '/our-journey', target: '_self' },
@@ -35,7 +35,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
         {/* Logo */}
-        <Link href="#home" className="flex items-center gap-3 group">
+        <Link href="/#home" className="flex items-center gap-3 group">
           <div className="w-10 h-10 rounded-full border border-gold-500/50 dark:border-gold-500/60 flex items-center justify-center group-hover:border-gold-500 transition-colors">
             <Scale className="w-5 h-5 text-gold-600 dark:text-gold-400" />
           </div>
@@ -68,7 +68,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           <ThemeToggle />
           <a
-            href="#contact"
+            href="/#contact"
             className="btn-gold text-navy-900 font-caps font-semibold text-xs tracking-widest uppercase px-6 py-3 rounded-sm"
           >
             Get In Touch
@@ -100,7 +100,7 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="#contact"
+            href="/#contact"
             onClick={() => setOpen(false)}
             className="block btn-gold text-center text-navy-900 font-caps font-semibold text-xs tracking-widest uppercase px-6 py-3 rounded-sm mt-4"
           >

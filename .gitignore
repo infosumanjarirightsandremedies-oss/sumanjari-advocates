@@ -1,1 +1,9 @@
 node_modules
+.next
+out
+.claude
+mcp-server.log
+
+# env files
+.env
+.env*.local

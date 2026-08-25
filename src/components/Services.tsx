@@ -13,6 +13,9 @@ import {
   Briefcase,
   Landmark,
   ScrollText,
+  Building2,
+  Banknote,
+  ShieldHalf,
   X,
 } from 'lucide-react'
 
@@ -165,6 +168,42 @@ const services = [
       'Wills & Power of Attorney',
       'Legal opinion on property/business matters',
       'MoU drafting',
+    ],
+  },
+  {
+    id: 'rera',
+    icon: Building2,
+    title: 'RERA Matters',
+    description: 'Representation in real estate regulatory disputes before UP-RERA, builder-buyer conflicts, and project compliance matters.',
+    items: [
+      'Builder-buyer disputes',
+      'UP-RERA complaints',
+      'Possession delay & compensation claims',
+      'Project registration & compliance advisory',
+    ],
+  },
+  {
+    id: 'banking-recovery',
+    icon: Banknote,
+    title: 'Banking, Recovery & Negotiable Instruments Matters',
+    description: 'Representation in bank loan recovery, DRT proceedings, and negotiable instruments disputes.',
+    items: [
+      'Debts Recovery Tribunal (DRT) proceedings',
+      'SARFAESI Act matters',
+      'Bank loan recovery & settlement',
+      'Negotiable instruments & cheque-related recovery',
+    ],
+  },
+  {
+    id: 'aft-mining',
+    icon: ShieldHalf,
+    title: 'Armed Forces Tribunal & Mining Matters',
+    description: 'Representation before the Armed Forces Tribunal for defence personnel, and in mining lease and revenue disputes.',
+    items: [
+      'Armed Forces Tribunal (AFT) service disputes',
+      'Defence personnel pension & benefit claims',
+      'Mining lease disputes',
+      'Mining revenue matters',
     ],
   },
 ]

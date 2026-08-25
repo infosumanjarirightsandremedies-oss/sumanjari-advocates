@@ -9,11 +9,11 @@ const SITE_URL = 'https://www.sumanjariadvocates.com'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Sumanjari & Co. Advocates |8299086204,8302471764| Advocates in Lucknow,Allahabad, Kanpur & Prayagraj',
-    template: '%s | Sumanjari & Co. Advocates|8299086204,8302471764| Advocates in Lucknow,Allahabad, Kanpur & Prayagraj',
+    default: 'Sumanjari & Co. Advocates | 8299086204 | Advocates in Lucknow & Allahabad High Court',
+    template: '%s | Sumanjari & Co. Advocates',
   },
  description:
-'Sumanjari & Co. Advocates practises before the Allahabad High Court, Lucknow Bench from Chamber Block D-311. We handle civil, criminal, family, property, constitutional and service matters across Lucknow, Ayodhya and Uttar Pradesh.',
+'Sumanjari & Co. Advocates practises before the Allahabad High Court, Lucknow Bench from Chamber Block D-311. We handle civil, criminal, family, property, constitutional, service, consumer, tax, RERA, banking recovery (DRT), armed forces tribunal (AFT), and mining matters across Lucknow, Ayodhya and Uttar Pradesh.',
 keywords: [
   'Sumanjari & Co. Advocates',
   'Sumanjari Advocates',
@@ -72,6 +72,26 @@ keywords: [
   'Legal Consultancy India',
   'Legal Advice Online India',
   'Best Legal Consultancy India',
+  'Consumer Lawyer Lucknow',
+  'Motor Accident Claims Lawyer Lucknow',
+  'Rent & Tenancy Lawyer Lucknow',
+  'Tax & Revenue Lawyer Lucknow',
+  'Company Law Lawyer Lucknow',
+  'Legal Drafting Lucknow',
+  'RERA Lawyer Lucknow',
+  'RERA Advocate Lucknow',
+  'Builder Buyer Dispute Lawyer Lucknow',
+  'DRT Lawyer Lucknow',
+  'Debts Recovery Tribunal Advocate Lucknow',
+  'SARFAESI Act Lawyer Lucknow',
+  'Banking Recovery Lawyer Lucknow',
+  'Negotiable Instruments Lawyer Lucknow',
+  'Cheque Bounce Lawyer Lucknow',
+  'AFT Lawyer Lucknow',
+  'Armed Forces Tribunal Advocate Lucknow',
+  'Defence Personnel Lawyer Lucknow',
+  'Mining Matters Lawyer Lucknow',
+  'Mining Dispute Advocate Uttar Pradesh',
 ],
   authors: [{ name: 'Sumanjari & Co. Advocates' }],
   creator: 'Sumanjari & Co. Advocates',
@@ -127,7 +147,7 @@ const legalServiceJsonLd = {
   name: 'Sumanjari & Co. Advocates',
   url: SITE_URL,
   description:
-    'Sumanjari & Co. Advocates practises before the Allahabad High Court, Lucknow Bench, serving clients across Lucknow, Kanpur, Ayodhya, Prayagraj, Sultanpur, Ambedkar Nagar, Noida, Gurugram, and Delhi — handling civil, criminal, family, and property matters.',
+    'Sumanjari & Co. Advocates practises before the Allahabad High Court, Lucknow Bench, serving clients across Lucknow, Kanpur, Ayodhya, Prayagraj, Sultanpur, Ambedkar Nagar, Noida, Gurugram, and Delhi — handling civil, criminal, family, property, consumer, tax, RERA, banking recovery (DRT), armed forces tribunal (AFT), and mining matters.',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Chamber No. Block D – 311, Allahabad High Court, Lucknow Bench',
@@ -142,7 +162,10 @@ const legalServiceJsonLd = {
   },
   email: 'info.sumanjarirightsandremedies@gmail.com',
   telephone: '+91-82990-86204',
-  sameAs: ['https://www.instagram.com/thelastvedict'],
+  sameAs: [
+    'https://www.instagram.com/thelastvedict',
+    'https://www.reddit.com/user/Mean-Bicycle-5947/',
+  ],
   areaServed: [
     { '@type': 'City', name: 'Lucknow' },
     { '@type': 'City', name: 'Kanpur' },

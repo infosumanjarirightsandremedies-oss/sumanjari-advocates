@@ -21,7 +21,9 @@ export const metadata: Metadata = {
 export default function InternshipPage() {
   return (
     <main className="relative min-h-screen">
+      <Navbar />
       <Internship />
+      <Footer />
     </main>
   )
 }

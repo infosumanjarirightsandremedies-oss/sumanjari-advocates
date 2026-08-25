@@ -139,6 +139,8 @@
 'use client'
 import Image from 'next/image'
 import { Heart, ShieldCheck, Compass, Scale } from 'lucide-react'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 
 const guidingValues = [
   {
@@ -160,6 +162,8 @@ const guidingValues = [
 
 export default function Page() {
   return (
+    <>
+    <Navbar />
     <section id="our-journey" className="relative overflow-hidden py-24 md:py-32">
       {/* Lady Justice Background — self-hosted from /public/images.
           next/image handles responsive srcSet and AVIF/WebP format
@@ -208,10 +212,10 @@ export default function Page() {
             </span>
             <div className="h-px w-12 bg-gold-500" />
           </div>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-6xl font-bold leading-tight text-[#060a10] dark:text-cream">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-6xl font-bold leading-tight text-[#060a10] dark:text-cream">
             A name born out of{' '}
             <span className="italic text-gold-gradient">love and gratitude</span>
-          </h2>
+          </h1>
         </div>
 
         {/* Origin story card */}
@@ -263,5 +267,7 @@ export default function Page() {
         </div>
       </div>
     </section>
+    <Footer />
+    </>
   )
 }

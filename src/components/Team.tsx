@@ -322,7 +322,7 @@ const team = [
     email: 'info.sumanjarirightsandremedies@gmail.com',
   },
   {
-    slug: 'Adarsh-Pratap_Singh',
+    slug: 'adarsh-pratap-singh',
     name: 'Adv. Adarsh Pratap Singh',
     chamber:  'Associate Advocate\n\nHigh Court, Lucknow Bench D–311 Chamber·Block D, Gomti Nagar, Lucknow, Uttar Pradesh',
     credentials: 'LL.B., LL.M',
@@ -331,7 +331,7 @@ const team = [
     email: 'info.sumanjarirightsandremedies@gmail.com',
   },
   {
-    slug: 'Devesh-Tiwari',
+    slug: 'devesh-tiwari',
     name: 'Adv. Devesh Tiwari',
     chamber:  'Associate Advocate\n\nHigh Court, Lucknow Bench D–311 Chamber·Block D, Gomti Nagar, Lucknow, Uttar Pradesh',
     credentials: 'LL.B., LL.M',
