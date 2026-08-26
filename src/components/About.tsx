@@ -89,7 +89,7 @@ export default function About() {
 
             <p className="mb-6 text-lg leading-relaxed text-navy-700/85 dark:text-cream/60">
               <strong>Sumanjari &amp; Co.</strong> is a trusted law firm serving clients across{' '}
-              <strong>Lucknow, Kanpur, Ayodhya, Prayagraj, Sultanpur, Ambedkar Nagar, Noida, Gurugram, and Delhi</strong>.
+              <strong>Lucknow, Kanpur, Ayodhya, Prayagraj, Sultanpur, Ambedkar Nagar, Noida, and Delhi</strong>.
               Our practice spans civil, criminal, matrimonial, constitutional writs, employment,
               consumer disputes, corporate litigation, compensation claims, bail matters,
               legal drafting, and advisory services, with a commitment to protecting our

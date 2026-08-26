@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import {
   Home,
   Key,
@@ -19,12 +20,22 @@ import {
   X,
 } from 'lucide-react'
 
-const services = [
+type Service = {
+  id: string
+  icon: typeof Home
+  title: string
+  description: string
+  href?: string
+  items: string[]
+}
+
+const services: Service[] = [
   {
     id: 'property-land',
     icon: Home,
     title: 'Property & Land Matters',
     description: 'Comprehensive legal assistance in property ownership, transfers, title verification, land disputes, revenue proceedings, and documentation.',
+    href: '/services/property-land-matters',
     items: [
       'Sale, purchase & transfer of immovable property',
       'Property title verification & due diligence',
@@ -59,6 +70,7 @@ const services = [
     icon: Receipt,
     title: 'Tax & Revenue Matters',
     description: 'Legal assistance in stamp duty, registration, taxation, valuation disputes, and revenue matters.',
+    href: '/services/tax-revenue-matters',
     items: [
       'Stamp duty & registration matters',
       'Property tax assessment disputes',
@@ -72,6 +84,7 @@ const services = [
     icon: Scale,
     title: 'Civil Matters',
     description: 'Representation in civil litigation, recovery proceedings, contractual disputes, and appeals.',
+    href: '/services/civil-matters',
     items: [
       'Civil suits & recovery of money',
       'Injunction & declaratory suits',
@@ -86,6 +99,7 @@ const services = [
     icon: Gavel,
     title: 'Criminal Matters',
     description: 'Strategic criminal defence, bail, trial representation, and appellate advocacy.',
+    href: '/services/criminal-matters',
     items: [
       'FIR quashing petitions',
       'Bail matters',
@@ -100,6 +114,7 @@ const services = [
     icon: Heart,
     title: 'Family & Matrimonial Matters',
     description: 'Legal support for matrimonial, custody, maintenance, and succession disputes.',
+    href: '/services/family-matrimonial-matters',
     items: [
       'Divorce (mutual consent & contested)',
       'Maintenance & alimony',
@@ -114,6 +129,7 @@ const services = [
     icon: Users,
     title: 'Service & Employment Matters',
     description: 'Representation in service disputes, tribunals, and employment litigation.',
+    href: '/services/service-employment-matters',
     items: [
       'Wrongful termination & reinstatement',
       'Departmental inquiry representation',
@@ -127,6 +143,7 @@ const services = [
     icon: ShoppingBag,
     title: 'Consumer & Motor Accident Matters',
     description: 'Consumer litigation, MACT claims, and insurance dispute resolution.',
+    href: '/services/consumer-motor-accident-matters',
     items: [
       'Consumer forum complaints',
       'Motor Accident Claims Tribunal (MACT) cases',
@@ -138,6 +155,7 @@ const services = [
     icon: Briefcase,
     title: 'Company & Corporate Matters',
     description: 'Corporate advisory, compliance, shareholder disputes, and commercial litigation.',
+    href: '/services/company-corporate-matters',
     items: [
       'Company registration & compliance advisory',
       'Shareholder & partnership disputes',
@@ -150,6 +168,7 @@ const services = [
     icon: Landmark,
     title: 'Constitutional & Writ Matters',
     description: 'Representation before the High Court in constitutional and writ jurisdiction.',
+    href: '/services/constitutional-writ-matters',
     items: [
       'Writ petitions (Article 226 - High Court)',
       'Public Interest Litigation (PIL) support',
@@ -175,6 +194,7 @@ const services = [
     icon: Building2,
     title: 'RERA Matters',
     description: 'Representation in real estate regulatory disputes before UP-RERA, builder-buyer conflicts, and project compliance matters.',
+    href: '/services/rera',
     items: [
       'Builder-buyer disputes',
       'UP-RERA complaints',
@@ -187,6 +207,7 @@ const services = [
     icon: Banknote,
     title: 'Banking, Recovery & Negotiable Instruments Matters',
     description: 'Representation in bank loan recovery, DRT proceedings, and negotiable instruments disputes.',
+    href: '/services/banking-recovery-matters',
     items: [
       'Debts Recovery Tribunal (DRT) proceedings',
       'SARFAESI Act matters',
@@ -236,13 +257,25 @@ export default function Services() {
         <div className={`${selectedService ? 'pointer-events-none blur-sm' : ''} grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3`}>
           {services.map((service) => {
             const Icon = service.icon
-            return (
-              <button key={service.id} onClick={() => setSelectedService(service)} className="glass-card rounded-sm border p-6 text-left transition hover:-translate-y-2 hover:border-gold-500">
+            const cardContent = (
+              <>
                 <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-sm border border-gold-500/40">
                   <Icon className="h-5 w-5 text-gold-600" />
                 </div>
                 <h3 className="mb-2 font-display text-lg font-bold">{service.title}</h3>
                 <p className="text-sm">{service.description}</p>
+              </>
+            )
+            if (service.href) {
+              return (
+                <Link key={service.id} href={service.href} className="glass-card rounded-sm border p-6 text-left transition hover:-translate-y-2 hover:border-gold-500 block">
+                  {cardContent}
+                </Link>
+              )
+            }
+            return (
+              <button key={service.id} onClick={() => setSelectedService(service)} className="glass-card rounded-sm border p-6 text-left transition hover:-translate-y-2 hover:border-gold-500">
+                {cardContent}
               </button>
             )
           })}

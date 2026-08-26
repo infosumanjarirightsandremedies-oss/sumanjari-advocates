@@ -14,17 +14,19 @@ function RedditIcon({ className }: { className?: string }) {
 }
 
 const services = [
-  'Property & Land Matters',
-  'Civil Matters',
-  'Criminal Matters',
-  'Family & Matrimonial Matters',
-  'Service & Employment Matters',
-  'Consumer & Motor Accident Matters',
-  'Constitutional & Writ Matters',
-  'Drafting & Legal Opinions',
-  'RERA Matters',
-  'Banking & Recovery (DRT) Matters',
-  'Armed Forces Tribunal & Mining Matters',
+  { label: 'Property & Land Matters', href: '/services/property-land-matters' },
+  { label: 'Civil Matters', href: '/services/civil-matters' },
+  { label: 'Criminal Matters', href: '/services/criminal-matters' },
+  { label: 'Tax & Revenue Matters', href: '/services/tax-revenue-matters' },
+  { label: 'Family & Matrimonial Matters', href: '/services/family-matrimonial-matters' },
+  { label: 'Service & Employment Matters', href: '/services/service-employment-matters' },
+  { label: 'Consumer & Motor Accident Matters', href: '/services/consumer-motor-accident-matters' },
+  { label: 'Constitutional & Writ Matters', href: '/services/constitutional-writ-matters' },
+  { label: 'Drafting & Legal Opinions', href: '/#services' },
+  { label: 'Company & Corporate Matters', href: '/services/company-corporate-matters' },
+  { label: 'RERA Matters', href: '/services/rera' },
+  { label: 'Banking & Recovery (DRT) Matters', href: '/services/banking-recovery-matters' },
+  { label: 'Armed Forces Tribunal & Mining Matters', href: '/#services' },
 ]
 
 const links = [
@@ -105,11 +107,11 @@ export default function Footer() {
             Practice Areas
           </h4>
           <ul className="space-y-3">
-            {services.map(s => (
-              <li key={s}>
-                <a href="#services" className="font-body text-navy-700/75 dark:text-cream/60 text-sm hover:text-gold-600 dark:hover:text-gold-400 transition-colors flex items-center gap-2">
+            {services.map(({ label, href }) => (
+              <li key={label}>
+                <a href={href} className="font-body text-navy-700/75 dark:text-cream/60 text-sm hover:text-gold-600 dark:hover:text-gold-400 transition-colors flex items-center gap-2">
                   <span className="w-1 h-1 rounded-full bg-gold-500/45 dark:bg-gold-500/55" />
-                  {s}
+                  {label}
                 </a>
               </li>
             ))}

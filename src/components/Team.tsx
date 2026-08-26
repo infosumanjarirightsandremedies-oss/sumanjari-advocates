@@ -291,7 +291,7 @@
 
 'use client'
 import Link from 'next/link'
-import { Mail, ArrowUpRight } from 'lucide-react'
+import { Mail, ArrowUpRight, Linkedin } from 'lucide-react'
 
 const team = [
   {
@@ -302,6 +302,7 @@ const team = [
     img: '/images/Jitendra.jpeg',
     focus: '50% 20%',
     email: 'info.sumanjarirightsandremedies@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/jitendra-tiwari-838353254/',
   },
   {
     slug: 'aishwarya-pandey',
@@ -311,13 +312,14 @@ const team = [
     img: '/images/Aishwarya.jpeg',
     focus: '50% 15%',
     email: 'info.sumanjarirightsandremedies@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/aishwarya-pandey-5553b0193/',
   },
   {
     slug: 'priyesh-dwivedi',
     name: 'Adv. Priyesh Dwivedi',
     chamber:  'Associate Advocate\n\nHigh Court, Lucknow Bench D–311 Chamber·Block D, Gomti Nagar, Lucknow, Uttar Pradesh',
     credentials: 'LL.B., LL.M',
-    img: 'images/Adv. Priyesh Dwivedi.jpeg',
+    img: '/images/Adv. Priyesh Dwivedi.jpeg',
     focus: '10% 2%',
     email: 'info.sumanjarirightsandremedies@gmail.com',
   },
@@ -326,7 +328,7 @@ const team = [
     name: 'Adv. Adarsh Pratap Singh',
     chamber:  'Associate Advocate\n\nHigh Court, Lucknow Bench D–311 Chamber·Block D, Gomti Nagar, Lucknow, Uttar Pradesh',
     credentials: 'LL.B., LL.M',
-    img: 'images/Adarsh Pratap Singh.jpeg',
+    img: '/images/Adarsh Pratap Singh.jpeg',
     focus: '10% 2%',
     email: 'info.sumanjarirightsandremedies@gmail.com',
   },
@@ -335,7 +337,7 @@ const team = [
     name: 'Adv. Devesh Tiwari',
     chamber:  'Associate Advocate\n\nHigh Court, Lucknow Bench D–311 Chamber·Block D, Gomti Nagar, Lucknow, Uttar Pradesh',
     credentials: 'LL.B., LL.M',
-    img: 'images/Devesh Tiwari.jpeg',
+    img: '/images/Devesh Tiwari.jpeg',
     focus: '10% 2%',
     email: 'info.sumanjarirightsandremedies@gmail.com',
   },
@@ -393,13 +395,26 @@ export default function Team() {
               </div>
 
               <div className="p-5 pt-4 mt-auto flex items-center justify-between">
-                <a
-                  href={`mailto:${member.email}`}
-                  aria-label={`Email ${member.name}`}
-                  className="w-8 h-8 rounded-sm border border-gold-500/35 flex items-center justify-center text-gold-600 dark:text-gold-400 hover:bg-gold-500/12 dark:border-gold-500/30 dark:hover:bg-gold-500/10 transition-colors"
-                >
-                  <Mail className="w-3.5 h-3.5" />
-                </a>
+                <div className="flex gap-2">
+                  {member.linkedin && (
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${member.name} on LinkedIn`}
+                      className="w-8 h-8 rounded-sm border border-gold-500/35 flex items-center justify-center text-gold-600 dark:text-gold-400 hover:bg-gold-500/12 dark:border-gold-500/30 dark:hover:bg-gold-500/10 transition-colors"
+                    >
+                      <Linkedin className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                  <a
+                    href={`mailto:${member.email}`}
+                    aria-label={`Email ${member.name}`}
+                    className="w-8 h-8 rounded-sm border border-gold-500/35 flex items-center justify-center text-gold-600 dark:text-gold-400 hover:bg-gold-500/12 dark:border-gold-500/30 dark:hover:bg-gold-500/10 transition-colors"
+                  >
+                    <Mail className="w-3.5 h-3.5" />
+                  </a>
+                </div>
                 <a href={`/team/${member.slug}`}
                   className="flex items-center gap-1 font-caps text-[11px] tracking-widest uppercase text-navy-700/70 dark:text-cream/45 hover:text-gold-600 dark:hover:text-gold-400 transition-colors"
                 >

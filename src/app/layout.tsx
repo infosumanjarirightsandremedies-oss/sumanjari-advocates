@@ -147,7 +147,7 @@ const legalServiceJsonLd = {
   name: 'Sumanjari & Co. Advocates',
   url: SITE_URL,
   description:
-    'Sumanjari & Co. Advocates practises before the Allahabad High Court, Lucknow Bench, serving clients across Lucknow, Kanpur, Ayodhya, Prayagraj, Sultanpur, Ambedkar Nagar, Noida, Gurugram, and Delhi — handling civil, criminal, family, property, consumer, tax, RERA, banking recovery (DRT), armed forces tribunal (AFT), and mining matters.',
+    'Sumanjari & Co. Advocates practises before the Allahabad High Court, Lucknow Bench, serving clients across Lucknow, Kanpur, Ayodhya, Prayagraj, Sultanpur, Ambedkar Nagar, Noida, and Delhi — handling civil, criminal, family, property, consumer, tax, RERA, banking recovery (DRT), armed forces tribunal (AFT), and mining matters.',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Chamber No. Block D – 311, Allahabad High Court, Lucknow Bench',

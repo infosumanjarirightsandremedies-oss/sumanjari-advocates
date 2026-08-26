@@ -3,6 +3,7 @@ node_modules
 out
 .claude
 mcp-server.log
+*.tsbuildinfo
 
 # env files
 .env

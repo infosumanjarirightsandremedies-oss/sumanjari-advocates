@@ -1,5 +1,5 @@
 ﻿import Link from 'next/link'
-import { ArrowLeft, Phone, Mail, GraduationCap } from 'lucide-react'
+import { ArrowLeft, Phone, Mail, GraduationCap, Linkedin } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -61,6 +61,17 @@ export default function AishwaryaPandeyPage() {
               <Mail className="w-4 h-4 text-gold-600 dark:text-gold-400 flex-shrink-0" />
               <a href="mailto:info.sumanjarirightsandremedies@gmail.com" className="font-body text-navy-800 dark:text-cream/85 hover:text-gold-600 dark:hover:text-gold-400 transition-colors">
                 info.sumanjarirightsandremedies@gmail.com
+              </a>
+            </div>
+            <div className="flex items-center gap-3">
+              <Linkedin className="w-4 h-4 text-gold-600 dark:text-gold-400 flex-shrink-0" />
+              <a
+                href="https://www.linkedin.com/in/aishwarya-pandey-5553b0193/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-body text-navy-800 dark:text-cream/85 hover:text-gold-600 dark:hover:text-gold-400 transition-colors"
+              >
+                LinkedIn Profile
               </a>
             </div>
           </div>
