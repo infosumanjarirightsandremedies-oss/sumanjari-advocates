@@ -290,8 +290,11 @@
 
 
 'use client'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { Mail, ArrowUpRight, Linkedin } from 'lucide-react'
+
+const AUTO_ROTATE_INTERVAL_MS = 4000
 
 const team = [
   {
@@ -344,12 +347,49 @@ const team = [
 ]
 
 export default function Team() {
+  const scrollerRef = useRef<HTMLDivElement>(null)
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const scrollToIndex = (index: number) => {
+    const scroller = scrollerRef.current
+    const card = scroller?.querySelectorAll('[data-team-card]')[index] as HTMLElement | undefined
+    if (!scroller || !card) return
+    const targetLeft =
+      card.getBoundingClientRect().left - scroller.getBoundingClientRect().left + scroller.scrollLeft
+    scroller.scrollTo({ left: targetLeft, behavior: 'smooth' })
+  }
+
+  const startAutoRotate = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current)
+    intervalRef.current = setInterval(() => {
+      setActiveIndex((prev) => {
+        const next = (prev + 1) % team.length
+        scrollToIndex(next)
+        return next
+      })
+    }, AUTO_ROTATE_INTERVAL_MS)
+  }
+
+  useEffect(() => {
+    startAutoRotate()
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current)
+    }
+  }, [])
+
+  const handleDotClick = (index: number) => {
+    setActiveIndex(index)
+    scrollToIndex(index)
+    startAutoRotate()
+  }
+
   return (
     <section id="team" className="py-24 md:py-32 relative">
       <div className="absolute right-0 bottom-0 w-96 h-96 bg-gold-500/8 dark:bg-gold-500/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="w-12 h-px bg-gold-500" />
             <span className="font-caps text-gold-600 dark:text-gold-400 text-xs tracking-[0.3em] uppercase">Our Advocates</span>
@@ -363,9 +403,16 @@ export default function Team() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div
+          ref={scrollerRef}
+          className="scrollbar-hide mx-auto flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 sm:max-w-[888px]"
+        >
           {team.map((member) => (
-            <div key={member.slug} className="glass-card rounded-sm overflow-hidden card-glow group flex flex-col">
+            <div
+              key={member.slug}
+              data-team-card
+              className="glass-card w-[260px] flex-shrink-0 snap-start overflow-hidden rounded-sm card-glow group flex flex-col sm:w-[280px]"
+            >
               <Link href={`/team/${member.slug}`} className="block">
                 <div className="relative h-64 overflow-hidden bg-navy-900/5">
                   <img
@@ -422,6 +469,23 @@ export default function Team() {
                 </a>
               </div>
             </div>
+          ))}
+        </div>
+
+        <div className="mt-6 flex items-center justify-center gap-2">
+          {team.map((member, index) => (
+            <button
+              key={member.slug}
+              type="button"
+              onClick={() => handleDotClick(index)}
+              aria-label={`Show ${member.name}`}
+              aria-current={activeIndex === index}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                activeIndex === index
+                  ? 'w-6 bg-gold-500'
+                  : 'w-2 bg-gold-500/30 hover:bg-gold-500/50'
+              }`}
+            />
           ))}
         </div>
 

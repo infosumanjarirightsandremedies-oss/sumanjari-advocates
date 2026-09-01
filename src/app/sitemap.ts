@@ -1,9 +1,17 @@
 import type { MetadataRoute } from 'next'
+import { getBlogPosts } from '@/lib/blogs'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date()
+  const blogPosts = await getBlogPosts()
+  const blogEntries: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${SITE_URL}/blog/${post.slug}`,
+    lastModified: post.publishedDate ? new Date(post.publishedDate) : now,
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }))
 
   return [
     {
@@ -21,67 +29,67 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${SITE_URL}/services/rera`,
       lastModified: now,
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/services/family-matrimonial-matters`,
       lastModified: now,
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/services/service-employment-matters`,
       lastModified: now,
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/services/criminal-matters`,
       lastModified: now,
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/services/banking-recovery-matters`,
       lastModified: now,
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/services/constitutional-writ-matters`,
       lastModified: now,
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/services/civil-matters`,
       lastModified: now,
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/services/property-land-matters`,
       lastModified: now,
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/services/consumer-motor-accident-matters`,
       lastModified: now,
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/services/company-corporate-matters`,
       lastModified: now,
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/services/tax-revenue-matters`,
       lastModified: now,
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
@@ -126,5 +134,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.7,
     },
+    ...blogEntries,
   ]
 }

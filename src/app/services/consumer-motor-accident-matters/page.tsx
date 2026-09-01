@@ -11,9 +11,12 @@ import {
   Scale,
   ShieldCheck,
   MessageSquareWarning,
+  ScrollText,
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceBlogs from '@/components/ServiceBlogs'
+import { getBlogPostsByCategory } from '@/lib/blogs'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
 
@@ -244,7 +247,9 @@ const consumerInsights = [
   },
 ]
 
-export default function ConsumerMotorAccidentMattersPage() {
+export default async function ConsumerMotorAccidentMattersPage() {
+  const consumerBlogPosts = await getBlogPostsByCategory('Consumer & Motor Accident Matters')
+
   return (
     <main className="relative min-h-screen">
       <script
@@ -285,6 +290,12 @@ export default function ConsumerMotorAccidentMattersPage() {
               Accident Claims Tribunal, and the Allahabad High Court, Lucknow
               Bench.
             </p>
+            <a
+              href="/#contact"
+              className="btn-gold mt-8 inline-flex rounded-sm px-8 py-3.5 font-caps text-sm font-semibold uppercase tracking-widest text-navy-900"
+            >
+              Consult Now
+            </a>
           </div>
 
           <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
@@ -463,6 +474,14 @@ export default function ConsumerMotorAccidentMattersPage() {
               ))}
             </div>
           </div>
+
+          <ServiceBlogs
+            posts={consumerBlogPosts}
+            fallbackIcon={<ScrollText className="h-5 w-5 text-gold-600 dark:text-gold-400" />}
+            eyebrow="From Our Desk"
+            heading="Consumer & Motor Accident Blogs"
+            description="Short reads on consumer disputes and motor accident compensation claims."
+          />
 
           <div className="glass-card rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">
             <h2 className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
