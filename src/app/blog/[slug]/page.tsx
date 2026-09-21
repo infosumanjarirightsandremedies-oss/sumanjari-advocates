@@ -10,6 +10,16 @@ type PageProps = {
   params: Promise<{ slug: string }>
 }
 
+const SITE_URL = 'https://www.sumanjariadvocates.com'
+
+// Thumbnails are either an absolute URL an editor pasted directly, or a
+// relative /api/drive-image/... path from normalizeThumbnail() in blogs.ts —
+// schema.org/OG images must always be absolute, so only prefix when needed.
+function absoluteImageUrl(url: string | null): string | undefined {
+  if (!url) return undefined
+  return url.startsWith('http') ? url : `${SITE_URL}${url}`
+}
+
 export const revalidate = 3600
 // New rows published in the sheet after the last build should still render —
 // generate them on demand instead of 404ing until the next full deploy.
@@ -28,6 +38,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: post.title,
     description: post.excerpt,
     alternates: { canonical: `/blog/${slug}` },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url: `/blog/${slug}`,
+      type: 'article',
+      publishedTime: post.publishedDate,
+      images: post.thumbnail ? [{ url: post.thumbnail }] : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+    },
   }
 }
 
@@ -132,8 +155,66 @@ export default async function BlogPostPage({ params }: PageProps) {
   const backHref = serviceSlug ? `/services/${serviceSlug}` : '/'
   const backLabel = serviceSlug ? `Back to ${post.category}` : 'Back to Home'
 
+  // Cross-links between posts in the same category so crawlers (and readers)
+  // can reach the rest of the corpus without going back through /blog.
+  const allPosts = await getBlogPosts()
+  const relatedPosts = allPosts.filter((p) => p.category === post.category && p.slug !== post.slug).slice(0, 3)
+
+  // articleBody spells out the full text in one structured field so LLM
+  // crawlers (which weigh JSON-LD heavily when citing sources) get the
+  // complete article without having to parse the rendered block markup.
+  const articleBody = content
+    .map((block) => (block.type === 'table' ? block.rows.map((row) => row.join(' | ')).join('\n') : block.text))
+    .join('\n\n')
+
+  const blogPostingJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    articleBody,
+    image: absoluteImageUrl(post.thumbnail),
+    datePublished: post.publishedDate,
+    dateModified: post.publishedDate,
+    articleSection: post.category,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${SITE_URL}/blog/${post.slug}`,
+    },
+    author: {
+      '@type': 'Organization',
+      name: 'Sumanjari & Co. Advocates',
+      url: SITE_URL,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Sumanjari & Co. Advocates',
+      url: SITE_URL,
+    },
+  }
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
+      { '@type': 'ListItem', position: 3, name: post.title, item: `${SITE_URL}/blog/${post.slug}` },
+    ],
+  }
+
   return (
     <main className="relative min-h-screen">
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <Navbar />
       <section className="py-24 md:py-32">
         <div className="mx-auto max-w-3xl px-6">
@@ -174,6 +255,39 @@ export default async function BlogPostPage({ params }: PageProps) {
             >
               Consult Now
             </a>
+          </div>
+
+          {relatedPosts.length > 0 && (
+            <div className="mt-16">
+              <h2 className="mb-6 font-display text-xl font-bold text-navy-900 dark:text-cream">
+                More on {post.category}
+              </h2>
+              <div className="grid gap-5 sm:grid-cols-3">
+                {relatedPosts.map((related) => (
+                  <Link
+                    key={related.slug}
+                    href={`/blog/${related.slug}`}
+                    className="glass-card card-glow rounded-sm border border-gold-500/20 p-5 dark:border-gold-500/15"
+                  >
+                    <h3 className="mb-2 font-display text-base font-bold leading-snug text-navy-900 dark:text-cream">
+                      {related.title}
+                    </h3>
+                    <span className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">
+                      Read Article →
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="mt-10 text-center">
+            <Link
+              href="/blog"
+              className="font-caps text-xs uppercase tracking-widest text-navy-700/70 transition-colors hover:text-gold-600 dark:text-cream/45 dark:hover:text-gold-400"
+            >
+              ← All Articles
+            </Link>
           </div>
         </div>
       </section>

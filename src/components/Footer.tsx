@@ -34,6 +34,7 @@ const links = [
   { label: 'Our Team', href: '/#team' },
   { label: 'Services', href: '/#services' },
   { label: 'Contact Us', href: '/#contact' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Publications', href: '/publications' },
   { label: 'Internship', href: '/internship' },
   { label: 'Our Journey', href: '/our-journey' },
