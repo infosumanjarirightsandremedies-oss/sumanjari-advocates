@@ -1,11 +1,20 @@
 const BLOG_SCRIPT_URL =
-  'https://script.google.com/macros/s/AKfycbxe94rBErezAQUus-lzGat8QliKGBqN-QZmibJFD8OsGeTWRRpHIcSp5TLko3G4Nlae/exec'
+  'https://script.google.com/macros/s/AKfycbyNJgTZgENxyi_mHtXorG2BA_Vce7M2IV1ng4B572ymDx9nrAwZXRDeZc3_ZOXkuDm_/exec'
+
+// One shared TTL + cache tag for every blog fetch. The TTL is long (1 week)
+// because the sheet trigger calls revalidateTag('blogs') on any change — so
+// content is never stale in practice, and we avoid needless background refetches.
+const REVALIDATE_SECONDS = 604800 // 7 days
+const BLOG_TAGS = ['blogs']
 
 export type BlogBlock =
   | { type: 'heading' | 'paragraph' | 'list-item'; text: string }
   | { type: 'table'; rows: string[][] }
 
-export type BlogPost = {
+// Metadata only — what the catalog endpoint (?resource=blogs) returns. Used by
+// the list, service pages, related posts, sitemap and llms.txt. No Doc content,
+// so these views open zero Docs and stay fast.
+export type BlogPostMeta = {
   slug: string
   title: string
   category: string
@@ -13,8 +22,10 @@ export type BlogPost = {
   thumbnail: string | null
   order: number
   publishedDate: string
-  content: BlogBlock[]
 }
+
+// A single post plus its rendered blocks — what ?resource=post&slug= returns.
+export type BlogPost = BlogPostMeta & { content: BlogBlock[] }
 
 // Editors paste whatever link Drive's "Share" dialog gives them
 // (drive.google.com/file/d/<ID>/view...). Chrome's ORB blocks Drive's direct
@@ -28,15 +39,82 @@ function normalizeThumbnail(url: string | null): string | null {
   return `/api/drive-image/${match[1]}`
 }
 
-// Published posts live in a Google Sheet an editor controls directly — a row's
-// Status flips to "published" and it shows up here within one revalidation
-// cycle, no redeploy needed. The Apps Script also renders each row's linked
-// Google Doc into structured blocks server-side, so the Doc can stay private.
-export async function getBlogPosts(): Promise<BlogPost[]> {
-  try {
-    const res = await fetch(`${BLOG_SCRIPT_URL}?resource=blogs`, {
-      next: { revalidate: 86400 },
+// --- request resilience ------------------------------------------------------
+// A Vercel build renders many /blog/[slug] pages, each hitting ?resource=post.
+// The gate keeps only a few of those in flight at once so we never trip Apps
+// Script's ~30-simultaneous-execution limit; the timeout + backoff keep a
+// transient throttle from turning into a build-time 404.
+
+const MAX_CONCURRENT_POST_FETCHES = 5
+let activeFetches = 0
+const waiters: Array<() => void> = []
+
+function acquire(): Promise<void> {
+  if (activeFetches < MAX_CONCURRENT_POST_FETCHES) {
+    activeFetches++
+    return Promise.resolve()
+  }
+  return new Promise((resolve) => {
+    waiters.push(() => {
+      activeFetches++
+      resolve()
     })
+  })
+}
+
+function release() {
+  activeFetches--
+  const next = waiters.shift()
+  if (next) next()
+}
+
+async function withGate<T>(fn: () => Promise<T>): Promise<T> {
+  await acquire()
+  try {
+    return await fn()
+  } finally {
+    release()
+  }
+}
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+const backoff = (attempt: number) => Math.min(1000 * 2 ** attempt, 8000)
+
+// Fetch a blog endpoint with a 30s timeout and backoff retries on 429/5xx.
+async function fetchBlog(url: string, retries = 3): Promise<Response> {
+  for (let attempt = 0; ; attempt++) {
+    const controller = new AbortController()
+    const timer = setTimeout(() => controller.abort(), 30_000)
+    try {
+      const res = await fetch(url, {
+        signal: controller.signal,
+        next: { revalidate: REVALIDATE_SECONDS, tags: BLOG_TAGS },
+      })
+      clearTimeout(timer)
+      if (res.ok) return res
+      if (attempt < retries && (res.status === 429 || res.status >= 500)) {
+        await sleep(backoff(attempt))
+        continue
+      }
+      return res
+    } catch (err) {
+      clearTimeout(timer)
+      if (attempt < retries) {
+        await sleep(backoff(attempt))
+        continue
+      }
+      throw err
+    }
+  }
+}
+
+// --- public API --------------------------------------------------------------
+
+// Catalog: metadata for every published post (no content). One upstream call;
+// Next's tagged fetch cache dedupes it across the whole build.
+export async function getBlogPosts(): Promise<BlogPostMeta[]> {
+  try {
+    const res = await fetchBlog(`${BLOG_SCRIPT_URL}?resource=blogs`)
     if (!res.ok) return []
     const data = await res.json()
     const posts = Array.isArray(data) ? data : []
@@ -48,12 +126,23 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
   }
 }
 
+// One post with its rendered content. Gated so a build-time fan-out can't
+// overwhelm Apps Script; the Doc render is cached server-side (keyed by mtime).
 export async function getBlogPost(slug: string): Promise<BlogPost | undefined> {
-  const posts = await getBlogPosts()
-  return posts.find((post) => post.slug === slug)
+  try {
+    const res = await withGate(() =>
+      fetchBlog(`${BLOG_SCRIPT_URL}?resource=post&slug=${encodeURIComponent(slug)}`)
+    )
+    if (!res.ok) return undefined
+    const data = await res.json()
+    if (!data || data.error || !data.slug) return undefined
+    return { ...data, thumbnail: normalizeThumbnail(data.thumbnail) }
+  } catch {
+    return undefined
+  }
 }
 
-export async function getBlogPostsByCategory(category: string): Promise<BlogPost[]> {
+export async function getBlogPostsByCategory(category: string): Promise<BlogPostMeta[]> {
   const posts = await getBlogPosts()
   return posts.filter((post) => post.category === category)
 }

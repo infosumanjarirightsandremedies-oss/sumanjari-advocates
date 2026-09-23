@@ -20,14 +20,21 @@ function absoluteImageUrl(url: string | null): string | undefined {
   return url.startsWith('http') ? url : `${SITE_URL}${url}`
 }
 
-export const revalidate = 86400
+export const revalidate = 604800 // 7 days; the sheet trigger invalidates on demand
 // New rows published in the sheet after the last build should still render —
 // generate them on demand instead of 404ing until the next full deploy.
 export const dynamicParams = true
 
+// Pre-render only the newest handful at build time; the rest render on first
+// visit (dynamicParams) and then cache. This keeps each build's ?resource=post
+// fan-out small, so it can't overwhelm Apps Script's execution limit. All posts
+// stay indexable — the sitemap lists every slug and each renders real HTML on
+// first crawl.
+const PRERENDER_COUNT = 12
+
 export async function generateStaticParams() {
   const posts = await getBlogPosts()
-  return posts.map((post) => ({ slug: post.slug }))
+  return posts.slice(0, PRERENDER_COUNT).map((post) => ({ slug: post.slug }))
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

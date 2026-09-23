@@ -7,7 +7,7 @@ const SITE_URL = 'https://www.sumanjariadvocates.com'
 // list posts published after the last deploy. Generating it here from the
 // same live blog feed as sitemap.ts keeps new articles visible to AI search
 // the moment they're published, not just to traditional crawlers.
-export const revalidate = 3600
+export const revalidate = 604800 // 7 days; the sheet trigger invalidates on demand
 
 export async function GET() {
   const posts = await getBlogPosts()

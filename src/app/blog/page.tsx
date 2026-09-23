@@ -4,7 +4,7 @@ import Footer from '@/components/Footer'
 import BlogArchive from '@/components/BlogArchive'
 import { getBlogPosts } from '@/lib/blogs'
 
-export const revalidate = 86400
+export const revalidate = 604800 // 7 days; the sheet trigger invalidates on demand
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
 
