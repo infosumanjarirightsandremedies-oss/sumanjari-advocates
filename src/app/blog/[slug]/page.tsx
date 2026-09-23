@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import { ArrowLeft } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { getBlogPost, getBlogPosts, getServiceSlugForCategory, type BlogBlock } from '@/lib/blogs'
+import { getBlogPost, getBlogPosts, getServiceSlugForCategory, type BlogBlock, type BlogPostMeta } from '@/lib/blogs'
 
 type PageProps = {
   params: Promise<{ slug: string }>
@@ -33,8 +33,14 @@ export const dynamicParams = true
 const PRERENDER_COUNT = 12
 
 export async function generateStaticParams() {
-  const posts = await getBlogPosts()
-  return posts.slice(0, PRERENDER_COUNT).map((post) => ({ slug: post.slug }))
+  try {
+    const posts = await getBlogPosts()
+    return posts.slice(0, PRERENDER_COUNT).map((post) => ({ slug: post.slug }))
+  } catch {
+    // Backend unreachable at build time — prerender none; dynamicParams renders
+    // each on first visit. Don't fail the whole build over a transient blip.
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -164,8 +170,15 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   // Cross-links between posts in the same category so crawlers (and readers)
   // can reach the rest of the corpus without going back through /blog.
-  const allPosts = await getBlogPosts()
-  const relatedPosts = allPosts.filter((p) => p.category === post.category && p.slug !== post.slug).slice(0, 3)
+  // Related posts are non-essential — if the catalog call fails, show none
+  // rather than 500-ing the article itself (getBlogPosts now throws on failure).
+  let relatedPosts: BlogPostMeta[] = []
+  try {
+    const allPosts = await getBlogPosts()
+    relatedPosts = allPosts.filter((p) => p.category === post.category && p.slug !== post.slug).slice(0, 3)
+  } catch {
+    /* leave relatedPosts empty */
+  }
 
   // articleBody spells out the full text in one structured field so LLM
   // crawlers (which weigh JSON-LD heavily when citing sources) get the

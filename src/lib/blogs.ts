@@ -112,34 +112,36 @@ async function fetchBlog(url: string, retries = 3): Promise<Response> {
 
 // Catalog: metadata for every published post (no content). One upstream call;
 // Next's tagged fetch cache dedupes it across the whole build.
+//
+// Deliberately does NOT swallow failures into an empty array: with a 1-week ISR
+// TTL, a transient blip that returned [] would get cached as a "No articles"
+// page and stick for days. Throwing instead yields a retriable 500 (never
+// cached), so the page self-heals on the next request once the backend is back.
+// A genuine empty catalog (200 + []) is still returned and cached normally.
 export async function getBlogPosts(): Promise<BlogPostMeta[]> {
-  try {
-    const res = await fetchBlog(`${BLOG_SCRIPT_URL}?resource=blogs`)
-    if (!res.ok) return []
-    const data = await res.json()
-    const posts = Array.isArray(data) ? data : []
-    return posts.map((post) => ({ ...post, thumbnail: normalizeThumbnail(post.thumbnail) }))
-  } catch {
-    // Apps Script down/unreachable — degrade to no posts rather than
-    // throwing and breaking the page that called this.
-    return []
-  }
+  const res = await fetchBlog(`${BLOG_SCRIPT_URL}?resource=blogs`)
+  if (!res.ok) throw new Error(`getBlogPosts: upstream HTTP ${res.status}`)
+  const data = await res.json()
+  if (!Array.isArray(data)) throw new Error('getBlogPosts: expected an array')
+  return data.map((post) => ({ ...post, thumbnail: normalizeThumbnail(post.thumbnail) }))
 }
 
 // One post with its rendered content. Gated so a build-time fan-out can't
 // overwhelm Apps Script; the Doc render is cached server-side (keyed by mtime).
+//
+// Only a genuine "not found" (200 + {error}) returns undefined, which the page
+// turns into a (correctly cached) 404. Any upstream failure THROWS instead, so
+// a transient blip renders a retriable 500 rather than caching a 404 on a real
+// post for the 1-week TTL.
 export async function getBlogPost(slug: string): Promise<BlogPost | undefined> {
-  try {
-    const res = await withGate(() =>
-      fetchBlog(`${BLOG_SCRIPT_URL}?resource=post&slug=${encodeURIComponent(slug)}`)
-    )
-    if (!res.ok) return undefined
-    const data = await res.json()
-    if (!data || data.error || !data.slug) return undefined
-    return { ...data, thumbnail: normalizeThumbnail(data.thumbnail) }
-  } catch {
-    return undefined
-  }
+  const res = await withGate(() =>
+    fetchBlog(`${BLOG_SCRIPT_URL}?resource=post&slug=${encodeURIComponent(slug)}`)
+  )
+  if (!res.ok) throw new Error(`getBlogPost(${slug}): upstream HTTP ${res.status}`)
+  const data = await res.json()
+  if (data && data.error) return undefined // genuine unpublished/unknown slug
+  if (!data || !data.slug) throw new Error(`getBlogPost(${slug}): unexpected payload`)
+  return { ...data, thumbnail: normalizeThumbnail(data.thumbnail) }
 }
 
 export async function getBlogPostsByCategory(category: string): Promise<BlogPostMeta[]> {
