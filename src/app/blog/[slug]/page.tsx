@@ -20,7 +20,7 @@ function absoluteImageUrl(url: string | null): string | undefined {
   return url.startsWith('http') ? url : `${SITE_URL}${url}`
 }
 
-export const revalidate = 3600
+export const revalidate = 86400
 // New rows published in the sheet after the last build should still render —
 // generate them on demand instead of 404ing until the next full deploy.
 export const dynamicParams = true

@@ -35,7 +35,7 @@ function normalizeThumbnail(url: string | null): string | null {
 export async function getBlogPosts(): Promise<BlogPost[]> {
   try {
     const res = await fetch(`${BLOG_SCRIPT_URL}?resource=blogs`, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 86400 },
     })
     if (!res.ok) return []
     const data = await res.json()

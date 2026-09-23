@@ -4,7 +4,7 @@ import Footer from '@/components/Footer'
 import BlogArchive from '@/components/BlogArchive'
 import { getBlogPosts } from '@/lib/blogs'
 
-export const revalidate = 3600
+export const revalidate = 86400
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
 
