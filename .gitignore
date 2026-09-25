@@ -8,3 +8,6 @@ mcp-server.log
 # env files
 .env
 .env*.local
+
+# Google Indexing API secrets/output
+scripts/google-indexing-api/*.json
