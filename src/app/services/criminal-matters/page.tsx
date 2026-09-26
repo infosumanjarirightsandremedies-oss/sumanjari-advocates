@@ -511,6 +511,7 @@ export default async function CriminalMattersPage() {
             eyebrow="From Our Desk"
             heading="Criminal Matters Blogs"
             description="Short reads on bail, criminal defence, and trial procedure."
+            viewAllHref={`/blog?category=${encodeURIComponent('Criminal Matters')}`}
           />
 
           <div className="glass-card rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">

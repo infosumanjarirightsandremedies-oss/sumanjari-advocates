@@ -144,6 +144,7 @@ keywords: [
 const legalServiceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
+  '@id': `${SITE_URL}/#organization`,
   name: 'Sumanjari & Co. Advocates',
   url: SITE_URL,
   description:

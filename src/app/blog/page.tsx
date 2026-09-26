@@ -20,8 +20,14 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function BlogIndexPage() {
+export default async function BlogIndexPage({
+  searchParams,
+}: {
+  searchParams: { category?: string }
+}) {
   const posts = await getBlogPosts()
+  const initialCategory =
+    typeof searchParams.category === 'string' ? searchParams.category : 'All'
   const sortedPosts = [...posts].sort(
     (a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
   )
@@ -72,7 +78,7 @@ export default async function BlogIndexPage() {
               No articles are published yet — check back soon.
             </p>
           ) : (
-            <BlogArchive posts={sortedPosts} />
+            <BlogArchive posts={sortedPosts} initialCategory={initialCategory} />
           )}
         </div>
       </section>

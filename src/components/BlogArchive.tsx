@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
 import { ScrollText } from 'lucide-react'
 
 type ArchivePost = {
@@ -16,12 +17,31 @@ type ArchivePost = {
 // Client-side filter over the full, server-fetched post list — every post is
 // already in the DOM, so switching tabs doesn't need a fetch and every post
 // stays crawlable even before JS runs.
-export default function BlogArchive({ posts }: { posts: ArchivePost[] }) {
+export default function BlogArchive({
+  posts,
+  initialCategory = 'All',
+}: {
+  posts: ArchivePost[]
+  initialCategory?: string
+}) {
+  const router = useRouter()
+  const pathname = usePathname()
   const categories = useMemo(
     () => Array.from(new Set(posts.map((post) => post.category))).sort(),
     [posts]
   )
-  const [activeCategory, setActiveCategory] = useState('All')
+  // Honour ?category= from the URL when it matches a real category; otherwise 'All'.
+  const [activeCategory, setActiveCategory] = useState(() =>
+    initialCategory === 'All' || posts.some((post) => post.category === initialCategory)
+      ? initialCategory
+      : 'All'
+  )
+
+  const selectCategory = (category: string) => {
+    setActiveCategory(category)
+    const query = category === 'All' ? '' : `?category=${encodeURIComponent(category)}`
+    router.replace(`${pathname}${query}`, { scroll: false })
+  }
 
   const visiblePosts =
     activeCategory === 'All' ? posts : posts.filter((post) => post.category === activeCategory)
@@ -33,7 +53,7 @@ export default function BlogArchive({ posts }: { posts: ArchivePost[] }) {
           <button
             key={category}
             type="button"
-            onClick={() => setActiveCategory(category)}
+            onClick={() => selectCategory(category)}
             className={`font-caps rounded-sm border px-4 py-2 text-xs uppercase tracking-widest transition-colors ${
               activeCategory === category
                 ? 'border-gold-500 bg-gold-500/15 text-gold-700 dark:text-gold-400'

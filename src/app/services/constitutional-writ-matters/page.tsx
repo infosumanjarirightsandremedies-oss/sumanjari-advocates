@@ -481,6 +481,7 @@ export default async function ConstitutionalWritMattersPage() {
             eyebrow="From Our Desk"
             heading="Constitutional & Writ Blogs"
             description="Short reads on writ remedies and constitutional law practice."
+            viewAllHref={`/blog?category=${encodeURIComponent('Constitutional & Writ Matters')}`}
           />
 
           <div className="glass-card rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">

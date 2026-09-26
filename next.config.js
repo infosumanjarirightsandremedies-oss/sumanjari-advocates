@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['hzfhnbmylsiuvezmxgkk.supabase.co'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'hzfhnbmylsiuvezmxgkk.supabase.co',
+      },
+    ],
   },
   // Blog pages fetch content from a Google Apps Script backend at build time.
   // That call can run close to (or past) Next's default 60s page-data limit,

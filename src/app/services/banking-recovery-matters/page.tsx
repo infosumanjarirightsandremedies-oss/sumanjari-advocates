@@ -509,6 +509,7 @@ export default async function BankingRecoveryMattersPage() {
             eyebrow="From Our Desk"
             heading="Banking & Recovery Blogs"
             description="Short reads on DRT proceedings, recovery claims, and negotiable instruments matters."
+            viewAllHref={`/blog?category=${encodeURIComponent('Banking & Recovery Matters')}`}
           />
 
           <div className="glass-card rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">

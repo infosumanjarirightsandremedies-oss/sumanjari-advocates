@@ -479,6 +479,7 @@ export default async function CivilMattersPage() {
             eyebrow="From Our Desk"
             heading="Civil Matters Blogs"
             description="Short reads on the practical side of civil suits, recovery, and appeals."
+            viewAllHref={`/blog?category=${encodeURIComponent('Civil Matters')}`}
           />
 
           <div className="glass-card rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">

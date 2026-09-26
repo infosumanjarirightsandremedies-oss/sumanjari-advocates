@@ -481,6 +481,7 @@ export default async function ConsumerMotorAccidentMattersPage() {
             eyebrow="From Our Desk"
             heading="Consumer & Motor Accident Blogs"
             description="Short reads on consumer disputes and motor accident compensation claims."
+            viewAllHref={`/blog?category=${encodeURIComponent('Consumer & Motor Accident Matters')}`}
           />
 
           <div className="glass-card rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">

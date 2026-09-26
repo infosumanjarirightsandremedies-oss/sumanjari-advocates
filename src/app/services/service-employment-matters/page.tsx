@@ -531,6 +531,7 @@ export default async function ServiceEmploymentMattersPage() {
             eyebrow="From Our Desk"
             heading="Service & Employment Blogs"
             description="Short reads on service law, employment disputes, and departmental proceedings."
+            viewAllHref={`/blog?category=${encodeURIComponent('Service & Employment Matters')}`}
           />
 
           <div className="glass-card rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">

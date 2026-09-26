@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react'
 import type { ReactNode } from 'react'
 
 type ServiceBlogPost = {
@@ -18,6 +18,8 @@ type ServiceBlogsProps = {
   heading?: string
   eyebrow?: string
   description?: string
+  // When set, the heading links here (e.g. the full, filtered blog listing).
+  viewAllHref?: string
 }
 
 // Reusable horizontally-scrolling row of blog boxes for a service page.
@@ -29,6 +31,7 @@ export default function ServiceBlogs({
   heading = 'From the Blog',
   eyebrow = 'Read More',
   description,
+  viewAllHref,
 }: ServiceBlogsProps) {
   const scrollerRef = useRef<HTMLDivElement>(null)
 
@@ -46,12 +49,22 @@ export default function ServiceBlogs({
     <div className="mb-16">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <span className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">
+          <span className="block font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">
             {eyebrow}
           </span>
-          <h2 className="mt-2 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-            {heading}
-          </h2>
+          {viewAllHref ? (
+            <Link
+              href={viewAllHref}
+              className="group mt-2 flex w-fit items-center gap-2 text-navy-900 transition-colors hover:text-gold-700 dark:text-cream dark:hover:text-gold-400"
+            >
+              <h2 className="font-display text-2xl font-bold md:text-3xl">{heading}</h2>
+              <ArrowRight className="h-5 w-5 flex-shrink-0 text-gold-600 transition-transform group-hover:translate-x-0.5 dark:text-gold-400" />
+            </Link>
+          ) : (
+            <h2 className="mt-2 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              {heading}
+            </h2>
+          )}
           {description && (
             <p className="mt-2 max-w-xl font-body text-navy-700 dark:text-cream/55">{description}</p>
           )}

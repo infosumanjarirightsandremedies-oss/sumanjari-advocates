@@ -481,6 +481,7 @@ export default async function TaxRevenueMattersPage() {
             eyebrow="From Our Desk"
             heading="Tax & Revenue Blogs"
             description="Short reads on tax disputes and revenue matters."
+            viewAllHref={`/blog?category=${encodeURIComponent('Tax & Revenue Matters')}`}
           />
 
           <div className="glass-card rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">

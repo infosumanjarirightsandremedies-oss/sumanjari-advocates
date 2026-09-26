@@ -476,6 +476,7 @@ export default async function CompanyCorporateMattersPage() {
             eyebrow="From Our Desk"
             heading="Company & Corporate Blogs"
             description="Short reads on company law, corporate compliance, and governance matters."
+            viewAllHref={`/blog?category=${encodeURIComponent('Company & Corporate Matters')}`}
           />
 
           <div className="glass-card rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">

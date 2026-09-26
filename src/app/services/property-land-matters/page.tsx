@@ -500,6 +500,7 @@ export default async function PropertyLandMattersPage() {
             eyebrow="From Our Desk"
             heading="Property & Land Blogs"
             description="Short reads on property disputes, title issues, and land matters."
+            viewAllHref={`/blog?category=${encodeURIComponent('Property & Land Matters')}`}
           />
 
           <div className="glass-card rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">
