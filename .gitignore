@@ -11,3 +11,4 @@ mcp-server.log
 
 # Google Indexing API secrets/output
 scripts/google-indexing-api/*.json
+scripts/supabase-blog-cache/__pycache__/

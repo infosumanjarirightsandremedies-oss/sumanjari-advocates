@@ -1,7 +1,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
-import { isValidEmail, isValidPhone } from '@/lib/validation'
+import { isValidEmail, isValidIntlPhone } from '@/lib/validation'
 import { supabase } from '@/lib/supabase'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -27,7 +27,36 @@ const SENDER_ADDRESS = MAIL_FROM_DOMAIN ? `noreply@${MAIL_FROM_DOMAIN}` : 'onboa
 
 const MAX_FILE_SIZE = 8 * 1024 * 1024 // 8MB — safe ceiling for a single PDF/DOC
 
-type FormType = 'contact' | 'internship' | 'publication'
+type FormType = 'contact' | 'internship' | 'publication' | 'callback'
+
+// Appends one row per submission via the separate Leads Apps Script (Leads.gs).
+// Best-effort: a logging failure never blocks the email or the response.
+async function logLeadToSheet(row: Record<string, string>): Promise<void> {
+  const url = process.env.LEADS_SCRIPT_URL
+  if (!url) return
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), 8000)
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        ...row,
+        timestamp: new Date().toISOString(),
+        token: process.env.LEADS_SCRIPT_TOKEN || '',
+      }),
+      signal: controller.signal,
+    })
+    const data = await res.json().catch(() => null)
+    if (!data?.ok) {
+      console.error('Lead sheet logging rejected:', res.status, data?.error || 'bad token or non-JSON reply')
+    }
+  } catch (err) {
+    console.error('Lead sheet logging failed:', err instanceof Error ? err.message : err)
+  } finally {
+    clearTimeout(timer)
+  }
+}
 
 // ---------------------------------------------------------------------------
 // EMAIL THEME NOTE
@@ -158,14 +187,27 @@ export async function POST(req: NextRequest) {
     const outlet = escapeHtml(formData.get('outlet')?.toString() || '')
     const link = escapeHtml(formData.get('link')?.toString() || '')
     const description = escapeHtml(formData.get('description')?.toString() || '')
+    const urgency = escapeHtml(formData.get('urgency')?.toString() || '')
+    const blogUrl = escapeHtml(formData.get('blogUrl')?.toString() || '')
     const file = formData.get('file') as File | null
 
     // ---- Validation per form type ----
-    if (!name || !email) {
+    // The blog callback card collects only name + phone (no email), so email is
+    // required for every type EXCEPT callback.
+    if (!name) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
-    if (!isValidEmail(email)) {
-      return NextResponse.json({ error: 'Invalid email address' }, { status: 400 })
+    if (formType === 'callback') {
+      if (!phone) {
+        return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+      }
+    } else {
+      if (!email) {
+        return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+      }
+      if (!isValidEmail(email)) {
+        return NextResponse.json({ error: 'Invalid email address' }, { status: 400 })
+      }
     }
     if (formType === 'contact' && (!phone || !message)) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
@@ -177,8 +219,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
     // Phone is required on contact/internship, optional on publication —
-    // but whenever a phone value IS present, it must be a valid number.
-    if (phone && !isValidPhone(phone)) {
+    // but whenever a phone value IS present, it must be plausible. Loose here
+    // (Indian + international) since the client enforces the per-country rule.
+    if (phone && !isValidIntlPhone(phone)) {
       return NextResponse.json({ error: 'Invalid phone number' }, { status: 400 })
     }
 
@@ -196,13 +239,37 @@ export async function POST(req: NextRequest) {
       attachments.push({ filename: file.name, content: base64 })
     }
 
+    // ---- Persist the lead to the spreadsheet (best-effort, raw values) ----
+    // Logged before the email so a lead is captured even if delivery fails.
+    if (formType === 'contact' || formType === 'callback') {
+      await logLeadToSheet({
+        formType,
+        name: formData.get('name')?.toString() || '',
+        email: formData.get('email')?.toString() || '',
+        phone: formData.get('phone')?.toString() || '',
+        practiceArea: formData.get('area')?.toString() || '',
+        urgency: formData.get('urgency')?.toString() || '',
+        message: formData.get('message')?.toString() || '',
+        blogUrl: formData.get('blogUrl')?.toString() || '',
+      })
+    }
+
     // ---- Build office notification email ----
     let subject = ''
     let subtitle = ''
     let badgeText = ''
     let bodyFields = ''
 
-    if (formType === 'contact') {
+    if (formType === 'callback') {
+      subject = `New Callback Request — ${name}`
+      subtitle = 'New Callback Request'
+      badgeText = urgency || 'Callback'
+      bodyFields =
+        field('Full Name', name) +
+        field('Phone', phone) +
+        (urgency ? field('Urgency', urgency) : '') +
+        (blogUrl ? field('Read Article', `<a href="${blogUrl}" style="color:${GOLD};">${blogUrl}</a>`) : '')
+    } else if (formType === 'contact') {
       subject = `New Consultation Request — ${name}`
       subtitle = 'New Consultation Request'
       badgeText = area || 'General Enquiry'
@@ -276,7 +343,8 @@ export async function POST(req: NextRequest) {
     const officeResult = await resend.emails.send({
       from: `Sumanjari & Co. Website <${SENDER_ADDRESS}>`,
       to: [OFFICE_EMAIL],
-      reply_to: email,
+      // Callback requests carry no email, so there's nothing to reply to.
+      ...(email ? { reply_to: email } : {}),
       subject,
       attachments,
       html: officeHtml,
@@ -349,8 +417,9 @@ export async function POST(req: NextRequest) {
     // Without a verified domain, Resend's sandbox sender can only deliver to
     // OFFICE_EMAIL — never to an arbitrary visitor's address — so skip the
     // call outright rather than let it fail on every single submission.
-    const confirmResult = !MAIL_FROM_DOMAIN
-      ? { error: { message: 'Skipped: MAIL_FROM_DOMAIN not set, sandbox sender cannot reach visitor inboxes' } }
+    // Callback requests have no email to confirm to, so skip them too.
+    const confirmResult = !MAIL_FROM_DOMAIN || !email
+      ? { error: { message: 'Skipped: MAIL_FROM_DOMAIN not set or no submitter email' } }
       : await resend.emails.send({
           from: `Sumanjari & Co. Advocates <${SENDER_ADDRESS}>`,
           to: [email],

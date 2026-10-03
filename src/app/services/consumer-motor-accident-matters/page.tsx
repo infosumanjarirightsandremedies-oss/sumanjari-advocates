@@ -55,7 +55,7 @@ const consumerMattersJsonLd = {
   url: `${SITE_URL}/services/consumer-motor-accident-matters`,
   description:
     'Representation in consumer forum complaints under the Consumer Protection Act, 2019, Motor Accident Claims Tribunal proceedings under the Motor Vehicles Act, 1988, no-fault and hit-and-run compensation, and insurance claim disputes.',
-  telephone: '+91-82990-86204',
+  telephone: '+91-83024-71764',
   email: 'info.sumanjarirightsandremedies@gmail.com',
   areaServed: [
     { '@type': 'City', name: 'Lucknow' },

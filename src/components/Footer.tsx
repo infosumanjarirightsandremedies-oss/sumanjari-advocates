@@ -24,14 +24,14 @@ const services = [
   { label: 'Constitutional & Writ Matters', href: '/services/constitutional-writ-matters' },
   { label: 'Drafting & Legal Opinions', href: '/#services' },
   { label: 'Company & Corporate Matters', href: '/services/company-corporate-matters' },
-  { label: 'RERA Matters', href: '/services/rera' },
+  { label: 'RERA Matters', href: '/services/rera-lawyer' },
   { label: 'Banking & Recovery (DRT) Matters', href: '/services/banking-recovery-matters' },
   { label: 'Armed Forces Tribunal & Mining Matters', href: '/#services' },
 ]
 
 const links = [
   { label: 'About Us', href: '/#about' },
-  { label: 'Our Team', href: '/#team' },
+  { label: 'Our Team', href: '/team' },
   { label: 'Services', href: '/#services' },
   { label: 'Contact Us', href: '/#contact' },
   { label: 'Blog', href: '/blog' },
@@ -45,7 +45,7 @@ const WEBSITE = 'https://www.sumanjariadvocates.com'
 const social = [
   {
     icon: Instagram,
-    href: "https://www.instagram.com/thelastvedict",
+    href: "https://www.instagram.com/thelast_verdict",
     label: "Instagram",
   },
   {

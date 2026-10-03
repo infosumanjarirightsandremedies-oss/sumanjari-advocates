@@ -62,7 +62,7 @@ const bankingRecoveryJsonLd = {
   url: `${SITE_URL}/services/banking-recovery-matters`,
   description:
     'Representation for banks, financial institutions, borrowers, and guarantors in Debts Recovery Tribunal proceedings, SARFAESI enforcement, bank loan recovery and settlement, and negotiable instrument disputes, before the DRT, Lucknow, DRAT Allahabad, and the Allahabad High Court, Lucknow Bench.',
-  telephone: '+91-82990-86204',
+  telephone: '+91-83024-71764',
   email: 'info.sumanjarirightsandremedies@gmail.com',
   areaServed: [
     { '@type': 'City', name: 'Lucknow' },

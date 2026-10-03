@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 60 * 60 * 24 * 30,
     remotePatterns: [
       {
         protocol: 'https',
@@ -14,6 +16,15 @@ const nextConfig = {
   // runtime is brought down (see google-apps-script/). One deduped fetch feeds
   // all blog pages, so this covers the whole blog corpus.
   staticPageGenerationTimeout: 180,
+  async redirects() {
+    return [
+      {
+        source: '/services/rera',
+        destination: '/services/rera-lawyer',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig

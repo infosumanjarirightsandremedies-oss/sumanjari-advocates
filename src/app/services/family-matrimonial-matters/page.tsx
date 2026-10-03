@@ -56,7 +56,7 @@ const familyServiceJsonLd = {
   url: `${SITE_URL}/services/family-matrimonial-matters`,
   description:
     'Representation in divorce, maintenance, child custody, domestic violence protection, restitution of conjugal rights, and succession disputes before the Family Court, District Courts, and the Allahabad High Court, Lucknow Bench.',
-  telephone: '+91-82990-86204',
+  telephone: '+91-83024-71764',
   email: 'info.sumanjarirightsandremedies@gmail.com',
   areaServed: [
     { '@type': 'City', name: 'Lucknow' },

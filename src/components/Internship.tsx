@@ -1,8 +1,9 @@
 'use client'
 import { useState, useMemo } from 'react'
 import { GraduationCap, Send, User, Phone, Mail, BookOpen, Briefcase, UploadCloud } from 'lucide-react'
-import { getCountries, getCountryCallingCode, type CountryCode } from 'libphonenumber-js'
-import { isValidEmail, isValidPhone } from '@/lib/validation'
+import { type CountryCode } from 'libphonenumber-js'
+import { isValidEmail } from '@/lib/validation'
+import { isValidPhoneIntl, buildCountryList, getDialCode } from '@/lib/phoneIntl'
 
 const areasOfInterest = [
   'Criminal Law',
@@ -17,31 +18,6 @@ const areasOfInterest = [
   'Consumer Protection',
   'Other Legal Areas',
 ]
-
-// Converts an ISO 3166-1 alpha-2 code (e.g. "IN") into its flag emoji
-function isoToFlag(iso: string): string {
-  return iso
-    .toUpperCase()
-    .replace(/./g, (char) => String.fromCodePoint(127397 + char.charCodeAt(0)))
-}
-
-// Builds the full list of countries (dial code + display name + flag) once,
-// straight from libphonenumber-js's metadata -- covers every country it supports.
-function buildCountryList() {
-  const regionNames =
-    typeof Intl !== 'undefined' && 'DisplayNames' in Intl
-      ? new Intl.DisplayNames(['en'], { type: 'region' })
-      : null
-
-  return getCountries()
-    .map((iso) => ({
-      iso: iso as CountryCode,
-      dialCode: `+${getCountryCallingCode(iso as CountryCode)}`,
-      name: regionNames?.of(iso) ?? iso,
-      flag: isoToFlag(iso),
-    }))
-    .sort((a, b) => a.name.localeCompare(b.name))
-}
 
 export default function Internship() {
   const [form, setForm] = useState({
@@ -80,7 +56,7 @@ export default function Internship() {
     const errors: { email?: string; phone?: string; resume?: string } = {}
     if (!isValidEmail(form.email)) errors.email = 'Enter a valid email address'
     if (!form.phone.trim()) errors.phone = 'Contact number is required'
-    else if (!isValidPhone(form.phone, country)) {
+    else if (!isValidPhoneIntl(form.phone, country)) {
       errors.phone = `Enter a valid phone number for ${selectedCountry?.name ?? 'the selected country'}`
     }
     if (!resume) errors.resume = 'Please attach your resume'
@@ -93,7 +69,7 @@ export default function Internship() {
     if (!validate()) return
     setStatus('loading')
     try {
-      const dialCode = `+${getCountryCallingCode(country)}`
+      const dialCode = getDialCode(country)
       const fullPhone = `${dialCode} ${form.phone.replace(/\D/g, '')}`
 
       const payload = new FormData()

@@ -16,8 +16,9 @@ import {
   ExternalLink,
   Download,
 } from 'lucide-react'
-import { getCountries, getCountryCallingCode, type CountryCode } from 'libphonenumber-js'
-import { isValidEmail, isValidPhone } from '@/lib/validation'
+import { type CountryCode } from 'libphonenumber-js'
+import { isValidEmail } from '@/lib/validation'
+import { isValidPhoneIntl, buildCountryList, getDialCode } from '@/lib/phoneIntl'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
@@ -62,31 +63,6 @@ function fromRow(row: PublicationRow): Publication {
     href: row.href ?? undefined,
     fileUrl: row.file_url ?? undefined,
   }
-}
-
-// Converts an ISO 3166-1 alpha-2 code (e.g. "IN") into its flag emoji
-function isoToFlag(iso: string): string {
-  return iso
-    .toUpperCase()
-    .replace(/./g, (char) => String.fromCodePoint(127397 + char.charCodeAt(0)))
-}
-
-// Builds the full list of countries (dial code + display name + flag) once,
-// straight from libphonenumber-js's metadata -- covers every country it supports.
-function buildCountryList() {
-  const regionNames =
-    typeof Intl !== 'undefined' && 'DisplayNames' in Intl
-      ? new Intl.DisplayNames(['en'], { type: 'region' })
-      : null
-
-  return getCountries()
-    .map((iso) => ({
-      iso: iso as CountryCode,
-      dialCode: `+${getCountryCallingCode(iso as CountryCode)}`,
-      name: regionNames?.of(iso) ?? iso,
-      flag: isoToFlag(iso),
-    }))
-    .sort((a, b) => a.name.localeCompare(b.name))
 }
 
 export default function Publications() {
@@ -156,7 +132,7 @@ export default function Publications() {
     const errors: { email?: string; phone?: string } = {}
     if (!isValidEmail(form.email)) errors.email = 'Enter a valid email address'
     // Phone is optional here — only validate format if the visitor entered one.
-    if (form.phone.trim() && !isValidPhone(form.phone, country)) {
+    if (form.phone.trim() && !isValidPhoneIntl(form.phone, country)) {
       errors.phone = `Enter a valid phone number for ${selectedCountry?.name ?? 'the selected country'}`
     }
     setFieldErrors(errors)
@@ -168,7 +144,7 @@ export default function Publications() {
     if (!validate()) return
     setStatus('loading')
     try {
-      const dialCode = `+${getCountryCallingCode(country)}`
+      const dialCode = getDialCode(country)
       const fullPhone = form.phone.trim() ? `${dialCode} ${form.phone.replace(/\D/g, '')}` : ''
 
       const payload = new FormData()
@@ -236,7 +212,7 @@ export default function Publications() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-10 mb-28">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 mb-28">
           {/* Info panel */}
           <div className="lg:col-span-2 space-y-6">
             {[

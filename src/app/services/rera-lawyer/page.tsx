@@ -143,7 +143,7 @@ const reraRights = [
 export const metadata: Metadata = {
   title: 'RERA Lawyer in Lucknow, Noida, Greater Noida & Ghaziabad',
   description:
-    'Sumanjari & Co. Advocates represents homebuyers and developers in RERA disputes across Lucknow, Noida, Greater Noida and Ghaziabad — before UP-RERA and the RERA Appellate Tribunal. Builder-buyer conflicts, possession delays, compensation claims, and project compliance.',
+    'Sumanjari & Co. Advocates — RERA lawyers and RERA property lawyers representing homebuyers and developers in builder-buyer disputes across Lucknow, Noida, Greater Noida and Ghaziabad. An experienced advocate for RERA case filings, possession delay, compensation, and project compliance before UP-RERA and the Appellate Tribunal.',
   keywords: [
     'RERA Lawyer Lucknow',
     'RERA Advocate Lucknow',
@@ -153,6 +153,10 @@ export const metadata: Metadata = {
     'RERA Advocate Greater Noida',
     'RERA Lawyer Ghaziabad',
     'RERA Advocate Ghaziabad',
+    'RERA Lawyer Near Me',
+    'RERA Property Lawyer',
+    'Advocate for RERA Case',
+    'UP RERA Lawyer',
     'Builder Buyer Dispute Lawyer Noida',
     'Builder Buyer Dispute Lawyer Ghaziabad',
     'Builder Buyer Dispute Lawyer Greater Noida',
@@ -163,13 +167,13 @@ export const metadata: Metadata = {
     'RERA Compensation Claim Lawyer',
   ],
   alternates: {
-    canonical: '/services/rera',
+    canonical: '/services/rera-lawyer',
   },
   openGraph: {
     title: 'RERA Lawyer in Lucknow, Noida, Greater Noida & Ghaziabad | Sumanjari & Co. Advocates',
     description:
-      'Representation in real estate regulatory disputes before UP-RERA and the RERA Appellate Tribunal — serving clients across Lucknow, Noida, Greater Noida and Ghaziabad.',
-    url: '/services/rera',
+      'RERA lawyers and property lawyers representing homebuyers and developers in real estate regulatory disputes before UP-RERA and the RERA Appellate Tribunal — serving clients across Lucknow, Noida, Greater Noida and Ghaziabad.',
+    url: '/services/rera-lawyer',
   },
 }
 
@@ -177,7 +181,7 @@ const reraServiceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: 'RERA Legal Services',
-  url: `${SITE_URL}/services/rera`,
+  url: `${SITE_URL}/services/rera-lawyer`,
   description:
     'Representation for homebuyers and developers in RERA disputes — builder-buyer conflicts, possession delays, compensation claims, project registration and compliance, and appeals before the RERA Appellate Tribunal.',
   provider: { '@id': `${SITE_URL}/#organization` },
@@ -347,6 +351,18 @@ const reraInsights = [
     excerpt:
       'An appeal to the RERA Appellate Tribunal must be filed within 60 days of the Authority’s order under Section 44(2). Where the promoter appeals, Section 43(5) requires a pre-deposit of at least 30% of the penalty or amount due to the buyer before the appeal is entertained.',
   },
+  {
+    icon: UserCheck,
+    title: 'How Do I Choose the Right Advocate for a RERA Case?',
+    excerpt:
+      'Rather than searching for a "best RERA advocate" by ranking alone, check that the advocate regularly appears before UP-RERA and the Appellate Tribunal, is named and identifiable on your matter, and explains the likely strategy and outcomes before you engage — these are the factors that actually decide a RERA case.',
+  },
+  {
+    icon: MapPin,
+    title: 'Do I Need a RERA Lawyer Near Me, or Can I Hire One From Another City?',
+    excerpt:
+      'A RERA complaint is filed before the Authority in the state where the project is located, so an advocate familiar with UP-RERA practice and the local Appellate Tribunal is generally better placed than searching only for a "RERA lawyer near me" by distance — what matters is regular appearance before the forum handling your matter.',
+  },
 ]
 
 const reraFaqJsonLd = {
@@ -385,6 +401,22 @@ const reraFaqJsonLd = {
         text: 'An appeal to the RERA Appellate Tribunal must be filed within 60 days of the Authority’s order under Section 44(2) of the RERA Act, 2016. Where the promoter files the appeal, Section 43(5) requires a pre-deposit of at least 30% of the penalty or amount due to the buyer before the appeal is entertained.',
       },
     },
+    {
+      '@type': 'Question',
+      name: 'How do I choose the right advocate for a RERA case?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Rather than searching for a "best RERA advocate" by ranking alone, check that the advocate regularly appears before UP-RERA and the Appellate Tribunal, is named and identifiable on your matter, and explains the likely strategy and outcomes before you engage — these are the factors that actually decide a RERA case.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do I need a RERA lawyer near me, or can I hire one from another city?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'A RERA complaint is filed before the Authority in the state where the project is located, so an advocate familiar with UP-RERA practice and the local Appellate Tribunal is generally better placed than searching only for a "RERA lawyer near me" by distance — what matters is regular appearance before the forum handling your matter.',
+      },
+    },
   ],
 }
 
@@ -415,9 +447,9 @@ export default async function ReraServicePage() {
           </Link>
 
           <div className="mb-16 grid items-stretch gap-10 md:mb-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
-            <div className="order-2 lg:order-1">
+            <div className="order-1 lg:order-1">
               <span className="font-caps text-xs uppercase tracking-[0.25em] text-gold-700 dark:text-gold-400">
-                RERA Lawyers · UP-RERA &amp; Appellate Tribunal
+                RERA Lawyers &amp; Property Advocates · UP-RERA &amp; Appellate Tribunal
               </span>
               <h1 className="mt-4 font-display text-4xl font-bold leading-[1.12] text-navy-900 dark:text-cream md:text-[3.25rem]">
                 Delayed possession or a broken booking promise?{' '}
@@ -472,7 +504,7 @@ export default async function ReraServicePage() {
               </div>
             </div>
 
-            <div className="order-1 lg:order-2">
+            <div className="order-2 lg:order-2">
               <div className="glass-card card-glow relative mx-auto flex h-full max-w-sm flex-col overflow-hidden rounded-sm border border-gold-500/25 dark:border-gold-500/20 lg:max-w-none">
                 <div className="relative aspect-[4/5] w-full lg:aspect-auto lg:min-h-0 lg:flex-1">
                   <Image
@@ -545,6 +577,9 @@ export default async function ReraServicePage() {
           </div>
 
           <div id="overview" className="mb-16 scroll-mt-28 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
+            <h2 className="mb-2 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              RERA Property Lawyer &amp; Advocate for RERA Case Filings
+            </h2>
             <p>
               Real estate disputes under the Real Estate (Regulation and
               Development) Act, 2016 can be complex and drawn out — whether the
@@ -561,6 +596,14 @@ export default async function ReraServicePage() {
               or execution remedies where required. Our practice extends across
               Uttar Pradesh&apos;s major real estate markets, including{' '}
               Lucknow, Noida, Greater Noida, and Ghaziabad.
+            </p>
+            <p>
+              As RERA property lawyers, we act as your advocate for RERA case
+              filings, appeals, and compliance matters from the first
+              complaint through to execution. If you are searching for a RERA
+              lawyer near me, our practice regularly appears before UP-RERA
+              on behalf of clients in Lucknow, Noida, Greater Noida, and
+              Ghaziabad.
             </p>
           </div>
 

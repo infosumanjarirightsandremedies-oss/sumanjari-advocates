@@ -57,7 +57,7 @@ const propertyMattersJsonLd = {
   url: `${SITE_URL}/services/property-land-matters`,
   description:
     'Representation in property title verification and due diligence, sale and transfer transactions, partition suits, possession disputes, mutation and revenue proceedings, boundary disputes, benami property matters, and land acquisition compensation, before the Revenue Courts, District Courts, and the Allahabad High Court, Lucknow Bench.',
-  telephone: '+91-82990-86204',
+  telephone: '+91-83024-71764',
   email: 'info.sumanjarirightsandremedies@gmail.com',
   areaServed: [
     { '@type': 'City', name: 'Lucknow' },

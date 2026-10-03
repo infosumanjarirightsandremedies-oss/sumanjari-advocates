@@ -8,10 +8,13 @@ import Testimonials from '@/components/Testimonials'
 import Footer from '@/components/Footer'
 import WhatsAppFloat from '@/components/WhatsAppFloat'
 import Team from '@/components/Team'
+import { getReviews } from '@/lib/reviews'
 
 import InternshipPage from './internship/page'
 
-export default function Home() {
+export default async function Home() {
+  const reviews = await getReviews()
+
   return (
     <main className="relative min-h-screen">
       <Navbar />
@@ -20,7 +23,7 @@ export default function Home() {
       <About />
       <Services />
       <Team />
-      <Testimonials />
+      <Testimonials initialReviews={reviews} />
       <Contact />
       <Footer />
       <WhatsAppFloat />

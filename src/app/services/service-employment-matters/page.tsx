@@ -65,7 +65,7 @@ const serviceMattersJsonLd = {
   url: `${SITE_URL}/services/service-employment-matters`,
   description:
     'Representation for government, public sector, and private sector employees in recruitment disputes, promotion and seniority matters, departmental and disciplinary proceedings, wrongful termination, pension and retirement benefits, and POSH Act compliance and inquiry matters before the Central Administrative Tribunal, U.P. Public Services Tribunal, CGIT, and the Allahabad High Court.',
-  telephone: '+91-82990-86204',
+  telephone: '+91-83024-71764',
   email: 'info.sumanjarirightsandremedies@gmail.com',
   areaServed: [
     { '@type': 'City', name: 'Lucknow' },

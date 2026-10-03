@@ -9,7 +9,7 @@ const SITE_URL = 'https://www.sumanjariadvocates.com'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Sumanjari & Co. Advocates | 8299086204 | Advocates in Lucknow & Allahabad High Court',
+    default: 'Sumanjari & Co. Advocates | 8302471764 | Advocates in Lucknow & Allahabad High Court',
     template: '%s | Sumanjari & Co. Advocates',
   },
  description:
@@ -162,9 +162,9 @@ const legalServiceJsonLd = {
     longitude: 80.9462,
   },
   email: 'info.sumanjarirightsandremedies@gmail.com',
-  telephone: '+91-82990-86204',
+  telephone: '+91-83024-71764',
   sameAs: [
-    'https://www.instagram.com/thelastvedict',
+    'https://www.instagram.com/thelast_verdict',
     'https://www.reddit.com/user/Mean-Bicycle-5947/',
   ],
   areaServed: [

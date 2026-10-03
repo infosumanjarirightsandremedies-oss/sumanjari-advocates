@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import BlogArchive from '@/components/BlogArchive'
+import WhatsAppFloat from '@/components/WhatsAppFloat'
 import { getBlogPosts } from '@/lib/blogs'
 
 export const revalidate = 604800 // 7 days; the sheet trigger invalidates on demand
@@ -83,6 +84,7 @@ export default async function BlogIndexPage({
         </div>
       </section>
       <Footer />
+      <WhatsAppFloat splitDesktop />
     </main>
   )
 }

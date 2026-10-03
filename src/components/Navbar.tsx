@@ -14,7 +14,7 @@ const primaryLinks: NavLink[] = [
   { label: 'Home', href: '/#home', target: '_self' },
   { label: 'Services', href: '/#services', target: '_self' },
   { label: 'About', href: '/#about', target: '_self' },
-  { label: 'Team', href: '/#team', target: '_self' },
+  { label: 'Team', href: '/team', target: '_self' },
   { label: 'Contact', href: '/#contact', target: '_self' },
 ]
 

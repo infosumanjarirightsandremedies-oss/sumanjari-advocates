@@ -30,5 +30,7 @@ export async function GET(request: Request) {
   // Every blog fetch is tagged 'blogs', so one call refreshes the list, each
   // post, the service pages, sitemap and llms.txt together.
   revalidateTag('blogs')
+  // Shows newly approved reviews without waiting out their 1h cache.
+  revalidateTag('reviews')
   return NextResponse.json({ ok: true, revalidated: true, at: Date.now() })
 }

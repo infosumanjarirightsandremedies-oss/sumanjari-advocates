@@ -54,7 +54,7 @@ const civilMattersJsonLd = {
   url: `${SITE_URL}/services/civil-matters`,
   description:
     'Representation in civil suits, recovery of money, injunctions and declaratory relief, contractual disputes, execution proceedings, easementary and partition disputes, and civil appeals, before the District Courts and the Allahabad High Court, Lucknow Bench.',
-  telephone: '+91-82990-86204',
+  telephone: '+91-83024-71764',
   email: 'info.sumanjarirightsandremedies@gmail.com',
   areaServed: [
     { '@type': 'City', name: 'Lucknow' },

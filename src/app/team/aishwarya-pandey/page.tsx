@@ -1,4 +1,5 @@
 ﻿import Link from 'next/link'
+import ProfileLayout from '@/components/ProfileLayout'
 import { ArrowLeft, Phone, Mail, GraduationCap, Linkedin } from 'lucide-react'
 import type { Metadata } from 'next'
 
@@ -29,9 +30,9 @@ const expertise = [
 export default function AishwaryaPandeyPage() {
   return (
     <section className="py-20 md:py-28">
-      <div className="max-w-4xl mx-auto px-6">
+      <ProfileLayout slug="aishwarya-pandey">
         <Link
-          href="/#team"
+          href="/team"
           className="inline-flex items-center gap-2 font-caps text-xs tracking-widest uppercase text-navy-700/70 dark:text-cream/45 hover:text-gold-600 dark:hover:text-gold-400 transition-colors mb-10"
         >
           <ArrowLeft className="w-3.5 h-3.5" /> Back to Team
@@ -39,7 +40,7 @@ export default function AishwaryaPandeyPage() {
 
         <div className="mb-10">
           <h1 className="font-display text-4xl md:text-5xl font-bold text-navy-900 dark:text-cream mb-2">
-            Aishwarya Pandey <span className="text-navy-500/60 dark:text-cream/40 text-2xl font-normal">, Lucknow</span>
+            Aishwarya Pandey <span className="text-navy-500/60 dark:text-cream/40 text-2xl font-normal block mt-1 lg:mt-0 lg:inline"><span className="hidden lg:inline">, </span>Lucknow</span>
           </h1>
           <p className="font-body text-gold-700 dark:text-gold-400 text-lg">
             Advocate · Family, Matrimonial &amp; Constitutional Matters
@@ -131,7 +132,7 @@ export default function AishwaryaPandeyPage() {
             </li>
           </ul>
         </div>
-      </div>
+      </ProfileLayout>
     </section>
   )
 }

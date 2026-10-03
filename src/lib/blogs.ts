@@ -1,9 +1,11 @@
+import { cache } from 'react'
+
 const BLOG_SCRIPT_URL =
   'https://script.google.com/macros/s/AKfycbyNJgTZgENxyi_mHtXorG2BA_Vce7M2IV1ng4B572ymDx9nrAwZXRDeZc3_ZOXkuDm_/exec'
 
-// One shared TTL + cache tag for every blog fetch. The TTL is long (1 week)
-// because the sheet trigger calls revalidateTag('blogs') on any change — so
-// content is never stale in practice, and we avoid needless background refetches.
+// Refresh the catalog regularly even if the sheet's invalidation trigger fails.
+// Article bodies keep a longer TTL; the shared tag still refreshes both on edits.
+const CATALOG_REVALIDATE_SECONDS = 3600
 const REVALIDATE_SECONDS = 604800 // 7 days
 const BLOG_TAGS = ['blogs']
 
@@ -80,31 +82,60 @@ async function withGate<T>(fn: () => Promise<T>): Promise<T> {
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 const backoff = (attempt: number) => Math.min(1000 * 2 ** attempt, 8000)
 
-// Fetch a blog endpoint with a 30s timeout and backoff retries on 429/5xx.
-async function fetchBlog(url: string, retries = 3): Promise<Response> {
+// Fetch + parse a blog endpoint with a 30s timeout (covering the body read) and
+// backoff retries. Apps Script intermittently answers 404 under load; a genuine
+// miss is 200 + {error}, so an HTTP 404 is always transient and safe to retry.
+async function fetchBlog(url: string, revalidateSeconds = REVALIDATE_SECONDS, retries = 3): Promise<{ status: number; data: unknown }> {
   for (let attempt = 0; ; attempt++) {
     const controller = new AbortController()
     const timer = setTimeout(() => controller.abort(), 30_000)
     try {
       const res = await fetch(url, {
         signal: controller.signal,
-        next: { revalidate: REVALIDATE_SECONDS, tags: BLOG_TAGS },
+        next: { revalidate: revalidateSeconds, tags: BLOG_TAGS },
       })
-      clearTimeout(timer)
-      if (res.ok) return res
-      if (attempt < retries && (res.status === 429 || res.status >= 500)) {
+      if (res.ok) {
+        const data = await res.json().catch(() => undefined)
+        return { status: data === undefined ? 502 : res.status, data }
+      }
+      if (attempt < retries && (res.status === 404 || res.status === 429 || res.status >= 500)) {
         await sleep(backoff(attempt))
         continue
       }
-      return res
+      return { status: res.status, data: undefined }
     } catch (err) {
-      clearTimeout(timer)
       if (attempt < retries) {
         await sleep(backoff(attempt))
         continue
       }
       throw err
+    } finally {
+      clearTimeout(timer)
     }
+  }
+}
+
+// Pre-synced snapshot from Supabase (see scripts/supabase-blog-cache/sync.py).
+// Same TTL + tag as Apps Script fetches; any miss or failure returns undefined so callers fall back.
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+async function fetchSnapshot(key: string, revalidateSeconds: number): Promise<unknown> {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return undefined
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/blog_snapshots?select=payload&key=eq.${encodeURIComponent(key)}`,
+      {
+        headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` },
+        signal: AbortSignal.timeout(5_000),
+        next: { revalidate: revalidateSeconds, tags: BLOG_TAGS },
+      }
+    )
+    if (!res.ok) return undefined
+    const rows = (await res.json()) as Array<{ payload: unknown }>
+    return rows[0]?.payload
+  } catch {
+    return undefined
   }
 }
 
@@ -118,13 +149,19 @@ async function fetchBlog(url: string, retries = 3): Promise<Response> {
 // page and stick for days. Throwing instead yields a retriable 500 (never
 // cached), so the page self-heals on the next request once the backend is back.
 // A genuine empty catalog (200 + []) is still returned and cached normally.
-export async function getBlogPosts(): Promise<BlogPostMeta[]> {
-  const res = await fetchBlog(`${BLOG_SCRIPT_URL}?resource=blogs`)
-  if (!res.ok) throw new Error(`getBlogPosts: upstream HTTP ${res.status}`)
-  const data = await res.json()
+// Wrapped in React cache(): passing an AbortSignal opts fetch out of Next's
+// request memoization, so this dedupes generateMetadata + page in one render.
+export const getBlogPosts = cache(async (): Promise<BlogPostMeta[]> => {
+  const snapshot = await fetchSnapshot('catalog', CATALOG_REVALIDATE_SECONDS)
+  if (Array.isArray(snapshot) && snapshot.length > 0) {
+    return snapshot.map((post) => ({ ...post, thumbnail: normalizeThumbnail(post.thumbnail) }))
+  }
+
+  const { status, data } = await fetchBlog(`${BLOG_SCRIPT_URL}?resource=blogs`, CATALOG_REVALIDATE_SECONDS)
+  if (status !== 200) throw new Error(`getBlogPosts: upstream HTTP ${status}`)
   if (!Array.isArray(data)) throw new Error('getBlogPosts: expected an array')
   return data.map((post) => ({ ...post, thumbnail: normalizeThumbnail(post.thumbnail) }))
-}
+})
 
 // One post with its rendered content. Gated so a build-time fan-out can't
 // overwhelm Apps Script; the Doc render is cached server-side (keyed by mtime).
@@ -133,16 +170,23 @@ export async function getBlogPosts(): Promise<BlogPostMeta[]> {
 // turns into a (correctly cached) 404. Any upstream failure THROWS instead, so
 // a transient blip renders a retriable 500 rather than caching a 404 on a real
 // post for the 1-week TTL.
-export async function getBlogPost(slug: string): Promise<BlogPost | undefined> {
-  const res = await withGate(() =>
+export const getBlogPost = cache(async (slug: string): Promise<BlogPost | undefined> => {
+  const snapshot = (await fetchSnapshot(`post:${slug}`, REVALIDATE_SECONDS)) as BlogPost | undefined
+  if (snapshot?.slug === slug && Array.isArray(snapshot.content) && snapshot.content.length > 0) {
+    // Unlisted snapshots fall through so Apps Script can 404 an unpublished post.
+    const published = await getBlogPosts().then((posts) => posts.some((post) => post.slug === slug), () => false)
+    if (published) return { ...snapshot, thumbnail: normalizeThumbnail(snapshot.thumbnail) }
+  }
+
+  const { status, data } = await withGate(() =>
     fetchBlog(`${BLOG_SCRIPT_URL}?resource=post&slug=${encodeURIComponent(slug)}`)
   )
-  if (!res.ok) throw new Error(`getBlogPost(${slug}): upstream HTTP ${res.status}`)
-  const data = await res.json()
-  if (data && data.error) return undefined // genuine unpublished/unknown slug
-  if (!data || !data.slug) throw new Error(`getBlogPost(${slug}): unexpected payload`)
-  return { ...data, thumbnail: normalizeThumbnail(data.thumbnail) }
-}
+  if (status !== 200) throw new Error(`getBlogPost(${slug}): upstream HTTP ${status}`)
+  const post = data as (BlogPost & { error?: string }) | null
+  if (post && post.error) return undefined // genuine unpublished/unknown slug
+  if (!post || !post.slug) throw new Error(`getBlogPost(${slug}): unexpected payload`)
+  return { ...post, thumbnail: normalizeThumbnail(post.thumbnail) }
+})
 
 export async function getBlogPostsByCategory(category: string): Promise<BlogPostMeta[]> {
   const posts = await getBlogPosts()
@@ -152,7 +196,7 @@ export async function getBlogPostsByCategory(category: string): Promise<BlogPost
 // Maps each sheet Category value to the service page that renders it, so a
 // blog post's "Back" link can return to its own service page instead of home.
 const CATEGORY_TO_SERVICE_SLUG: Record<string, string> = {
-  RERA: 'rera',
+  RERA: 'rera-lawyer',
   'Civil Matters': 'civil-matters',
   'Criminal Matters': 'criminal-matters',
   'Family & Matrimonial Matters': 'family-matrimonial-matters',

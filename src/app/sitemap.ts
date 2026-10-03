@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getBlogPosts } from '@/lib/blogs'
+import { teamMembers } from '@/lib/team'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
 
@@ -12,6 +13,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: 'monthly',
     priority: 0.6,
   }))
+  const teamProfileEntries: MetadataRoute.Sitemap = teamMembers
+    .filter((member) => member.profile)
+    .map((member) => ({
+      url: `${SITE_URL}/team/${member.slug}`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.7,
+    }))
 
   return [
     {
@@ -33,7 +42,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      url: `${SITE_URL}/services/rera`,
+      url: `${SITE_URL}/services/rera-lawyer`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.7,
@@ -111,6 +120,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.5,
     },
     {
+      url: `${SITE_URL}/team`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
       url: `${SITE_URL}/team/jitendra-tiwari`,
       lastModified: now,
       changeFrequency: 'yearly',
@@ -140,6 +155,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'yearly',
       priority: 0.7,
     },
+    ...teamProfileEntries,
     ...blogEntries,
   ]
 }

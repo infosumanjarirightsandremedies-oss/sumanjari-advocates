@@ -194,7 +194,7 @@ const services: Service[] = [
     icon: Building2,
     title: 'RERA Matters',
     description: 'Representation in real estate regulatory disputes before UP-RERA, builder-buyer conflicts, and project compliance matters.',
-    href: '/services/rera',
+    href: '/services/rera-lawyer',
     items: [
       'Builder-buyer disputes',
       'UP-RERA complaints',

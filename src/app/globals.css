@@ -376,3 +376,75 @@ Ticker before edit: */
   color: var(--gold);
   border-bottom: 2px solid var(--gold);
 }
+
+/* Pulsing glow to draw the eye to the disclaimer's accept button so visitors
+   acknowledge and proceed quickly. Glow only (no opacity change on the label). */
+@keyframes ctaPulse {
+  0%, 100% { box-shadow: 0 8px 26px rgba(168, 132, 44, 0.45); }
+  50% { box-shadow: 0 12px 44px rgba(168, 132, 44, 0.85); }
+}
+/* Finite attention pulse (3×) then rest — draws the eye without the relentless,
+   ad-like feel of an infinite animation. */
+.cta-pulse {
+  animation: ctaPulse 1.6s ease-in-out 3;
+  box-shadow: 0 10px 34px rgba(168, 132, 44, 0.55);
+}
+@media (prefers-reduced-motion: reduce) {
+  .cta-pulse { animation: none; }
+}
+
+/* Sticky blog contact bar: a few glow pulses on appear to catch the eye, then
+   settles to a steady subtle glow. */
+@keyframes barFlash {
+  0%, 100% { box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.14); }
+  50% { box-shadow: 0 -6px 28px 3px rgba(34, 197, 94, 0.6); }
+}
+.bar-flash {
+  animation: barFlash 1.4s ease-in-out 3;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.14);
+}
+@media (prefers-reduced-motion: reduce) {
+  .bar-flash { animation: none; }
+}
+
+/* Profile pages: photo beside the name + info card; everything else spans full width.
+   DOM order: photo, back link, header, info card, rest. */
+.profile-grid {
+  display: flex;
+  flex-direction: column;
+}
+.profile-grid > :nth-child(2) { order: -2; }
+.profile-grid > :nth-child(3) { order: -1; }
+
+#contact a[href^="mailto:"],
+.profile-grid a[href^="mailto:"] {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1023px) {
+  .profile-grid > :nth-child(3) { margin-bottom: 1.75rem; }
+}
+.profile-photo { margin-bottom: 2.5rem; }
+
+@media (min-width: 1024px) {
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    column-gap: 3rem;
+  }
+  .profile-grid > * { grid-column: 1 / -1; }
+  .profile-grid > :nth-child(n + 5) { max-width: 60rem; }
+  .profile-grid > :nth-child(2),
+  .profile-grid > :nth-child(3) { order: 0; }
+  .profile-grid > .profile-photo {
+    position: relative;
+    grid-column: 1;
+    grid-row: 2 / span 2;
+    min-height: 340px;
+    margin-bottom: 3rem;
+  }
+  .profile-grid > :nth-child(3) { grid-column: 2; grid-row: 2; }
+  .profile-grid > :nth-child(4) { grid-column: 2; grid-row: 3; }
+  .profile-grid > :nth-child(4).grid { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
+}

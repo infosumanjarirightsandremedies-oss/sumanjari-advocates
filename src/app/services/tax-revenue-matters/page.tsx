@@ -54,7 +54,7 @@ const taxMattersJsonLd = {
   url: `${SITE_URL}/services/tax-revenue-matters`,
   description:
     'Advisory and representation in stamp duty and registration, property tax assessment, circle rate valuation, income tax, GST, and recovery of government dues, before the ITAT Lucknow Bench, the GST Appellate Tribunal, Lucknow, and the Allahabad High Court, Lucknow Bench.',
-  telephone: '+91-82990-86204',
+  telephone: '+91-83024-71764',
   email: 'info.sumanjarirightsandremedies@gmail.com',
   areaServed: [
     { '@type': 'City', name: 'Lucknow' },

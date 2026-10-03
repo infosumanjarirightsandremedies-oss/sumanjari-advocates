@@ -55,7 +55,7 @@ const constitutionalJsonLd = {
   url: `${SITE_URL}/services/constitutional-writ-matters`,
   description:
     'Representation in writ petitions under Article 226, Public Interest Litigation, fundamental rights matters, and service-related writs, before the Allahabad High Court, Lucknow Bench.',
-  telephone: '+91-82990-86204',
+  telephone: '+91-83024-71764',
   email: 'info.sumanjarirightsandremedies@gmail.com',
   areaServed: [
     { '@type': 'City', name: 'Lucknow' },

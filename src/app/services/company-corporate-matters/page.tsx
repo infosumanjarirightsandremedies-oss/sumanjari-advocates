@@ -53,7 +53,7 @@ const companyMattersJsonLd = {
   url: `${SITE_URL}/services/company-corporate-matters`,
   description:
     'Advisory and representation in company registration and compliance, shareholder and partnership disputes, LLP matters, and corporate litigation, before the National Company Law Tribunal (Allahabad Bench), the Commercial Courts, and the Allahabad High Court, Lucknow Bench.',
-  telephone: '+91-82990-86204',
+  telephone: '+91-83024-71764',
   email: 'info.sumanjarirightsandremedies@gmail.com',
   areaServed: [
     { '@type': 'City', name: 'Lucknow' },

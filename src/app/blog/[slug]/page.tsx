@@ -4,6 +4,9 @@ import type { Metadata } from 'next'
 import { ArrowLeft } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import BlogCallbackCard from '@/components/BlogCallbackCard'
+import BlogContactBar from '@/components/BlogContactBar'
+import WhatsAppFloat from '@/components/WhatsAppFloat'
 import { getBlogPost, getBlogPosts, getServiceSlugForCategory, type BlogBlock, type BlogPostMeta } from '@/lib/blogs'
 
 type PageProps = {
@@ -164,6 +167,13 @@ export default async function BlogPostPage({ params }: PageProps) {
       ? post.content.slice(1)
       : post.content
 
+  // The hero renders wide, so request a larger width from our image proxy to
+  // stay crisp on Retina (only for our own /api/drive-image/ URLs).
+  const heroSrc =
+    post.thumbnail && post.thumbnail.startsWith('/api/drive-image/')
+      ? `${post.thumbnail}?w=1200`
+      : post.thumbnail
+
   const serviceSlug = getServiceSlugForCategory(post.category)
   const backHref = serviceSlug ? `/services/${serviceSlug}` : '/'
   const backLabel = serviceSlug ? `Back to ${post.category}` : 'Back to Home'
@@ -224,7 +234,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   }
 
   return (
-    <main className="relative min-h-screen">
+    <main className="relative min-h-screen pb-14 md:pb-0">
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
@@ -253,10 +263,13 @@ export default async function BlogPostPage({ params }: PageProps) {
           </h1>
 
           {post.thumbnail && (
+            // Single hero image, above the fold — keep it eager for LCP; it's
+            // the /blog listing's 100+ thumbnails that need lazy-loading.
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={post.thumbnail}
+              src={heroSrc!}
               alt={post.title}
+              decoding="async"
               className="mb-10 h-64 w-full rounded-sm object-cover md:h-80"
             />
           )}
@@ -265,17 +278,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             <BlockList blocks={content} />
           </div>
 
-          <div className="glass-card rounded-sm border border-gold-500/20 p-8 text-center dark:border-gold-500/15">
-            <p className="font-body text-navy-700/85 dark:text-cream/60">
-              Speak with our team directly about this topic.
-            </p>
-            <a
-              href="/#contact"
-              className="btn-gold mt-6 inline-flex rounded-sm px-8 py-3.5 font-caps text-sm font-semibold uppercase tracking-widest text-navy-900"
-            >
-              Consult Now
-            </a>
-          </div>
+          <BlogCallbackCard />
 
           {relatedPosts.length > 0 && (
             <div className="mt-16">
@@ -312,6 +315,9 @@ export default async function BlogPostPage({ params }: PageProps) {
         </div>
       </section>
       <Footer />
+      {/* Mobile: flashing sticky bar. Desktop: home-style WhatsApp float. */}
+      <BlogContactBar title={post.title} category={post.category} />
+      <WhatsAppFloat title={post.title} category={post.category} className="hidden md:flex" splitDesktop />
     </main>
   )
 }

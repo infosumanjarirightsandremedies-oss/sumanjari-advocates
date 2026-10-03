@@ -1,10 +1,9 @@
 'use client'
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { MapPin, Phone, Mail, Send, MessageCircle, Clock } from 'lucide-react'
-import { getCountries, getCountryCallingCode, type CountryCode } from 'libphonenumber-js'
-import { isValidEmail, isValidPhone } from '@/lib/validation'
-
-const WHATSAPP_NUMBER = '8299086204'  //Jitendra Tiwari
+import { isValidEmail, isValidPhone, isValidIntlPhone } from '@/lib/validation'
+import { whatsappUrl } from '@/lib/contactLinks'
+import { DIAL_CODES, DEFAULT_DIAL_CODE } from '@/lib/dialCodes'
 
 const practiceAreas = [
   'Civil Matters',
@@ -22,39 +21,11 @@ const practiceAreas = [
   'Other Legal Matters',
 ]
 
-// Converts an ISO 3166-1 alpha-2 code (e.g. "IN") into its flag emoji
-function isoToFlag(iso: string): string {
-  return iso
-    .toUpperCase()
-    .replace(/./g, (char) => String.fromCodePoint(127397 + char.charCodeAt(0)))
-}
-
-// Builds the full list of countries (dial code + display name + flag) once,
-// straight from libphonenumber-js's metadata -- covers every country it supports.
-function buildCountryList() {
-  const regionNames =
-    typeof Intl !== 'undefined' && 'DisplayNames' in Intl
-      ? new Intl.DisplayNames(['en'], { type: 'region' })
-      : null
-
-  return getCountries()
-    .map((iso) => ({
-      iso: iso as CountryCode,
-      dialCode: `+${getCountryCallingCode(iso as CountryCode)}`,
-      name: regionNames?.of(iso) ?? iso,
-      flag: isoToFlag(iso),
-    }))
-    .sort((a, b) => a.name.localeCompare(b.name))
-}
-
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', area: '', message: '' })
-  const [country, setCountry] = useState<CountryCode>('IN')
+  const [dialCode, setDialCode] = useState<string>(DEFAULT_DIAL_CODE)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [fieldErrors, setFieldErrors] = useState<{ email?: string; phone?: string }>({})
-
-  const countryList = useMemo(() => buildCountryList(), [])
-  const selectedCountry = countryList.find((c) => c.iso === country)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -71,8 +42,8 @@ export default function Contact() {
     const errors: { email?: string; phone?: string } = {}
     if (!isValidEmail(form.email)) errors.email = 'Enter a valid email address'
     if (!form.phone.trim()) errors.phone = 'Phone number is required'
-    else if (!isValidPhone(form.phone, country)) {
-      errors.phone = `Enter a valid phone number for ${selectedCountry?.name ?? 'the selected country'}`
+    else if (dialCode === '+91' ? !isValidPhone(form.phone) : !isValidIntlPhone(form.phone)) {
+      errors.phone = dialCode === '+91' ? 'Enter a valid 10-digit mobile number' : 'Enter a valid phone number'
     }
     setFieldErrors(errors)
     return Object.keys(errors).length === 0
@@ -83,7 +54,6 @@ export default function Contact() {
     if (!validate()) return
     setStatus('loading')
     try {
-      const dialCode = `+${getCountryCallingCode(country)}`
       const fullPhone = `${dialCode} ${form.phone.replace(/\D/g, '')}`
       const payload = new FormData()
       payload.append('formType', 'contact')
@@ -98,7 +68,7 @@ export default function Contact() {
       if (res.ok) {
         setStatus('success')
         setForm({ name: '', email: '', phone: '', area: '', message: '' })
-        setCountry('IN')
+        setDialCode(DEFAULT_DIAL_CODE)
         setFieldErrors({})
       } else {
         setStatus('error')
@@ -109,7 +79,7 @@ export default function Contact() {
   }
   
 
-  const whatsappUrl = `https://wa.me/91${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello, I need legal consultation. Please connect me with an advocate.')}`
+  const chatUrl = whatsappUrl()
 
   return (
     <section id="contact" className="py-24 md:py-32 relative">
@@ -131,11 +101,11 @@ export default function Contact() {
             Contact <em className="text-gold-gradient">Us</em>
           </h2>
           <p className="font-body text-navy-700 text-lg max-w-xl mx-auto leading-relaxed dark:text-cream/50">
-            Fill out the form or reach us directly. We respond within 24 hours.
+            Fill out the form or reach us directly — direct consultation with our High Court &amp; Tribunal desk.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
           {/* Info panel */}
           <div className="lg:col-span-2 space-y-6">
             {/* Contact cards */}
@@ -176,7 +146,7 @@ export default function Contact() {
 
             {/* WhatsApp CTA */}
             <a
-              href={whatsappUrl}
+              href={chatUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-4 p-5 rounded-sm border border-green-500/30 bg-green-500/5 hover:bg-green-500/10 transition-colors group"
@@ -240,18 +210,14 @@ export default function Contact() {
                     <label className="block font-caps text-navy-600/80 dark:text-cream/50 text-[10px] tracking-widest uppercase mb-2">Phone *</label>
                     <div className="flex gap-2">
                       <select
-                        aria-label="Country code"
-                        value={country}
-                        onChange={(e) => setCountry(e.target.value as CountryCode)}
-                        className="input-luxury w-[5.5rem] sm:w-24 px-1.5 py-3 rounded-sm font-body text-sm bg-white dark:bg-[rgba(255,255,255,0.04)] flex-shrink-0"
+                        aria-label="Country dial code"
+                        value={dialCode}
+                        onChange={(e) => setDialCode(e.target.value)}
+                        className="input-luxury w-[5.5rem] flex-shrink-0 px-2 py-3 rounded-sm font-body text-sm bg-white dark:bg-[rgba(255,255,255,0.04)]"
                       >
-                        {countryList.map(({ iso, dialCode, name, flag }) => (
-                          <option
-                            key={iso}
-                            value={iso}
-                            className="bg-white text-navy-900 dark:bg-navy-800 dark:text-cream"
-                          >
-                            {flag} {dialCode}
+                        {DIAL_CODES.map(({ code, label }) => (
+                          <option key={label} value={code} className="bg-white text-navy-900 dark:bg-navy-800 dark:text-cream">
+                            {label}
                           </option>
                         ))}
                       </select>
@@ -267,7 +233,7 @@ export default function Contact() {
                       />
                     </div>
                     {fieldErrors.phone && (
-                      <p className="text-red-400 font-body text-xs mt-1.5">{fieldErrors.phone}</p>
+                      <p className="text-red-400 font-body text-xs mt-1.5" role="alert" aria-live="polite">{fieldErrors.phone}</p>
                     )}
                   </div>
                 </div>
@@ -285,7 +251,7 @@ export default function Contact() {
                     className={`input-luxury w-full px-4 py-3 rounded-sm font-body text-sm ${fieldErrors.email ? 'border-red-400/60' : ''}`}
                   />
                   {fieldErrors.email && (
-                    <p className="text-red-400 font-body text-xs mt-1.5">{fieldErrors.email}</p>
+                    <p className="text-red-400 font-body text-xs mt-1.5" role="alert" aria-live="polite">{fieldErrors.email}</p>
                   )}
                 </div>
 

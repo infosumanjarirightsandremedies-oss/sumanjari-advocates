@@ -1,11 +1,30 @@
 ﻿'use client'
 import { useEffect, useState, useCallback } from 'react'
-import { Scale, CheckCircle } from 'lucide-react'
+import { Scale, CheckCircle, ArrowRight } from 'lucide-react'
 
 // ─── CONFIGURATION ───────────────────────────────────────────────────────────
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzvY1iyl0nipJ5iLRSkuxkdQkpTvIX5bDX1aeMpWHPfP39CaSBHNL2e-1STOSBYCM1G/exec"
 // ─────────────────────────────────────────────────────────────────────────────
 const STORAGE_KEY = 'sumanjari_disclaimer_response'
+// The modal waits a few seconds so a visitor can glimpse some content first,
+// instead of hitting a wall the instant the page paints.
+const MODAL_DELAY_MS = 3000
+
+// Fallback for browsers that block localStorage, so a tab switch doesn't re-prompt.
+let acceptedInMemory = false
+
+function persistAcceptance() {
+  acceptedInMemory = true
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      response: 'accepted',
+      timestamp: new Date().toISOString(),
+    }))
+  } catch {
+    // Storage blocked (private mode / in-app browsers) — still let them in for this visit.
+  }
+  logToGoogleSheetsBackground('accepted')
+}
 
 function logToGoogleSheetsBackground(response: 'accepted') {
   fetch('https://ipwho.is/')
@@ -37,6 +56,7 @@ function logToGoogleSheetsBackground(response: 'accepted') {
 // whose response is literally 'accepted'. Anything else — missing key,
 // or corrupted JSON — must show the modal.
 function hasAccepted(): boolean {
+  if (acceptedInMemory) return true
   try {
     const saved = localStorage.getItem(STORAGE_KEY)
     if (!saved) return false
@@ -49,6 +69,7 @@ function hasAccepted(): boolean {
 
 export default function Disclaimer() {
   const [visible, setVisible] = useState(false)
+  const [delayReady, setDelayReady] = useState(false)
   const [accepting, setAccepting] = useState(false)
   const [accepted, setAccepted] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -59,6 +80,8 @@ export default function Disclaimer() {
 
   useEffect(() => {
     evaluate()
+
+    const timer = setTimeout(() => setDelayReady(true), MODAL_DELAY_MS)
 
     const onPageShow = (event: PageTransitionEvent) => {
       if (event.persisted) evaluate()
@@ -71,30 +94,41 @@ export default function Disclaimer() {
     document.addEventListener('visibilitychange', onVisibilityChange)
 
     return () => {
+      clearTimeout(timer)
       window.removeEventListener('pageshow', onPageShow)
       document.removeEventListener('visibilitychange', onVisibilityChange)
     }
   }, [evaluate])
+
+  // Lock body scroll while the mandatory modal is on screen so it reads as a
+  // genuine gate rather than a half-blocking overlay the page scrolls behind.
+  useEffect(() => {
+    if (visible && delayReady) {
+      document.body.style.overflow = 'hidden'
+      return () => {
+        document.body.style.overflow = ''
+      }
+    }
+  }, [visible, delayReady])
 
   const handleAccept = () => {
     if (submitted) return
     setSubmitted(true)
     setAccepting(true)
 
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      response: 'accepted',
-      timestamp: new Date().toISOString(),
-    }))
+    persistAcceptance()
 
     setAccepting(false)
     setAccepted(true)
-
-    logToGoogleSheetsBackground('accepted')
 
     setTimeout(() => setVisible(false), 1200)
   }
 
   if (!visible) return null
+
+  // Mandatory acceptance on every page (blog included), held back a few seconds
+  // so a visitor can glimpse some content before the modal blocks the page.
+  if (!delayReady) return null
 
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
@@ -158,14 +192,19 @@ export default function Disclaimer() {
                 type="button"
                 onClick={handleAccept}
                 disabled={submitted}
-                className="btn-gold w-full text-navy-900 font-caps font-semibold text-xs tracking-widest uppercase px-6 py-3 rounded-sm disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className={`btn-gold w-full text-navy-900 font-caps font-bold text-sm md:text-base tracking-widest uppercase px-8 py-4 md:py-5 rounded-sm ring-2 ring-gold-400/60 transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2.5 ${submitted ? '' : 'cta-pulse'}`}
               >
                 {accepting ? (
                   <>
-                    <div className="w-3.5 h-3.5 border-2 border-navy-900/30 border-t-navy-900 rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-navy-900/30 border-t-navy-900 rounded-full animate-spin" />
                     Processing…
                   </>
-                ) : 'I Agree & Proceed'}
+                ) : (
+                  <>
+                    I Agree &amp; Proceed
+                    <ArrowRight className="w-5 h-5" />
+                  </>
+                )}
               </button>
             </div>
 

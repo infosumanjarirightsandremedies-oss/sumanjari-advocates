@@ -59,7 +59,7 @@ const criminalMattersJsonLd = {
   url: `${SITE_URL}/services/criminal-matters`,
   description:
     'Strategic criminal defence covering FIR quashing, bail and anticipatory bail, trial representation, appeals and revisions, cheque bounce, domestic violence and 498A matters, and cybercrime, before the District & Sessions Courts and the Allahabad High Court, Lucknow Bench.',
-  telephone: '+91-82990-86204',
+  telephone: '+91-83024-71764',
   email: 'info.sumanjarirightsandremedies@gmail.com',
   areaServed: [
     { '@type': 'City', name: 'Lucknow' },

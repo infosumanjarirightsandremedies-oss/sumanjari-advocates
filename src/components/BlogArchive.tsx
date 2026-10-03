@@ -77,7 +77,13 @@ export default function BlogArchive({
             >
               {thumbnail ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={thumbnail} alt={title} className="h-80 w-full object-cover" />
+                <img
+                  src={thumbnail}
+                  alt={title}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-80 w-full object-cover"
+                />
               ) : (
                 <div className="p-6 pb-0">
                   <div className="flex h-11 w-11 items-center justify-center rounded-sm border border-gold-500/40">
