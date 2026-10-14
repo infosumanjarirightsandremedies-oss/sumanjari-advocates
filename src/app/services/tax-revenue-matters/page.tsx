@@ -1,7 +1,10 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
 import {
   ArrowLeft,
+  ArrowUpRight,
+  Phone,
   Receipt,
   Home,
   MapPin,
@@ -15,15 +18,38 @@ import {
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ServiceBlogs from '@/components/ServiceBlogs'
+import TeamCarousel from '@/components/TeamCarousel'
+import { teamMembers } from '@/lib/team'
+import { CHAMBER_TEL } from '@/lib/contactLinks'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
 
+const taxLead = teamMembers.find((member) => member.slug === 'jitendra-tiwari')
+const taxTeam = ['arti-dwivedi', 'aditya-narayan-shukla', 'prabhash-yadav', 'vinod-arya', 'abhishek-mishra']
+  .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
+
+function ConsultationActions({ className }: { className: string }) {
+  return (
+    <div className={`flex-wrap items-center gap-2 sm:gap-3 ${className}`}>
+      <a href="/#contact" className="btn-gold inline-flex items-center justify-center rounded-sm px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-900 sm:px-8 sm:text-sm sm:tracking-widest">
+        Consult Now
+      </a>
+      <a href={CHAMBER_TEL} className="inline-flex items-center justify-center gap-2 rounded-sm border border-gold-500/40 px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-800 transition-colors hover:border-gold-500 hover:text-gold-700 dark:text-cream/85 dark:hover:text-gold-300 sm:px-6 sm:text-sm sm:tracking-widest">
+        <Phone className="h-4 w-4 shrink-0" /> Call Now
+      </a>
+    </div>
+  )
+}
+
 export const metadata: Metadata = {
-  title: 'Tax Lawyer in Lucknow | Stamp Duty, GST & Income Tax Disputes',
+  title: 'Tax & Revenue Advocate and Lawyer in Lucknow | stamp duty, property tax, income tax & GST disputes',
   description:
     'Sumanjari & Co. Advocates advises on stamp duty and registration, property tax assessment, circle rate valuation, income tax, and GST disputes before the ITAT Lucknow Bench, the GST Appellate Tribunal, Lucknow, and the Allahabad High Court, Lucknow Bench.',
   keywords: [
+    'Tax & Revenue Advocate and Lawyer in Lucknow',
+    'Tax Advocate Lucknow',
+    'Revenue Advocate Lucknow',
     'Tax Lawyer Lucknow',
     'Revenue Lawyer Lucknow',
     'Stamp Duty Lawyer Lucknow',
@@ -37,21 +63,21 @@ export const metadata: Metadata = {
     'Registration Act Lawyer Lucknow',
   ],
   alternates: {
-    canonical: '/services/tax-revenue-matters',
+    canonical: '/services/tax-revenue-advocate',
   },
   openGraph: {
-    title: 'Tax & Revenue Lawyer in Lucknow | Sumanjari & Co. Advocates',
+    title: 'Tax & Revenue Advocate and Lawyer in Lucknow | Sumanjari & Co. Advocates',
     description:
       'Advisory and litigation in stamp duty, property tax, circle rate valuation, income tax, and GST disputes before the ITAT Lucknow Bench, GSTAT Lucknow, and the Allahabad High Court, Lucknow Bench.',
-    url: '/services/tax-revenue-matters',
+    url: '/services/tax-revenue-advocate',
   },
 }
 
 const taxMattersJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
-  name: 'Sumanjari & Co. Advocates — Tax & Revenue Matters',
-  url: `${SITE_URL}/services/tax-revenue-matters`,
+  name: 'Sumanjari & Co. Advocates — Tax & Revenue Advocate and Lawyer in Lucknow',
+  url: `${SITE_URL}/services/tax-revenue-advocate`,
   description:
     'Advisory and representation in stamp duty and registration, property tax assessment, circle rate valuation, income tax, GST, and recovery of government dues, before the ITAT Lucknow Bench, the GST Appellate Tribunal, Lucknow, and the Allahabad High Court, Lucknow Bench.',
   telephone: '+91-83024-71764',
@@ -272,8 +298,9 @@ export default async function TaxRevenueMattersPage() {
             <ArrowLeft className="h-3.5 w-3.5" /> Back to Services
           </Link>
 
-          <div className="mb-16 text-center">
-            <div className="mb-4 flex items-center justify-center gap-4">
+          <div className="mb-12 grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_280px]">
+            <div className="min-w-0">
+            <div className="mb-4 flex items-center gap-4">
               <div className="h-px w-12 bg-gold-500" />
               <span className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">
                 Tax &amp; Revenue Law
@@ -281,19 +308,46 @@ export default async function TaxRevenueMattersPage() {
               <div className="h-px w-12 bg-gold-500" />
             </div>
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-              Tax &amp; <em className="text-gold-gradient">Revenue Matters</em>
+              Tax &amp; Revenue Advocate and Lawyer <em className="text-gold-gradient">in Lucknow</em>
             </h1>
-            <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
-              Legal assistance in stamp duty, registration, property tax,
-              circle rate valuation, and income tax and GST disputes.
+            <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
+              Sumanjari &amp; Co. Advocates advises individuals and businesses
+              in Lucknow on stamp duty, registration, property tax, circle rate
+              valuation, income tax, GST, and revenue recovery disputes before
+              the relevant authorities, tribunals, and the Allahabad High Court,
+              Lucknow Bench.
             </p>
-            <a
-              href="/#contact"
-              className="btn-gold mt-8 inline-flex rounded-sm px-8 py-3.5 font-caps text-sm font-semibold uppercase tracking-widest text-navy-900"
-            >
-              Consult Now
-            </a>
+            <ConsultationActions className="mt-8 hidden md:flex" />
+            </div>
+            {taxLead && (
+              <div className="min-w-0 border-l border-gold-500/30 pl-6">
+                {taxLead.img && (
+                  <Image src={taxLead.img} alt={taxLead.name} width={252} height={288} sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: taxLead.focus }} />
+                )}
+                <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">Tax &amp; Revenue Practice Lead</p>
+                <h2 className="mt-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{taxLead.name}</h2>
+                <p className="mt-2 font-body text-sm text-navy-700 dark:text-cream/60">{taxLead.role}</p>
+                <Link href={`/team/${taxLead.slug}`} className="mt-4 inline-flex items-center gap-2 font-body text-sm font-semibold text-gold-700 dark:text-gold-400">
+                  View Profile <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </div>
+            )}
+            <ConsultationActions className="flex md:hidden" />
           </div>
+
+          <section className="mb-16" aria-labelledby="tax-revenue-team">
+            <h2 id="tax-revenue-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Our Tax &amp; Revenue Law Team
+            </h2>
+            <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+              Adv. Jitendra Tiwari leads our tax and revenue practice, supported
+              by Adv. Arti Dwivedi, Adv. Aditya Narayan Shukla and
+              Adv. Prabhash Yadav in tax matters, and Adv. Vinod Arya and
+              Adv. Abhishek Mishra in revenue matters. Each profile below
+              sets out that member&apos;s individual practice areas.
+            </p>
+            <TeamCarousel members={taxTeam} label="Tax and revenue team members" />
+          </section>
 
           <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>

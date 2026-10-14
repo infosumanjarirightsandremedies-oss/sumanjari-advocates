@@ -17,6 +17,8 @@ import {
   Building2,
   Banknote,
   ShieldHalf,
+  Laptop,
+  Globe2,
   X,
 } from 'lucide-react'
 
@@ -30,6 +32,22 @@ type Service = {
 }
 
 const services: Service[] = [
+  {
+    id: 'nri-legal-services',
+    icon: Globe2,
+    title: 'NRI Legal Services',
+    description: 'Legal assistance for Non-Resident Indians with property, inheritance, powers of attorney, family disputes, and litigation in India.',
+    href: '/services/nri-lawyer',
+    items: [
+      'Property disputes & title verification',
+      'Power of attorney & overseas documentation',
+      'Inheritance, wills & succession matters',
+      'NRI divorce & family disputes',
+      'Civil & criminal litigation in India',
+      'Consumer, RERA & business disputes',
+      'Remote consultation & case coordination',
+    ],
+  },
   {
     id: 'property-land',
     icon: Home,
@@ -70,7 +88,7 @@ const services: Service[] = [
     icon: Receipt,
     title: 'Tax & Revenue Matters',
     description: 'Legal assistance in stamp duty, registration, taxation, valuation disputes, and revenue matters.',
-    href: '/services/tax-revenue-matters',
+    href: '/services/tax-revenue-advocate',
     items: [
       'Stamp duty & registration matters',
       'Property tax assessment disputes',
@@ -84,7 +102,7 @@ const services: Service[] = [
     icon: Scale,
     title: 'Civil Matters',
     description: 'Representation in civil litigation, recovery proceedings, contractual disputes, and appeals.',
-    href: '/services/civil-matters',
+    href: '/services/civil-advocate',
     items: [
       'Civil suits & recovery of money',
       'Injunction & declaratory suits',
@@ -99,7 +117,7 @@ const services: Service[] = [
     icon: Gavel,
     title: 'Criminal Matters',
     description: 'Strategic criminal defence, bail, trial representation, and appellate advocacy.',
-    href: '/services/criminal-matters',
+    href: '/services/criminal-lawyer',
     items: [
       'FIR quashing petitions',
       'Bail matters',
@@ -114,7 +132,7 @@ const services: Service[] = [
     icon: Heart,
     title: 'Family & Matrimonial Matters',
     description: 'Legal support for matrimonial, custody, maintenance, and succession disputes.',
-    href: '/services/family-matrimonial-matters',
+    href: '/services/family-advocate',
     items: [
       'Divorce (mutual consent & contested)',
       'Maintenance & alimony',
@@ -129,7 +147,7 @@ const services: Service[] = [
     icon: Users,
     title: 'Service & Employment Matters',
     description: 'Representation in service disputes, tribunals, and employment litigation.',
-    href: '/services/service-employment-matters',
+    href: '/services/service-advocate',
     items: [
       'Wrongful termination & reinstatement',
       'Departmental inquiry representation',
@@ -192,7 +210,7 @@ const services: Service[] = [
   {
     id: 'rera',
     icon: Building2,
-    title: 'RERA Matters',
+    title: 'RERA & Real Estate Matters',
     description: 'Representation in real estate regulatory disputes before UP-RERA, builder-buyer conflicts, and project compliance matters.',
     href: '/services/rera-lawyer',
     items: [
@@ -225,6 +243,21 @@ const services: Service[] = [
       'Defence personnel pension & benefit claims',
       'Mining lease disputes',
       'Mining revenue matters',
+    ],
+  },
+  {
+    id: 'cyber-crime',
+    icon: Laptop,
+    title: 'Cyber Crime Matters',
+    description: 'Cyber crime complaints, bank account freeze/unfreeze matters, IT Act prosecution and defence, and cyber fraud bail.',
+    href: '/services/cyber-crime-lawyer',
+    items: [
+      'Cyber crime complaints & cyber thana proceedings',
+      'Bank account freeze & unfreeze matters',
+      'Cyber fraud & financial scams',
+      'Sextortion & online harassment',
+      'IT Act prosecution & defence',
+      'Cyber fraud bail & FIR quashing',
     ],
   },
 ]

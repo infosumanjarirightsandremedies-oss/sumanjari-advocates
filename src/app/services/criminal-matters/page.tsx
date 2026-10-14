@@ -1,7 +1,10 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
 import {
   ArrowLeft,
+  ArrowUpRight,
+  Phone,
   FileX,
   KeyRound,
   Gavel,
@@ -19,17 +22,36 @@ import {
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ServiceBlogs from '@/components/ServiceBlogs'
+import TeamCarousel from '@/components/TeamCarousel'
 import { getBlogPostsByCategory } from '@/lib/blogs'
+import { teamMembers } from '@/lib/team'
+import { CHAMBER_TEL } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const criminalLead = teamMembers.find((member) => member.slug === 'aditya-narayan-shukla')
+const criminalTeam = ['jitendra-tiwari', 'abhishek-mishra', 'shishir-pandey', 'priyesh-dwivedi']
+  .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
+
+function ConsultationActions({ className }: { className: string }) {
+  return (
+    <div className={`flex-wrap items-center gap-2 sm:gap-3 ${className}`}>
+      <a href="/#contact" className="btn-gold inline-flex items-center justify-center rounded-sm px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-900 sm:px-8 sm:text-sm sm:tracking-widest">
+        Consult Now
+      </a>
+      <a href={CHAMBER_TEL} className="inline-flex items-center justify-center gap-2 rounded-sm border border-gold-500/40 px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-800 transition-colors hover:border-gold-500 hover:text-gold-700 dark:text-cream/85 dark:hover:text-gold-300 sm:px-6 sm:text-sm sm:tracking-widest">
+        <Phone className="h-4 w-4 shrink-0" /> Call Now
+      </a>
+    </div>
+  )
+}
 
 export const metadata: Metadata = {
-  title: 'Criminal Lawyer in Lucknow | Bail, FIR Quashing & Trial Defence',
+  title: 'Criminal Lawyer in Lucknow',
   description:
-    'Sumanjari & Co. Advocates provides strategic criminal defence in Lucknow — bail and anticipatory bail, FIR quashing, trial representation, appeals, cheque bounce, and 498A matters before the District & Sessions Courts and the Allahabad High Court, Lucknow Bench.',
+    'Consult a criminal lawyer in Lucknow at Sumanjari & Co. Advocates for bail, anticipatory bail, FIR quashing, trial defence, and criminal appeals.',
   keywords: [
+    'Criminal Lawyer in Lucknow',
     'Criminal Lawyer Lucknow',
-    'Criminal Advocate Lucknow',
     'Bail Lawyer Lucknow',
     'Anticipatory Bail Lawyer Lucknow',
     'FIR Quashing Lawyer Lucknow',
@@ -42,21 +64,21 @@ export const metadata: Metadata = {
     'Cybercrime Lawyer Lucknow',
   ],
   alternates: {
-    canonical: '/services/criminal-matters',
+    canonical: '/services/criminal-lawyer',
   },
   openGraph: {
-    title: 'Criminal Lawyer in Lucknow | Sumanjari & Co. Advocates',
+    title: 'Criminal Lawyer in Lucknow | Sumanjari & Co.',
     description:
-      'Strategic criminal defence, bail, FIR quashing, trial representation, and appellate advocacy before the District & Sessions Courts and the Allahabad High Court, Lucknow Bench.',
-    url: '/services/criminal-matters',
+      'Consult a criminal lawyer in Lucknow for bail, FIR quashing, trial defence, and appeals before the District & Sessions Courts and the Allahabad High Court, Lucknow Bench.',
+    url: '/services/criminal-lawyer',
   },
 }
 
 const criminalMattersJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
-  name: 'Sumanjari & Co. Advocates — Criminal Matters',
-  url: `${SITE_URL}/services/criminal-matters`,
+  name: 'Sumanjari & Co. Advocates — Criminal Lawyer in Lucknow',
+  url: `${SITE_URL}/services/criminal-lawyer`,
   description:
     'Strategic criminal defence covering FIR quashing, bail and anticipatory bail, trial representation, appeals and revisions, cheque bounce, domestic violence and 498A matters, and cybercrime, before the District & Sessions Courts and the Allahabad High Court, Lucknow Bench.',
   telephone: '+91-83024-71764',
@@ -65,7 +87,7 @@ const criminalMattersJsonLd = {
     { '@type': 'City', name: 'Lucknow' },
     { '@type': 'State', name: 'Uttar Pradesh' },
   ],
-  serviceType: 'Criminal Legal Services',
+  serviceType: 'Criminal Lawyer Services',
 }
 
 const matters = [
@@ -300,8 +322,9 @@ export default async function CriminalMattersPage() {
             <ArrowLeft className="h-3.5 w-3.5" /> Back to Services
           </Link>
 
-          <div className="mb-16 text-center">
-            <div className="mb-4 flex items-center justify-center gap-4">
+          <div className="mb-12 grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_280px]">
+            <div className="min-w-0">
+            <div className="mb-4 flex items-center gap-4">
               <div className="h-px w-12 bg-gold-500" />
               <span className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">
                 Criminal Law
@@ -309,21 +332,45 @@ export default async function CriminalMattersPage() {
               <div className="h-px w-12 bg-gold-500" />
             </div>
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-              Criminal <em className="text-gold-gradient">Matters</em>
+              Criminal Advocates &amp; Lawyers <em className="text-gold-gradient">in Lucknow</em>
             </h1>
-            <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
-              Strategic criminal defence — bail, FIR quashing, trial
+            <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
+              Sumanjari &amp; Co. Advocates provides criminal lawyer
+              services in Lucknow, including bail, FIR quashing, trial
               representation, and appellate advocacy — before the District
               &amp; Sessions Courts and the Allahabad High Court, Lucknow
               Bench.
             </p>
-            <a
-              href="/#contact"
-              className="btn-gold mt-8 inline-flex rounded-sm px-8 py-3.5 font-caps text-sm font-semibold uppercase tracking-widest text-navy-900"
-            >
-              Consult Now
-            </a>
+            <ConsultationActions className="mt-8 hidden md:flex" />
+            </div>
+            {criminalLead && (
+              <div className="min-w-0 border-l border-gold-500/30 pl-6">
+                {criminalLead.img && (
+                  <Image src={criminalLead.img} alt={criminalLead.name} width={252} height={288} sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: criminalLead.focus }} />
+                )}
+                <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">Criminal Practice Lead</p>
+                <h2 className="mt-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{criminalLead.name}</h2>
+                <p className="mt-2 font-body text-sm text-navy-700 dark:text-cream/60">{criminalLead.role}</p>
+                <Link href={`/team/${criminalLead.slug}`} className="mt-4 inline-flex items-center gap-2 font-body text-sm font-semibold text-gold-700 dark:text-gold-400">
+                  View Profile <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </div>
+            )}
+            <ConsultationActions className="flex md:hidden" />
           </div>
+
+          <section className="mb-16" aria-labelledby="criminal-team">
+            <h2 id="criminal-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Our Criminal Law Team
+            </h2>
+            <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+              Adv. Aditya Narayan Shukla leads our criminal law practice alongside
+              Adv. Jitendra Tiwari, Adv. Abhishek Mishra, Adv. Shishir Pandey and
+              Adv. Priyesh Dwivedi. Each profile below sets out that member&apos;s
+              individual practice areas.
+            </p>
+            <TeamCarousel members={criminalTeam} label="Criminal law team members" />
+          </section>
 
           <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>
@@ -523,9 +570,7 @@ export default async function CriminalMattersPage() {
               practising before the District &amp; Sessions Courts and the
               Allahabad High Court, Lucknow Bench.
             </p>
-            <a href="/#contact" className="btn-gold inline-flex rounded-sm px-8 py-3.5 font-caps text-sm font-semibold uppercase tracking-widest text-navy-900">
-              Consult Now
-            </a>
+            <ConsultationActions className="flex justify-center" />
           </div>
         </div>
       </section>

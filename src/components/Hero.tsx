@@ -32,7 +32,7 @@ export default function Hero() {
 
       {/* Readability scrims: strong wash on the left where copy sits; softer on the right */}
       <div
-        className="absolute inset-0 bg-gradient-to-r from-[#f4f1ea]/[0.96] via-[#f4f1ea]/78 to-[#f4f1ea]/35 dark:from-navy-950/98 dark:via-navy-900/90 dark:to-navy-900/70"
+        className="absolute inset-0 bg-gradient-to-r from-[#f4f1ea]/60 via-[#f4f1ea]/40 to-[#f4f1ea]/20 dark:from-navy-950/60 dark:via-navy-900/45 dark:to-navy-900/30"
         aria-hidden
       />
       <div
@@ -77,7 +77,7 @@ export default function Hero() {
       {/* Main content — frosted panel for crisp type over photography */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 pb-24 pt-32">
         <div className="max-w-4xl">
-          <div className="rounded-2xl border border-white/90 bg-white/[0.82] p-8 shadow-[0_25px_80px_-20px_rgba(10,15,24,0.18)] backdrop-blur-xl ring-1 ring-[#0a0e1a]/[0.08] dark:border-gold-500/25 dark:bg-navy-950/90 dark:shadow-[0_25px_80px_-35px_rgba(0,0,0,0.75)] dark:ring-gold-500/10 md:p-10">
+          <div className="rounded-2xl border border-white/50 bg-white/30 p-8 shadow-[0_25px_80px_-20px_rgba(10,15,24,0.18)] backdrop-blur-sm ring-1 ring-[#0a0e1a]/[0.08] dark:border-gold-500/25 dark:bg-navy-950/35 dark:shadow-[0_25px_80px_-35px_rgba(0,0,0,0.75)] dark:ring-gold-500/10 md:p-10">
             {/* Eyebrow */}
             <div className="mb-6 flex items-center gap-4">
               <div className="h-px w-12 bg-gold-500" />

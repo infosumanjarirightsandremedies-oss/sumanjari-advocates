@@ -1,5 +1,6 @@
 'use client'
-import { Scale, Instagram, Phone, Mail, MapPin } from 'lucide-react'
+import { useState } from 'react'
+import { Scale, Instagram, Phone, Mail, MapPin, ChevronDown, ChevronUp } from 'lucide-react'
 
 // lucide-react has no Reddit icon, so the mark is inlined here (matches the
 // official Reddit logo; uses currentColor so it inherits the same
@@ -14,18 +15,21 @@ function RedditIcon({ className }: { className?: string }) {
 }
 
 const services = [
+  { label: 'NRI Legal Services', href: '/services/nri-lawyer' },
   { label: 'Property & Land Matters', href: '/services/property-land-matters' },
-  { label: 'Civil Matters', href: '/services/civil-matters' },
-  { label: 'Criminal Matters', href: '/services/criminal-matters' },
-  { label: 'Tax & Revenue Matters', href: '/services/tax-revenue-matters' },
-  { label: 'Family & Matrimonial Matters', href: '/services/family-matrimonial-matters' },
-  { label: 'Service & Employment Matters', href: '/services/service-employment-matters' },
+  { label: 'Civil Advocate & Lawyer', href: '/services/civil-advocate' },
+  { label: 'Criminal Lawyer', href: '/services/criminal-lawyer' },
+  { label: 'Tax & Revenue Matters', href: '/services/tax-revenue-advocate' },
+  { label: 'Family & Matrimonial Matters', href: '/services/family-advocate' },
+  { label: 'Service & Employment Matters', href: '/services/service-advocate' },
   { label: 'Consumer & Motor Accident Matters', href: '/services/consumer-motor-accident-matters' },
   { label: 'Constitutional & Writ Matters', href: '/services/constitutional-writ-matters' },
   { label: 'Drafting & Legal Opinions', href: '/#services' },
   { label: 'Company & Corporate Matters', href: '/services/company-corporate-matters' },
   { label: 'RERA Matters', href: '/services/rera-lawyer' },
+  { label: 'RERA Advocate & Lawyer in Noida & Ghaziabad', href: '/services/rera-lawyer-noida-ghaziabad' },
   { label: 'Banking & Recovery (DRT) Matters', href: '/services/banking-recovery-matters' },
+  { label: 'Cyber Crime Lawyer & Advocate', href: '/services/cyber-crime-lawyer' },
   { label: 'Armed Forces Tribunal & Mining Matters', href: '/#services' },
 ]
 
@@ -61,6 +65,8 @@ const social = [
 ];
 
 export default function Footer() {
+  const [showAllLinks, setShowAllLinks] = useState(false)
+
   return (
     <footer className="relative border-t border-gold-500/18 bg-[#f0ebe3]/90 dark:bg-transparent dark:border-gold-500/10">
       {/* Top section */}
@@ -107,9 +113,9 @@ export default function Footer() {
           <h4 className="font-caps text-navy-900 dark:text-cream text-xs tracking-widest uppercase mb-5 pb-2 border-b border-gold-500/22 dark:border-gold-500/15">
             Practice Areas
           </h4>
-          <ul className="space-y-3">
-            {services.map(({ label, href }) => (
-              <li key={label}>
+          <ul id="footer-practice-links" className="space-y-3">
+            {services.map(({ label, href }, index) => (
+              <li key={label} hidden={!showAllLinks && index >= 6}>
                 <a href={href} className="font-body text-navy-700/75 dark:text-cream/60 text-sm hover:text-gold-600 dark:hover:text-gold-400 transition-colors flex items-center gap-2">
                   <span className="w-1 h-1 rounded-full bg-gold-500/45 dark:bg-gold-500/55" />
                   {label}
@@ -124,9 +130,9 @@ export default function Footer() {
           <h4 className="font-caps text-navy-900 dark:text-cream text-xs tracking-widest uppercase mb-5 pb-2 border-b border-gold-500/22 dark:border-gold-500/15">
             Quick Links
           </h4>
-          <ul className="space-y-3">
-            {links.map(({ label, href }) => (
-              <li key={label}>
+          <ul id="footer-quick-links" className="space-y-3">
+            {links.map(({ label, href }, index) => (
+              <li key={label} hidden={!showAllLinks && index >= 6}>
                 <a href={href} className="font-body text-navy-700/75 dark:text-cream/60 text-sm hover:text-gold-600 dark:hover:text-gold-400 transition-colors flex items-center gap-2">
                   <span className="w-1 h-1 rounded-full bg-gold-500/45 dark:bg-gold-500/55" />
                   {label}
@@ -134,6 +140,16 @@ export default function Footer() {
               </li>
             ))}
           </ul>
+          <button
+            type="button"
+            aria-expanded={showAllLinks}
+            aria-controls="footer-practice-links footer-quick-links"
+            onClick={() => setShowAllLinks(current => !current)}
+            className="mt-5 inline-flex items-center gap-2 rounded-sm border border-gold-500/30 px-3 py-2 font-body text-sm text-gold-700 hover:bg-gold-500/10 dark:text-gold-400 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-500"
+          >
+            {showAllLinks ? 'View fewer links' : 'View more links'}
+            {showAllLinks ? <ChevronUp className="h-4 w-4" aria-hidden="true" /> : <ChevronDown className="h-4 w-4" aria-hidden="true" />}
+          </button>
         </div>
 
         {/* Contact */}

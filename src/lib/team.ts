@@ -218,6 +218,37 @@ export const teamMembers: TeamMember[] = [
       languages: ['Hindi', 'English'],
     },
   },
+  {
+    slug: 'abhishek-mishra',
+    name: 'Adv. Abhishek Mishra',
+    role: 'Associate Advocate',
+    office: 'lucknow',
+    location: 'Lucknow',
+    credentials: 'B.A., LL.B., LL.M.',
+    expertise: [
+      'Criminal & Civil Matters',
+      'Public Interest Litigation (PIL)',
+      'Revenue Matters',
+      'Service Matters',
+      'Civil Rights Litigation',
+    ],
+    img: '/images/Adv. Abhishek Mishra.png',
+    focus: '50% 15%',
+    profile: {
+      summary:
+        'Associate Advocate with more than five years of experience in criminal and civil matters, including public interest litigation, revenue, service and civil rights litigation before the High Court at Lucknow.',
+      bio: [
+        'Abhishek Mishra is an Associate Advocate at Sumanjari & Co. Advocates, with more than five years of experience in criminal and civil matters, including public interest litigation, revenue, service and civil rights litigation before the High Court at Lucknow.',
+        'He holds B.A., LL.B. and LL.M. degrees from the University of Lucknow. His experience across constitutional, service and revenue matters, together with his criminal and civil practice, allows him to advise clients with clarity and a research-driven approach.',
+      ],
+      memberships: ['Bar Council of Uttar Pradesh'],
+      education: [
+        'LL.M., University of Lucknow',
+        'LL.B., University of Lucknow',
+        'B.A., University of Lucknow',
+      ],
+    },
+  },
 
   // NCR
   {

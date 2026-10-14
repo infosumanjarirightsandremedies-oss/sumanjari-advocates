@@ -197,16 +197,17 @@ export async function getBlogPostsByCategory(category: string): Promise<BlogPost
 // blog post's "Back" link can return to its own service page instead of home.
 const CATEGORY_TO_SERVICE_SLUG: Record<string, string> = {
   RERA: 'rera-lawyer',
-  'Civil Matters': 'civil-matters',
-  'Criminal Matters': 'criminal-matters',
-  'Family & Matrimonial Matters': 'family-matrimonial-matters',
+  'Civil Matters': 'civil-advocate',
+  'Criminal Matters': 'criminal-lawyer',
+  'Family & Matrimonial Matters': 'family-advocate',
   'Property & Land Matters': 'property-land-matters',
   'Banking & Recovery Matters': 'banking-recovery-matters',
   'Company & Corporate Matters': 'company-corporate-matters',
   'Constitutional & Writ Matters': 'constitutional-writ-matters',
   'Consumer & Motor Accident Matters': 'consumer-motor-accident-matters',
-  'Service & Employment Matters': 'service-employment-matters',
-  'Tax & Revenue Matters': 'tax-revenue-matters',
+  'Service & Employment Matters': 'service-advocate',
+  'Tax & Revenue Matters': 'tax-revenue-advocate',
+  'Cyber Crime Matters': 'cyber-crime-lawyer',
 }
 
 export function getServiceSlugForCategory(category: string): string | undefined {

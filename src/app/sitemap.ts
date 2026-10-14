@@ -4,158 +4,163 @@ import { teamMembers } from '@/lib/team'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
 
+export const revalidate = 604800
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date()
   const blogPosts = await getBlogPosts()
-  const blogEntries: MetadataRoute.Sitemap = blogPosts.map((post) => ({
-    url: `${SITE_URL}/blog/${post.slug}`,
-    lastModified: post.publishedDate ? new Date(post.publishedDate) : now,
-    changeFrequency: 'monthly',
-    priority: 0.6,
-  }))
+  const blogEntries: MetadataRoute.Sitemap = blogPosts.map((post) => {
+    const published = new Date(post.publishedDate)
+    return {
+      url: `${SITE_URL}/blog/${encodeURIComponent(post.slug)}`,
+      ...(Number.isFinite(published.getTime()) && published.getTime() <= Date.now()
+        ? { lastModified: published }
+        : {}),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    }
+  })
   const teamProfileEntries: MetadataRoute.Sitemap = teamMembers
     .filter((member) => member.profile)
     .map((member) => ({
       url: `${SITE_URL}/team/${member.slug}`,
-      lastModified: now,
       changeFrequency: 'yearly',
       priority: 0.7,
     }))
 
-  return [
+  const entries: MetadataRoute.Sitemap = [
     {
       url: SITE_URL,
-      lastModified: now,
       changeFrequency: 'monthly',
       priority: 1,
     },
     {
       url: `${SITE_URL}/blog`,
-      lastModified: now,
       changeFrequency: 'daily',
       priority: 0.8,
     },
     {
       url: `${SITE_URL}/publications`,
-      lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
       url: `${SITE_URL}/services/rera-lawyer`,
-      lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
-      url: `${SITE_URL}/services/family-matrimonial-matters`,
-      lastModified: now,
+      url: `${SITE_URL}/services/nri-lawyer`,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
-      url: `${SITE_URL}/services/service-employment-matters`,
-      lastModified: now,
+      url: `${SITE_URL}/services/rera-lawyer-noida-ghaziabad`,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
-      url: `${SITE_URL}/services/criminal-matters`,
-      lastModified: now,
+      url: `${SITE_URL}/services/family-advocate`,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/services/divorce-lawyer`,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/services/service-advocate`,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/services/criminal-lawyer`,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/services/banking-recovery-matters`,
-      lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/services/constitutional-writ-matters`,
-      lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
-      url: `${SITE_URL}/services/civil-matters`,
-      lastModified: now,
+      url: `${SITE_URL}/services/civil-advocate`,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/services/property-land-matters`,
-      lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/services/consumer-motor-accident-matters`,
-      lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/services/company-corporate-matters`,
-      lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
-      url: `${SITE_URL}/services/tax-revenue-matters`,
-      lastModified: now,
+      url: `${SITE_URL}/services/tax-revenue-advocate`,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/services/cyber-crime-lawyer`,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/internship`,
-      lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.6,
     },
     {
       url: `${SITE_URL}/our-journey`,
-      lastModified: now,
       changeFrequency: 'yearly',
       priority: 0.5,
     },
     {
       url: `${SITE_URL}/team`,
-      lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
       url: `${SITE_URL}/team/jitendra-tiwari`,
-      lastModified: now,
       changeFrequency: 'yearly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/team/aishwarya-pandey`,
-      lastModified: now,
       changeFrequency: 'yearly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/team/priyesh-dwivedi`,
-      lastModified: now,
       changeFrequency: 'yearly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/team/adarsh-pratap-singh`,
-      lastModified: now,
       changeFrequency: 'yearly',
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/team/devesh-tiwari`,
-      lastModified: now,
       changeFrequency: 'yearly',
       priority: 0.7,
     },
     ...teamProfileEntries,
     ...blogEntries,
   ]
+
+  return [...new Map(entries.map((entry) => [entry.url, entry])).values()]
 }

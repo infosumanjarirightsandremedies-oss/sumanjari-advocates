@@ -1,7 +1,10 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
 import {
   ArrowLeft,
+  ArrowUpRight,
+  Phone,
   HeartCrack,
   HandCoins,
   Baby,
@@ -16,15 +19,37 @@ import {
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ServiceBlogs from '@/components/ServiceBlogs'
+import TeamCarousel from '@/components/TeamCarousel'
 import { getBlogPostsByCategory } from '@/lib/blogs'
+import { teamMembers } from '@/lib/team'
+import { CHAMBER_TEL } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const familyLead = teamMembers.find((member) => member.slug === 'aishwarya-pandey')
+const familyTeam = ['akhilesh-yadav', 'prerna-yaduvanshi']
+  .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
+
+function ConsultationActions({ className }: { className: string }) {
+  return (
+    <div className={`flex-wrap items-center gap-2 sm:gap-3 ${className}`}>
+      <a href="/#contact" className="btn-gold inline-flex items-center justify-center rounded-sm px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-900 sm:px-8 sm:text-sm sm:tracking-widest">
+        Consult Now
+      </a>
+      <a href={CHAMBER_TEL} className="inline-flex items-center justify-center gap-2 rounded-sm border border-gold-500/40 px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-800 transition-colors hover:border-gold-500 hover:text-gold-700 dark:text-cream/85 dark:hover:text-gold-300 sm:px-6 sm:text-sm sm:tracking-widest">
+        <Phone aria-hidden="true" className="h-4 w-4 shrink-0" /> Call Now
+      </a>
+    </div>
+  )
+}
 
 export const metadata: Metadata = {
-  title: 'Family & Matrimonial Lawyer in Lucknow | Divorce, Custody & Maintenance',
+  title: 'Family Advocate & Lawyer in Lucknow | Divorce, Custody & Maintenance',
   description:
-    'Sumanjari & Co. Advocates represents clients in divorce, child custody, maintenance, domestic violence, and matrimonial disputes before the Family Court, District Courts, and the Allahabad High Court, Lucknow Bench.',
+    'Family advocate and lawyer in Lucknow for divorce, child custody, maintenance and domestic violence matters. Family law practice led by Adv. Aishwarya Pandey.',
   keywords: [
+    'Family Advocate Lucknow',
+    'Family Advocate & Lawyer in Lucknow',
+    'Aishwarya Pandey Family Lawyer',
     'Family Lawyer Lucknow',
     'Matrimonial Lawyer Lucknow',
     'Divorce Lawyer Lucknow',
@@ -39,21 +64,28 @@ export const metadata: Metadata = {
     'Matrimonial Dispute Advocate Lucknow',
   ],
   alternates: {
-    canonical: '/services/family-matrimonial-matters',
+    canonical: '/services/family-advocate',
   },
   openGraph: {
-    title: 'Family & Matrimonial Lawyer in Lucknow | Sumanjari & Co. Advocates',
+    title: 'Family Advocate & Lawyer in Lucknow | Sumanjari & Co. Advocates',
     description:
       'Representation in divorce, child custody, maintenance, domestic violence, and matrimonial disputes before the Family Court and Allahabad High Court, Lucknow Bench.',
-    url: '/services/family-matrimonial-matters',
+    url: '/services/family-advocate',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Family Advocate & Lawyer in Lucknow',
+    description: 'Divorce, child custody, maintenance and domestic violence representation led by Adv. Aishwarya Pandey at Sumanjari & Co. Advocates.',
   },
 }
 
 const familyServiceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
-  name: 'Sumanjari & Co. Advocates — Family & Matrimonial Matters',
-  url: `${SITE_URL}/services/family-matrimonial-matters`,
+  '@id': `${SITE_URL}/services/family-advocate#legal-service`,
+  name: 'Sumanjari & Co. Advocates — Family Advocate & Lawyer in Lucknow',
+  url: `${SITE_URL}/services/family-advocate`,
   description:
     'Representation in divorce, maintenance, child custody, domestic violence protection, restitution of conjugal rights, and succession disputes before the Family Court, District Courts, and the Allahabad High Court, Lucknow Bench.',
   telephone: '+91-83024-71764',
@@ -63,12 +95,28 @@ const familyServiceJsonLd = {
     { '@type': 'State', name: 'Uttar Pradesh' },
   ],
   serviceType: 'Family & Matrimonial Legal Services',
+  employee: familyLead ? {
+    '@type': 'Person',
+    name: familyLead.name,
+    jobTitle: 'Family Law Practice Lead',
+    url: `${SITE_URL}/team/${familyLead.slug}`,
+  } : undefined,
+}
+
+const familyBreadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Family Advocate & Lawyer in Lucknow', item: `${SITE_URL}/services/family-advocate` },
+  ],
 }
 
 const matters = [
   {
     icon: HeartCrack,
     title: 'Divorce & Matrimonial Disputes',
+    href: '/services/divorce-lawyer',
     points: [
       'Mutual consent divorce petitions and settlement negotiations',
       'Contested divorce proceedings on grounds such as cruelty, desertion, or adultery',
@@ -268,6 +316,10 @@ export default async function FamilyMatrimonialServicePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(familyFaqJsonLd) }}
       />
       <Navbar />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(familyBreadcrumbJsonLd) }}
+      />
 
       <section className="py-24 md:py-32">
         <div className="mx-auto max-w-5xl px-6">
@@ -278,8 +330,9 @@ export default async function FamilyMatrimonialServicePage() {
             <ArrowLeft className="h-3.5 w-3.5" /> Back to Services
           </Link>
 
-          <div className="mb-16 text-center">
-            <div className="mb-4 flex items-center justify-center gap-4">
+          <div className="mb-12 grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_280px]">
+            <div className="min-w-0">
+            <div className="mb-4 flex items-center gap-4">
               <div className="h-px w-12 bg-gold-500" />
               <span className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">
                 Family Law
@@ -287,20 +340,44 @@ export default async function FamilyMatrimonialServicePage() {
               <div className="h-px w-12 bg-gold-500" />
             </div>
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-              Family &amp; <em className="text-gold-gradient">Matrimonial Matters</em>
+              Family Advocate &amp; Lawyer <em className="text-gold-gradient">in Lucknow</em>
             </h1>
-            <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
-              Discreet, sensitive representation in divorce, custody, maintenance,
+            <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
+              Sumanjari &amp; Co. Advocates provides family law representation in Lucknow,
+              led by Adv. Aishwarya Pandey, for divorce, child custody, maintenance,
               and matrimonial disputes — before the Family Court, District Courts,
               and the Allahabad High Court, Lucknow Bench.
             </p>
-            <a
-              href="/#contact"
-              className="btn-gold mt-8 inline-flex rounded-sm px-8 py-3.5 font-caps text-sm font-semibold uppercase tracking-widest text-navy-900"
-            >
-              Consult Now
-            </a>
+            <ConsultationActions className="mt-8 hidden md:flex" />
+            </div>
+            {familyLead && (
+              <div className="min-w-0 border-l border-gold-500/30 pl-6">
+                {familyLead.img && (
+                  <Image src={familyLead.img} alt={familyLead.name} width={252} height={288} sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: familyLead.focus }} />
+                )}
+                <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">Family Law Practice Lead</p>
+                <h2 className="mt-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{familyLead.name}</h2>
+                <p className="mt-2 font-body text-sm text-navy-700 dark:text-cream/60">{familyLead.role}</p>
+                <Link href={`/team/${familyLead.slug}`} className="mt-4 inline-flex items-center gap-2 font-body text-sm font-semibold text-gold-700 dark:text-gold-400">
+                  View Profile <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+                </Link>
+              </div>
+            )}
+            <ConsultationActions className="flex md:hidden" />
           </div>
+
+          <section className="mb-16" aria-labelledby="family-team">
+            <h2 id="family-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Our Family Law Team
+            </h2>
+            <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+              Adv. Aishwarya Pandey leads our family and matrimonial practice in Lucknow,
+              supported by Adv. Akhilesh Yadav in family matters. Adv. Prerna Yaduvanshi,
+              based in Delhi, handles matrimonial disputes, domestic violence, maintenance
+              and child custody matters. Each profile sets out the advocate&apos;s practice areas and location.
+            </p>
+            <TeamCarousel members={familyTeam} label="Family law team members" />
+          </section>
 
           <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>
@@ -348,16 +425,22 @@ export default async function FamilyMatrimonialServicePage() {
               Types of Family &amp; Matrimonial Matters We Handle
             </h2>
             <div className="grid gap-5 sm:grid-cols-2">
-              {matters.map(({ icon: Icon, title, points }) => (
+              {matters.map(({ icon: Icon, title, points, href }) => (
                 <div
                   key={title}
-                  className="glass-card rounded-sm border border-gold-500/20 p-6 dark:border-gold-500/15"
+                  className={`glass-card relative rounded-sm border border-gold-500/20 p-6 dark:border-gold-500/15 ${href ? 'transition-colors hover:border-gold-500/60 focus-within:ring-2 focus-within:ring-gold-500' : ''}`}
                 >
                   <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-sm border border-gold-500/40">
                     <Icon className="h-5 w-5 text-gold-600 dark:text-gold-400" />
                   </div>
                   <h3 className="mb-3 font-display text-lg font-bold text-navy-900 dark:text-cream">
-                    {title}
+                    {href ? (
+                      <a href={href} className="inline-flex items-center gap-2 focus:outline-none">
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {title}
+                        <ArrowUpRight aria-hidden="true" className="h-4 w-4 shrink-0 text-gold-600 dark:text-gold-400" />
+                      </a>
+                    ) : title}
                   </h3>
                   <ul className="space-y-2">
                     {points.map((point) => (

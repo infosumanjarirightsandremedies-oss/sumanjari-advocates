@@ -200,7 +200,8 @@ var CATEGORY_TO_SERVICE_SLUG = {
   'Constitutional & Writ Matters': 'constitutional-writ-matters',
   'Consumer & Motor Accident Matters': 'consumer-motor-accident-matters',
   'Service & Employment Matters': 'service-employment-matters',
-  'Tax & Revenue Matters': 'tax-revenue-matters'
+  'Tax & Revenue Matters': 'tax-revenue-matters',
+  'Cyber Crime Matters': 'cyber-crime-lawyer'
 };
 
 // Run ONCE from the editor. Wires onSheetChange to both cell edits (onEdit) and

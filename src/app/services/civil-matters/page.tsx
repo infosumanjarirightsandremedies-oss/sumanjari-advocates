@@ -1,7 +1,10 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
 import {
   ArrowLeft,
+  ArrowUpRight,
+  Phone,
   Banknote,
   ShieldCheck,
   Landmark,
@@ -15,14 +18,33 @@ import {
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ServiceBlogs from '@/components/ServiceBlogs'
+import TeamCarousel from '@/components/TeamCarousel'
 import { getBlogPostsByCategory } from '@/lib/blogs'
+import { teamMembers } from '@/lib/team'
+import { CHAMBER_TEL } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const civilLead = teamMembers.find((member) => member.slug === 'jitendra-tiwari')
+const civilTeam = ['aishwarya-pandey', 'akhilesh-yadav', 'prerna-yaduvanshi']
+  .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
+
+function ConsultationActions({ className }: { className: string }) {
+  return (
+    <div className={`flex-wrap items-center gap-2 sm:gap-3 ${className}`}>
+      <a href="/#contact" className="btn-gold inline-flex items-center justify-center rounded-sm px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-900 sm:px-8 sm:text-sm sm:tracking-widest">
+        Consult Now
+      </a>
+      <a href={CHAMBER_TEL} className="inline-flex items-center justify-center gap-2 rounded-sm border border-gold-500/40 px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-800 transition-colors hover:border-gold-500 hover:text-gold-700 dark:text-cream/85 dark:hover:text-gold-300 sm:px-6 sm:text-sm sm:tracking-widest">
+        <Phone className="h-4 w-4 shrink-0" /> Call Now
+      </a>
+    </div>
+  )
+}
 
 export const metadata: Metadata = {
-  title: 'Civil Lawyer in Lucknow | Civil Litigation, Recovery & Injunctions',
+  title: 'Civil Advocate & Lawyer in Lucknow',
   description:
-    'Sumanjari & Co. Advocates represents clients in civil suits, recovery of money, injunctions, contractual disputes, execution proceedings, and civil appeals before the District Courts and the Allahabad High Court, Lucknow Bench.',
+    'Civil advocate and lawyer in Lucknow for recovery suits, injunctions, property disputes and civil appeals. Civil practice led by Adv. Jitendra Tiwari.',
   keywords: [
     'Civil Lawyer Lucknow',
     'Civil Litigation Lawyer Lucknow',
@@ -37,21 +59,26 @@ export const metadata: Metadata = {
     'CPC Lawyer Lucknow',
   ],
   alternates: {
-    canonical: '/services/civil-matters',
+    canonical: '/services/civil-advocate',
   },
   openGraph: {
-    title: 'Civil Litigation Lawyer in Lucknow | Sumanjari & Co. Advocates',
+    title: 'Civil Advocate & Lawyer in Lucknow | Sumanjari & Co.',
     description:
       'Representation in civil suits, recovery of money, injunctions, contractual disputes, execution proceedings, and civil appeals before the District Courts and the Allahabad High Court, Lucknow Bench.',
-    url: '/services/civil-matters',
+    url: '/services/civil-advocate',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Civil Advocate & Lawyer in Lucknow | Sumanjari & Co.',
+    description: 'Civil suits, recovery, injunctions, property disputes and appeals in Lucknow. Civil practice led by Adv. Jitendra Tiwari.',
   },
 }
 
 const civilMattersJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
-  name: 'Sumanjari & Co. Advocates — Civil Matters',
-  url: `${SITE_URL}/services/civil-matters`,
+  name: 'Sumanjari & Co. Advocates — Civil Advocate & Lawyer in Lucknow',
+  url: `${SITE_URL}/services/civil-advocate`,
   description:
     'Representation in civil suits, recovery of money, injunctions and declaratory relief, contractual disputes, execution proceedings, easementary and partition disputes, and civil appeals, before the District Courts and the Allahabad High Court, Lucknow Bench.',
   telephone: '+91-83024-71764',
@@ -272,8 +299,9 @@ export default async function CivilMattersPage() {
             <ArrowLeft className="h-3.5 w-3.5" /> Back to Services
           </Link>
 
-          <div className="mb-16 text-center">
-            <div className="mb-4 flex items-center justify-center gap-4">
+          <div className="mb-12 grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_280px]">
+            <div className="min-w-0">
+            <div className="mb-4 flex items-center gap-4">
               <div className="h-px w-12 bg-gold-500" />
               <span className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">
                 Civil Litigation
@@ -281,20 +309,45 @@ export default async function CivilMattersPage() {
               <div className="h-px w-12 bg-gold-500" />
             </div>
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-              Civil <em className="text-gold-gradient">Matters</em>
+              Civil Advocate &amp; Lawyer <em className="text-gold-gradient">in Lucknow</em>
             </h1>
-            <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
-              Representation in civil suits, recovery of money, injunctions,
+            <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
+              Sumanjari &amp; Co. Advocates provides civil advocate and lawyer
+              services in Lucknow for civil suits, recovery of money, injunctions,
               contractual disputes, and civil appeals before the District
               Courts and the Allahabad High Court, Lucknow Bench.
             </p>
-            <a
-              href="/#contact"
-              className="btn-gold mt-8 inline-flex rounded-sm px-8 py-3.5 font-caps text-sm font-semibold uppercase tracking-widest text-navy-900"
-            >
-              Consult Now
-            </a>
+            <ConsultationActions className="mt-8 hidden md:flex" />
+            </div>
+            {civilLead && (
+              <div className="min-w-0 border-l border-gold-500/30 pl-6">
+                {civilLead.img && (
+                  <Image src={civilLead.img} alt={civilLead.name} width={252} height={288} sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: civilLead.focus }} />
+                )}
+                <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">Civil Practice Lead</p>
+                <h2 className="mt-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{civilLead.name}</h2>
+                <p className="mt-2 font-body text-sm text-navy-700 dark:text-cream/60">{civilLead.role}</p>
+                <Link href={`/team/${civilLead.slug}`} className="mt-4 inline-flex items-center gap-2 font-body text-sm font-semibold text-gold-700 dark:text-gold-400">
+                  View Profile <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </div>
+            )}
+            <ConsultationActions className="flex md:hidden" />
           </div>
+
+          <section className="mb-16" aria-labelledby="civil-team">
+            <h2 id="civil-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Our Civil Law Team
+            </h2>
+            <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+              Adv. Jitendra Tiwari leads our civil practice, supported by
+              Adv. Aishwarya Pandey and Adv. Akhilesh Yadav, whose practice areas
+              include family and matrimonial matters. Adv. Prerna Yaduvanshi
+              handles civil and matrimonial matters in Delhi. Each profile below
+              sets out the advocate&apos;s individual practice areas and location.
+            </p>
+            <TeamCarousel members={civilTeam} label="Civil law team members" />
+          </section>
 
           <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>

@@ -141,25 +141,23 @@ const reraRights = [
 ]
 
 export const metadata: Metadata = {
-  title: 'RERA Lawyer in Lucknow, Noida, Greater Noida & Ghaziabad',
+  title: 'RERA Advocate & Real Estate Lawyer in Lucknow',
   description:
-    'Sumanjari & Co. Advocates — RERA lawyers and RERA property lawyers representing homebuyers and developers in builder-buyer disputes across Lucknow, Noida, Greater Noida and Ghaziabad. An experienced advocate for RERA case filings, possession delay, compensation, and project compliance before UP-RERA and the Appellate Tribunal.',
+    'RERA advocate and real estate lawyer in Lucknow for builder-buyer disputes, possession delays, refunds and appeals before UP-RERA and the Appellate Tribunal.',
   keywords: [
+    'Real Estate Advocate & Lawyer',
+    'Real Estate Advocate',
+    'Real Estate Lawyer',
+    'RERA Advocate',
     'RERA Lawyer Lucknow',
     'RERA Advocate Lucknow',
-    'RERA Lawyer Noida',
-    'RERA Advocate Noida',
-    'RERA Lawyer Greater Noida',
-    'RERA Advocate Greater Noida',
-    'RERA Lawyer Ghaziabad',
-    'RERA Advocate Ghaziabad',
     'RERA Lawyer Near Me',
     'RERA Property Lawyer',
     'Advocate for RERA Case',
     'UP RERA Lawyer',
-    'Builder Buyer Dispute Lawyer Noida',
-    'Builder Buyer Dispute Lawyer Ghaziabad',
-    'Builder Buyer Dispute Lawyer Greater Noida',
+    'Real Estate Lawyer Lucknow',
+    'Real Estate Advocate Lucknow',
+    'Builder Buyer Dispute Lawyer Lucknow',
     'UP RERA Complaint Lawyer',
     'UP RERA Advocate',
     'RERA Possession Delay Lawyer',
@@ -170,9 +168,9 @@ export const metadata: Metadata = {
     canonical: '/services/rera-lawyer',
   },
   openGraph: {
-    title: 'RERA Lawyer in Lucknow, Noida, Greater Noida & Ghaziabad | Sumanjari & Co. Advocates',
+    title: 'RERA Advocate & Real Estate Lawyer in Lucknow | Sumanjari & Co. Advocates',
     description:
-      'RERA lawyers and property lawyers representing homebuyers and developers in real estate regulatory disputes before UP-RERA and the RERA Appellate Tribunal — serving clients across Lucknow, Noida, Greater Noida and Ghaziabad.',
+      'Real estate advocates and lawyers in Lucknow representing homebuyers and developers in disputes before UP-RERA and the RERA Appellate Tribunal.',
     url: '/services/rera-lawyer',
   },
 }
@@ -180,17 +178,13 @@ export const metadata: Metadata = {
 const reraServiceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  name: 'RERA Legal Services',
+  name: 'RERA & Real Estate Legal Services in Lucknow',
   url: `${SITE_URL}/services/rera-lawyer`,
   description:
-    'Representation for homebuyers and developers in RERA disputes — builder-buyer conflicts, possession delays, compensation claims, project registration and compliance, and appeals before the RERA Appellate Tribunal.',
+    'Representation for homebuyers and developers in Lucknow in RERA disputes — builder-buyer conflicts, possession delays, compensation claims, project registration and compliance, and appeals before the RERA Appellate Tribunal.',
   provider: { '@id': `${SITE_URL}/#organization` },
   areaServed: [
     { '@type': 'City', name: 'Lucknow' },
-    { '@type': 'City', name: 'Noida' },
-    { '@type': 'City', name: 'Greater Noida' },
-    { '@type': 'City', name: 'Ghaziabad' },
-    { '@type': 'State', name: 'Uttar Pradesh' },
   ],
   serviceType: 'RERA Legal Services',
   employee: {
@@ -268,29 +262,6 @@ const whyIssues = [
   'Delayed or stalled real estate projects',
   'Non-registration of projects and other RERA violations',
   'Substandard construction and non-compliance with agreed specifications',
-]
-
-const areasServed = [
-  {
-    city: 'Lucknow',
-    blurb:
-      'Our chambers are based at Block D-311, Allahabad High Court, Lucknow Bench — representing homebuyers and developers before UP-RERA Lucknow and in appeals before the Appellate Tribunal.',
-  },
-  {
-    city: 'Noida',
-    blurb:
-      'Handling builder-buyer disputes, delayed possession, and compensation claims for homebuyers in Noida’s residential and commercial projects, filed and pursued before UP-RERA.',
-  },
-  {
-    city: 'Greater Noida',
-    blurb:
-      'Representation in RERA complaints and appeals concerning projects in Greater Noida and Greater Noida West, including possession delay, refund, and compensation claims.',
-  },
-  {
-    city: 'Ghaziabad',
-    blurb:
-      'Advising homebuyers and developers in Ghaziabad, Indirapuram, and Raj Nagar Extension on RERA registration, compliance, and builder-buyer disputes.',
-  },
 ]
 
 const workSteps = [
@@ -421,7 +392,9 @@ const reraFaqJsonLd = {
 }
 
 export default async function ReraServicePage() {
-  const reraBlogPosts = await getBlogPostsByCategory('RERA')
+  const reraBlogPosts = (await getBlogPostsByCategory('RERA')).filter(
+    (post) => !/\b(?:Noida|Ghaziabad)\b/i.test(`${post.title} ${post.excerpt}`)
+  )
 
   return (
     <main className="relative min-h-screen">
@@ -449,20 +422,23 @@ export default async function ReraServicePage() {
           <div className="mb-16 grid items-stretch gap-10 md:mb-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
             <div className="order-1 lg:order-1">
               <span className="font-caps text-xs uppercase tracking-[0.25em] text-gold-700 dark:text-gold-400">
-                RERA Lawyers &amp; Property Advocates · UP-RERA &amp; Appellate Tribunal
+                UP-RERA &amp; Appellate Tribunal
               </span>
               <h1 className="mt-4 font-display text-4xl font-bold leading-[1.12] text-navy-900 dark:text-cream md:text-[3.25rem]">
-                Delayed possession or a broken booking promise?{' '}
-                <em className="text-gold-gradient">We take it to UP-RERA.</em>
+                RERA Advocate &amp;{' '}
+                <em className="text-gold-gradient">Real Estate Lawyer in Lucknow</em>
               </h1>
+              <p className="mt-4 max-w-xl font-body text-lg font-semibold leading-relaxed text-navy-900 dark:text-cream">
+                Delayed possession or a broken booking promise? We take it to UP-RERA.
+              </p>
               <p className="mt-5 max-w-xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
-                Representation for homebuyers and developers in builder-buyer
-                disputes, possession-delay and compensation claims, and appeals —
-                across{' '}
+                Our real estate advocates and lawyers represent homebuyers and
+                developers in{' '}
                 <strong className="font-semibold text-navy-900 dark:text-cream">
-                  Lucknow, Noida, Greater Noida and Ghaziabad
+                  Lucknow
                 </strong>
-                .
+                . We handle builder-buyer disputes, possession delay and
+                compensation claims, and RERA appeals.
               </p>
 
               {reraStats.length > 0 && (
@@ -578,7 +554,7 @@ export default async function ReraServicePage() {
 
           <div id="overview" className="mb-16 scroll-mt-28 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <h2 className="mb-2 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-              RERA Property Lawyer &amp; Advocate for RERA Case Filings
+              Real Estate Lawyer for RERA &amp; Builder-Buyer Disputes
             </h2>
             <p>
               Real estate disputes under the Real Estate (Regulation and
@@ -593,17 +569,26 @@ export default async function ReraServicePage() {
               possession claims, project registration and compliance matters,
               and appeals — with the aim of securing possession, compensation,
               or refund at the earliest possible stage, and pursuing appellate
-              or execution remedies where required. Our practice extends across
-              Uttar Pradesh&apos;s major real estate markets, including{' '}
-              Lucknow, Noida, Greater Noida, and Ghaziabad.
+              or execution remedies where required. This practice serves
+              homebuyers and developers with real estate matters in Lucknow.
             </p>
             <p>
-              As RERA property lawyers, we act as your advocate for RERA case
-              filings, appeals, and compliance matters from the first
-              complaint through to execution. If you are searching for a RERA
-              lawyer near me, our practice regularly appears before UP-RERA
-              on behalf of clients in Lucknow, Noida, Greater Noida, and
-              Ghaziabad.
+              A RERA advocate reviews the builder-buyer agreement, promised
+              possession date, payment receipts, project registration details,
+              and correspondence with the developer to assess the available
+              remedies. Our real estate lawyers assist with preparing complaints,
+              presenting supporting documents, responding to the other party,
+              and pursuing appeals or enforcement of orders where appropriate.
+              The relief available depends on the facts, the agreement, and the
+              applicable law; no particular outcome is guaranteed.
+            </p>
+            <p>
+              For ownership, title verification, partition, sale deeds, or land
+              disputes outside the RERA context, see our{' '}
+              <Link href="/services/property-land-matters" className="font-semibold text-gold-700 underline underline-offset-4 hover:text-gold-600 dark:text-gold-400">
+                property and land legal services
+              </Link>
+              .
             </p>
           </div>
 
@@ -611,27 +596,41 @@ export default async function ReraServicePage() {
             <div className="mb-8 flex items-center gap-2">
               <MapPin className="h-5 w-5 text-gold-600 dark:text-gold-400" />
               <h2 className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-                Where We Practise
+                Where We Represent
               </h2>
             </div>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {areasServed.map(({ city, blurb }) => (
-                <div
-                  key={city}
-                  className="glass-card card-glow rounded-sm border border-gold-500/20 p-6 transition-colors hover:border-gold-500/50 dark:border-gold-500/15"
-                >
-                  <div className="mb-3 flex items-start gap-2">
-                    <MapPin className="mt-1 h-4 w-4 flex-shrink-0 text-gold-600 dark:text-gold-400" />
-                    <h3 className="font-display text-lg font-bold leading-snug text-navy-900 dark:text-cream">
-                      RERA Lawyer in{' '}
-                      <em className="text-gold-gradient not-italic">{city}</em>
-                    </h3>
-                  </div>
-                  <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">
-                    {blurb}
-                  </p>
-                </div>
-              ))}
+            <p className="max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+              Our chambers are based at Block D-311, Allahabad High Court,
+              Lucknow Bench. We represent homebuyers and developers in Lucknow
+              before UP-RERA and in appeals before the RERA Appellate Tribunal.
+              For an initial review, bring your builder-buyer agreement, payment
+              records, the promised possession date, and correspondence with the
+              developer so the relevant documents and next steps can be assessed.
+            </p>
+            <div className="mt-6 grid gap-5 md:grid-cols-2">
+              <Link href="#services" className="glass-card group block rounded-sm border border-gold-500/20 p-6 transition-colors hover:border-gold-500/50 dark:border-gold-500/15">
+                <h3 className="flex items-center justify-between gap-4 font-display text-xl font-bold text-navy-900 dark:text-cream">
+                  RERA Lawyer in Lucknow
+                  <ArrowUpRight className="h-5 w-5 shrink-0 text-gold-600 dark:text-gold-400" />
+                </h3>
+                <p className="mt-3 font-body text-sm leading-relaxed text-navy-700 dark:text-cream/60">
+                  Representation before UP-RERA and the RERA Appellate Tribunal
+                  for Lucknow homebuyers and developers, including complaints,
+                  possession delays, refund claims and appeals. Our chambers are
+                  at Block D-311, Allahabad High Court, Lucknow Bench.
+                </p>
+              </Link>
+              <Link href="/services/rera-lawyer-noida-ghaziabad" className="glass-card group block rounded-sm border border-gold-500/20 p-6 transition-colors hover:border-gold-500/50 dark:border-gold-500/15">
+                <h3 className="flex items-center justify-between gap-4 font-display text-xl font-bold text-navy-900 dark:text-cream">
+                  RERA Advocate &amp; Lawyer in Noida &amp; Ghaziabad
+                  <ArrowUpRight className="h-5 w-5 shrink-0 text-gold-600 dark:text-gold-400" />
+                </h3>
+                <p className="mt-3 font-body text-sm leading-relaxed text-navy-700 dark:text-cream/60">
+                  Meet our Delhi/NCR team and explore representation for builder-buyer
+                  disputes, delayed possession and refund claims involving projects
+                  in Noida and Ghaziabad.
+                </p>
+              </Link>
             </div>
           </div>
 
@@ -778,7 +777,7 @@ export default async function ReraServicePage() {
               </h2>
               <p className="mx-auto max-w-xl font-body text-navy-700 dark:text-cream/55">
                 Common questions homebuyers and developers bring to us — drawn from
-                our RERA practice across Lucknow, Noida, Greater Noida and Ghaziabad.
+                our RERA practice in Lucknow.
               </p>
             </div>
             <div className="grid gap-5 sm:grid-cols-2">
@@ -825,9 +824,9 @@ export default async function ReraServicePage() {
             </h2>
             <p className="mx-auto mb-8 max-w-xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
               Speak with our team about your builder-buyer dispute, possession
-              delay, or project compliance matter — serving clients in Lucknow,
-              Noida, Greater Noida and Ghaziabad, and practising before UP-RERA
-              and the Allahabad High Court, Lucknow Bench.
+              delay, or project compliance matter in Lucknow. We represent clients
+              before UP-RERA, the RERA Appellate Tribunal, and the Allahabad High
+              Court, Lucknow Bench, as appropriate to the matter.
             </p>
 
             <div className="mx-auto grid max-w-2xl gap-4 text-left sm:grid-cols-2">

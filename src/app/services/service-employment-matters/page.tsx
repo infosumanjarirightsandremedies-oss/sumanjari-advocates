@@ -1,7 +1,10 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
 import {
   ArrowLeft,
+  ArrowUpRight,
+  Phone,
   UserSearch,
   TrendingUp,
   Gavel,
@@ -18,12 +21,31 @@ import {
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ServiceBlogs from '@/components/ServiceBlogs'
+import TeamCarousel from '@/components/TeamCarousel'
 import { getBlogPostsByCategory } from '@/lib/blogs'
+import { teamMembers } from '@/lib/team'
+import { CHAMBER_TEL } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const serviceLead = teamMembers.find((member) => member.slug === 'jitendra-tiwari')
+const serviceTeam = ['aditya-narayan-shukla', 'devesh-tiwari', 'abhishek-mishra']
+  .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
+
+function ConsultationActions({ className }: { className: string }) {
+  return (
+    <div className={`flex-wrap items-center gap-2 sm:gap-3 ${className}`}>
+      <a href="/#contact" className="btn-gold inline-flex items-center justify-center rounded-sm px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-900 sm:px-8 sm:text-sm sm:tracking-widest">
+        Consult Now
+      </a>
+      <a href={CHAMBER_TEL} className="inline-flex items-center justify-center gap-2 rounded-sm border border-gold-500/40 px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-800 transition-colors hover:border-gold-500 hover:text-gold-700 dark:text-cream/85 dark:hover:text-gold-300 sm:px-6 sm:text-sm sm:tracking-widest">
+        <Phone className="h-4 w-4 shrink-0" /> Call Now
+      </a>
+    </div>
+  )
+}
 
 export const metadata: Metadata = {
-  title: 'Service & Employment Lawyer in Lucknow | CAT Lucknow Bench & Service Tribunal',
+  title: 'Service Advocate & Lawyer in Lucknow | CAT Lucknow Bench & Service Tribunal',
   description:
     'Sumanjari & Co. Advocates represents government, public sector, and private sector employees in departmental inquiries, wrongful termination, promotion & seniority disputes, pension matters, and POSH Act proceedings before the CAT Lucknow Bench, U.P. Public Services Tribunal, CGIT, and the Allahabad High Court, Lucknow Bench.',
   keywords: [
@@ -48,13 +70,13 @@ export const metadata: Metadata = {
     'CGIT Advocate Lucknow',
   ],
   alternates: {
-    canonical: '/services/service-employment-matters',
+    canonical: '/services/service-advocate',
   },
   openGraph: {
-    title: 'Service & Employment Lawyer in Lucknow | Sumanjari & Co. Advocates',
+    title: 'Service Advocate & Lawyer in Lucknow | Sumanjari & Co.',
     description:
       'Representation for government, public sector, and private sector employees in service disputes, departmental inquiries, and employment litigation before CAT, the Service Tribunal, CGIT, and the Allahabad High Court, Lucknow Bench.',
-    url: '/services/service-employment-matters',
+    url: '/services/service-advocate',
   },
 }
 
@@ -62,7 +84,7 @@ const serviceMattersJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
   name: 'Sumanjari & Co. Advocates — Service & Employment Matters',
-  url: `${SITE_URL}/services/service-employment-matters`,
+  url: `${SITE_URL}/services/service-advocate`,
   description:
     'Representation for government, public sector, and private sector employees in recruitment disputes, promotion and seniority matters, departmental and disciplinary proceedings, wrongful termination, pension and retirement benefits, and POSH Act compliance and inquiry matters before the Central Administrative Tribunal, U.P. Public Services Tribunal, CGIT, and the Allahabad High Court.',
   telephone: '+91-83024-71764',
@@ -317,8 +339,9 @@ export default async function ServiceEmploymentMattersPage() {
             <ArrowLeft className="h-3.5 w-3.5" /> Back to Services
           </Link>
 
-          <div className="mb-16 text-center">
-            <div className="mb-4 flex items-center justify-center gap-4">
+          <div className="mb-12 grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_280px]">
+            <div className="min-w-0">
+            <div className="mb-4 flex items-center gap-4">
               <div className="h-px w-12 bg-gold-500" />
               <span className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">
                 Service Law
@@ -326,22 +349,44 @@ export default async function ServiceEmploymentMattersPage() {
               <div className="h-px w-12 bg-gold-500" />
             </div>
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-              Service &amp; <em className="text-gold-gradient">Employment Matters</em>
+              Service Advocate &amp; Lawyer <em className="text-gold-gradient">in Lucknow</em>
             </h1>
-            <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
+            <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
               Representation for government, public sector, and private
               sector employees in recruitment, promotion, disciplinary,
               pension, and industrial disputes — before the Central
               Administrative Tribunal (CAT), the U.P. Public Services
               Tribunal, CGIT, and the Allahabad High Court, Lucknow Bench.
             </p>
-            <a
-              href="/#contact"
-              className="btn-gold mt-8 inline-flex rounded-sm px-8 py-3.5 font-caps text-sm font-semibold uppercase tracking-widest text-navy-900"
-            >
-              Consult Now
-            </a>
+            <ConsultationActions className="mt-8 hidden md:flex" />
+            </div>
+            {serviceLead && (
+              <div className="min-w-0 border-l border-gold-500/30 pl-6">
+                {serviceLead.img && (
+                  <Image src={serviceLead.img} alt={serviceLead.name} width={252} height={288} sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: serviceLead.focus }} />
+                )}
+                <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">Service &amp; Employment Practice Lead</p>
+                <h2 className="mt-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{serviceLead.name}</h2>
+                <p className="mt-2 font-body text-sm text-navy-700 dark:text-cream/60">{serviceLead.role}</p>
+                <Link href={`/team/${serviceLead.slug}`} className="mt-4 inline-flex items-center gap-2 font-body text-sm font-semibold text-gold-700 dark:text-gold-400">
+                  View Profile <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </div>
+            )}
+            <ConsultationActions className="flex md:hidden" />
           </div>
+
+          <section className="mb-16" aria-labelledby="service-team">
+            <h2 id="service-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Our Service &amp; Employment Law Team
+            </h2>
+            <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+              Adv. Jitendra Tiwari leads our service and employment practice alongside
+              Adv. Aditya Narayan Shukla, Adv. Devesh Tiwari, and Adv. Abhishek Mishra.
+              Each profile below sets out that member&apos;s individual practice areas.
+            </p>
+            <TeamCarousel members={serviceTeam} label="Service and employment team members" />
+          </section>
 
           <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>
@@ -544,9 +589,7 @@ export default async function ServiceEmploymentMattersPage() {
               the Central Administrative Tribunal, the U.P. Public Services
               Tribunal, CGIT, and the Allahabad High Court, Lucknow Bench.
             </p>
-            <a href="/#contact" className="btn-gold inline-flex rounded-sm px-8 py-3.5 font-caps text-sm font-semibold uppercase tracking-widest text-navy-900">
-              Consult Now
-            </a>
+            <ConsultationActions className="flex justify-center" />
           </div>
         </div>
       </section>

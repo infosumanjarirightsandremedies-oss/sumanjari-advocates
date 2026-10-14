@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  distDir: process.env.NODE_ENV === 'development' ? '.next-dev' : '.next',
   images: {
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 60 * 60 * 24 * 30,
@@ -18,6 +19,31 @@ const nextConfig = {
   staticPageGenerationTimeout: 180,
   async redirects() {
     return [
+      {
+        source: '/services/tax-revenue-matters',
+        destination: '/services/tax-revenue-advocate',
+        permanent: true,
+      },
+      {
+        source: '/services/civil-matters',
+        destination: '/services/civil-advocate',
+        permanent: true,
+      },
+      {
+        source: '/services/family-matrimonial-matters',
+        destination: '/services/family-advocate',
+        permanent: true,
+      },
+      {
+        source: '/services/service-employment-matters',
+        destination: '/services/service-advocate',
+        permanent: true,
+      },
+      {
+        source: '/services/criminal-matters',
+        destination: '/services/criminal-lawyer',
+        permanent: true,
+      },
       {
         source: '/services/rera',
         destination: '/services/rera-lawyer',
