@@ -44,8 +44,6 @@ const links = [
   { label: 'Our Journey', href: '/our-journey' },
 ]
 
-const WEBSITE = 'https://www.sumanjariadvocates.com'
-
 const social = [
   {
     icon: Instagram,

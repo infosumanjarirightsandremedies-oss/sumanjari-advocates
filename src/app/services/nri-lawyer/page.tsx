@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { ArrowLeft, ArrowUpRight, Globe2, Home, ScrollText, Users, Heart, Scale, FileCheck2, Phone } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import FirmCredentials from '@/components/FirmCredentials'
 import TeamCarousel from '@/components/TeamCarousel'
 import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL, whatsappUrl } from '@/lib/contactLinks'
@@ -14,10 +15,15 @@ const nriTeam = ['shishir-pandey', 'aniket-bose', 'arti-dwivedi', 'prabhash-yada
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
 
 export const metadata: Metadata = {
-  title: 'NRI Lawyer & Advocate | NRI Legal Services in India',
-  description: 'NRI legal services at Sumanjari & Co. Advocates, led by Adv. Aishwarya Pandey: property disputes, inheritance, powers of attorney, family matters, and litigation in India.',
+  title: { absolute: 'NRI Lawyer in Lucknow | Property & Family Matters | Sumanjari' },
+  description: 'NRI lawyer and advocate in Lucknow for property, inheritance, powers of attorney and family matters in India. Remote coordination with our legal team.',
   keywords: ['NRI Lawyer', 'NRI Advocate', 'NRI Legal Services', 'NRI Lawyer in Lucknow', 'NRI Property Dispute Lawyer', 'NRI Power of Attorney', 'NRI Inheritance Lawyer', 'NRI Divorce Lawyer'],
   alternates: { canonical: '/services/nri-lawyer' },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'NRI Lawyer in Lucknow | Legal Services in India',
+    description: 'Remote coordination for NRI property, inheritance, family and power-of-attorney matters, with case-specific attendance advice.',
+  },
   openGraph: {
     title: 'NRI Lawyer & Advocate | Sumanjari & Co. Advocates',
     description: 'Legal assistance for Indians living abroad with property, inheritance, family, documentation, and litigation matters in India.',
@@ -172,7 +178,7 @@ export default function NriLegalServicesPage() {
                 NRI Lawyer &amp; Advocate <em className="text-gold-gradient">in India</em>
               </h1>
               <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
-                Living abroad should not leave your legal affairs in India unattended. Sumanjari &amp; Co. Advocates assists Non-Resident Indians with property, inheritance, family disputes, documentation, and litigation, with Adv. Aishwarya Pandey as lead advocate.
+                Living abroad should not leave your legal affairs in India unattended. Our NRI lawyers and advocates assist Non-Resident Indians with property, inheritance, family disputes, documentation, and litigation, with Adv. Aishwarya Pandey as lead advocate.
               </p>
               <div className="hidden md:block">
                 <ConsultationActions />
@@ -181,9 +187,9 @@ export default function NriLegalServicesPage() {
             {nriLead && (
               <div className="min-w-0 border-l border-gold-500/30 pl-6">
                 {nriLead.img && (
-                  <Image src={nriLead.img} alt={nriLead.name} width={252} height={288} sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: nriLead.focus }} />
+                  <Image src={nriLead.img} alt={nriLead.name} width={252} height={288} priority sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: nriLead.focus }} />
                 )}
-                <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">NRI Services Lead Advocate</p>
+                <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">NRI Practice Lead</p>
                 <h2 className="mt-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{nriLead.name}</h2>
                 <p className="mt-2 font-body text-sm text-navy-700 dark:text-cream/60">{nriLead.role}</p>
                 <Link href={`/team/${nriLead.slug}`} className="mt-4 inline-flex items-center gap-2 font-body text-sm font-semibold text-gold-700 dark:text-gold-400">
@@ -249,6 +255,12 @@ export default function NriLegalServicesPage() {
             </div>
           </section>
 
+          <section aria-labelledby="nri-authority-document-review" className="mb-16 border-t border-gold-500/20 pt-10">
+            <h2 id="nri-authority-document-review" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Instructing an Indian Lawyer From Abroad</h2>
+            <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">Identify the Indian property location or court, your country of residence, the dispute chronology and any live deadline before arranging document execution overseas. A power of attorney should state the precise acts authorised and any limits; it is not itself a transfer of ownership. Notarisation, consular authentication or apostille, Indian stamping and registration requirements depend on the document, country, transaction and receiving authority. Confirm the required form before signing or sending originals.</p>
+            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">For inheritance, share the death certificate, will if any, family details, asset documents and existing succession proceedings. For property disputes, provide the title chain, current possession information and notices. Scans can support an initial review, but courts and registries may require originals, certified copies or personal participation. Video appearance and exemption from attendance require the applicable procedure or court permission. Our <Link href="/services/property-land-matters" className="text-gold-700 underline dark:text-gold-400">property practice</Link> and <Link href="/services/family-advocate" className="text-gold-700 underline dark:text-gold-400">family practice</Link> provide subject-specific support.</p>
+          </section>
+
           <section className="border-t border-gold-500/25 pt-10" aria-labelledby="nri-consultation">
             <h2 id="nri-consultation" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Discuss Your Legal Matter in India</h2>
             <p className="max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/65">Contact our chamber to arrange a consultation. Share the nature of your matter, the relevant Indian location, and any urgent deadlines so the team can assess the next steps.</p>
@@ -260,6 +272,7 @@ export default function NriLegalServicesPage() {
           </section>
         </div>
       </section>
+      <FirmCredentials />
       <Footer />
     </main>
   )

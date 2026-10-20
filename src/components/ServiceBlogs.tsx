@@ -102,7 +102,15 @@ export default function ServiceBlogs({
           >
             {thumbnail ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={thumbnail} alt={title} className="h-52 w-full object-cover" />
+              <img
+                src={thumbnail}
+                srcSet={thumbnail.startsWith('/api/drive-image/') ? `${thumbnail}?w=400 400w, ${thumbnail}?w=800 800w` : undefined}
+                sizes="(min-width: 640px) 320px, 280px"
+                alt={title}
+                loading="lazy"
+                decoding="async"
+                className="h-52 w-full object-cover"
+              />
             ) : (
               <div className="p-6 pb-0">
                 <div className="flex h-11 w-11 items-center justify-center rounded-sm border border-gold-500/40">

@@ -21,7 +21,8 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import ServiceBlogs from '@/components/ServiceBlogs'
+import FirmCredentials from '@/components/FirmCredentials'
+import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
@@ -46,9 +47,9 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: 'Cyber Crime Lawyer in Lucknow | IT Act, Cyber Fraud & Bank Freeze Cases',
+  title: { absolute: 'Cyber Crime Lawyer in Lucknow | Fraud & Bank Freeze | Sumanjari' },
   description:
-    'Sumanjari & Co. Advocates handles cyber crime complaints, cyber thana matters, IT Act prosecutions, bank account freeze/unfreeze applications, cyber fraud bail, and sextortion cases in Lucknow and before the Allahabad High Court, Lucknow Bench.',
+    'Cyber crime lawyer and advocate in Lucknow for online fraud complaints, bank account freeze or unfreeze, IT Act defence and bail. Consult our legal team.',
   keywords: [
     'Cyber Crime Lawyer Lucknow',
     'Cyber Crime Complaint Lucknow',
@@ -61,6 +62,8 @@ export const metadata: Metadata = {
     'Sextortion Complaint Lawyer',
     'Cyber Fraud Bail Lawyer Lucknow',
     'Cyber Crime Advocate Lucknow',
+    'Cyber Fraud Evidence Legal Advice',
+    'Cyber Crime Bank Lien Lucknow',
   ],
   alternates: {
     canonical: '/services/cyber-crime-lawyer',
@@ -70,6 +73,11 @@ export const metadata: Metadata = {
     description:
       'Cyber crime complaints, bank account freeze/unfreeze matters, IT Act prosecution and defence, and cyber fraud bail before the Allahabad High Court, Lucknow Bench.',
     url: '/services/cyber-crime-lawyer',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Cyber Crime Lawyer in Lucknow | Fraud & Bank Freeze',
+    description: 'Legal advice on cyber fraud complaints, digital evidence, bank account restrictions, IT Act cases and bail.',
   },
 }
 
@@ -103,7 +111,7 @@ const matters = [
     icon: Lock,
     title: 'Bank Account Freeze & Unfreeze Matters',
     points: [
-      'Advice and representation where a bank account is frozen on a cyber crime complaint or police request under Section 35 of the IT Act',
+      'Advice and representation where a bank account is frozen following a cyber crime complaint, police direction, or court order, after reviewing the stated legal basis',
       'Applications before the investigating officer, bank nodal office, and Magistrate for defreezing/unfreezing of wrongly or disproportionately frozen accounts',
       'Representation for account holders who are third parties to the underlying fraud but whose accounts are frozen in the process',
     ],
@@ -139,8 +147,8 @@ const matters = [
     icon: Gavel,
     title: 'Cyber Fraud Bail & Quashing',
     points: [
-      'Regular and anticipatory bail in cyber crime and IT Act cases before the Magistrate, Sessions Court, and High Court',
-      'Petitions under Section 528 BNSS for quashing of FIRs and cyber crime proceedings',
+      'Regular bail before the competent court and anticipatory bail before the Sessions Court or High Court, where maintainable',
+      'High Court petitions for quashing of FIRs and cyber crime proceedings under the applicable procedural law, including Section 528 BNSS where applicable',
       'Challenging chargesheets filed in cyber crime investigations',
     ],
   },
@@ -216,7 +224,7 @@ const cyberCrimeInsights = [
     icon: Lock,
     title: 'How to Unfreeze a Bank Account',
     excerpt:
-      'A bank account is often frozen on the direction of an investigating officer once it is linked, even remotely, to a cyber fraud complaint. An application before the IO, the bank nodal office, or the Magistrate — supported by proof of the legitimate source of funds — is usually the fastest route to defreezing.',
+      'Ask the bank for the freeze reference, disputed amount, and investigating authority. Bank statements, invoices, and proof of the source of funds can support a representation or application before the competent court. The appropriate remedy depends on the direction or order; no fixed unfreezing timeline can be promised.',
   },
   {
     icon: Smartphone,
@@ -240,7 +248,7 @@ const cyberCrimeInsights = [
     icon: Gavel,
     title: 'Can You Get Bail in a Cyber Fraud Case?',
     excerpt:
-      'Bail in cyber fraud and IT Act matters depends on the gravity of the offence, the amount involved, and the accused\u2019s role — regular and anticipatory bail applications are considered by the Magistrate, Sessions Court, and the Allahabad High Court on the usual bail parameters.',
+      'Bail depends on the offences alleged, the accused person\u2019s role, the money trail, and the need for custody. Regular bail is sought before the competent court; anticipatory bail may be sought before the Sessions Court or High Court where maintainable. A complaint or account freeze alone does not determine the outcome.',
   },
 ]
 
@@ -253,7 +261,7 @@ const cyberCrimeFaqJsonLd = {
       name: 'How do I unfreeze a bank account frozen in a cyber crime case?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'An application is filed before the investigating officer, the bank\u2019s nodal office, or the Magistrate, supported by proof of the legitimate source of the frozen funds — this is the usual route to defreezing an account linked to a cyber fraud complaint.',
+        text: 'First obtain the freeze reference, disputed amount, and investigating authority from the bank. Preserve bank statements and documents showing the source of funds. Depending on the direction or order, a representation to the investigating officer or an application before the competent court may seek release or limitation of the freeze. Relief and timelines depend on the facts; the bank may need instructions from the authority that ordered the restriction.',
       },
     },
     {
@@ -261,7 +269,7 @@ const cyberCrimeFaqJsonLd = {
       name: 'Where can I file a cyber crime complaint in Lucknow?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Complaints can be filed on the National Cyber Crime Reporting Portal, through the 1930 financial-fraud helpline, or in person at the Cyber Thana, Lucknow.',
+        text: 'Report online financial fraud immediately to your bank or payment provider and call 1930. Submit the details at cybercrime.gov.in and preserve the acknowledgement. You can also approach the local police or Cyber Crime Police Station in Lucknow. An online acknowledgement is not itself confirmation that an FIR has been registered; follow up with the investigating authority.',
       },
     },
     {
@@ -277,7 +285,7 @@ const cyberCrimeFaqJsonLd = {
       name: 'Can I get bail in a cyber fraud or IT Act case?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Regular and anticipatory bail in cyber fraud and IT Act matters are considered by the Magistrate, Sessions Court, and the Allahabad High Court, Lucknow Bench, based on the gravity of the offence, amount involved, and the accused\u2019s role.',
+        text: 'Bail depends on the charged offences, alleged role, transaction trail, and investigation needs. Regular bail is sought before the competent court. Anticipatory bail may be sought before the Sessions Court or High Court where maintainable. The FIR and any police notice should be reviewed before deciding the remedy; bail cannot be guaranteed.',
       },
     },
     {
@@ -285,14 +293,38 @@ const cyberCrimeFaqJsonLd = {
       name: 'What offences fall under the IT Act, 2000?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Common offences include hacking (Section 66), identity theft (Section 66C), cheating by personation using a computer resource (Section 66D), violation of privacy (Section 66E), and publishing obscene material in electronic form (Section 67).',
+        text: 'The Information Technology Act, 2000 addresses computer-related offences under Section 66, identity theft under Section 66C, cheating by personation using a computer resource under Section 66D, violation of privacy under Section 66E, and obscene electronic material under Section 67. Other criminal offences may also apply. The applicable substantive and procedural law depends on the dates and circumstances of the case.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can money lost in UPI fraud or an online investment scam be recovered?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Prompt reporting to the bank, 1930, and the national portal may help authorities trace or hold funds, but it does not guarantee recovery. Release of traced funds depends on the investigation and applicable bank or court process. Keep transaction references, statements, complaint acknowledgements, and communications with the recipient.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do I need a lawyer to file a cyber crime complaint?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. You can report directly to the bank, helpline, portal, or police without a lawyer. Legal assistance may help where a complaint needs detailed supporting evidence, there is no progress, your account is frozen, or you need advice on a police notice, bail, or court proceedings. Do not delay urgent reporting while arranging a consultation.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What should I bring to a cyber crime lawyer consultation in Lucknow?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Bring a dated chronology, complaint or FIR details, police notices, bank statements, transaction IDs, relevant messages and URLs, and any freeze communication. Preserve original devices and files. Do not send passwords, OTPs, PINs, or unnecessary copies of intimate material. Fees and scope should be discussed after the documents and required work are assessed.',
       },
     },
   ],
 }
 
 export default async function CyberCrimeLawyerAdvocatePage() {
-  const cyberCrimeBlogPosts = await getBlogPostsByCategory('Cyber Crime Matters')
+  const cyberCrimeBlogPosts = getBlogPostsByCategory('Cyber Crime Matters')
 
   return (
     <main className="relative min-h-screen">
@@ -327,10 +359,10 @@ export default async function CyberCrimeLawyerAdvocatePage() {
                 <div className="h-px w-12 bg-gold-500" />
               </div>
               <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-                Cyber Crime <em className="text-gold-gradient">Lawyer & Advocate</em>
+                Cyber Crime <em className="text-gold-gradient">Lawyer in Lucknow</em>
               </h1>
               <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
-                Cyber crime complaints, bank account freeze &amp; unfreeze
+                Our cyber crime lawyers and advocates in Lucknow assist with complaints, bank account freeze &amp; unfreeze
                 matters, IT Act prosecution and defence, and cyber fraud bail
                 — before the Cyber Thana, Lucknow, and the Allahabad High
                 Court, Lucknow Bench, led by Adv. Aishwarya Pandey.
@@ -340,7 +372,7 @@ export default async function CyberCrimeLawyerAdvocatePage() {
             {cyberCrimeLead && (
               <div className="min-w-0 border-l border-gold-500/30 pl-6">
                 {cyberCrimeLead.img && (
-                  <Image src={cyberCrimeLead.img} alt={cyberCrimeLead.name} width={252} height={288} sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: cyberCrimeLead.focus }} />
+                  <Image src={cyberCrimeLead.img} alt={cyberCrimeLead.name} width={252} height={288} priority sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: cyberCrimeLead.focus }} />
                 )}
                 <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">Cyber Crime Practice Lead</p>
                 <h2 className="mt-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{cyberCrimeLead.name}</h2>
@@ -365,11 +397,26 @@ export default async function CyberCrimeLawyerAdvocatePage() {
             <TeamCarousel members={cyberCrimeTeam} label="Cyber crime team members" />
           </section>
 
+          <section className="mb-16 border-y border-gold-500/25 py-8" aria-labelledby="urgent-cyber-fraud">
+            <h2 id="urgent-cyber-fraud" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Lost Money to Online Fraud? Act Immediately
+            </h2>
+            <ol className="list-decimal space-y-3 pl-5 font-body leading-relaxed text-navy-800 dark:text-cream/75">
+              <li>Contact your bank or payment provider through its official fraud channel to report the transaction and secure affected accounts.</li>
+              <li>Call the national financial cyber fraud helpline <a href="tel:1930" className="font-semibold underline underline-offset-4">1930</a> and submit your complaint at <a href="https://cybercrime.gov.in/" target="_blank" rel="noopener noreferrer" className="font-semibold underline underline-offset-4">cybercrime.gov.in</a>. Keep the acknowledgement and follow the reporting instructions.</li>
+              <li>Save transaction IDs, beneficiary details, messages, phone numbers, and website links. Do not delete chats or reset the affected device before preserving evidence.</li>
+              <li>Do not pay a supposed recovery agent or transfer more money to unlock funds. No caller can lawfully place you under a &quot;digital arrest&quot; over a video call.</li>
+            </ol>
+            <p className="mt-4 font-body text-sm leading-relaxed text-navy-700 dark:text-cream/60">
+              You do not need a lawyer to make an urgent report. Early reporting may help trace funds, but recovery is not guaranteed. For an immediate threat to physical safety, contact emergency services on <a href="tel:112" className="underline underline-offset-4">112</a>.
+            </p>
+          </section>
+
           <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>
-              Cyber crime cases move fast, and a delay of even a few hours in
-              reporting online fraud can mean the difference between
-              recovering siphoned funds and losing them permanently.
+              Looking for a cyber crime advocate in Lucknow often starts with
+              an urgent problem: a fraudulent UPI payment, a frozen bank
+              account, a police notice, or threats on social media.
               Sumanjari &amp; Co. Advocates advises and represents victims
               and accused persons alike — from filing a complaint at the
               Cyber Thana or on the National Cyber Crime Reporting Portal,
@@ -439,6 +486,49 @@ export default async function CyberCrimeLawyerAdvocatePage() {
               ))}
             </div>
           </div>
+
+          <section className="mb-16 space-y-6" aria-labelledby="cyber-complaint-lucknow">
+            <h2 id="cyber-complaint-lucknow" className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              How to File a Cyber Crime Complaint in Lucknow
+            </h2>
+            <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">
+              Prepare a dated account of what happened: how contact began, what was promised or threatened, when each payment was made, and when you discovered the fraud. Include the amount, transaction reference or UTR, recipient account or UPI ID, phone numbers, email addresses, and relevant URLs. Keep the portal acknowledgement and copies of anything submitted to the police. A portal complaint is not the same as a registered FIR; ask the police about the status and next steps.
+            </p>
+            <h3 className="font-display text-xl font-bold text-navy-900 dark:text-cream">Preserve Digital Evidence Before It Disappears</h3>
+            <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">
+              Keep original messages, chat exports, emails with headers, payment receipts, and bank statements as well as screenshots showing dates and account handles. Do not crop or edit the only copy. Preserve the original device where possible; screenshots alone may not establish authenticity. Electronic records may require supporting certificates under the applicable evidence law. Avoid forwarding intimate material unnecessarily, and never share passwords, OTPs, or banking PINs.
+            </p>
+            <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">
+              Our role can include organising the evidence, drafting a complaint or follow-up representation, and advising on remedies where action is delayed. The appropriate police authority and court depend on the facts and territorial jurisdiction, not simply the complainant&apos;s preferred location.
+            </p>
+          </section>
+
+          <section className="mb-16 space-y-5" aria-labelledby="frozen-bank-account">
+            <h2 id="frozen-bank-account" className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Bank Account Frozen After a Cyber Crime Complaint?
+            </h2>
+            <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">
+              An account restriction can affect a fraud victim, a business that received a payment, or an account holder alleged to be part of a transaction chain. A freeze does not by itself establish guilt. Ask the bank for the complaint or reference number, the investigating agency, the disputed amount, and whether the restriction is a lien for a specific amount or a wider debit freeze.
+            </p>
+            <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">
+              Gather statements and documents explaining the payment, such as invoices, contracts, salary records, or delivery proof. After reviewing the direction and money trail, counsel can assess a representation to the investigating officer or an application to the competent court for release or a narrower restriction. Do not assume the bank can remove a police-directed freeze on its own. Where the investigation originates outside Lucknow, proceedings may need to be taken before the authority or court with jurisdiction.
+            </p>
+          </section>
+
+          <section className="mb-16 space-y-5" aria-labelledby="cyber-law-remedies">
+            <h2 id="cyber-law-remedies" className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Cyber Law, Police Notices and Court Remedies
+            </h2>
+            <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">
+              The Information Technology Act, 2000 addresses identity theft, online personation, computer-related offences, privacy violations, and unlawful electronic content. Cheating, extortion, stalking, or other offences under general criminal law may also be alleged. The dates and circumstances determine which substantive, procedural, and evidence provisions apply; older and newer cases should not be treated as legally identical.
+            </p>
+            <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">
+              If you receive a police notice or learn of an FIR, preserve it and obtain advice before responding. Do not ignore the notice, delete records, or contact a complainant to pressure them. We assess the alleged role, transaction trail, and available documents before advising on a response, regular or anticipatory bail where maintainable, or a High Court remedy. Quashing is a distinct remedy and is not available merely because an allegation is disputed.
+            </p>
+            <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">
+              For connected proceedings, see our <Link href="/services/criminal-lawyer" className="font-semibold underline underline-offset-4">criminal law practice in Lucknow</Link>. For online harassment or impersonation, preserve the account URLs and report the content through the platform&apos;s grievance process alongside any police complaint; content removal and criminal proceedings are separate processes.
+            </p>
+          </section>
 
           <div className="mb-16 grid gap-10 md:grid-cols-2">
             <div>
@@ -545,6 +635,34 @@ export default async function CyberCrimeLawyerAdvocatePage() {
             </div>
           </div>
 
+          <section className="mb-16" aria-labelledby="cyber-crime-faq">
+            <h2 id="cyber-crime-faq" className="mb-6 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Cyber Crime Lawyer in Lucknow: Frequently Asked Questions
+            </h2>
+            <div className="divide-y divide-gold-500/20">
+              {cyberCrimeFaqJsonLd.mainEntity.map((question) => (
+                <details key={question.name} className="py-5">
+                  <summary className="cursor-pointer font-display text-lg font-bold text-navy-900 dark:text-cream">
+                    {question.name}
+                  </summary>
+                  <p className="mt-3 font-body leading-relaxed text-navy-800 dark:text-cream/75">
+                    {question.acceptedAnswer.text}
+                  </p>
+                </details>
+              ))}
+            </div>
+            <p className="mt-5 font-body text-sm leading-relaxed text-navy-700 dark:text-cream/60">
+              This page provides general information, not advice on an individual case. Legal options depend on the records, applicable law, and jurisdiction. No recovery, account release, bail, or other outcome is guaranteed.
+            </p>
+          </section>
+
+          <section aria-labelledby="cyber-fraud-evidence" className="mb-16 border-t border-gold-500/20 pt-10">
+            <h2 id="cyber-fraud-evidence" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Online Fraud Reporting and Bank Freeze Review</h2>
+            <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">For suspected financial cyber fraud, contact your bank and report promptly through 1930 or the National Cyber Crime Reporting Portal at cybercrime.gov.in. Do not wait for a lawyer appointment before reporting an ongoing loss. Retain the acknowledgement and transaction references; a report does not guarantee recovery. If your own account is restricted, ask the bank for the available lien or freeze particulars, the originating authority and the complaint reference rather than assuming the restriction can be removed by the branch alone.</p>
+            <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Keep the complaint, transaction trail and electronic evidence separate</h3>
+            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Preserve original messages, email headers, URLs, payment references, account statements and bank communications without editing or deleting the source material. A cyber complaint acknowledgement is not the same document as an FIR or a court order. Multistate complaints may require identifying each police authority and the precise restriction before making representations or seeking relief before the competent forum. Never share passwords, OTPs, PINs or recovery codes with someone claiming to recover funds.</p>
+          </section>
+
           <ServiceBlogs
             posts={cyberCrimeBlogPosts}
             fallbackIcon={<FileX className="h-5 w-5 text-gold-600 dark:text-gold-400" />}
@@ -571,6 +689,7 @@ export default async function CyberCrimeLawyerAdvocatePage() {
         </div>
       </section>
 
+      <FirmCredentials />
       <Footer />
     </main>
   )

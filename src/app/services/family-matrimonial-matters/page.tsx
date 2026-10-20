@@ -18,7 +18,8 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import ServiceBlogs from '@/components/ServiceBlogs'
+import FirmCredentials from '@/components/FirmCredentials'
+import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
@@ -43,9 +44,9 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: 'Family Advocate & Lawyer in Lucknow | Divorce, Custody & Maintenance',
+  title: { absolute: 'Family Advocate & Lawyer in Lucknow | Sumanjari & Co.' },
   description:
-    'Family advocate and lawyer in Lucknow for divorce, child custody, maintenance and domestic violence matters. Family law practice led by Adv. Aishwarya Pandey.',
+    'Consult a family lawyer or family advocate in Lucknow for custody, maintenance, divorce and domestic violence matters. Led by Adv. Aishwarya Pandey.',
   keywords: [
     'Family Advocate Lucknow',
     'Family Advocate & Lawyer in Lucknow',
@@ -62,6 +63,8 @@ export const metadata: Metadata = {
     'Alimony Lawyer Lucknow',
     'Restitution of Conjugal Rights Lawyer Lucknow',
     'Matrimonial Dispute Advocate Lucknow',
+    'Child Visitation Lawyer Lucknow',
+    'Interim Maintenance Legal Advice Lucknow',
   ],
   alternates: {
     canonical: '/services/family-advocate',
@@ -127,8 +130,8 @@ const matters = [
     icon: HandCoins,
     title: 'Maintenance & Alimony',
     points: [
-      'Interim and permanent maintenance under Section 144 BNSS (formerly Section 125 CrPC)',
-      'Maintenance claims under the Hindu Marriage Act and Hindu Adoption & Maintenance Act',
+      'Interim and ongoing maintenance under Section 144 BNSS, subject to eligibility and applicable transitional provisions',
+      'Interim support and permanent alimony under the Hindu Marriage Act; maintenance under the Hindu Adoptions and Maintenance Act',
       'Negotiating and enforcing alimony settlements',
     ],
   },
@@ -147,7 +150,7 @@ const matters = [
     points: [
       'Protection orders under Section 18 of the Protection of Women from Domestic Violence Act, 2005',
       'Residence orders under Section 19 and monetary relief under Section 20 of the Act',
-      'Representation in related 498A and matrimonial cruelty matters',
+      'Representation in connected matrimonial cruelty proceedings under Sections 85 and 86 BNS, or Section 498A IPC where applicable',
     ],
   },
   {
@@ -206,31 +209,31 @@ const workSteps = [
     icon: Landmark,
     title: 'Private Consultation',
     description:
-      'We begin with a confidential discussion of your matter, understanding the facts and your expectations while safeguarding your privacy.',
+      'Discuss the marriage, children, financial position, existing cases, and immediate safety or support needs in confidence. Bring available records and a chronology of events.',
   },
   {
     icon: Scale,
     title: 'In-Depth Case Review',
     description:
-      'Every document and detail is carefully examined so we can assess the strengths, risks, and best possible legal routes for you.',
+      'Identify the applicable law, territorial jurisdiction, available evidence, and appropriate remedies. Review existing orders so connected proceedings and disclosures remain consistent.',
   },
   {
     icon: HeartHandshake,
     title: 'Strategy & Drafting',
     description:
-      'A clear, customised strategy is prepared and precise pleadings are drafted to present your case strongly before the court or authority.',
+      'Prepare petitions, replies, financial disclosures, and interim applications as needed. Discuss settlement options, the scope of representation, and fee terms before proceeding.',
   },
   {
     icon: ShieldCheck,
     title: 'Focused Representation',
     description:
-      'We represent you with preparation and clarity, ensuring timely filings, effective arguments, and regular updates on each hearing.',
+      'Represent you through notice, responses, interim hearings, mediation where appropriate, and evidence. Explain hearing outcomes and what documents or instructions are needed next.',
   },
   {
     icon: HandCoins,
     title: 'Resolution & Ongoing Support',
     description:
-      'Even after the matter is resolved, we guide you on next steps, compliance, and any further legal support you may require.',
+      'Review the decree, order, or settlement obligations. Advise on compliance, enforcement, variation, or an available challenge, including any applicable filing deadline.',
   },
 ]
 
@@ -245,7 +248,7 @@ const familyInsights = [
     icon: HandCoins,
     title: 'How Is Maintenance Calculated?',
     excerpt:
-      'Courts weigh the income and assets of both spouses, the standard of living during marriage, dependents, and reasonable needs when fixing interim or permanent maintenance under Section 144 BNSS.',
+      'There is no fixed percentage that applies to every case. Courts consider income, assets, reasonable needs, dependants, the marital standard of living, and existing support orders. Section 144 BNSS provides maintenance for eligible wives, children, and parents; permanent alimony under Section 25 of the Hindu Marriage Act is a separate remedy. The applicable provision depends on the parties and facts.',
   },
   {
     icon: Baby,
@@ -257,51 +260,61 @@ const familyInsights = [
     icon: ShieldAlert,
     title: 'What Relief Is Available Under the Domestic Violence Act?',
     excerpt:
-      'A Magistrate can grant a protection order (Section 18), a residence order (Section 19), and monetary relief (Section 20) to an aggrieved person facing domestic violence, in addition to any criminal proceedings.',
+      'Depending on the facts, a Magistrate can grant protection orders under Section 18, residence orders under Section 19, monetary relief under Section 20, temporary custody under Section 21, and compensation under Section 22 of the Protection of Women from Domestic Violence Act, 2005. Interim or ex parte relief may be sought under Section 23. If there is immediate danger, contact the police or emergency services first.',
+  },
+  {
+    icon: Landmark,
+    title: 'Can I File a Family Case in Lucknow?',
+    excerpt:
+      'Living in Lucknow does not automatically give every court jurisdiction. For a Hindu Marriage Act petition, Section 19 considers factors such as where the marriage took place, where the respondent resides, and where the spouses last lived together; additional rules apply, including where a wife petitioner resides. Maintenance, domestic violence, and guardianship proceedings have their own jurisdiction rules. We assess the correct forum before filing.',
+  },
+  {
+    icon: ScrollText,
+    title: 'What Documents Should I Bring to a Family Lawyer?',
+    excerpt:
+      'Bring identity and address records, any marriage certificate or other available proof of marriage, a dated account of events, notices, and existing petitions or orders. For maintenance, include available income, asset, liability, and expense records. For custody, include birth, schooling, medical, and care records. Preserve relevant messages in their original form and obtain evidence lawfully. Missing documents can be discussed at the first consultation.',
+  },
+  {
+    icon: HeartHandshake,
+    title: 'Is Mediation Suitable for Every Family Dispute?',
+    excerpt:
+      'Mediation can help parties agree on financial support, parenting arrangements, and settlement terms, but settlement must be voluntary. Safety concerns, coercion, or urgent protection needs may require court relief first. A divorce still requires a court decree, and criminal proceedings cannot all be ended by a private agreement. Each connected case needs the legally appropriate disposal process.',
+  },
+  {
+    icon: HandCoins,
+    title: 'What Does a Family Court Case Cost in Lucknow?',
+    excerpt:
+      'Fees depend on the remedy, complexity, documents, contested issues, and stages of representation. Ask for the scope of work and fee terms before engaging counsel, including whether consultation, drafting, appearances, mediation, appeals, court fees, and other expenses are included. No single quoted amount can reliably cover every family dispute.',
+  },
+  {
+    icon: Scale,
+    title: 'How Long Does a Family Court Case Take?',
+    excerpt:
+      'Timing depends on service of notice, cooperation, interim applications, evidence, court workload, and any appeal. Under Section 13B of the Hindu Marriage Act, mutual consent divorce ordinarily requires at least one year of living separately and a six-month interval between motions; waiver of that interval is discretionary where legal conditions are met. Contested cases have no guaranteed completion date. Urgent interim relief can be assessed separately.',
+  },
+  {
+    icon: Baby,
+    title: 'Are Inheritance Disputes Also Decided by the Family Court?',
+    excerpt:
+      'Not every dispute between relatives belongs in the Family Court. Succession certificates, probate, inheritance, and partition disputes may require a different court or procedure depending on the relief and applicable law. A succession certificate generally concerns debts and securities, not ownership of immovable property. We distinguish these remedies from matrimonial and custody proceedings before recommending the next step.',
   },
 ]
 
 const familyFaqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'What is the difference between mutual consent and contested divorce?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'A mutual consent divorce is generally faster and requires both spouses to agree on terms including maintenance and custody, while a contested divorce is decided by the court on specific legal grounds.',
-      },
+  mainEntity: familyInsights.map(({ title, excerpt }) => ({
+    '@type': 'Question',
+    name: title,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: excerpt,
     },
-    {
-      '@type': 'Question',
-      name: 'How is maintenance calculated in a matrimonial matter?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Courts weigh the income and assets of both spouses, the standard of living during marriage, dependents, and reasonable needs when fixing interim or permanent maintenance under Section 144 BNSS (formerly Section 125 CrPC).',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What do courts look at in child custody cases?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'The welfare of the child is the paramount consideration — including age, the child’s own wishes where relevant, stability of the home, and each parent’s ability to provide care.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What relief is available under the Domestic Violence Act?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'A Magistrate can grant a protection order under Section 18, a residence order under Section 19, and monetary relief under Section 20 of the Protection of Women from Domestic Violence Act, 2005.',
-      },
-    },
-  ],
+  })),
 }
 
 export default async function FamilyMatrimonialServicePage() {
-  const familyBlogPosts = await getBlogPostsByCategory('Family & Matrimonial Matters')
+  const familyBlogPosts = getBlogPostsByCategory('Family & Matrimonial Matters')
 
   return (
     <main className="relative min-h-screen">
@@ -343,7 +356,7 @@ export default async function FamilyMatrimonialServicePage() {
               Family Advocate &amp; Lawyer <em className="text-gold-gradient">in Lucknow</em>
             </h1>
             <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
-              Sumanjari &amp; Co. Advocates provides family law representation in Lucknow,
+              Our family lawyers and advocates provide representation in Lucknow,
               led by Adv. Aishwarya Pandey, for divorce, child custody, maintenance,
               and matrimonial disputes — before the Family Court, District Courts,
               and the Allahabad High Court, Lucknow Bench.
@@ -353,7 +366,7 @@ export default async function FamilyMatrimonialServicePage() {
             {familyLead && (
               <div className="min-w-0 border-l border-gold-500/30 pl-6">
                 {familyLead.img && (
-                  <Image src={familyLead.img} alt={familyLead.name} width={252} height={288} sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: familyLead.focus }} />
+                  <Image src={familyLead.img} alt={familyLead.name} width={252} height={288} priority sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: familyLead.focus }} />
                 )}
                 <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">Family Law Practice Lead</p>
                 <h2 className="mt-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{familyLead.name}</h2>
@@ -380,19 +393,50 @@ export default async function FamilyMatrimonialServicePage() {
           </section>
 
           <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
+            <h2 className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Family Law Advice and Family Court Representation in Lucknow
+            </h2>
             <p>
-              Family disputes carry personal, emotional, and financial weight that
-              goes well beyond the courtroom. Whether the matter concerns divorce,
-              maintenance, child custody, domestic violence, or a family property
-              dispute, Sumanjari &amp; Co. Advocates provides clear legal guidance
-              and steady representation through every stage of the process.
+              A family dispute may involve several decisions at once: financial
+              support while a case is pending, where a child will live, access to
+              the shared home, or whether a marriage can be reconciled or legally
+              dissolved. Our family lawyers in Lucknow help identify the remedy
+              for each issue, the documents needed, and the court that can grant
+              relief. We advise people bringing claims and those responding to
+              petitions, notices, or existing orders.
             </p>
             <p>
-              We advise both individuals and families on their rights and options,
-              working towards an amicable resolution wherever possible while
-              remaining fully prepared to represent you before the Family Court,
-              District Courts, and the Allahabad High Court, Lucknow Bench, where
-              litigation cannot be avoided.
+              The governing law matters. Matrimonial remedies may arise under the
+              Hindu Marriage Act, 1955, the Special Marriage Act, 1954, or other
+              applicable personal law. The Family Courts Act, 1984 governs the
+              jurisdiction and procedure of Family Courts, but not every dispute
+              between relatives belongs there. We assess maintenance, protection,
+              custody, and property issues separately instead of treating divorce
+              as the only solution. For dissolution of marriage, see our{' '}
+              <Link href="/services/divorce-lawyer" className="font-semibold text-gold-700 underline underline-offset-4 dark:text-gold-400">
+                divorce lawyer in Lucknow
+              </Link>{' '}
+              page for mutual consent and contested divorce guidance.
+            </p>
+            <p>
+              For parents, advice can include interim custody, visitation,
+              schooling, holidays, and child-support arrangements. For financial
+              disputes, we review income and expense records and existing awards
+              before recommending an application or response. Where safety is at
+              risk, urgent protection may take priority over settlement. A
+              negotiated agreement must be voluntary, workable, and followed by
+              the court orders or other legal steps required in each proceeding.
+            </p>
+            <p className="text-sm">
+              This page is general legal information, not advice on a particular
+              case. Outcomes and timelines depend on the facts and applicable law.
+              Statutory texts are available through{' '}
+              <a href="https://www.indiacode.nic.in/" className="text-gold-700 underline underline-offset-4 dark:text-gold-400">
+                India Code
+              </a>; case status and cause lists can be checked through{' '}
+              <a href="https://services.ecourts.gov.in/" className="text-gold-700 underline underline-offset-4 dark:text-gold-400">
+                eCourts Services
+              </a>.
             </p>
           </div>
 
@@ -529,7 +573,7 @@ export default async function FamilyMatrimonialServicePage() {
                 From Our Desk
               </span>
               <h2 className="mb-3 mt-2 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-                Family Law <em className="text-gold-gradient">Insights</em>
+                Family Lawyers in Lucknow: <em className="text-gold-gradient">Frequently Asked Questions</em>
               </h2>
               <p className="mx-auto max-w-xl font-body text-navy-700 dark:text-cream/55">
                 Common questions clients bring to us — drawn from our family and
@@ -562,6 +606,13 @@ export default async function FamilyMatrimonialServicePage() {
             </div>
           </div>
 
+          <section aria-labelledby="family-interim-relief-review" className="mb-16 border-t border-gold-500/20 pt-10">
+            <h2 id="family-interim-relief-review" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Planning Custody, Visitation and Interim Support</h2>
+            <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">Family proceedings may require workable interim arrangements before a final decision. For custody and access, prepare a child-focused account of schooling, health, daily care, safety and existing contact arrangements. The child&apos;s welfare is central; neither parent should assume custody follows automatically from gender, income or allegations. We assess requests for interim custody, visitation, communication and travel in light of the record and any existing order.</p>
+            <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Financial disclosure and connected cases</h3>
+            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Bring income and asset records, bank statements, essential household and child-related expenses, marriage records and every pending maintenance or protection order. Disclose overlapping proceedings so relief and payments can be addressed consistently; support is not calculated by one universal percentage. Divorce, maintenance, domestic violence and guardianship may involve different provisions and forums. For marriage dissolution and settlement planning, see our <Link href="/services/divorce-lawyer" className="text-gold-700 underline dark:text-gold-400">divorce lawyer page</Link>.</p>
+          </section>
+
           <ServiceBlogs
             posts={familyBlogPosts}
             fallbackIcon={<ScrollText className="h-5 w-5 text-gold-600 dark:text-gold-400" />}
@@ -587,6 +638,7 @@ export default async function FamilyMatrimonialServicePage() {
         </div>
       </section>
 
+      <FirmCredentials />
       <Footer />
     </main>
   )

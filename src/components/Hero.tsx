@@ -2,19 +2,20 @@
 import { useEffect, useRef } from 'react'
 import { ArrowDown, Shield, Landmark, Building2 } from 'lucide-react'
 
-const HERO_IMAGE = 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920&q=80'
+const HERO_IMAGE = 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f'
+const heroSrc = (width: number) => `${HERO_IMAGE}?w=${width}&q=60&auto=format`
 
 export default function Hero() {
-  const heroRef = useRef<HTMLDivElement>(null)
+  const heroRef = useRef<HTMLImageElement>(null)
 
   useEffect(() => {
     const el = heroRef.current
     if (!el) return
     const onScroll = () => {
       const offset = window.scrollY * 0.35
-      el.style.backgroundPositionY = `${offset}px`
+      el.style.objectPosition = `50% calc(50% + ${offset}px)`
     }
-    window.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
@@ -22,10 +23,15 @@ export default function Hero() {
     <section id="home" className="relative min-h-screen flex flex-col justify-center overflow-hidden">
       {/* Background: soft blur + scale hides edge artifacts */}
       <div className="absolute inset-0 overflow-hidden">
-        <div
+        {/* eslint-disable-next-line @next/next/no-img-element -- Unsplash resizes via srcSet; blurred decorative layer */}
+        <img
           ref={heroRef}
-          className="absolute inset-0 scale-110 bg-cover bg-center blur-[3px] md:blur-[2px] dark:brightness-[0.42] dark:saturate-[0.85]"
-          style={{ backgroundImage: `url(${HERO_IMAGE})` }}
+          src={heroSrc(1080)}
+          srcSet={[640, 1080, 1600, 1920].map((width) => `${heroSrc(width)} ${width}w`).join(', ')}
+          sizes="100vw"
+          alt=""
+          decoding="async"
+          className="absolute inset-0 h-full w-full scale-110 object-cover blur-[3px] md:blur-[2px] dark:brightness-[0.42] dark:saturate-[0.85]"
           aria-hidden
         />
       </div>

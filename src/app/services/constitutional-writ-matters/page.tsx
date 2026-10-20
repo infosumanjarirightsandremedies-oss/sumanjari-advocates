@@ -1,7 +1,10 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
 import {
   ArrowLeft,
+  ArrowUpRight,
+  Phone,
   Landmark,
   Megaphone,
   ShieldCheck,
@@ -14,15 +17,35 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import ServiceBlogs from '@/components/ServiceBlogs'
+import FirmCredentials from '@/components/FirmCredentials'
+import ServiceBlogs from '@/components/DeferredServiceBlogs'
+import TeamCarousel from '@/components/TeamCarousel'
 import { getBlogPostsByCategory } from '@/lib/blogs'
+import { teamMembers } from '@/lib/team'
+import { CHAMBER_TEL } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const constitutionalLead = teamMembers.find((member) => member.slug === 'aishwarya-pandey')
+const constitutionalTeam = ['abhishek-mishra', 'priyesh-dwivedi', 'adarsh-pratap-singh', 'devesh-tiwari']
+  .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
+
+function ConsultationActions({ className }: { className: string }) {
+  return (
+    <div className={`flex-wrap items-center gap-2 sm:gap-3 ${className}`}>
+      <a href="/#contact" className="btn-gold inline-flex items-center justify-center rounded-sm px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-900 sm:px-8 sm:text-sm sm:tracking-widest">
+        Consult Now
+      </a>
+      <a href={CHAMBER_TEL} className="inline-flex items-center justify-center gap-2 rounded-sm border border-gold-500/40 px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-800 transition-colors hover:border-gold-500 hover:text-gold-700 dark:text-cream/85 dark:hover:text-gold-300 sm:px-6 sm:text-sm sm:tracking-widest">
+        <Phone className="h-4 w-4 shrink-0" /> Call Now
+      </a>
+    </div>
+  )
+}
 
 export const metadata: Metadata = {
-  title: 'Constitutional Lawyer in Lucknow | Writ Petitions & PIL, Article 226',
+  title: { absolute: 'Writ Petition Lawyer in Lucknow | Article 226 | Sumanjari' },
   description:
-    'Sumanjari & Co. Advocates represents clients in writ petitions under Article 226, Public Interest Litigation, and fundamental rights matters — habeas corpus, mandamus, certiorari, prohibition, quo warranto, and service-related writs before the Allahabad High Court, Lucknow Bench.',
+    'Writ petition lawyer and constitutional advocate in Lucknow for Article 226, PIL and administrative orders before Allahabad High Court, Lucknow Bench.',
   keywords: [
     'Constitutional Lawyer Lucknow',
     'Writ Petition Lawyer Lucknow',
@@ -36,6 +59,8 @@ export const metadata: Metadata = {
     'Service Writ Lawyer Allahabad High Court',
     'Allahabad High Court Writ Advocate',
     'Quo Warranto Lawyer Lucknow',
+    'Administrative Order Challenge Lucknow',
+    'Writ Maintainability Legal Advice',
   ],
   alternates: {
     canonical: '/services/constitutional-writ-matters',
@@ -45,6 +70,11 @@ export const metadata: Metadata = {
     description:
       'Representation in writ petitions, PIL, and fundamental rights matters under Article 226 before the Allahabad High Court, Lucknow Bench.',
     url: '/services/constitutional-writ-matters',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Writ Petition Lawyer in Lucknow | Article 226',
+    description: 'Advice on writ maintainability, public authority decisions, fundamental rights and PIL before the Lucknow Bench.',
   },
 }
 
@@ -248,7 +278,7 @@ const constitutionalInsights = [
 ]
 
 export default async function ConstitutionalWritMattersPage() {
-  const constitutionalBlogPosts = await getBlogPostsByCategory('Constitutional & Writ Matters')
+  const constitutionalBlogPosts = getBlogPostsByCategory('Constitutional & Writ Matters')
 
   return (
     <main className="relative min-h-screen">
@@ -273,8 +303,9 @@ export default async function ConstitutionalWritMattersPage() {
             <ArrowLeft className="h-3.5 w-3.5" /> Back to Services
           </Link>
 
-          <div className="mb-16 text-center">
-            <div className="mb-4 flex items-center justify-center gap-4">
+          <div className="mb-12 grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_280px]">
+            <div className="min-w-0">
+            <div className="mb-4 flex items-center gap-4">
               <div className="h-px w-12 bg-gold-500" />
               <span className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">
                 Constitutional Law
@@ -284,18 +315,41 @@ export default async function ConstitutionalWritMattersPage() {
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
               Constitutional &amp; <em className="text-gold-gradient">Writ Matters</em>
             </h1>
-            <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
-              Representation in writ petitions, Public Interest Litigation,
-              and fundamental rights matters under Article 226 before the
+            <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
+              Our writ petition lawyers and constitutional advocates in Lucknow represent clients in
+              Public Interest Litigation and fundamental rights matters under Article 226 before the
               Allahabad High Court, Lucknow Bench.
             </p>
-            <a
-              href="/#contact"
-              className="btn-gold mt-8 inline-flex rounded-sm px-8 py-3.5 font-caps text-sm font-semibold uppercase tracking-widest text-navy-900"
-            >
-              Consult Now
-            </a>
+            <ConsultationActions className="mt-8 hidden md:flex" />
+            </div>
+            {constitutionalLead && (
+              <div className="min-w-0 border-l border-gold-500/30 pl-6">
+                {constitutionalLead.img && (
+                  <Image src={constitutionalLead.img} alt={constitutionalLead.name} width={252} height={288} priority sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: constitutionalLead.focus }} />
+                )}
+                <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">Constitutional Practice Lead</p>
+                <h2 className="mt-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{constitutionalLead.name}</h2>
+                <p className="mt-2 font-body text-sm text-navy-700 dark:text-cream/60">{constitutionalLead.role}</p>
+                <Link href={`/team/${constitutionalLead.slug}`} className="mt-4 inline-flex items-center gap-2 font-body text-sm font-semibold text-gold-700 dark:text-gold-400">
+                  View Profile <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </div>
+            )}
+            <ConsultationActions className="flex md:hidden" />
           </div>
+
+          <section className="mb-16" aria-labelledby="constitutional-team">
+            <h2 id="constitutional-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Constitutional &amp; Writ Matters Team
+            </h2>
+            <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+              Adv. Aishwarya Pandey leads the constitutional practice
+              assessment, supported by advocates with recorded experience in
+              PIL, civil rights and High Court litigation. Case allocation
+              depends on the subject matter and forum.
+            </p>
+            <TeamCarousel members={constitutionalTeam} label="Constitutional and writ team members" />
+          </section>
 
           <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>
@@ -475,6 +529,13 @@ export default async function ConstitutionalWritMattersPage() {
             </div>
           </div>
 
+          <section aria-labelledby="writ-maintainability-review" className="mb-16 border-t border-gold-500/20 pt-10">
+            <h2 id="writ-maintainability-review" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Can Your Administrative Order Be Challenged by Writ?</h2>
+            <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">A writ petition is not an automatic alternative to a statutory appeal or a civil suit. We examine whether the respondent is amenable to writ jurisdiction, whether an effective alternative remedy exists, delay in approaching the court, and whether the cause of action falls within the Lucknow Bench&apos;s territorial allocation. Questions of natural justice, jurisdiction and fundamental rights may affect maintainability, but the facts and applicable law must support the chosen remedy.</p>
+            <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Records needed for a writ consultation</h3>
+            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Share the complete challenged order, its communication date, notices, your replies and representations, supporting records and previous proceedings. Identify the public authority, the action requested and any urgent consequence. For PIL, disclose the public injury, your interest and prior approaches to the authorities; a private grievance does not become a public-interest case merely by its label. For employment orders, see our <Link href="/services/service-advocate" className="text-gold-700 underline dark:text-gold-400">service law practice</Link>.</p>
+          </section>
+
           <ServiceBlogs
             posts={constitutionalBlogPosts}
             fallbackIcon={<ScrollText className="h-5 w-5 text-gold-600 dark:text-gold-400" />}
@@ -500,6 +561,7 @@ export default async function ConstitutionalWritMattersPage() {
         </div>
       </section>
 
+      <FirmCredentials />
       <Footer />
     </main>
   )

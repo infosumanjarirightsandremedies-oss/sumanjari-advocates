@@ -95,7 +95,7 @@ export default function DeveshTiwariPage() {
           </p>
         </div>
 
-        {/* <div className="mb-14">
+        <div className="mb-14">
           <h2 className="font-display text-2xl font-bold text-navy-900 dark:text-cream mb-6">Practice Areas</h2>
           <div className="grid sm:grid-cols-2 gap-3">
             {practiceAreas.map((item) => (
@@ -119,7 +119,7 @@ export default function DeveshTiwariPage() {
               </li>
             ))}
           </ul>
-        </div> */}
+        </div>
 
         <div>
           <h2 className="font-display text-2xl font-bold text-navy-900 dark:text-cream mb-4 flex items-center gap-2">

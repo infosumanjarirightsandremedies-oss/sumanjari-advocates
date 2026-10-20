@@ -21,7 +21,8 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import ServiceBlogs from '@/components/ServiceBlogs'
+import FirmCredentials from '@/components/FirmCredentials'
+import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
@@ -46,9 +47,9 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: 'Criminal Lawyer in Lucknow',
+  title: { absolute: 'Criminal Lawyer in Lucknow | Bail & FIR Quashing | Sumanjari' },
   description:
-    'Consult a criminal lawyer in Lucknow at Sumanjari & Co. Advocates for bail, anticipatory bail, FIR quashing, trial defence, and criminal appeals.',
+    'Criminal lawyer and advocate in Lucknow for bail, anticipatory bail, FIR quashing, trials and appeals before District Courts and the High Court, Lucknow Bench.',
   keywords: [
     'Criminal Lawyer in Lucknow',
     'Criminal Lawyer Lucknow',
@@ -56,21 +57,30 @@ export const metadata: Metadata = {
     'Anticipatory Bail Lawyer Lucknow',
     'FIR Quashing Lawyer Lucknow',
     'Criminal Defence Lawyer Lucknow',
+    'Criminal Advocate Lucknow',
+    'Bail Advocate Lucknow',
     'Cheque Bounce Lawyer Lucknow',
     'Section 138 NI Act Lawyer Lucknow',
     '498A Lawyer Lucknow',
     'Criminal Appeal Lawyer Lucknow',
     'BNSS Lawyer Lucknow',
     'Cybercrime Lawyer Lucknow',
+    'Police Notice Legal Advice Lucknow',
+    'Criminal Summons Lawyer Lucknow',
   ],
   alternates: {
     canonical: '/services/criminal-lawyer',
   },
   openGraph: {
-    title: 'Criminal Lawyer in Lucknow | Sumanjari & Co.',
+    title: 'Criminal Lawyer in Lucknow | Bail & FIR Quashing | Sumanjari & Co.',
     description:
       'Consult a criminal lawyer in Lucknow for bail, FIR quashing, trial defence, and appeals before the District & Sessions Courts and the Allahabad High Court, Lucknow Bench.',
     url: '/services/criminal-lawyer',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Criminal Lawyer in Lucknow | Bail & FIR Quashing',
+    description: 'Advice on police notices, arrest, bail, FIR quashing, trial defence and criminal appeals in Lucknow.',
   },
 }
 
@@ -122,7 +132,7 @@ const matters = [
     title: 'Criminal Appeals & Revisions',
     points: [
       'Appeals against conviction, acquittal, or sentence before the Sessions Court and High Court',
-      'Revision petitions against interlocutory and other orders passed during trial',
+      'Revision petitions against eligible orders, subject to statutory restrictions; purely interlocutory orders are ordinarily excluded',
     ],
   },
   {
@@ -186,118 +196,108 @@ const jurisdiction = [
 const workSteps = [
   {
     icon: Landmark,
-    title: 'Private Consultation',
+    title: 'FIR, Complaint & Police Investigation',
     description:
-      'We begin with a confidential discussion of your matter, understanding the facts and your expectations while safeguarding your privacy.',
+      'We review the allegations, FIR or police notice, relevant offences, and available records. Advice at this stage covers responding to lawful notices, preserving evidence, and identifying the appropriate remedy for an accused person or complainant.',
   },
   {
     icon: Siren,
-    title: 'In-Depth Case Review',
+    title: 'Arrest, Remand & Bail',
     description:
-      'Every document and detail is carefully examined so we can assess the strengths, risks, and best possible legal routes for you.',
+      'If arrest is apprehended, we assess whether anticipatory bail is available. After arrest, we examine remand and regular bail options, prior orders, and any special-law restrictions. Filing a bail application does not itself protect against arrest.',
   },
   {
     icon: Scale,
-    title: 'Strategy & Drafting',
+    title: 'Police Report, Cognizance & Charges',
     description:
-      'A clear, customised strategy is prepared and precise pleadings are drafted to present your case strongly before the court or authority.',
+      'After the police report, we examine the chargesheet or closure report, the court orders, and the supporting material. Depending on the record and procedural stage, advice may concern objections, discharge, framing of charges, or a High Court challenge.',
   },
   {
     icon: ShieldCheck,
-    title: 'Focused Representation',
+    title: 'Evidence & Criminal Trial',
     description:
-      'We represent you with preparation and clarity, ensuring timely filings, effective arguments, and regular updates on each hearing.',
+      'Trial preparation includes reviewing witness statements, medical and forensic records, and electronic evidence. We prepare cross-examination and submissions on the prosecution case and any defence evidence, while explaining hearing requirements and bail conditions.',
   },
   {
     icon: Gavel,
-    title: 'Resolution & Ongoing Support',
+    title: 'Judgment, Appeal & Further Remedies',
     description:
-      'Even after the matter is resolved, we guide you on next steps, compliance, and any further legal support you may require.',
+      'After an order or judgment, we assess appeal or revision rights, applicable deadlines, and whether suspension of sentence and bail pending appeal can be sought. The appropriate forum and remedy depend on the order and the governing law.',
   },
 ]
 
 const criminalInsights = [
   {
     icon: ShieldAlert,
-    title: 'What to Do If You Are Arrested',
+    title: 'What should I do after an arrest or police notice in Lucknow?',
     excerpt:
-      'You have the right to know the grounds of arrest, the right to consult a lawyer of your choice, and the right to remain silent — exercising these rights early can shape the entire case.',
+      'Do not ignore a police notice or court summons. Preserve it, note the FIR number and police station, and seek advice about the required response. If arrested, ask for the grounds of arrest and access to a lawyer, and request that a relative or friend be informed. Do not destroy evidence or attempt to influence witnesses.',
   },
   {
     icon: KeyRound,
-    title: 'Regular vs. Anticipatory Bail',
+    title: 'What is the difference between regular and anticipatory bail?',
     excerpt:
-      'Anticipatory bail under Section 482 BNSS protects a person from arrest before it happens, while regular bail is sought after arrest — the forum and approach differ with the stage of the case.',
+      'Regular bail is sought after arrest or surrender. Anticipatory bail under Section 482 BNSS is a request to the Sessions Court or High Court for release on bail in the event of arrest for a non-bailable offence. Availability, conditions, and restrictions depend on the allegations and applicable law; neither an application nor a consultation guarantees protection.',
   },
   {
     icon: FileX,
-    title: 'When Can an FIR Be Quashed?',
+    title: 'Can the Allahabad High Court, Lucknow Bench quash an FIR?',
     excerpt:
-      'The Allahabad High Court can quash an FIR under Section 528 BNSS where continuing the proceedings would be an abuse of process, including personal or matrimonial disputes resolved through compromise — though grave offences such as murder, rape, or dacoity are not ordinarily quashed even after a settlement.',
+      'The High Court can consider quashing where the legal grounds justify intervention, for example where the allegations do not disclose an offence or the proceedings amount to an abuse of process. The petition route depends on the stage and relief sought. Territorial jurisdiction must also be checked. A settlement does not automatically end a case, particularly one involving serious offences.',
   },
   {
     icon: Banknote,
-    title: 'Cheque Bounce Under Section 138 NI Act',
+    title: 'Can a bounced cheque lead to a criminal complaint?',
     excerpt:
-      'A dishonoured cheque can lead to criminal liability once a valid legal demand notice is issued and payment is not made within the statutory period, with scope for compounding the offence.',
+      'Yes, if the requirements of Section 138 of the Negotiable Instruments Act are met, including a legally enforceable debt or liability, a timely demand notice, and non-payment within the statutory period. Bring the cheque, bank return memo, notice, delivery proof, and transaction records so limitation and available defences can be checked.',
   },
   {
     icon: ClipboardX,
-    title: 'Chargesheet Quashing Under Section 528 BNSS',
+    title: 'Can proceedings be challenged after a chargesheet is filed?',
     excerpt:
-      'Once a chargesheet is filed and the Magistrate takes cognizance, the chargesheet and cognizance order can be challenged under Section 528 BNSS — the Supreme Court has held that Article 226 is not the route once cognizance is taken, and the Allahabad High Court requires the chargesheet and cognizance order to be placed on record for the petition to be maintainable.',
+      'Filing a chargesheet does not by itself rule out a challenge. Depending on the record, a lawyer may assess discharge before the trial court or quashing under Section 528 BNSS, formerly Section 482 CrPC. The chargesheet, cognizance or summoning order, and subsequent orders should be reviewed together. Quashing is an exceptional remedy, not a substitute for a disputed factual trial.',
+  },
+  {
+    icon: Landmark,
+    title: 'Do BNS and BNSS apply to an older criminal case?',
+    excerpt:
+      'BNS, BNSS, and BSA came into force on 1 July 2024, subject to notified exceptions and transitional provisions. The date of the alleged offence and whether an investigation or proceeding was already pending matter. Older cases may continue under IPC, CrPC, or the Indian Evidence Act where the relevant savings provisions apply; the correct provisions must be checked case by case.',
+  },
+  {
+    icon: ScrollText,
+    title: 'How much does a criminal lawyer in Lucknow charge?',
+    excerpt:
+      'Fees depend on the work required, court, urgency, volume of records, and stage of proceedings. Ask for the scope of drafting, filing, appearances, and consultation to be explained, with court expenses and other outlays distinguished from professional fees. A bail application, full trial, and High Court petition involve different work; discuss an estimate after the papers are reviewed.',
+  },
+  {
+    icon: Gavel,
+    title: 'How long will bail or a criminal case take?',
+    excerpt:
+      'There is no reliable fixed timeline for every case. Listing, the court roster, prosecution response, custody status, evidence, and any special statute affect progress. A lawyer can explain the next procedural steps after reviewing the case but cannot promise same-day bail, a particular hearing date, or acquittal.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'How should I choose a criminal advocate in Lucknow?',
+    excerpt:
+      'Check the advocate\'s relevant practice areas, experience with the court and type of proceeding, and who will handle drafting and appearances. Ask for an assessment of risks, communication arrangements, and fee scope. Be cautious of anyone promising bail, quashing, or a favourable judgment; the decision belongs to the court.',
   },
 ]
 
 const criminalFaqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'What should I do if I am arrested?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'You have the right to know the grounds of arrest, the right to consult a lawyer of your choice, and the right to remain silent — exercising these rights early can shape the entire case.',
-      },
+  mainEntity: criminalInsights.map(({ title, excerpt }) => ({
+    '@type': 'Question',
+    name: title,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: excerpt,
     },
-    {
-      '@type': 'Question',
-      name: 'What is the difference between regular and anticipatory bail?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Anticipatory bail under Section 482 BNSS protects a person from arrest before it happens, while regular bail is sought after arrest — the forum and approach differ with the stage of the case.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'When can an FIR be quashed?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'The Allahabad High Court can quash an FIR under Section 528 BNSS where continuing the proceedings would be an abuse of process, including personal or matrimonial disputes resolved through compromise — though grave offences such as murder, rape, or dacoity are not ordinarily quashed even after a settlement.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Can I face criminal liability for a bounced cheque?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'A dishonoured cheque can lead to criminal liability under Section 138 of the Negotiable Instruments Act once a valid legal demand notice is issued and payment is not made within the statutory period, with scope for compounding the offence.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Can a chargesheet be quashed under Section 528 BNSS?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Once a chargesheet is filed and the Magistrate takes cognizance, the chargesheet and cognizance order can be challenged under Section 528 BNSS. The Supreme Court has held that Article 226 is not the route once cognizance is taken, and the Allahabad High Court requires the chargesheet and cognizance order to be placed on record for the petition to be maintainable.',
-      },
-    },
-  ],
+  })),
 }
 
 export default async function CriminalMattersPage() {
-  const criminalBlogPosts = await getBlogPostsByCategory('Criminal Matters')
+  const criminalBlogPosts = getBlogPostsByCategory('Criminal Matters')
 
   return (
     <main className="relative min-h-screen">
@@ -332,21 +332,21 @@ export default async function CriminalMattersPage() {
               <div className="h-px w-12 bg-gold-500" />
             </div>
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-              Criminal Advocates &amp; Lawyers <em className="text-gold-gradient">in Lucknow</em>
+              Criminal Lawyers <em className="text-gold-gradient">in Lucknow</em>
             </h1>
             <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
-              Sumanjari &amp; Co. Advocates provides criminal lawyer
-              services in Lucknow, including bail, FIR quashing, trial
-              representation, and appellate advocacy — before the District
-              &amp; Sessions Courts and the Allahabad High Court, Lucknow
-              Bench.
+              Facing an FIR, a police notice, or an arrest in Lucknow?
+              Our criminal lawyers and advocates advise on regular and anticipatory
+              bail, FIR and chargesheet quashing, criminal trial defence,
+              and appeals before the District &amp; Sessions Courts, Lucknow,
+              and the Allahabad High Court, Lucknow Bench.
             </p>
             <ConsultationActions className="mt-8 hidden md:flex" />
             </div>
             {criminalLead && (
               <div className="min-w-0 border-l border-gold-500/30 pl-6">
                 {criminalLead.img && (
-                  <Image src={criminalLead.img} alt={criminalLead.name} width={252} height={288} sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: criminalLead.focus }} />
+                  <Image src={criminalLead.img} alt={criminalLead.name} width={252} height={288} priority sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: criminalLead.focus }} />
                 )}
                 <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">Criminal Practice Lead</p>
                 <h2 className="mt-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{criminalLead.name}</h2>
@@ -479,10 +479,54 @@ export default async function CriminalMattersPage() {
             </div>
           </div>
 
+          <section className="mb-16 grid gap-10 md:grid-cols-2" aria-labelledby="criminal-consultation">
+            <div>
+              <h2 id="criminal-consultation" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">
+                Documents to Bring to a Criminal Lawyer
+              </h2>
+              <p className="mb-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
+                Bring what is available; do not delay seeking advice about an
+                arrest or imminent hearing just because the file is incomplete.
+              </p>
+              <ul className="list-disc space-y-3 pl-5 font-body text-navy-800 dark:text-cream/75">
+                <li>FIR or complaint, police station details, and the case number.</li>
+                <li>Police notices, summons, warrants, and the next hearing date.</li>
+                <li>Arrest or remand papers and any earlier bail applications or orders.</li>
+                <li>Chargesheet, witness statements, and court orders, if available.</li>
+                <li>A dated account of events, relevant medical or financial records, and original electronic messages or files without alteration.</li>
+              </ul>
+            </div>
+            <div>
+              <h2 className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">
+                What We Assess at the First Consultation
+              </h2>
+              <p className="mb-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
+                We review your role in the case, the alleged offences, custody
+                status, earlier orders, and immediate deadlines. This helps
+                distinguish a bail application from a discharge request,
+                quashing petition, trial defence, or appeal. The court with
+                jurisdiction must be identified before selecting a remedy.
+              </p>
+              <p className="mb-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
+                Ask about the proposed scope of work, professional fees,
+                filing expenses, and who will appear. For matters involving
+                electronic evidence, see our{' '}
+                <Link href="/services/cyber-crime-lawyer" className="text-gold-700 underline underline-offset-4 dark:text-gold-400">cybercrime legal services</Link>.
+                {' '}Related matrimonial issues are covered in our{' '}
+                <Link href="/services/family-advocate" className="text-gold-700 underline underline-offset-4 dark:text-gold-400">family and matrimonial practice</Link>.
+              </p>
+              <p className="font-body text-sm leading-relaxed text-navy-700 dark:text-cream/60">
+                This page provides general information, not advice on an
+                individual case. Relief depends on the facts, applicable law,
+                and the court; no result or timeline is guaranteed.
+              </p>
+            </div>
+          </section>
+
           <div className="mb-16">
             <div className="mb-10 text-center">
               <h2 className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-                The Way <em className="text-gold-gradient">We Work</em>
+                Criminal Case Procedure <em className="text-gold-gradient">in Lucknow</em>
               </h2>
               <p className="mx-auto max-w-xl font-body text-navy-700 dark:text-cream/55">
                 A clear, structured process from first consultation to resolution.
@@ -519,7 +563,7 @@ export default async function CriminalMattersPage() {
                 From Our Desk
               </span>
               <h2 className="mb-3 mt-2 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-                Criminal Law <em className="text-gold-gradient">Insights</em>
+                Criminal Lawyer in Lucknow: <em className="text-gold-gradient">FAQs</em>
               </h2>
               <p className="mx-auto max-w-xl font-body text-navy-700 dark:text-cream/55">
                 Common questions clients bring to us — drawn from our criminal
@@ -552,6 +596,13 @@ export default async function CriminalMattersPage() {
             </div>
           </div>
 
+          <section aria-labelledby="criminal-notice-review" className="mb-16 border-t border-gold-500/20 pt-10">
+            <h2 id="criminal-notice-review" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Received a Police Notice, Summons or FIR?</h2>
+            <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">The next step depends on whether you are a complainant, witness, accused person or someone apprehending arrest. Share the complete notice or FIR, offence details, police station, hearing or attendance date and any existing order. Do not ignore a summons or assume that filing a quashing petition protects you from arrest; protection requires an applicable legal provision or a court order. Bail, anticipatory bail and quashing serve different purposes and require separate assessment.</p>
+            <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Prepare the record without compromising evidence</h3>
+            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Preserve the chronology, original messages, medical records, transaction documents and previous applications. Do not delete records or approach witnesses to influence their account. We examine the offence date, procedural stage and transitional provisions before deciding whether the BNS, BNSS and Bharatiya Sakshya Adhiniyam or earlier legislation governs the issue. For electronic evidence and account restrictions, see our <Link href="/services/cyber-crime-lawyer" className="text-gold-700 underline dark:text-gold-400">cybercrime legal services</Link>.</p>
+          </section>
+
           <ServiceBlogs
             posts={criminalBlogPosts}
             fallbackIcon={<ScrollText className="h-5 w-5 text-gold-600 dark:text-gold-400" />}
@@ -575,6 +626,7 @@ export default async function CriminalMattersPage() {
         </div>
       </section>
 
+      <FirmCredentials />
       <Footer />
     </main>
   )

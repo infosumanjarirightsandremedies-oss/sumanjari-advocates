@@ -1,7 +1,10 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
 import {
   ArrowLeft,
+  ArrowUpRight,
+  Phone,
   ShoppingBag,
   Landmark,
   Gavel,
@@ -15,15 +18,35 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import ServiceBlogs from '@/components/ServiceBlogs'
+import FirmCredentials from '@/components/FirmCredentials'
+import ServiceBlogs from '@/components/DeferredServiceBlogs'
+import TeamCarousel from '@/components/TeamCarousel'
 import { getBlogPostsByCategory } from '@/lib/blogs'
+import { teamMembers } from '@/lib/team'
+import { CHAMBER_TEL } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const consumerLead = teamMembers.find((member) => member.slug === 'jitendra-tiwari')
+const consumerTeam = ['prerna-yaduvanshi', 'aditya-narayan-shukla', 'priyesh-dwivedi']
+  .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
+
+function ConsultationActions({ className }: { className: string }) {
+  return (
+    <div className={`flex-wrap items-center gap-2 sm:gap-3 ${className}`}>
+      <a href="/#contact" className="btn-gold inline-flex items-center justify-center rounded-sm px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-900 sm:px-8 sm:text-sm sm:tracking-widest">
+        Consult Now
+      </a>
+      <a href={CHAMBER_TEL} className="inline-flex items-center justify-center gap-2 rounded-sm border border-gold-500/40 px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-800 transition-colors hover:border-gold-500 hover:text-gold-700 dark:text-cream/85 dark:hover:text-gold-300 sm:px-6 sm:text-sm sm:tracking-widest">
+        <Phone className="h-4 w-4 shrink-0" /> Call Now
+      </a>
+    </div>
+  )
+}
 
 export const metadata: Metadata = {
-  title: 'Consumer & MACT Lawyer in Lucknow | Consumer Forum & Accident Claims',
+  title: { absolute: 'Consumer & MACT Lawyer in Lucknow | Claims | Sumanjari' },
   description:
-    'Sumanjari & Co. Advocates represents clients in consumer forum complaints, motor accident compensation claims, no-fault and hit-and-run compensation, and insurance disputes before the District & State Consumer Commissions, the Motor Accident Claims Tribunal, and the Allahabad High Court, Lucknow Bench.',
+    'Consumer lawyer and MACT advocate in Lucknow for deficient services, insurance disputes and motor accident compensation. Get advice on documents and claims.',
   keywords: [
     'Consumer Lawyer Lucknow',
     'Consumer Forum Advocate Lucknow',
@@ -36,6 +59,8 @@ export const metadata: Metadata = {
     'Deficiency of Service Lawyer Lucknow',
     'Product Liability Lawyer Lucknow',
     'Consumer Commission Advocate Lucknow',
+    'Motor Accident Compensation Lucknow',
+    'Insurance Repudiation Lawyer Lucknow',
   ],
   alternates: {
     canonical: '/services/consumer-motor-accident-matters',
@@ -45,6 +70,11 @@ export const metadata: Metadata = {
     description:
       'Representation in consumer forum complaints, MACT compensation claims, no-fault and hit-and-run compensation, and insurance disputes before the Consumer Commissions, MACT, and the Allahabad High Court, Lucknow Bench.',
     url: '/services/consumer-motor-accident-matters',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Consumer & MACT Lawyer in Lucknow',
+    description: 'Consumer complaints, insurance claim disputes and accident compensation: document review and forum-specific legal advice.',
   },
 }
 
@@ -248,7 +278,7 @@ const consumerInsights = [
 ]
 
 export default async function ConsumerMotorAccidentMattersPage() {
-  const consumerBlogPosts = await getBlogPostsByCategory('Consumer & Motor Accident Matters')
+  const consumerBlogPosts = getBlogPostsByCategory('Consumer & Motor Accident Matters')
 
   return (
     <main className="relative min-h-screen">
@@ -273,8 +303,9 @@ export default async function ConsumerMotorAccidentMattersPage() {
             <ArrowLeft className="h-3.5 w-3.5" /> Back to Services
           </Link>
 
-          <div className="mb-16 text-center">
-            <div className="mb-4 flex items-center justify-center gap-4">
+          <div className="mb-12 grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_280px]">
+            <div className="min-w-0">
+            <div className="mb-4 flex items-center gap-4">
               <div className="h-px w-12 bg-gold-500" />
               <span className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">
                 Consumer &amp; Accident Law
@@ -284,19 +315,42 @@ export default async function ConsumerMotorAccidentMattersPage() {
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
               Consumer &amp; <em className="text-gold-gradient">Motor Accident Matters</em>
             </h1>
-            <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
-              Consumer litigation, MACT compensation claims, and insurance
-              dispute resolution before the Consumer Commissions, the Motor
+            <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
+              Our consumer lawyers and motor accident claims advocates in Lucknow handle
+              consumer litigation, MACT compensation claims and insurance disputes before the Consumer Commissions, the Motor
               Accident Claims Tribunal, and the Allahabad High Court, Lucknow
               Bench.
             </p>
-            <a
-              href="/#contact"
-              className="btn-gold mt-8 inline-flex rounded-sm px-8 py-3.5 font-caps text-sm font-semibold uppercase tracking-widest text-navy-900"
-            >
-              Consult Now
-            </a>
+            <ConsultationActions className="mt-8 hidden md:flex" />
+            </div>
+            {consumerLead && (
+              <div className="min-w-0 border-l border-gold-500/30 pl-6">
+                {consumerLead.img && (
+                  <Image src={consumerLead.img} alt={consumerLead.name} width={252} height={288} priority sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: consumerLead.focus }} />
+                )}
+                <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">Consumer &amp; Accident Practice Lead</p>
+                <h2 className="mt-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{consumerLead.name}</h2>
+                <p className="mt-2 font-body text-sm text-navy-700 dark:text-cream/60">{consumerLead.role}</p>
+                <Link href={`/team/${consumerLead.slug}`} className="mt-4 inline-flex items-center gap-2 font-body text-sm font-semibold text-gold-700 dark:text-gold-400">
+                  View Profile <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </div>
+            )}
+            <ConsultationActions className="flex md:hidden" />
           </div>
+
+          <section className="mb-16" aria-labelledby="consumer-team">
+            <h2 id="consumer-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Consumer &amp; Accident Claims Team
+            </h2>
+            <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+              Adv. Jitendra Tiwari leads the initial litigation review. Adv.
+              Prerna Yaduvanshi contributes her recorded consumer practice, with
+              civil litigation support selected for the evidence and
+              proceedings involved.
+            </p>
+            <TeamCarousel members={consumerTeam} label="Consumer and accident claims team members" />
+          </section>
 
           <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>
@@ -475,6 +529,13 @@ export default async function ConsumerMotorAccidentMattersPage() {
             </div>
           </div>
 
+          <section aria-labelledby="consumer-mact-claim-review" className="mb-16 border-t border-gold-500/20 pt-10">
+            <h2 id="consumer-mact-claim-review" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Consumer Complaint or Motor Accident Claim: Which Route Applies?</h2>
+            <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">A complaint about defective goods, deficient services or an eligible insurance dispute may fall before a Consumer Commission. Compensation for injury or death arising from a motor accident follows the Motor Vehicles Act framework before the competent MACT; hit-and-run compensation has a separate scheme. We examine eligibility, territorial and monetary jurisdiction, the applicable filing period and existing proceedings before recommending a route. Not every insurance dispute belongs before the same forum.</p>
+            <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Evidence to preserve before seeking compensation</h3>
+            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">For consumer matters, retain invoices, warranties, complaint numbers, correspondence and the insurer&apos;s rejection letter where relevant. For accident claims, preserve police papers, vehicle and policy details, treatment bills, income and age proof, disability assessments and dependency records. Compensation depends on proved facts and applicable law, not a promised payout. Prompt review is important because limitation and evidence requirements differ between remedies.</p>
+          </section>
+
           <ServiceBlogs
             posts={consumerBlogPosts}
             fallbackIcon={<ScrollText className="h-5 w-5 text-gold-600 dark:text-gold-400" />}
@@ -501,6 +562,7 @@ export default async function ConsumerMotorAccidentMattersPage() {
         </div>
       </section>
 
+      <FirmCredentials />
       <Footer />
     </main>
   )

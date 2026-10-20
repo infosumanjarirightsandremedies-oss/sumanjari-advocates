@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import TeamMemberCard from '@/components/TeamMemberCard'
@@ -14,16 +14,16 @@ export default function Team() {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const [activeIndex, setActiveIndex] = useState(0)
 
-  const scrollToIndex = (index: number) => {
+  const scrollToIndex = useCallback((index: number) => {
     const scroller = scrollerRef.current
     const card = scroller?.querySelectorAll('[data-team-card]')[index] as HTMLElement | undefined
     if (!scroller || !card) return
     const targetLeft =
       card.getBoundingClientRect().left - scroller.getBoundingClientRect().left + scroller.scrollLeft
     scroller.scrollTo({ left: targetLeft, behavior: 'smooth' })
-  }
+  }, [])
 
-  const startAutoRotate = () => {
+  const startAutoRotate = useCallback(() => {
     if (intervalRef.current) clearInterval(intervalRef.current)
     intervalRef.current = setInterval(() => {
       setActiveIndex((prev) => {
@@ -32,14 +32,14 @@ export default function Team() {
         return next
       })
     }, AUTO_ROTATE_INTERVAL_MS)
-  }
+  }, [scrollToIndex])
 
   useEffect(() => {
     startAutoRotate()
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current)
     }
-  }, [])
+  }, [startAutoRotate])
 
   const handleDotClick = (index: number) => {
     setActiveIndex(index)

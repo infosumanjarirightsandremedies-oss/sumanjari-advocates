@@ -4,7 +4,8 @@ import type { Metadata } from 'next'
 import { ArrowLeft, ArrowUpRight, Building2, FileCheck, MapPin, MessageCircle, Phone, ScrollText } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import ServiceBlogs from '@/components/ServiceBlogs'
+import FirmCredentials from '@/components/FirmCredentials'
+import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { CHAMBER_TEL, CHAMBER_CALL_DISPLAY, whatsappUrl } from '@/lib/contactLinks'
@@ -30,9 +31,15 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: 'RERA Advocate & Lawyer in Noida & Ghaziabad',
+  title: { absolute: 'RERA Lawyer in Noida & Ghaziabad | Builder Claims | Sumanjari' },
   description: 'RERA advocate and real estate lawyer for Noida and Ghaziabad builder-buyer disputes, delayed possession, refund claims, project compliance and appeals.',
   alternates: { canonical: PAGE_PATH },
+  keywords: ['RERA Lawyer Noida', 'RERA Lawyer Ghaziabad', 'UP RERA Greater Noida Lawyer', 'Builder Buyer Dispute Noida', 'Delayed Possession Lawyer Ghaziabad', 'RERA Refund Claim Noida', 'UP RERA Order Enforcement NCR', 'RERA Appeal Lawyer Uttar Pradesh'],
+  twitter: {
+    card: 'summary_large_image',
+    title: 'RERA Lawyer in Noida & Ghaziabad | Builder Claims',
+    description: 'Project-specific advice on UP-RERA complaints, delayed possession, refunds, order enforcement and appeals for NCR homebuyers.',
+  },
   openGraph: {
     title: 'RERA Advocate & Lawyer in Noida & Ghaziabad | Sumanjari & Co. Advocates',
     description: 'Representation for Noida and Ghaziabad homebuyers and developers in UP-RERA complaints, possession delays, refund claims and appeals.',
@@ -135,9 +142,9 @@ const faqSchema = {
 }
 
 export default async function NoidaGhaziabadReraPage() {
-  const posts = (await getBlogPostsByCategory('RERA')).filter(
+  const posts = getBlogPostsByCategory('RERA').then((posts) => posts.filter(
     (post) => /\b(?:Noida|Ghaziabad)\b/i.test(`${post.title} ${post.excerpt}`)
-  )
+  ))
 
   return (
     <main className="relative min-h-screen">
@@ -169,7 +176,7 @@ export default async function NoidaGhaziabadReraPage() {
             <ConsultationActions className="mt-8 hidden md:flex" />
           </div>
           {reraAdvocate && <div className="min-w-0 border-l border-gold-500/30 pl-6">
-            {reraAdvocate.img && <Image src={reraAdvocate.img} alt={reraAdvocate.name} width={252} height={288} sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: reraAdvocate.focus }} />}
+            {reraAdvocate.img && <Image src={reraAdvocate.img} alt={reraAdvocate.name} width={252} height={288} priority sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: reraAdvocate.focus }} />}
             <div className="min-w-0">
               <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">RERA Practice Lead</p>
               <h2 className="mt-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{reraAdvocate.name}</h2>
@@ -267,6 +274,12 @@ export default async function NoidaGhaziabadReraPage() {
           </ol>
         </section>
 
+        <section aria-labelledby="ncr-rera-enforcement-review" className="mb-16 border-t border-gold-500/20 pt-10">
+          <h2 id="ncr-rera-enforcement-review" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Noida &amp; Ghaziabad Projects: From Complaint to Order Compliance</h2>
+          <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">Start with the project registration, promoter&apos;s legal name, unit and phase details, agreement, payment trail and current construction or possession status. A NOIDA, GNIDA or other development-authority issue is not necessarily the same as a promoter&apos;s RERA obligation. The project location and current UP-RERA allocation must be checked before choosing the filing route; an NCR address alone does not decide every jurisdiction question.</p>
+          <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">If you already hold a refund or possession order, share its complete copy, service details, compliance dates, payments received and information about any appeal or stay. The next step may be compliance or recovery proceedings, not another complaint on the same facts. Promoter insolvency, competing proceedings or a settlement can affect strategy and recoverability. We assess those issues before advising on enforcement or an appeal, without promising a collection date or outcome.</p>
+        </section>
+
         <section className="mb-16" aria-labelledby="rera-faqs">
           <h2 id="rera-faqs" className="mb-6 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Noida &amp; Ghaziabad RERA FAQs</h2>
           <div className="divide-y divide-gold-500/20 border-y border-gold-500/20">
@@ -309,6 +322,7 @@ export default async function NoidaGhaziabadReraPage() {
           </p>
         </section>
       </div>
+      <FirmCredentials />
       <Footer />
     </main>
   )

@@ -17,7 +17,8 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import ServiceBlogs from '@/components/ServiceBlogs'
+import FirmCredentials from '@/components/FirmCredentials'
+import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
@@ -42,7 +43,7 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: 'Civil Advocate & Lawyer in Lucknow',
+  title: { absolute: 'Civil Advocate in Lucknow | Suits & Injunctions | Sumanjari' },
   description:
     'Civil advocate and lawyer in Lucknow for recovery suits, injunctions, property disputes and civil appeals. Civil practice led by Adv. Jitendra Tiwari.',
   keywords: [
@@ -115,7 +116,7 @@ const civilFaqJsonLd = {
       name: 'How is a civil decree executed?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Once a decree becomes final, execution proceedings under Order XXI of the Code of Civil Procedure can attach and sell the judgment-debtor’s property, or use other modes available under the Code, to satisfy the decree.',
+        text: 'An executable decree may be enforced under Order XXI of the Code of Civil Procedure, subject to any stay or legal restriction. An appeal does not by itself stay execution. Available modes may include attachment and sale of the judgment-debtor’s property, depending on the decree and applicable law.',
       },
     },
     {
@@ -263,7 +264,7 @@ const civilInsights = [
     icon: Landmark,
     title: 'How Is a Civil Decree Executed?',
     excerpt:
-      'Once a decree becomes final, execution proceedings under Order XXI CPC can attach and sell the judgment-debtor’s property, or use other modes available under the Code, to satisfy the decree.',
+      'An executable decree may be enforced under Order XXI CPC, subject to any stay or legal restriction. An appeal does not by itself stay execution. Attachment and sale of property or other modes depend on the decree and applicable law.',
   },
   {
     icon: Gavel,
@@ -274,7 +275,7 @@ const civilInsights = [
 ]
 
 export default async function CivilMattersPage() {
-  const civilBlogPosts = await getBlogPostsByCategory('Civil Matters')
+  const civilBlogPosts = getBlogPostsByCategory('Civil Matters')
 
   return (
     <main className="relative min-h-screen">
@@ -322,7 +323,7 @@ export default async function CivilMattersPage() {
             {civilLead && (
               <div className="min-w-0 border-l border-gold-500/30 pl-6">
                 {civilLead.img && (
-                  <Image src={civilLead.img} alt={civilLead.name} width={252} height={288} sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: civilLead.focus }} />
+                  <Image src={civilLead.img} alt={civilLead.name} width={252} height={288} priority sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: civilLead.focus }} />
                 )}
                 <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">Civil Practice Lead</p>
                 <h2 className="mt-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{civilLead.name}</h2>
@@ -526,6 +527,14 @@ export default async function CivilMattersPage() {
             </div>
           </div>
 
+          <section aria-labelledby="civil-case-preparation" className="mb-16 border-t border-gold-500/20 pt-10">
+            <h2 id="civil-case-preparation" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Before Filing a Civil Suit in Lucknow</h2>
+            <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Identify the claim, court and limitation period</h3>
+            <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">A recovery suit, declaration, partition claim and injunction do not follow an identical filing route. We review the cause of action, property location, claim value, court fees and limitation before recommending a civil court, commercial court or contractual arbitration. Do not assume that sending a legal notice extends the time to sue. Urgent interim relief requires evidence of the threatened harm and remains subject to the court&apos;s assessment.</p>
+            <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Documents for your first consultation</h3>
+            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Bring the agreement or title documents, payment records, notices and delivery proofs, relevant messages, previous pleadings and orders, and a dated chronology. For an existing decree, include its certified copy and available information about the judgment-debtor&apos;s assets; execution may be available unless stayed and need not always await the end of every appeal. For title and possession issues, also see our <Link href="/services/property-land-matters" className="text-gold-700 underline dark:text-gold-400">property and land dispute practice</Link>.</p>
+          </section>
+
           <ServiceBlogs
             posts={civilBlogPosts}
             fallbackIcon={<ScrollText className="h-5 w-5 text-gold-600 dark:text-gold-400" />}
@@ -551,6 +560,7 @@ export default async function CivilMattersPage() {
         </div>
       </section>
 
+      <FirmCredentials />
       <Footer />
     </main>
   )

@@ -34,10 +34,15 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import ServiceBlogs from '@/components/ServiceBlogs'
+import FirmCredentials from '@/components/FirmCredentials'
+import ServiceBlogs from '@/components/DeferredServiceBlogs'
+import TeamCarousel from '@/components/TeamCarousel'
 import { getBlogPostsByCategory } from '@/lib/blogs'
+import { teamMembers } from '@/lib/team'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const reraTeam = ['jyotish-raj', 'aniket-bose', 'prerna-yaduvanshi']
+  .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
 
 // ─────────────────────────────────────────────────────────────────────────────
 // RERA practice credibility data
@@ -141,7 +146,7 @@ const reraRights = [
 ]
 
 export const metadata: Metadata = {
-  title: 'RERA Advocate & Real Estate Lawyer in Lucknow',
+  title: { absolute: 'RERA Lawyer in Lucknow | Builder Disputes & Refunds | Sumanjari' },
   description:
     'RERA advocate and real estate lawyer in Lucknow for builder-buyer disputes, possession delays, refunds and appeals before UP-RERA and the Appellate Tribunal.',
   keywords: [
@@ -163,6 +168,8 @@ export const metadata: Metadata = {
     'RERA Possession Delay Lawyer',
     'RERA Appellate Tribunal Lawyer UP',
     'RERA Compensation Claim Lawyer',
+    'UP RERA Order Enforcement Lawyer',
+    'Builder Buyer Agreement Review Lucknow',
   ],
   alternates: {
     canonical: '/services/rera-lawyer',
@@ -172,6 +179,11 @@ export const metadata: Metadata = {
     description:
       'Real estate advocates and lawyers in Lucknow representing homebuyers and developers in disputes before UP-RERA and the RERA Appellate Tribunal.',
     url: '/services/rera-lawyer',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'RERA Lawyer in Lucknow | Builder Disputes & Refunds',
+    description: 'UP-RERA advice on delayed possession, refunds, agreement review, order compliance and appeals.',
   },
 }
 
@@ -392,9 +404,9 @@ const reraFaqJsonLd = {
 }
 
 export default async function ReraServicePage() {
-  const reraBlogPosts = (await getBlogPostsByCategory('RERA')).filter(
+  const reraBlogPosts = getBlogPostsByCategory('RERA').then((posts) => posts.filter(
     (post) => !/\b(?:Noida|Ghaziabad)\b/i.test(`${post.title} ${post.excerpt}`)
-  )
+  ))
 
   return (
     <main className="relative min-h-screen">
@@ -529,6 +541,19 @@ export default async function ReraServicePage() {
               </div>
             </div>
           </div>
+
+          <section className="mb-16" aria-labelledby="rera-team">
+            <h2 id="rera-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              RERA &amp; Real Estate Support Team
+            </h2>
+            <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+              Adv. Jitendra Tiwari leads our RERA practice. Adv. Jyotish Raj
+              contributes his recorded RERA and real estate dispute focus,
+              supported by associates with civil, commercial and contract
+              experience.
+            </p>
+            <TeamCarousel members={reraTeam} label="RERA and real estate team members" />
+          </section>
 
           <div className="mb-16">
             <h2 className="sr-only">Why Clients Choose Us</h2>
@@ -806,6 +831,13 @@ export default async function ReraServicePage() {
             </div>
           </div>
 
+          <section aria-labelledby="rera-remedy-document-review" className="mb-16 border-t border-gold-500/20 pt-10">
+            <h2 id="rera-remedy-document-review" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Prepare Your UP-RERA Complaint Around the Relief You Need</h2>
+            <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">A homebuyer seeking possession with delay interest may need a different case strategy from one seeking withdrawal and refund. Compensation, interest, project compliance, appeals and enforcement also have distinct statutory requirements. We review the agreement, project registration, promised possession date, extensions, payments and earlier proceedings before identifying the competent authority and available relief. Filing a complaint does not guarantee an immediate refund or possession.</p>
+            <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Prepare a project and payment chronology</h3>
+            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Share the allotment letter, builder-buyer agreement, receipts, demand letters, possession communications, project details and any settlement or prior order. Record what was promised, paid, delivered and disputed, with dates. An unpaid order may require enforcement rather than a fresh complaint; an appeal has its own deadline and requirements. For projects in the NCR region, see our dedicated <Link href="/services/rera-lawyer-noida-ghaziabad" className="text-gold-700 underline dark:text-gold-400">Noida and Ghaziabad RERA service</Link>.</p>
+          </section>
+
           <ServiceBlogs
             posts={reraBlogPosts}
             fallbackIcon={<ScrollText className="h-5 w-5 text-gold-600 dark:text-gold-400" />}
@@ -889,6 +921,7 @@ export default async function ReraServicePage() {
         </div>
       </section>
 
+      <FirmCredentials />
       <Footer />
     </main>
   )

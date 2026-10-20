@@ -301,7 +301,7 @@ export default function Services() {
             )
             if (service.href) {
               return (
-                <Link key={service.id} href={service.href} className="glass-card rounded-sm border p-6 text-left transition hover:-translate-y-2 hover:border-gold-500 block">
+                <Link key={service.id} href={service.href} prefetch={true} className="glass-card rounded-sm border p-6 text-left transition hover:-translate-y-2 hover:border-gold-500 block">
                   {cardContent}
                 </Link>
               )

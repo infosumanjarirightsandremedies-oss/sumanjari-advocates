@@ -1,7 +1,10 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
 import {
   ArrowLeft,
+  ArrowUpRight,
+  Phone,
   Briefcase,
   Users,
   Gavel,
@@ -13,15 +16,35 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import ServiceBlogs from '@/components/ServiceBlogs'
+import FirmCredentials from '@/components/FirmCredentials'
+import ServiceBlogs from '@/components/DeferredServiceBlogs'
+import TeamCarousel from '@/components/TeamCarousel'
 import { getBlogPostsByCategory } from '@/lib/blogs'
+import { teamMembers } from '@/lib/team'
+import { CHAMBER_TEL } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const corporateLead = teamMembers.find((member) => member.slug === 'jitendra-tiwari')
+const corporateTeam = ['aniket-bose', 'prerna-yaduvanshi', 'aditya-narayan-shukla', 'shishir-pandey']
+  .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
+
+function ConsultationActions({ className }: { className: string }) {
+  return (
+    <div className={`flex-wrap items-center gap-2 sm:gap-3 ${className}`}>
+      <a href="/#contact" className="btn-gold inline-flex items-center justify-center rounded-sm px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-900 sm:px-8 sm:text-sm sm:tracking-widest">
+        Consult Now
+      </a>
+      <a href={CHAMBER_TEL} className="inline-flex items-center justify-center gap-2 rounded-sm border border-gold-500/40 px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-800 transition-colors hover:border-gold-500 hover:text-gold-700 dark:text-cream/85 dark:hover:text-gold-300 sm:px-6 sm:text-sm sm:tracking-widest">
+        <Phone className="h-4 w-4 shrink-0" /> Call Now
+      </a>
+    </div>
+  )
+}
 
 export const metadata: Metadata = {
-  title: 'Corporate Lawyer in Lucknow | Company, LLP & NCLT Matters',
+  title: { absolute: 'Corporate Lawyer in Lucknow | Company & NCLT | Sumanjari' },
   description:
-    'Sumanjari & Co. Advocates advises on company registration and compliance, shareholder and partnership disputes, LLP matters, and corporate litigation before the NCLT, Allahabad Bench, the Commercial Courts, and the Allahabad High Court, Lucknow Bench.',
+    'Corporate lawyer and company law advocate in Lucknow for shareholder disputes, LLP advice, contracts, NCLT matters and commercial litigation. Arrange a review.',
   keywords: [
     'Corporate Lawyer Lucknow',
     'Company Law Advocate Lucknow',
@@ -34,6 +57,8 @@ export const metadata: Metadata = {
     'Commercial Court Lawyer Lucknow',
     'Oppression Mismanagement Lawyer Lucknow',
     'Partnership Dispute Lawyer Lucknow',
+    'Commercial Contract Lawyer Lucknow',
+    'Corporate Insolvency Legal Advice Uttar Pradesh',
   ],
   alternates: {
     canonical: '/services/company-corporate-matters',
@@ -43,6 +68,11 @@ export const metadata: Metadata = {
     description:
       'Advisory and litigation in company registration and compliance, shareholder and partnership disputes, LLP matters, and corporate disputes before the NCLT, Commercial Courts, and the Allahabad High Court, Lucknow Bench.',
     url: '/services/company-corporate-matters',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Corporate Lawyer in Lucknow | Company & NCLT Matters',
+    description: 'Company and LLP advice, shareholder disputes, commercial contracts and forum-specific corporate litigation.',
   },
 }
 
@@ -245,7 +275,7 @@ const companyInsights = [
 ]
 
 export default async function CompanyCorporateMattersPage() {
-  const companyBlogPosts = await getBlogPostsByCategory('Company & Corporate Matters')
+  const companyBlogPosts = getBlogPostsByCategory('Company & Corporate Matters')
 
   return (
     <main className="relative min-h-screen">
@@ -270,8 +300,9 @@ export default async function CompanyCorporateMattersPage() {
             <ArrowLeft className="h-3.5 w-3.5" /> Back to Services
           </Link>
 
-          <div className="mb-16 text-center">
-            <div className="mb-4 flex items-center justify-center gap-4">
+          <div className="mb-12 grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_280px]">
+            <div className="min-w-0">
+            <div className="mb-4 flex items-center gap-4">
               <div className="h-px w-12 bg-gold-500" />
               <span className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">
                 Corporate Law
@@ -281,18 +312,41 @@ export default async function CompanyCorporateMattersPage() {
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
               Company &amp; <em className="text-gold-gradient">Corporate Matters</em>
             </h1>
-            <p className="mx-auto max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
-              Corporate advisory, compliance, shareholder and partnership
-              disputes, and commercial litigation before the NCLT, the
+            <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
+              Our corporate lawyers and company law advocates in Lucknow advise on
+              compliance, shareholder and partnership disputes, and commercial litigation before the NCLT, the
               Commercial Courts, and the Allahabad High Court, Lucknow Bench.
             </p>
-            <a
-              href="/#contact"
-              className="btn-gold mt-8 inline-flex rounded-sm px-8 py-3.5 font-caps text-sm font-semibold uppercase tracking-widest text-navy-900"
-            >
-              Consult Now
-            </a>
+            <ConsultationActions className="mt-8 hidden md:flex" />
+            </div>
+            {corporateLead && (
+              <div className="min-w-0 border-l border-gold-500/30 pl-6">
+                {corporateLead.img && (
+                  <Image src={corporateLead.img} alt={corporateLead.name} width={252} height={288} priority sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: corporateLead.focus }} />
+                )}
+                <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">Corporate Practice Lead</p>
+                <h2 className="mt-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{corporateLead.name}</h2>
+                <p className="mt-2 font-body text-sm text-navy-700 dark:text-cream/60">{corporateLead.role}</p>
+                <Link href={`/team/${corporateLead.slug}`} className="mt-4 inline-flex items-center gap-2 font-body text-sm font-semibold text-gold-700 dark:text-gold-400">
+                  View Profile <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </div>
+            )}
+            <ConsultationActions className="flex md:hidden" />
           </div>
+
+          <section className="mb-16" aria-labelledby="corporate-team">
+            <h2 id="corporate-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Company &amp; Commercial Matters Team
+            </h2>
+            <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+              Adv. Jitendra Tiwari leads the initial litigation assessment,
+              supported by associates whose recorded practice includes
+              commercial disputes, contract review and arbitration. The team
+              is selected for the issues and forum involved.
+            </p>
+            <TeamCarousel members={corporateTeam} label="Company and commercial team members" />
+          </section>
 
           <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>
@@ -470,6 +524,13 @@ export default async function CompanyCorporateMattersPage() {
             </div>
           </div>
 
+          <section aria-labelledby="corporate-case-preparation" className="mb-16 border-t border-gold-500/20 pt-10">
+            <h2 id="corporate-case-preparation" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Company Dispute, Unpaid Invoice or Insolvency Notice?</h2>
+            <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">The remedy depends on the dispute, not just the fact that a company is involved. Shareholder oppression and mismanagement may engage the Companies Act and NCLT jurisdiction; contractual recovery may belong before a commercial court or arbitrator. Insolvency proceedings have separate eligibility, default and procedural requirements and are not a substitute for ordinary debt recovery. We review the registered office, contractual forum and current tribunal allocation before advising on filing.</p>
+            <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Corporate documents to share for review</h3>
+            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Bring incorporation and LLP records, constitutional documents, shareholder or partnership agreements, board resolutions, statutory notices, contracts, invoices, payment evidence and relevant ROC filings. Include any demand notice and its delivery date, pending orders and a chronology of the dispute. The consultation can then address authority to act, available remedies, interim protection, professional fees and coordination with company secretaries or other professionals where needed.</p>
+          </section>
+
           <ServiceBlogs
             posts={companyBlogPosts}
             fallbackIcon={<ScrollText className="h-5 w-5 text-gold-600 dark:text-gold-400" />}
@@ -496,6 +557,7 @@ export default async function CompanyCorporateMattersPage() {
         </div>
       </section>
 
+      <FirmCredentials />
       <Footer />
     </main>
   )

@@ -4,7 +4,9 @@ import type { Metadata } from 'next'
 import { ArrowLeft, ArrowUpRight, Phone, HeartCrack, HeartHandshake, HandCoins, Baby, ShieldCheck, Scale, ScrollText } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import ServiceBlogs from '@/components/ServiceBlogs'
+import FirmCredentials from '@/components/FirmCredentials'
+import ServiceBlogs from '@/components/DeferredServiceBlogs'
+import TeamCarousel from '@/components/TeamCarousel'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL } from '@/lib/contactLinks'
@@ -12,16 +14,23 @@ import { CHAMBER_TEL } from '@/lib/contactLinks'
 const SITE_URL = 'https://www.sumanjariadvocates.com'
 const PAGE_PATH = '/services/divorce-lawyer'
 const divorceLead = teamMembers.find((member) => member.slug === 'aishwarya-pandey')
+const divorceTeam = ['akhilesh-yadav', 'prerna-yaduvanshi', 'jitendra-tiwari']
+  .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
 
 export const metadata: Metadata = {
-  title: 'Divorce Advocate & Lawyer in Lucknow',
-  description: 'Consult Adv. Aishwarya Pandey, divorce practice lead at Sumanjari & Co., Lucknow, for mutual consent divorce, contested divorce, maintenance, alimony, and custody.',
+  title: { absolute: 'Divorce Lawyer in Lucknow | Mutual & Contested | Sumanjari' },
+  description: 'Divorce lawyer and advocate in Lucknow for mutual consent and contested cases, alimony and custody. Consult the team led by Adv. Aishwarya Pandey.',
   keywords: ['Divorce Advocate in Lucknow', 'Divorce Lawyer in Lucknow', 'Mutual Consent Divorce Lawyer Lucknow', 'Contested Divorce Lawyer Lucknow', 'Alimony Lawyer Lucknow', 'Child Custody Lawyer Lucknow', 'Family Court Advocate Lucknow'],
   alternates: { canonical: PAGE_PATH },
   openGraph: {
     title: 'Divorce Advocate & Lawyer in Lucknow | Sumanjari & Co.',
     description: 'Divorce and matrimonial representation led by Adv. Aishwarya Pandey: mutual consent divorce, contested proceedings, maintenance, and child custody in Lucknow.',
     url: PAGE_PATH,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Divorce Lawyer in Lucknow | Mutual & Contested Divorce',
+    description: 'Aishwarya Pandey leads advice on divorce, alimony, parenting arrangements and connected matrimonial proceedings.',
   },
 }
 
@@ -144,7 +153,7 @@ function ConsultationActions() {
 }
 
 export default async function DivorceLawyerPage() {
-  const familyBlogPosts = await getBlogPostsByCategory('Family & Matrimonial Matters')
+  const familyBlogPosts = getBlogPostsByCategory('Family & Matrimonial Matters')
   const headingClass = 'mb-6 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl'
   const bodyClass = 'font-body leading-relaxed text-navy-700 dark:text-cream/65'
 
@@ -180,6 +189,19 @@ export default async function DivorceLawyerPage() {
               <ConsultationActions />
             </div>
           </header>
+
+          <section className="mb-16" aria-labelledby="divorce-team">
+            <h2 id="divorce-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Divorce &amp; Matrimonial Support Team
+            </h2>
+            <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+              Adv. Aishwarya Pandey leads our divorce practice. Supporting
+              advocates bring recorded experience in family, matrimonial and
+              connected civil proceedings, with allocation based on the needs
+              of the case.
+            </p>
+            <TeamCarousel members={divorceTeam} label="Divorce and matrimonial team members" />
+          </section>
 
           <section className="mb-16">
             <h2 className={headingClass}>Clear Advice at a Difficult Turning Point</h2>
@@ -259,6 +281,12 @@ export default async function DivorceLawyerPage() {
             <div className="divide-y divide-gold-500/20 border-y border-gold-500/20">{faqs.map(({ question, answer }) => <details key={question} className="py-5"><summary className="cursor-pointer font-display text-lg font-bold leading-relaxed text-navy-900 transition-colors hover:text-gold-700 focus-visible:outline-gold-500 dark:text-cream dark:hover:text-gold-400">{question}</summary><p className={`mt-3 ${bodyClass}`}>{answer}</p></details>)}</div>
           </section>
 
+          <section aria-labelledby="divorce-settlement-review" className="mb-16 border-t border-gold-500/20 pt-10">
+            <h2 id="divorce-settlement-review" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">What Should a Divorce Settlement Cover?</h2>
+            <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">A mutual consent settlement should address more than the divorce petition. Review the amount and timing of financial support, return of belongings and stridhan, responsibility for joint liabilities, parenting arrangements and the lawful steps required in connected cases. A private agreement does not automatically close criminal or domestic violence proceedings, transfer property or dissolve a marriage. Each obligation needs an appropriate document, order or implementation step.</p>
+            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">For the first review, bring marriage and identity records, address details, the separation chronology, income disclosures and all existing notices, petitions and orders. Identify the applicable marriage law and any overseas connection before assuming eligibility or a filing timeline. Consent must remain voluntary; a cooling-off waiver is subject to legal conditions and the court&apos;s decision. For broader support and protection issues, visit our <Link href="/services/family-advocate" className="text-gold-700 underline dark:text-gold-400">family law practice</Link>.</p>
+          </section>
+
           <ServiceBlogs posts={familyBlogPosts} fallbackIcon={<ScrollText className="h-5 w-5 text-gold-600 dark:text-gold-400" />} eyebrow="From Our Desk" heading="Divorce & Matrimonial Blogs" description="Legal perspectives on divorce, maintenance, custody, and family disputes." viewAllHref={`/blog?category=${encodeURIComponent('Family & Matrimonial Matters')}`} />
 
           <section className="border-t border-gold-500/25 pt-10 text-center">
@@ -269,6 +297,7 @@ export default async function DivorceLawyerPage() {
           </section>
         </div>
       </section>
+      <FirmCredentials />
       <Footer />
     </main>
   )

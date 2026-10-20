@@ -20,7 +20,8 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import ServiceBlogs from '@/components/ServiceBlogs'
+import FirmCredentials from '@/components/FirmCredentials'
+import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
@@ -45,9 +46,9 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: 'Service Advocate & Lawyer in Lucknow | CAT Lucknow Bench & Service Tribunal',
+  title: { absolute: 'Service Matter Advocate in Lucknow | Sumanjari & Co.' },
   description:
-    'Sumanjari & Co. Advocates represents government, public sector, and private sector employees in departmental inquiries, wrongful termination, promotion & seniority disputes, pension matters, and POSH Act proceedings before the CAT Lucknow Bench, U.P. Public Services Tribunal, CGIT, and the Allahabad High Court, Lucknow Bench.',
+    'Service matter advocate and employment lawyer in Lucknow for inquiries, suspension, promotion, pay and pension disputes before tribunals and the High Court.',
   keywords: [
     'Service Lawyer Lucknow',
     'Service Matter Advocate Lucknow',
@@ -68,15 +69,22 @@ export const metadata: Metadata = {
     'Industrial Dispute Advocate Lucknow',
     'Central Government Industrial Tribunal Lawyer',
     'CGIT Advocate Lucknow',
+    'Armed Forces Tribunal Legal Advice Lucknow',
+    'Disciplinary Charge Sheet Reply Lawyer Lucknow',
   ],
   alternates: {
     canonical: '/services/service-advocate',
   },
   openGraph: {
-    title: 'Service Advocate & Lawyer in Lucknow | Sumanjari & Co.',
+    title: 'Service Matter Advocate in Lucknow | Sumanjari & Co.',
     description:
       'Representation for government, public sector, and private sector employees in service disputes, departmental inquiries, and employment litigation before CAT, the Service Tribunal, CGIT, and the Allahabad High Court, Lucknow Bench.',
     url: '/services/service-advocate',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Service Matter Advocate in Lucknow | Employment Disputes',
+    description: 'Advice on disciplinary inquiries, employment orders, pay, pension and the appropriate tribunal or court remedy.',
   },
 }
 
@@ -144,15 +152,32 @@ const matters = [
     icon: Repeat2,
     title: 'Transfer, Posting & Service Conditions',
     points: [
-      'Transfer and posting grievances',
-      'Disputes concerning pay, allowances, and leave rules',
+      'Review of transfer orders for breach of statutory rules, lack of authority, or mala fides',
+      'Pay fixation, withheld increments, salary arrears, and recovery from pay or pension',
+      'Disputes concerning allowances, leave, and service-record entries',
+    ],
+  },
+  {
+    icon: UserSearch,
+    title: 'Compassionate Appointment',
+    points: [
+      'Review of eligibility, dependency, financial circumstances, and the applicable appointment scheme',
+      'Advice on rejected or delayed applications; appointment is not an automatic entitlement',
+    ],
+  },
+  {
+    icon: ScrollText,
+    title: 'Regularisation & Contractual Employment',
+    points: [
+      'Assessment of ad hoc, daily-wage, and contractual service against the applicable rules and binding decisions',
+      'Review of appointment records, sanctioned posts, and available remedies without assuming a right to regularisation',
     ],
   },
   {
     icon: ShieldAlert,
     title: 'POSH Act Compliance & Inquiry Matters',
     points: [
-      'Representation in Internal Committee inquiries under the POSH Act, 2013',
+      'Advice on complaints, replies, evidence, and procedural fairness in Internal Committee inquiries; legal practitioners cannot represent parties in the inquiry under the POSH Rules',
       'Compliance advisory for employers on POSH policy and committee constitution',
     ],
   },
@@ -171,32 +196,32 @@ const jurisdiction = [
   {
     title: 'Departmental Authorities',
     blurb:
-      'Representation at the inquiry and show-cause stage before disciplinary and appellate authorities within the department.',
+      'Advice on replies, evidence, departmental appeals, and review petitions. Assistance or representation during an inquiry depends on the applicable service rules and permission requirements.',
   },
   {
     title: 'U.P. Public Services Tribunal',
     blurb:
-      'Service matters concerning State Government and public sector employees before the Tribunal.',
+      'Claims by public servants covered by the U.P. Public Services (Tribunal) Act, 1976. Eligibility, available departmental remedies, and limitation must be checked before filing; not every public-sector post is covered.',
   },
   {
     title: 'Central Administrative Tribunal (CAT), Lucknow Bench',
     blurb:
-      'Service disputes concerning Central Government employees and Central public sector personnel before the CAT Lucknow Bench, which sits locally rather than requiring travel to Allahabad.',
+      'Recruitment and service disputes within the Administrative Tribunals Act, 1985, including covered Central Government posts and notified organisations. PSU employment alone does not establish CAT jurisdiction; bench jurisdiction also needs checking.',
   },
   {
     title: 'Central Government Industrial Tribunal-cum-Labour Court',
     blurb:
-      'Industrial and workmen disputes, including retrenchment, wrongful dismissal, and wage claims, before CGIT.',
+      'Industrial disputes within the central labour jurisdiction, subject to employee status and the applicable statutory procedure. Other employment disputes may belong before State labour forums or a civil court; CGIT is not the default forum for every private employee.',
   },
   {
     title: 'Allahabad High Court, Lucknow Bench',
     blurb:
-      'Writ petitions under Article 226 challenging service orders, arguing from our chambers at Block D-311.',
+      'Service writ petitions under Article 226 and judicial review of tribunal decisions, subject to maintainability, alternative remedies, and territorial jurisdiction. A Lucknow address alone does not establish jurisdiction.',
   },
   {
     title: 'Internal Complaints Committee',
     blurb:
-      'Representation and advisory in proceedings before the Internal Committee constituted under the POSH Act.',
+      'Advice on POSH complaints, responses, inquiry procedure, and available appeals. Legal practitioners cannot represent either party before the Internal Committee under the POSH Rules.',
   },
 ]
 
@@ -236,85 +261,75 @@ const workSteps = [
 const serviceInsights = [
   {
     icon: BookOpen,
-    title: 'What Is Service Law?',
+    title: 'What does a service matter advocate in Lucknow help with?',
     excerpt:
-      'Service law governs employment relationships arising under statutory rules, service regulations, and administrative instructions applicable to government and public sector employees.',
+      'A service law advocate reviews recruitment, appointment, suspension, disciplinary action, promotion, pay, and pension disputes against the rules governing your post. The first step is to identify your employer, employment status, challenged order, and the authority or court that can grant a remedy.',
   },
   {
     icon: Gavel,
-    title: 'Responding to a Departmental Charge Sheet',
+    title: 'How should I respond to a departmental charge sheet?',
     excerpt:
-      'A charge sheet should be answered within the prescribed time with a clear, well-reasoned written response — the approach taken at this stage often shapes the outcome of the inquiry.',
+      'Record the date of receipt and the reply deadline. Check each allegation against the applicable conduct and disciplinary rules, request relied-upon documents where needed, and prepare a point-by-point reply supported by records. Seek an extension promptly if necessary; do not assume it has been granted or ignore the notice.',
   },
   {
     icon: TrendingUp,
-    title: 'Challenging Denial of Promotion or Seniority',
+    title: 'Can I challenge a promotion decision or seniority list?',
     excerpt:
-      'Promotion and seniority disputes are typically pursued before the Service Tribunal or in writ jurisdiction, based on applicable service rules and the employer’s own promotion policy.',
+      'A review may consider eligibility, vacancies, recruitment rules, the seniority list, service-record entries, and the Departmental Promotion Committee process. Keep the relevant orders and submit objections within any notified period. The available remedy depends on your service rules; eligibility does not automatically guarantee promotion.',
   },
   {
     icon: HandCoins,
-    title: 'Pension & Retiral Dues After Superannuation',
+    title: 'What can I do about delayed pension or retirement benefits?',
     excerpt:
-      'Delayed or reduced pension, gratuity, and family pension can be pursued through representation to the department and, where unresolved, before the Tribunal or High Court.',
+      'Collect your retirement order, pension payment order, service and pay records, calculation sheets, and earlier representations. A review can identify missing service periods, incorrect calculations, or the stated reason for withholding benefits. Arrears and interest may be sought where legally available, but depend on the applicable rules and facts.',
   },
   {
     icon: Landmark,
-    title: 'CAT Matters for Lucknow-Based Central Government Employees',
+    title: 'Should I approach CAT, the U.P. Tribunal, or the High Court?',
     excerpt:
-      'The Central Administrative Tribunal has a Lucknow Bench, so Central Government employees in and around Lucknow can pursue service matters locally rather than travelling to the Allahabad Bench.',
+      'CAT generally hears covered Central Government service matters; the U.P. Public Services Tribunal hears claims within its statutory coverage. For matters assigned to a tribunal, that tribunal ordinarily acts as the court of first instance, with High Court judicial review available afterwards. Employer status, statutory exclusions, departmental remedies, and territorial jurisdiction must be checked before choosing a forum.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Can I obtain a stay on suspension, transfer, or dismissal?',
+    excerpt:
+      'Interim relief can be requested from the competent forum where the facts and law justify it. Filing a challenge does not itself suspend the order. The forum considers factors such as a prima facie case, balance of convenience, and irreparable harm; transfer and disciplinary matters have specific limits on judicial intervention. No stay or reinstatement can be guaranteed.',
+  },
+  {
+    icon: ScrollText,
+    title: 'What is the deadline to challenge a service order?',
+    excerpt:
+      'There is no single deadline for all service disputes. A departmental reply, statutory appeal, CAT application, and U.P. Tribunal claim can each have different time limits. Record when the order was communicated and obtain advice promptly. Repeated representations do not automatically extend limitation, and the power to excuse delay differs between forums.',
+  },
+  {
+    icon: UserX,
+    title: 'Can a private employee file a service writ petition?',
+    excerpt:
+      'A private employment dispute does not automatically qualify for a writ petition. The employer, any public-law duty, your actual duties, and the governing employment law determine whether a labour remedy, civil claim, contractual process, or exceptional writ remedy is available. Keep the employment contract, termination notice, payslips, and relevant correspondence.',
+  },
+  {
+    icon: HandCoins,
+    title: 'What will a service-law consultation and case cost?',
+    excerpt:
+      'Fees depend on the records to review, the forum, urgency, drafting, and the stages of representation required. Ask for the proposed scope, professional fees, and separate filing or incidental expenses before instructing counsel. The likely duration depends on the proceedings and cannot be promised in advance.',
   },
 ]
 
 const serviceFaqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'What is service law?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Service law governs employment relationships arising under statutory rules, service regulations, and administrative instructions applicable to government and public sector employees.',
-      },
+  mainEntity: serviceInsights.map(({ title, excerpt }) => ({
+    '@type': 'Question',
+    name: title,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: excerpt,
     },
-    {
-      '@type': 'Question',
-      name: 'How should I respond to a departmental charge sheet?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'A charge sheet should be answered within the prescribed time with a clear, well-reasoned written response — the approach taken at this stage often shapes the outcome of the inquiry.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'How can I challenge denial of promotion or seniority?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Promotion and seniority disputes are typically pursued before the Service Tribunal or in writ jurisdiction, based on applicable service rules and the employer’s own promotion policy.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'How can I claim pension and retiral dues after superannuation?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Delayed or reduced pension, gratuity, and family pension can be pursued through representation to the department and, where unresolved, before the Tribunal or High Court.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Where do CAT matters get heard for Lucknow-based Central Government employees?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'The Central Administrative Tribunal has a Lucknow Bench, so Central Government employees in and around Lucknow can pursue service matters locally rather than travelling to the Allahabad Bench.',
-      },
-    },
-  ],
+  })),
 }
 
 export default async function ServiceEmploymentMattersPage() {
-  const employmentBlogPosts = await getBlogPostsByCategory('Service & Employment Matters')
+  const employmentBlogPosts = getBlogPostsByCategory('Service & Employment Matters')
 
   return (
     <main className="relative min-h-screen">
@@ -349,21 +364,23 @@ export default async function ServiceEmploymentMattersPage() {
               <div className="h-px w-12 bg-gold-500" />
             </div>
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-              Service Advocate &amp; Lawyer <em className="text-gold-gradient">in Lucknow</em>
+              Service Matter Advocate <em className="text-gold-gradient">in Lucknow</em>
             </h1>
             <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
-              Representation for government, public sector, and private
-              sector employees in recruitment, promotion, disciplinary,
-              pension, and industrial disputes — before the Central
-              Administrative Tribunal (CAT), the U.P. Public Services
-              Tribunal, CGIT, and the Allahabad High Court, Lucknow Bench.
+              Our service matter advocates and employment lawyers in Lucknow advise government employees,
+              public-sector staff, teachers, and private employees facing
+              suspension, departmental inquiries, dismissal, promotion,
+              pay, or pension disputes. We assess the applicable service
+              rules and the appropriate remedy before the CAT Lucknow Bench,
+              U.P. Public Services Tribunal, labour forums, or the
+              Allahabad High Court, Lucknow Bench.
             </p>
             <ConsultationActions className="mt-8 hidden md:flex" />
             </div>
             {serviceLead && (
               <div className="min-w-0 border-l border-gold-500/30 pl-6">
                 {serviceLead.img && (
-                  <Image src={serviceLead.img} alt={serviceLead.name} width={252} height={288} sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: serviceLead.focus }} />
+                  <Image src={serviceLead.img} alt={serviceLead.name} width={252} height={288} priority sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: serviceLead.focus }} />
                 )}
                 <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">Service &amp; Employment Practice Lead</p>
                 <h2 className="mt-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{serviceLead.name}</h2>
@@ -401,12 +418,13 @@ export default async function ServiceEmploymentMattersPage() {
             <p>
               Sumanjari &amp; Co. Advocates advises and represents employees
               and, where instructed, departments — from the departmental
-              inquiry stage through to the CAT Lucknow Bench (for Central
-              Government employees, without the need to travel to Allahabad),
-              the U.P. Public Services Tribunal (for State Government
-              employees), CGIT (for workmen and private sector employees),
-              and writ proceedings before the Allahabad High Court, Lucknow
-              Bench.
+              inquiry stage through departmental appeals and, where
+              maintainable, tribunal or court proceedings. The correct route
+              depends on the legal status of the employer, the post held,
+              the governing rules, and where the cause of action arose.
+              Central and State Government service disputes, aided-institution
+              matters, and private employment claims do not all follow the
+              same procedure.
             </p>
           </div>
 
@@ -414,7 +432,7 @@ export default async function ServiceEmploymentMattersPage() {
             <div className="mb-8 flex items-center gap-2">
               <Landmark className="h-5 w-5 text-gold-600 dark:text-gold-400" />
               <h2 className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-                Forums We Appear Before
+                Which Forum Can Hear Your Service Matter?
               </h2>
             </div>
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -462,6 +480,56 @@ export default async function ServiceEmploymentMattersPage() {
               ))}
             </div>
           </div>
+
+          <section className="mb-16" aria-labelledby="service-deadlines">
+            <h2 id="service-deadlines" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Received a Service Order? Deadlines and Immediate Steps
+            </h2>
+            <div className="space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
+              <p>
+                Keep the complete order, notice, envelope, or email showing when
+                it reached you. A charge-sheet reply, departmental appeal,
+                tribunal application, and writ petition have different procedural
+                requirements. An informal assurance from the department or a
+                fresh representation should not be treated as an extension of time.
+              </p>
+              <p>
+                For Central Government matters, Sections 20 and 21 of the
+                Administrative Tribunals Act, 1985 address departmental remedies
+                and limitation. U.P. Tribunal claims are governed by the U.P.
+                Public Services (Tribunal) Act, 1976, including its limitation
+                provisions. Departmental appeal periods depend on the disciplinary
+                rules applicable to your post. Writ petitions can also be refused
+                for unexplained delay even where no fixed statutory period applies.
+              </p>
+              <p>
+                If an order has immediate consequences, seek advice on any
+                available interim application. Until a competent authority or
+                court grants relief, filing a representation or case does not
+                by itself stay the order. Do not assume you can disregard it.
+              </p>
+            </div>
+          </section>
+
+          <section className="mb-16" aria-labelledby="service-documents">
+            <h2 id="service-documents" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Documents to Bring to a Service-Law Consultation
+            </h2>
+            <ul className="list-disc space-y-3 pl-5 font-body leading-relaxed text-navy-800 dark:text-cream/75">
+              <li>The challenged order or notice, its attachments, and proof of the date you received it.</li>
+              <li>Your appointment letter, employment terms, applicable service rules, and relevant service-book entries.</li>
+              <li>For disciplinary matters: the charge sheet, relied-upon documents, replies, inquiry report, and punishment order.</li>
+              <li>For promotion or pay disputes: seniority lists, promotion orders, relevant service-record entries, payslips, and fixation or recovery orders.</li>
+              <li>For retirement claims: the retirement order, pension payment order, gratuity calculation, and details of unpaid benefits.</li>
+              <li>Earlier representations, appeals, acknowledgements, and any tribunal or court orders, with a short chronology of events.</li>
+            </ul>
+            <p className="mt-5 font-body leading-relaxed text-navy-700 dark:text-cream/60">
+              Bring the records available to you; do not delay seeking advice
+              solely because a document is missing. A first review should identify
+              the available remedy, missing evidence, urgency, and proposed scope
+              of work, rather than promise a particular result.
+            </p>
+          </section>
 
           <div className="mb-16 grid gap-10 md:grid-cols-2">
             <div>
@@ -537,11 +605,11 @@ export default async function ServiceEmploymentMattersPage() {
                 From Our Desk
               </span>
               <h2 className="mb-3 mt-2 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-                Service Law <em className="text-gold-gradient">Insights</em>
+                Service Law <em className="text-gold-gradient">Frequently Asked Questions</em>
               </h2>
               <p className="mx-auto max-w-xl font-body text-navy-700 dark:text-cream/55">
-                Common questions government and public sector employees bring
-                to us — drawn from our service law practice in Lucknow.
+                Answers on departmental proceedings, service tribunals,
+                employment remedies, and preparing for a consultation in Lucknow.
               </p>
             </div>
             <div className="grid gap-5 sm:grid-cols-2">
@@ -570,6 +638,13 @@ export default async function ServiceEmploymentMattersPage() {
             </div>
           </div>
 
+          <section aria-labelledby="service-disciplinary-record-review" className="mb-16 border-t border-gold-500/20 pt-10">
+            <h2 id="service-disciplinary-record-review" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Facing a Charge Sheet, Suspension or Adverse Service Order?</h2>
+            <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">Identify the employer, appointment terms, applicable service rules and the stage of proceedings before choosing a remedy. A departmental inquiry, statutory appeal, CAT application, U.P. Public Services Tribunal claim, industrial dispute and High Court writ are not interchangeable. Armed forces service matters may engage the Armed Forces Tribunal, subject to its statutory jurisdiction and exclusions. Private employment claims require a separate assessment of the contract, duties and applicable labour law.</p>
+            <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Prepare the full employment and disciplinary record</h3>
+            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Share the appointment letter, service rules, charge sheet and annexures, inquiry notices, replies, inquiry report, challenged order and proof of its communication. For pay or pension disputes, add service-book extracts, pay fixation and retirement records. Record each reply, appeal and hearing deadline. Repeated representations do not necessarily extend limitation or suspend the order. We assess natural justice, available departmental remedies and the basis for any interim relief; reinstatement or a stay cannot be assured.</p>
+          </section>
+
           <ServiceBlogs
             posts={employmentBlogPosts}
             fallbackIcon={<ScrollText className="h-5 w-5 text-gold-600 dark:text-gold-400" />}
@@ -594,6 +669,7 @@ export default async function ServiceEmploymentMattersPage() {
         </div>
       </section>
 
+      <FirmCredentials />
       <Footer />
     </main>
   )

@@ -17,7 +17,8 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import ServiceBlogs from '@/components/ServiceBlogs'
+import FirmCredentials from '@/components/FirmCredentials'
+import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
 import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL } from '@/lib/contactLinks'
@@ -43,9 +44,9 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: 'Tax & Revenue Advocate and Lawyer in Lucknow | stamp duty, property tax, income tax & GST disputes',
+  title: { absolute: 'Tax & Revenue Advocate in Lucknow | GST & Appeals | Sumanjari' },
   description:
-    'Sumanjari & Co. Advocates advises on stamp duty and registration, property tax assessment, circle rate valuation, income tax, and GST disputes before the ITAT Lucknow Bench, the GST Appellate Tribunal, Lucknow, and the Allahabad High Court, Lucknow Bench.',
+    'Tax and revenue advocate and lawyer in Lucknow for GST, income tax, stamp duty, property tax and mining disputes. Advice on notices, appeals and recovery.',
   keywords: [
     'Tax & Revenue Advocate and Lawyer in Lucknow',
     'Tax Advocate Lucknow',
@@ -61,6 +62,9 @@ export const metadata: Metadata = {
     'GST Appellate Tribunal Lucknow',
     'GSTAT Lucknow Advocate',
     'Registration Act Lawyer Lucknow',
+    'Mining Lease Dispute Lawyer Lucknow',
+    'Mining Revenue Matters Uttar Pradesh',
+    'GST Demand Notice Lawyer Lucknow',
   ],
   alternates: {
     canonical: '/services/tax-revenue-advocate',
@@ -70,6 +74,11 @@ export const metadata: Metadata = {
     description:
       'Advisory and litigation in stamp duty, property tax, circle rate valuation, income tax, and GST disputes before the ITAT Lucknow Bench, GSTAT Lucknow, and the Allahabad High Court, Lucknow Bench.',
     url: '/services/tax-revenue-advocate',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Tax & Revenue Advocate in Lucknow | GST & Appeals',
+    description: 'Legal review of tax notices, statutory appeals, stamp duty, property tax and mining revenue disputes in Uttar Pradesh.',
   },
 }
 
@@ -273,7 +282,7 @@ const taxInsights = [
 ]
 
 export default async function TaxRevenueMattersPage() {
-  const taxBlogPosts = await getBlogPostsByCategory('Tax & Revenue Matters')
+  const taxBlogPosts = getBlogPostsByCategory('Tax & Revenue Matters')
 
   return (
     <main className="relative min-h-screen">
@@ -311,7 +320,7 @@ export default async function TaxRevenueMattersPage() {
               Tax &amp; Revenue Advocate and Lawyer <em className="text-gold-gradient">in Lucknow</em>
             </h1>
             <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
-              Sumanjari &amp; Co. Advocates advises individuals and businesses
+              Our tax lawyers and revenue advocates advise individuals and businesses
               in Lucknow on stamp duty, registration, property tax, circle rate
               valuation, income tax, GST, and revenue recovery disputes before
               the relevant authorities, tribunals, and the Allahabad High Court,
@@ -322,7 +331,7 @@ export default async function TaxRevenueMattersPage() {
             {taxLead && (
               <div className="min-w-0 border-l border-gold-500/30 pl-6">
                 {taxLead.img && (
-                  <Image src={taxLead.img} alt={taxLead.name} width={252} height={288} sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: taxLead.focus }} />
+                  <Image src={taxLead.img} alt={taxLead.name} width={252} height={288} priority sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: taxLead.focus }} />
                 )}
                 <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">Tax &amp; Revenue Practice Lead</p>
                 <h2 className="mt-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{taxLead.name}</h2>
@@ -529,6 +538,13 @@ export default async function TaxRevenueMattersPage() {
             </div>
           </div>
 
+          <section aria-labelledby="tax-notice-appeal-review" className="mb-16 border-t border-gold-500/20 pt-10">
+            <h2 id="tax-notice-appeal-review" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Tax Notice, Demand Order or Revenue Recovery: What Comes Next?</h2>
+            <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">First distinguish a show-cause notice from a final assessment, penalty order or recovery action. The governing statute, period involved, issuing authority and communication date determine the reply or appeal route. GST, income tax, stamp duty, municipal property tax and mining revenue disputes have different procedures; a writ petition is not an automatic replacement for a statutory remedy. We check current forum arrangements, limitation, any pre-deposit and the separate requirements for protection from recovery.</p>
+            <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Records for a tax or mining revenue consultation</h3>
+            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Share the full notice or order, portal acknowledgements, returns, ledgers, invoices, earlier replies and payment records. For stamp duty or property valuation, include the instrument and assessment material; for mining lease or royalty disputes, include the lease, permits, inspection records and demand calculation. Preparing a reply or appeal does not itself stay recovery. The legal team can coordinate with your accountant or technical adviser while reviewing the legal grounds and procedural deadlines.</p>
+          </section>
+
           <ServiceBlogs
             posts={taxBlogPosts}
             fallbackIcon={<ScrollText className="h-5 w-5 text-gold-600 dark:text-gold-400" />}
@@ -554,6 +570,7 @@ export default async function TaxRevenueMattersPage() {
         </div>
       </section>
 
+      <FirmCredentials />
       <Footer />
     </main>
   )

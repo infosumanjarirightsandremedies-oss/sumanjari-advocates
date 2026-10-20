@@ -1,5 +1,6 @@
 // Shared by /llms.txt, /llms-full.txt, and /llms/<area>.txt.
 import { FIRM_EMAIL, officeLabels, teamMembers } from '@/lib/team'
+import { FIRM_BACKGROUND, FIRM_CREDENTIALS } from '@/lib/firm'
 
 export const SITE_URL = 'https://www.sumanjariadvocates.com'
 
@@ -8,10 +9,10 @@ export function markdownText(value: string): string {
 }
 
 export const FIRM_SUMMARY =
-  'Sumanjari & Co. Advocates is a second-generation law firm with over 50 years of legal experience and more than 1,000 cases handled, practising before the Allahabad High Court, Lucknow Bench (Chamber Block D-311), serving clients across Lucknow, Kanpur, Ayodhya, Prayagraj, and Uttar Pradesh. The firm also handles RERA builder-buyer disputes and DRT bank recovery matters for clients in Noida, Ghaziabad, and Greater Noida.'
+  `Sumanjari & Co. Advocates is ${FIRM_BACKGROUND}, practising before the Allahabad High Court, Lucknow Bench (Chamber Block D-311), serving clients across Lucknow, Kanpur, Ayodhya, Prayagraj, and Uttar Pradesh. The firm also handles RERA builder-buyer disputes and DRT bank recovery matters for clients in Noida, Ghaziabad, and Greater Noida.`
 
 export const PRACTICE_AREAS =
-  'Practice areas: civil, criminal, cyber crime & IT Act, family & matrimonial, property & land, rent & tenancy, tax & revenue, service & employment, consumer & motor accident, company & corporate, constitutional & writ, drafting & legal opinions, RERA, banking & recovery (DRT), armed forces tribunal (AFT), and mining matters.'
+  'Practice areas: civil litigation; criminal law; cyber crime & IT Act matters; family & matrimonial matters; property & land disputes; rent & tenancy matters; tax & revenue matters; service & employment law; consumer disputes; motor accident compensation claims; company & corporate matters; contractual & commercial disputes; constitutional & writ matters; drafting & legal opinions; RERA builder-buyer disputes; banking recovery & Debts Recovery Tribunal (DRT) proceedings; SARFAESI Act matters; cheque bounce & negotiable instruments disputes; NRI legal services; Armed Forces Tribunal (AFT) service disputes; defence personnel pension & benefit claims; mining lease disputes; and mining revenue matters.'
 
 export const CONTENT_NOTICE =
   "Articles are general legal information, not legal advice; their publication dates and cited law should be checked before relying on them. An advocate's individual practice areas are listed on their profile. No case outcome is guaranteed."
@@ -27,8 +28,7 @@ export const CONTACT_LINES = [
 export const KEY_FACTS = [
   '- Name: Sumanjari & Co. Advocates',
   '- Type: Law firm (advocates) in India',
-  '- Legacy: Second-generation law firm with over 50 years of legal experience',
-  '- Track record: More than 1,000 cases handled',
+  ...FIRM_CREDENTIALS.map(({ value, label }) => `- ${label}: ${value}`),
   '- Chamber: Chamber No. Block D-311, Allahabad High Court, Lucknow Bench, Lucknow, Uttar Pradesh, India',
   `- Offices: ${Object.values(officeLabels)
     .map((office) => `${office.title} — ${office.subtitle}`)

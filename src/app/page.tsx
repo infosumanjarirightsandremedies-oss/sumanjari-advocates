@@ -10,8 +10,6 @@ import WhatsAppFloat from '@/components/WhatsAppFloat'
 import Team from '@/components/Team'
 import { getReviews } from '@/lib/reviews'
 
-import InternshipPage from './internship/page'
-
 export default async function Home() {
   const reviews = await getReviews()
 

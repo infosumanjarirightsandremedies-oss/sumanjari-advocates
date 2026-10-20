@@ -1,13 +1,22 @@
 import type { Metadata } from 'next'
-// @ts-ignore
+import { Cormorant_SC, EB_Garamond, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import Disclaimer from '@/components/Disclaimer'
+
+const playfair = Playfair_Display({ subsets: ['latin'], style: ['normal', 'italic'], display: 'swap', variable: '--font-playfair' })
+const ebGaramond = EB_Garamond({ subsets: ['latin'], style: ['normal', 'italic'], display: 'swap', variable: '--font-eb-garamond' })
+const cormorantSC = Cormorant_SC({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'], display: 'swap', preload: false, variable: '--font-cormorant-sc' })
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  icons: {
+    icon: [{ url: '/favicon.png', type: 'image/png', sizes: '192x192' }],
+    shortcut: '/favicon.png',
+    apple: [{ url: '/favicon.png', sizes: '192x192', type: 'image/png' }],
+  },
   title: {
     default: 'Sumanjari & Co. Advocates | 8302471764 | Advocates in Lucknow & Allahabad High Court',
     template: '%s | Sumanjari & Co. Advocates',
@@ -147,6 +156,7 @@ const legalServiceJsonLd = {
   '@id': `${SITE_URL}/#organization`,
   name: 'Sumanjari & Co. Advocates',
   url: SITE_URL,
+  logo: `${SITE_URL}/favicon.png`,
   description:
     'Sumanjari & Co. Advocates practises before the Allahabad High Court, Lucknow Bench, serving clients across Lucknow, Kanpur, Ayodhya, Prayagraj, Sultanpur, Ambedkar Nagar, Noida, and Delhi — handling civil, criminal, family, property, consumer, tax, RERA, banking recovery (DRT), armed forces tribunal (AFT), and mining matters.',
   address: {
@@ -189,7 +199,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${playfair.variable} ${ebGaramond.variable} ${cormorantSC.variable}`} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -200,12 +210,6 @@ export default function RootLayout({
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: JSON.stringify(legalServiceJsonLd) }}
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+SC:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
         />
       </head>
       <body suppressHydrationWarning>
