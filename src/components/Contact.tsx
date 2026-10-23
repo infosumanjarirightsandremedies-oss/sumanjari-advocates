@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { MapPin, Phone, Mail, Send, MessageCircle, Clock } from 'lucide-react'
 import { isValidEmail, isValidPhone, isValidIntlPhone } from '@/lib/validation'
-import { whatsappUrl } from '@/lib/contactLinks'
+import { NCR_CHAMBER_ADDRESS, whatsappUrl } from '@/lib/contactLinks'
 import { DIAL_CODES, DEFAULT_DIAL_CODE } from '@/lib/dialCodes'
 
 const practiceAreas = [
@@ -140,6 +140,19 @@ export default function Contact() {
                 <div className="font-body text-navy-900 dark:text-cream text-sm leading-relaxed">
                   Practising before Allahabad High Court, Lucknow Bench<br />
                   Chamber No. Block D&nbsp;–&nbsp;311
+                </div>
+              </div>
+            </div>
+
+            <div className="glass-card rounded-sm p-5 flex items-start gap-4">
+              <div className="w-10 h-10 rounded-sm border border-gold-500/35 dark:border-gold-500/30 flex items-center justify-center flex-shrink-0">
+                <MapPin className="w-5 h-5 text-gold-600 dark:text-gold-400" />
+              </div>
+              <div>
+                <div className="font-caps text-navy-600/65 dark:text-cream/40 text-[10px] tracking-widest uppercase mb-1">NCR Chamber</div>
+                <div className="font-body text-navy-900 dark:text-cream text-sm leading-relaxed">
+                  {NCR_CHAMBER_ADDRESS.street}<br />
+                  {NCR_CHAMBER_ADDRESS.city}
                 </div>
               </div>
             </div>

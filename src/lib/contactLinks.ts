@@ -8,6 +8,11 @@ export const CHAMBER_CALL_DIGITS = '8302471764'
 export const CHAMBER_CALL_DISPLAY = '83024 71764' // grouped for display
 export const CHAMBER_TEL = `tel:+91${CHAMBER_CALL_DIGITS}`
 
+export const NCR_CHAMBER_ADDRESS = {
+  street: 'A-247, Defence Colony',
+  city: 'New Delhi',
+} as const
+
 export const GENERIC_WHATSAPP_MESSAGE =
   'Hello, I need legal consultation. Please connect me with an advocate.'
 

@@ -12,7 +12,7 @@ import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
 import { reraNoidaGhaziabadStages, reraNoidaGhaziabadToc } from '@/lib/guides/reraNoidaGhaziabad'
 import { reraStatutes } from '@/lib/guides/reraLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
-import { CHAMBER_TEL, CHAMBER_CALL_DISPLAY, whatsappUrl } from '@/lib/contactLinks'
+import { CHAMBER_TEL, CHAMBER_CALL_DISPLAY, NCR_CHAMBER_ADDRESS, whatsappUrl } from '@/lib/contactLinks'
 import { teamMembers } from '@/lib/team'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
@@ -347,6 +347,16 @@ export default async function NoidaGhaziabadReraPage() {
             Ghaziabad project. This page does not indicate a separate office
             in either city.
           </p>
+          <div className="mt-6 flex items-start gap-3 font-body text-navy-700 dark:text-cream/70">
+            <MapPin aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-gold-600" />
+            <div>
+              <h3 className="font-semibold text-navy-900 dark:text-cream">NCR Chamber</h3>
+              <p className="mt-1 leading-relaxed">
+                {NCR_CHAMBER_ADDRESS.street}<br />
+                {NCR_CHAMBER_ADDRESS.city}
+              </p>
+            </div>
+          </div>
           <div className="mt-6 flex flex-wrap gap-4">
             <a href={CHAMBER_TEL} className="inline-flex items-center gap-2 rounded-sm border border-gold-500/40 px-5 py-3 font-body font-semibold text-navy-900 dark:text-cream"><Phone className="h-4 w-4" /> +91 {CHAMBER_CALL_DISPLAY}</a>
             <a href={whatsappUrl('Hello, I would like to discuss a RERA matter involving a project in Noida or Ghaziabad.')} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-sm border border-gold-500/40 px-5 py-3 font-body font-semibold text-navy-900 dark:text-cream"><MessageCircle className="h-4 w-4" /> WhatsApp</a>

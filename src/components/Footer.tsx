@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { Scale, Instagram, Phone, Mail, MapPin, ChevronDown, ChevronUp } from 'lucide-react'
+import { NCR_CHAMBER_ADDRESS } from '@/lib/contactLinks'
 
 // lucide-react has no Reddit icon, so the mark is inlined here (matches the
 // official Reddit logo; uses currentColor so it inherits the same
@@ -181,6 +182,14 @@ export default function Footer() {
               <div className="flex items-start gap-3 text-navy-700/75 dark:text-cream/60">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-gold-600 dark:text-gold-400" />
                 <span className="font-body text-sm">High Court Lucknow · Chamber Block D · D-311</span>
+              </div>
+            </li>
+            <li>
+              <div className="flex items-start gap-3 text-navy-700/75 dark:text-cream/60">
+                <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-gold-600 dark:text-gold-400" />
+                <span className="font-body text-sm">
+                  NCR Chamber · {NCR_CHAMBER_ADDRESS.street}, {NCR_CHAMBER_ADDRESS.city}
+                </span>
               </div>
             </li>
           </ul>
