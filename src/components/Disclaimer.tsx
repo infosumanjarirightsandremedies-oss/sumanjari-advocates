@@ -131,7 +131,12 @@ export default function Disclaimer() {
   if (!delayReady) return null
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="bci-disclaimer-title"
+    >
       <div className="absolute inset-0 bg-navy-950/80 backdrop-blur-sm" />
 
       <div className="relative w-full max-w-2xl glass-card rounded-sm border border-gold-500/25 shadow-2xl p-8 md:p-10">
@@ -157,7 +162,7 @@ export default function Disclaimer() {
                 <div className="font-caps text-gold-600 dark:text-gold-400 text-[10px] tracking-[0.3em] uppercase mb-1">
                   Important Notice
                 </div>
-                <h2 className="font-display text-xl font-bold text-navy-900 dark:text-cream">
+                <h2 id="bci-disclaimer-title" className="font-display text-xl font-bold text-navy-900 dark:text-cream">
                   Disclaimer — Sumanjari & Co.
                 </h2>
               </div>

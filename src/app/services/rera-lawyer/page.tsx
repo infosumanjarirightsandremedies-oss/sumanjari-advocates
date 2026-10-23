@@ -12,11 +12,6 @@ import {
   ShieldCheck,
   MessageSquareWarning,
   MapPin,
-  Lock,
-  Search,
-  FileSignature,
-  Presentation,
-  CheckCircle2,
   ScrollText,
   Award,
   Landmark,
@@ -35,8 +30,11 @@ import {
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FirmCredentials from '@/components/FirmCredentials'
+import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
+import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
+import { reraLucknowFaqs, reraLucknowStages, reraLucknowToc, reraStatutes } from '@/lib/guides/reraLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
 
@@ -49,9 +47,7 @@ const reraTeam = ['jyotish-raj', 'aniket-bose', 'prerna-yaduvanshi']
 // -----------------------------------------------------------------------------
 // EDIT with figures the firm can factually stand behind. Bar Council of India
 // norms allow declarative, verifiable facts (years, forums, matters handled) but
-// NOT superlatives ("best", "No. 1") or solicitation. The two numeric stats below
-// render ONLY when set to a real string — leave them `null` and they stay hidden,
-// so no unverified number is ever published.
+// NOT superlatives ("best", "No. 1") or solicitation.
 const reraLead = {
   name: 'Adv. Jitendra Tiwari',
   href: '/team/jitendra-tiwari',
@@ -63,22 +59,6 @@ const reraLead = {
   credential: 'Over 8 years of practice before the Allahabad High Court, Lucknow Bench',
   forums: 'UP-RERA · RERA Appellate Tribunal · Allahabad High Court, Lucknow Bench',
 }
-
-const reraTrackRecord = {
-  yearsPractisingRera: '8+' as string | null,
-  mattersHandled: '100+' as string | null,
-}
-
-const reraStats = [
-  reraTrackRecord.yearsPractisingRera && {
-    value: reraTrackRecord.yearsPractisingRera,
-    label: 'Years practising before UP-RERA',
-  },
-  reraTrackRecord.mattersHandled && {
-    value: reraTrackRecord.mattersHandled,
-    label: 'RERA & builder-buyer matters handled',
-  },
-].filter(Boolean) as { value: string; label: string }[]
 
 // Real, site-wide contact details (kept in sync with Footer.tsx / Contact.tsx).
 const CONTACT = {
@@ -116,7 +96,7 @@ const reraRights = [
   {
     icon: Clock,
     title: 'Possession Delay & Refund — Section 18',
-    text: 'If possession is not given by the date in the builder-buyer agreement, the buyer may claim interest for every month of delay, or withdraw and seek a full refund with interest under Section 18.',
+    text: 'Where Section 18 conditions are met, a buyer remaining in the project may seek interest for every month of delay until possession, while a buyer withdrawing may seek return of the amount paid with prescribed interest. The agreement, facts and applicable orders must be reviewed.',
   },
   {
     icon: Percent,
@@ -126,22 +106,22 @@ const reraRights = [
   {
     icon: CalendarClock,
     title: '60-Day Appeal Window — Section 44(2)',
-    text: 'An appeal against an order of the Authority must be filed before the RERA Appellate Tribunal within 60 days of the order under Section 44(2).',
+    text: 'Section 44 generally allows an appeal from the Authority or adjudicating officer within sixty days from receipt of the order copy. UP-REAT may admit a delayed appeal for sufficient cause, but condonation is not automatic.',
   },
   {
     icon: IndianRupee,
     title: 'Promoter Pre-Deposit — Section 43(5)',
-    text: 'Where a promoter appeals, Section 43(5) requires a pre-deposit of at least 30% of the penalty, or the total amount to be paid to the buyer, before the appeal is entertained.',
+    text: 'For a promoter appeal, Section 43(5) requires at least 30% of a penalty, or a higher percentage set by the Tribunal; the total amount payable to the allottee including interest and compensation; or both, as applicable. It is not a universal 30% deposit for a refund award.',
   },
   {
     icon: Ruler,
     title: 'Carpet Area & Amenities',
-    text: 'RERA fixes liability on the price of carpet area and on the amenities promised in the sanctioned plan — shortfalls between the brochure and delivery are actionable.',
+    text: 'Registered carpet-area disclosures, sanctioned plans, representations and agreed specifications help assess differences between what was promised and delivered. The appropriate remedy depends on the alleged default, statutory conditions and supporting evidence.',
   },
   {
     icon: FileCheck,
     title: 'Execution of RERA Orders',
-    text: 'A RERA order that is not complied with can be executed as a recovery certificate through the District Magistrate, with further remedies before the High Court where required.',
+    text: 'Non-compliance may require execution or recovery under Section 40 and the applicable procedure. Monetary recovery and enforcement of other directions are distinct. A recovery certificate still requires action by the competent authority; it is not an automatic cash refund.',
   },
 ]
 
@@ -172,13 +152,13 @@ export const metadata: Metadata = {
     'Builder Buyer Agreement Review Lucknow',
   ],
   alternates: {
-    canonical: '/services/rera-lawyer',
+    canonical: '/services/rera-lawyer-lucknow',
   },
   openGraph: {
     title: 'RERA Advocate & Real Estate Lawyer in Lucknow | Sumanjari & Co. Advocates',
     description:
       'Real estate advocates and lawyers in Lucknow representing homebuyers and developers in disputes before UP-RERA and the RERA Appellate Tribunal.',
-    url: '/services/rera-lawyer',
+    url: '/services/rera-lawyer-lucknow',
   },
   twitter: {
     card: 'summary_large_image',
@@ -191,7 +171,7 @@ const reraServiceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: 'RERA & Real Estate Legal Services in Lucknow',
-  url: `${SITE_URL}/services/rera-lawyer`,
+  url: `${SITE_URL}/services/rera-lawyer-lucknow`,
   description:
     'Representation for homebuyers and developers in Lucknow in RERA disputes — builder-buyer conflicts, possession delays, compensation claims, project registration and compliance, and appeals before the RERA Appellate Tribunal.',
   provider: { '@id': `${SITE_URL}/#organization` },
@@ -253,7 +233,7 @@ const matters = [
     title: 'RERA Appeals & Dispute Resolution',
     points: [
       'Appeals before the UP Real Estate Appellate Tribunal against orders of the Authority, within the 60-day limitation period under Section 44(2)',
-      'Advising promoters on the mandatory 30% pre-deposit required under Section 43(5) before a promoter’s appeal is entertained',
+      'Advising promoters on the Section 43(5) pre-deposit: at least 30% of a penalty (or a higher percentage set by the Tribunal), the total amount payable to the allottee including interest and compensation, or both, as applicable',
       'Representation in mediation and settlement discussions with builders and developers, and execution of RERA orders before the Authority and Tribunal',
     ],
   },
@@ -276,131 +256,21 @@ const whyIssues = [
   'Substandard construction and non-compliance with agreed specifications',
 ]
 
-const workSteps = [
-  {
-    icon: Lock,
-    title: 'Private Consultation',
-    description:
-      'We begin with a confidential discussion of your matter, understanding the facts and your expectations while safeguarding your privacy.',
-  },
-  {
-    icon: Search,
-    title: 'In-Depth Case Review',
-    description:
-      'Every document and detail is carefully examined so we can assess the strengths, risks, and best possible legal routes for you.',
-  },
-  {
-    icon: FileSignature,
-    title: 'Strategy & Drafting',
-    description:
-      'A clear, customised strategy is prepared and precise pleadings are drafted to present your case strongly before the court or authority.',
-  },
-  {
-    icon: Presentation,
-    title: 'Focused Representation',
-    description:
-      'We represent you with preparation and clarity, ensuring timely filings, effective arguments, and regular updates on each hearing.',
-  },
-  {
-    icon: CheckCircle2,
-    title: 'Resolution & Ongoing Support',
-    description:
-      'Even after the matter is resolved, we guide you on next steps, compliance, and any further legal support you may require.',
-  },
-]
-
-const reraInsights = [
-  {
-    icon: ClipboardCheck,
-    title: 'How to File a Complaint Before UP-RERA',
-    excerpt:
-      'A UP-RERA complaint is filed online on the prescribed form with the requisite fee, supported by the builder-buyer agreement, payment receipts, and correspondence evidencing the delay or default. Once admitted, the Authority can order interest, refund, or compensation to the buyer.',
-  },
-  {
-    icon: Home,
-    title: "What Counts as 'Possession Delay' Under RERA?",
-    excerpt:
-      'Possession delay under RERA is measured from the date committed in the builder-buyer agreement, not marketing brochures. Once that date passes without a valid occupancy certificate, the buyer can claim monthly interest on the amount paid, or withdraw and seek a full refund with interest under Section 18.',
-  },
-  {
-    icon: FileWarning,
-    title: 'Builder-Buyer Disputes: Documents You Will Need',
-    excerpt:
-      'A RERA builder-buyer complaint is strongest with the allotment letter, the sale or builder-buyer agreement, the payment schedule, demand and payment receipts, and the project’s RERA registration or occupancy-certificate details. These establish the committed timeline and the amount paid, on which interest and compensation are calculated.',
-  },
-  {
-    icon: Gavel,
-    title: 'RERA Appeals: What Is the Time Limit and Pre-Deposit?',
-    excerpt:
-      'An appeal to the RERA Appellate Tribunal must be filed within 60 days of the Authority’s order under Section 44(2). Where the promoter appeals, Section 43(5) requires a pre-deposit of at least 30% of the penalty or amount due to the buyer before the appeal is entertained.',
-  },
-  {
-    icon: UserCheck,
-    title: 'How Do I Choose the Right Advocate for a RERA Case?',
-    excerpt:
-      'Rather than searching for a "best RERA advocate" by ranking alone, check that the advocate regularly appears before UP-RERA and the Appellate Tribunal, is named and identifiable on your matter, and explains the likely strategy and outcomes before you engage — these are the factors that actually decide a RERA case.',
-  },
-  {
-    icon: MapPin,
-    title: 'Do I Need a RERA Lawyer Near Me, or Can I Hire One From Another City?',
-    excerpt:
-      'A RERA complaint is filed before the Authority in the state where the project is located, so an advocate familiar with UP-RERA practice and the local Appellate Tribunal is generally better placed than searching only for a "RERA lawyer near me" by distance — what matters is regular appearance before the forum handling your matter.',
-  },
-]
+const reraInsightIcons = [ClipboardCheck, Home, FileWarning, Gavel, UserCheck, MapPin, IndianRupee, Hammer]
+const reraInsights = reraLucknowFaqs.map((faq, index) => ({
+  icon: reraInsightIcons[index],
+  title: faq.question,
+  excerpt: faq.answer,
+}))
 
 const reraFaqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'How do I file a complaint before UP-RERA?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'A UP-RERA complaint is filed online on the prescribed form with the requisite fee, supported by the builder-buyer agreement, payment receipts, and correspondence evidencing the delay or default. Once admitted, the Authority can order interest, refund, or compensation to the buyer.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What counts as possession delay under RERA?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Possession delay under RERA is measured from the date committed in the builder-buyer agreement, not marketing brochures. Once that date passes without a valid occupancy certificate, the buyer can claim monthly interest on the amount paid, or withdraw and seek a full refund with interest under Section 18.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What documents are needed for a builder-buyer dispute?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'A RERA builder-buyer complaint is strongest with the allotment letter, the sale or builder-buyer agreement, the payment schedule, demand and payment receipts, and the project’s RERA registration or occupancy-certificate details. These establish the committed timeline and the amount paid, on which interest and compensation are calculated.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What is the time limit and pre-deposit for a RERA appeal?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'An appeal to the RERA Appellate Tribunal must be filed within 60 days of the Authority’s order under Section 44(2) of the RERA Act, 2016. Where the promoter files the appeal, Section 43(5) requires a pre-deposit of at least 30% of the penalty or amount due to the buyer before the appeal is entertained.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'How do I choose the right advocate for a RERA case?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Rather than searching for a "best RERA advocate" by ranking alone, check that the advocate regularly appears before UP-RERA and the Appellate Tribunal, is named and identifiable on your matter, and explains the likely strategy and outcomes before you engage — these are the factors that actually decide a RERA case.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Do I need a RERA lawyer near me, or can I hire one from another city?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'A RERA complaint is filed before the Authority in the state where the project is located, so an advocate familiar with UP-RERA practice and the local Appellate Tribunal is generally better placed than searching only for a "RERA lawyer near me" by distance — what matters is regular appearance before the forum handling your matter.',
-      },
-    },
-  ],
+  mainEntity: reraLucknowFaqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
 }
 
 export default async function ReraServicePage() {
@@ -453,20 +323,7 @@ export default async function ReraServicePage() {
                 compensation claims, and RERA appeals.
               </p>
 
-              {reraStats.length > 0 && (
-                <div className="mt-7 flex flex-wrap gap-x-8 gap-y-3">
-                  {reraStats.map(({ value, label }) => (
-                    <div key={label} className="flex items-baseline gap-2">
-                      <span className="font-display text-2xl font-bold text-gold-gradient">
-                        {value}
-                      </span>
-                      <span className="max-w-[8rem] font-body text-sm leading-snug text-navy-700/75 dark:text-cream/55">
-                        {label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              )}
+              <ServiceStats service="rera" />
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
@@ -542,8 +399,10 @@ export default async function ReraServicePage() {
             </div>
           </div>
 
+          <GuideToc items={reraLucknowToc} />
+
           <section className="mb-16" aria-labelledby="rera-team">
-            <h2 id="rera-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="rera-team" className="mb-4 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               RERA &amp; Real Estate Support Team
             </h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
@@ -610,7 +469,7 @@ export default async function ReraServicePage() {
             <p>
               For ownership, title verification, partition, sale deeds, or land
               disputes outside the RERA context, see our{' '}
-              <Link href="/services/property-land-matters" className="font-semibold text-gold-700 underline underline-offset-4 hover:text-gold-600 dark:text-gold-400">
+              <Link href="/services/property-lawyer-lucknow" className="font-semibold text-gold-700 underline underline-offset-4 hover:text-gold-600 dark:text-gold-400">
                 property and land legal services
               </Link>
               .
@@ -631,6 +490,17 @@ export default async function ReraServicePage() {
               For an initial review, bring your builder-buyer agreement, payment
               records, the promised possession date, and correspondence with the
               developer so the relevant documents and next steps can be assessed.
+            </p>
+            <p className="mt-4 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+              Check the current allocation for a Lucknow project at UP-RERA,
+              Lucknow. The regional office at Greater Noida in Gautam Buddh Nagar
+              handles matters allocated to it for western Uttar Pradesh, including
+              relevant NCR projects; the lawyer&apos;s address does not decide the
+              original forum. Appeals from the Authority or adjudicating officer
+              are distinct proceedings before UP-REAT at Lucknow. Any subsequent
+              High Court appeal or other challenge needs a separate statutory and
+              territorial assessment, not an assumption that every case belongs
+              at the Lucknow Bench.
             </p>
             <div className="mt-6 grid gap-5 md:grid-cols-2">
               <Link href="#services" className="glass-card group block rounded-sm border border-gold-500/20 p-6 transition-colors hover:border-gold-500/50 dark:border-gold-500/15">
@@ -758,39 +628,19 @@ export default async function ReraServicePage() {
             </p>
           </div>
 
-          <div id="process" className="mb-16 scroll-mt-28">
-            <div className="mb-10 text-center">
-              <h2 className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-                The Way <em className="text-gold-gradient">We Work</em>
-              </h2>
-              <p className="mx-auto max-w-xl font-body text-navy-700 dark:text-cream/55">
-                A clear, structured process from first consultation to resolution.
-              </p>
-            </div>
-            <div className="relative">
-              <div className="absolute left-[10%] right-[10%] top-[22px] hidden h-px bg-gold-500/25 lg:block" aria-hidden />
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
-                {workSteps.map(({ icon: Icon, title, description }, index) => (
-                  <div key={title} className="relative flex flex-col items-center gap-4 text-center">
-                    <div className="glass-card z-10 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-gold-500/40">
-                      <Icon className="h-5 w-5 text-gold-600 dark:text-gold-400" />
-                    </div>
-                    <div className="glass-card w-full flex-1 rounded-sm border border-gold-500/20 p-5 dark:border-gold-500/15">
-                      <span className="mb-1 block font-caps text-xs uppercase tracking-widest text-gold-600 dark:text-gold-400">
-                        Step {index + 1}
-                      </span>
-                      <h3 className="mb-1.5 font-display text-lg font-bold text-navy-900 dark:text-cream">
-                        {title}
-                      </h3>
-                      <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">
-                        {description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <StatuteTable
+            id="rera-statutory-framework"
+            heading="RERA Statutory Framework"
+            intro="The key provisions separate Authority complaints, compensation adjudication, appellate remedies and enforcement. Check the current Uttar Pradesh rules, official directions and applicable decisions for the particular project."
+            rows={reraStatutes}
+          />
+
+          <GuideStages
+            id="process"
+            heading="From Project Review to Order Enforcement"
+            intro="Six stages explain how a Lucknow RERA matter may proceed, with a separate route for compensation and further steps for appeal or non-compliance. Not every case needs every stage; the outcome and timing depend on the facts and the competent forum."
+            stages={reraLucknowStages}
+          />
 
           <div id="insights" className="mb-16 scroll-mt-28">
             <div className="mb-10 text-center">
@@ -798,7 +648,7 @@ export default async function ReraServicePage() {
                 From Our Desk
               </span>
               <h2 className="mb-3 mt-2 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-                RERA <em className="text-gold-gradient">Insights</em>
+                RERA <em className="text-gold-gradient">FAQs</em>
               </h2>
               <p className="mx-auto max-w-xl font-body text-navy-700 dark:text-cream/55">
                 Common questions homebuyers and developers bring to us — drawn from
@@ -832,7 +682,7 @@ export default async function ReraServicePage() {
           </div>
 
           <section aria-labelledby="rera-remedy-document-review" className="mb-16 border-t border-gold-500/20 pt-10">
-            <h2 id="rera-remedy-document-review" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Prepare Your UP-RERA Complaint Around the Relief You Need</h2>
+            <h2 id="rera-remedy-document-review" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream">Prepare Your UP-RERA Complaint Around the Relief You Need</h2>
             <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">A homebuyer seeking possession with delay interest may need a different case strategy from one seeking withdrawal and refund. Compensation, interest, project compliance, appeals and enforcement also have distinct statutory requirements. We review the agreement, project registration, promised possession date, extensions, payments and earlier proceedings before identifying the competent authority and available relief. Filing a complaint does not guarantee an immediate refund or possession.</p>
             <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Prepare a project and payment chronology</h3>
             <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Share the allotment letter, builder-buyer agreement, receipts, demand letters, possession communications, project details and any settlement or prior order. Record what was promised, paid, delivered and disputed, with dates. An unpaid order may require enforcement rather than a fresh complaint; an appeal has its own deadline and requirements. For projects in the NCR region, see our dedicated <Link href="/services/rera-lawyer-noida-ghaziabad" className="text-gold-700 underline dark:text-gold-400">Noida and Ghaziabad RERA service</Link>.</p>

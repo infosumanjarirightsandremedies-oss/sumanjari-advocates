@@ -9,8 +9,6 @@ import {
   ShieldAlert,
   AlertTriangle,
   Smartphone,
-  Scale,
-  Siren,
   Landmark,
   Gavel,
   ShieldCheck,
@@ -22,8 +20,11 @@ import {
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FirmCredentials from '@/components/FirmCredentials'
+import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
+import { GuideToc, GuideStages, StatuteTable } from '@/components/LucknowGuide'
+import { cyberCrimeLucknowStages, cyberCrimeLucknowToc, cyberCrimeLucknowStatutes } from '@/lib/guides/cyberCrimeLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL } from '@/lib/contactLinks'
@@ -66,13 +67,13 @@ export const metadata: Metadata = {
     'Cyber Crime Bank Lien Lucknow',
   ],
   alternates: {
-    canonical: '/services/cyber-crime-lawyer',
+    canonical: '/services/cyber-crime-lawyer-lucknow',
   },
   openGraph: {
     title: 'Cyber Crime Lawyer in Lucknow | Sumanjari & Co. Advocates',
     description:
       'Cyber crime complaints, bank account freeze/unfreeze matters, IT Act prosecution and defence, and cyber fraud bail before the Allahabad High Court, Lucknow Bench.',
-    url: '/services/cyber-crime-lawyer',
+    url: '/services/cyber-crime-lawyer-lucknow',
   },
   twitter: {
     card: 'summary_large_image',
@@ -85,7 +86,7 @@ const cyberCrimeJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
   name: 'Sumanjari & Co. Advocates — Cyber Crime Matters',
-  url: `${SITE_URL}/services/cyber-crime-lawyer`,
+  url: `${SITE_URL}/services/cyber-crime-lawyer-lucknow`,
   description:
     'Representation in cyber crime complaints, cyber thana proceedings, IT Act prosecutions, bank account freeze and unfreeze applications, sextortion and online harassment matters, and cyber fraud bail, before the police, District & Sessions Courts, and the Allahabad High Court, Lucknow Bench.',
   telephone: '+91-83024-71764',
@@ -183,39 +184,6 @@ const jurisdiction = [
     title: 'Allahabad High Court, Lucknow Bench',
     blurb:
       'Anticipatory bail, FIR quashing, and writ remedies in cyber crime and IT Act matters, argued from our chambers at Block D-311.',
-  },
-]
-
-const workSteps = [
-  {
-    icon: Landmark,
-    title: 'Private Consultation',
-    description:
-      'We begin with a confidential discussion of your matter, understanding the facts and your expectations while safeguarding your privacy.',
-  },
-  {
-    icon: Siren,
-    title: 'In-Depth Case Review',
-    description:
-      'Every document and detail is carefully examined so we can assess the strengths, risks, and best possible legal routes for you.',
-  },
-  {
-    icon: Scale,
-    title: 'Strategy & Drafting',
-    description:
-      'A clear, customised strategy is prepared and precise pleadings are drafted to present your case strongly before the court or authority.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Focused Representation',
-    description:
-      'We represent you with preparation and clarity, ensuring timely filings, effective arguments, and regular updates on each hearing.',
-  },
-  {
-    icon: Gavel,
-    title: 'Resolution & Ongoing Support',
-    description:
-      'Even after the matter is resolved, we guide you on next steps, compliance, and any further legal support you may require.',
   },
 ]
 
@@ -367,6 +335,7 @@ export default async function CyberCrimeLawyerAdvocatePage() {
                 — before the Cyber Thana, Lucknow, and the Allahabad High
                 Court, Lucknow Bench, led by Adv. Aishwarya Pandey.
               </p>
+              <ServiceStats service="cyberCrime" />
               <ConsultationActions className="mt-8 hidden md:flex" />
             </div>
             {cyberCrimeLead && (
@@ -385,8 +354,10 @@ export default async function CyberCrimeLawyerAdvocatePage() {
             <ConsultationActions className="flex md:hidden" />
           </div>
 
+          <GuideToc items={cyberCrimeLucknowToc} />
+
           <section className="mb-16" aria-labelledby="cyber-crime-team">
-            <h2 id="cyber-crime-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="cyber-crime-team" className="mb-4 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Our Cyber Crime Team
             </h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
@@ -398,7 +369,7 @@ export default async function CyberCrimeLawyerAdvocatePage() {
           </section>
 
           <section className="mb-16 border-y border-gold-500/25 py-8" aria-labelledby="urgent-cyber-fraud">
-            <h2 id="urgent-cyber-fraud" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="urgent-cyber-fraud" className="mb-4 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Lost Money to Online Fraud? Act Immediately
             </h2>
             <ol className="list-decimal space-y-3 pl-5 font-body leading-relaxed text-navy-800 dark:text-cream/75">
@@ -488,7 +459,7 @@ export default async function CyberCrimeLawyerAdvocatePage() {
           </div>
 
           <section className="mb-16 space-y-6" aria-labelledby="cyber-complaint-lucknow">
-            <h2 id="cyber-complaint-lucknow" className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="cyber-complaint-lucknow" className="scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               How to File a Cyber Crime Complaint in Lucknow
             </h2>
             <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">
@@ -504,7 +475,7 @@ export default async function CyberCrimeLawyerAdvocatePage() {
           </section>
 
           <section className="mb-16 space-y-5" aria-labelledby="frozen-bank-account">
-            <h2 id="frozen-bank-account" className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="frozen-bank-account" className="scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Bank Account Frozen After a Cyber Crime Complaint?
             </h2>
             <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">
@@ -526,7 +497,7 @@ export default async function CyberCrimeLawyerAdvocatePage() {
               If you receive a police notice or learn of an FIR, preserve it and obtain advice before responding. Do not ignore the notice, delete records, or contact a complainant to pressure them. We assess the alleged role, transaction trail, and available documents before advising on a response, regular or anticipatory bail where maintainable, or a High Court remedy. Quashing is a distinct remedy and is not available merely because an allegation is disputed.
             </p>
             <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">
-              For connected proceedings, see our <Link href="/services/criminal-lawyer" className="font-semibold underline underline-offset-4">criminal law practice in Lucknow</Link>. For online harassment or impersonation, preserve the account URLs and report the content through the platform&apos;s grievance process alongside any police complaint; content removal and criminal proceedings are separate processes.
+              For connected proceedings, see our <Link href="/services/criminal-lawyer-lucknow" className="font-semibold underline underline-offset-4">criminal law practice in Lucknow</Link>. For online harassment or impersonation, preserve the account URLs and report the content through the platform&apos;s grievance process alongside any police complaint; content removal and criminal proceedings are separate processes.
             </p>
           </section>
 
@@ -562,39 +533,31 @@ export default async function CyberCrimeLawyerAdvocatePage() {
             </div>
           </div>
 
-          <div className="mb-16">
-            <div className="mb-10 text-center">
-              <h2 className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-                The Way <em className="text-gold-gradient">We Work</em>
-              </h2>
-              <p className="mx-auto max-w-xl font-body text-navy-700 dark:text-cream/55">
-                A clear, structured process from first consultation to resolution.
-              </p>
-            </div>
-            <div className="relative">
-              <div className="absolute left-[10%] right-[10%] top-[22px] hidden h-px bg-gold-500/25 lg:block" aria-hidden />
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
-                {workSteps.map(({ icon: Icon, title, description }, index) => (
-                  <div key={title} className="relative flex flex-col items-center gap-4 text-center">
-                    <div className="glass-card z-10 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-gold-500/40">
-                      <Icon className="h-5 w-5 text-gold-600 dark:text-gold-400" />
-                    </div>
-                    <div className="glass-card w-full flex-1 rounded-sm border border-gold-500/20 p-5 dark:border-gold-500/15">
-                      <span className="mb-1 block font-caps text-xs uppercase tracking-widest text-gold-600 dark:text-gold-400">
-                        Step {index + 1}
-                      </span>
-                      <h3 className="mb-1.5 font-display text-lg font-bold text-navy-900 dark:text-cream">
-                        {title}
-                      </h3>
-                      <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">
-                        {description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <StatuteTable
+            id="cyber-statutes"
+            heading="Cybercrime Law, Procedure and Digital Evidence"
+            intro="The IT Act may apply alongside general criminal law. Offence dates, procedural stage and commencement or savings provisions determine whether BNS, BNSS and BSA or predecessor provisions govern a particular issue. Current jurisdictional and forum practice must also be checked."
+            rows={cyberCrimeLucknowStatutes}
+          />
+
+          <GuideStages
+            id="cyber-procedure"
+            heading="From Cybercrime Reporting to Appropriate Court Relief"
+            intro="These six stages distinguish a report from an FIR, an investigation from a finding of liability, and a bank restriction from authority to release money. The sequence varies with the incident, your role and connected proceedings."
+            stages={cyberCrimeLucknowStages}
+          />
+
+          <section id="cyber-documents" aria-labelledby="cyber-documents-heading" className="mb-16 scroll-mt-28 border-t border-gold-500/20 pt-10">
+            <h2 id="cyber-documents-heading" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">First-Consultation and Digital-Evidence Checklist</h2>
+            <p className="mb-4 font-body leading-relaxed text-navy-700 dark:text-cream/70">Preserve the originals and a clear chronology. Seek urgent advice on an active notice, continuing threat or account restriction even when the bank has not yet supplied every requested detail.</p>
+            <ul className="list-disc space-y-3 pl-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">
+              <li>Transaction IDs, relevant statements, payment dates and amounts, bank complaints and replies from official channels.</li>
+              <li>1930 or portal acknowledgements, written police complaints, FIR details if registered, notices and proof of receipt.</li>
+              <li>Original messages, emails, account URLs and relevant devices; retain complete context without editing or publicly circulating sensitive material.</li>
+              <li>For a freeze: the available restriction letter, affected amount, issuing authority, complaint references and documents explaining legitimate credits.</li>
+              <li>All connected complaints, orders and partial releases, including instructions from other states. Do not provide passwords, OTPs or remote access to anyone promising recovery.</li>
+            </ul>
+          </section>
 
           <div className="mb-16">
             <div className="mb-10 text-center">
@@ -636,7 +599,7 @@ export default async function CyberCrimeLawyerAdvocatePage() {
           </div>
 
           <section className="mb-16" aria-labelledby="cyber-crime-faq">
-            <h2 id="cyber-crime-faq" className="mb-6 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="cyber-crime-faq" className="mb-6 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Cyber Crime Lawyer in Lucknow: Frequently Asked Questions
             </h2>
             <div className="divide-y divide-gold-500/20">

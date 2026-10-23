@@ -21,12 +21,22 @@ const nextConfig = {
     return [
       {
         source: '/services/tax-revenue-matters',
-        destination: '/services/tax-revenue-advocate',
+        destination: '/services/tax-lawyer-lucknow',
+        permanent: true,
+      },
+      {
+        source: '/services/tax-revenue-advocate',
+        destination: '/services/tax-lawyer-lucknow',
         permanent: true,
       },
       {
         source: '/services/civil-matters',
-        destination: '/services/civil-advocate',
+        destination: '/services/civil-lawyer-lucknow',
+        permanent: true,
+      },
+      {
+        source: '/services/civil-advocate',
+        destination: '/services/civil-lawyer-lucknow',
         permanent: true,
       },
       {
@@ -36,17 +46,67 @@ const nextConfig = {
       },
       {
         source: '/services/service-employment-matters',
-        destination: '/services/service-advocate',
+        destination: '/services/service-lawyer-lucknow',
+        permanent: true,
+      },
+      {
+        source: '/services/service-advocate',
+        destination: '/services/service-lawyer-lucknow',
         permanent: true,
       },
       {
         source: '/services/criminal-matters',
-        destination: '/services/criminal-lawyer',
+        destination: '/services/criminal-lawyer-lucknow',
+        permanent: true,
+      },
+      {
+        source: '/services/criminal-lawyer',
+        destination: '/services/criminal-lawyer-lucknow',
+        permanent: true,
+      },
+      {
+        source: '/services/divorce-lawyer',
+        destination: '/services/divorce-lawyer-lucknow',
+        permanent: true,
+      },
+      {
+        source: '/services/banking-recovery-matters',
+        destination: '/services/banking-recovery-lawyer-lucknow',
+        permanent: true,
+      },
+      {
+        source: '/services/company-corporate-matters',
+        destination: '/services/company-corporate-lawyer-lucknow',
+        permanent: true,
+      },
+      {
+        source: '/services/consumer-motor-accident-matters',
+        destination: '/services/consumer-motor-accident-lawyer-lucknow',
+        permanent: true,
+      },
+      {
+        source: '/services/cyber-crime-lawyer',
+        destination: '/services/cyber-crime-lawyer-lucknow',
+        permanent: true,
+      },
+      {
+        source: '/services/constitutional-writ-matters',
+        destination: '/services/constitutional-writ-lawyer-lucknow',
+        permanent: true,
+      },
+      {
+        source: '/services/property-land-matters',
+        destination: '/services/property-lawyer-lucknow',
+        permanent: true,
+      },
+      {
+        source: '/services/rera-lawyer',
+        destination: '/services/rera-lawyer-lucknow',
         permanent: true,
       },
       {
         source: '/services/rera',
-        destination: '/services/rera-lawyer',
+        destination: '/services/rera-lawyer-lucknow',
         permanent: true,
       },
     ]

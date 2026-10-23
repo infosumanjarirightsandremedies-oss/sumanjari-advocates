@@ -15,15 +15,17 @@ import {
   Landmark,
   ShieldCheck,
   MessageSquareWarning,
-  Siren,
   ClipboardX,
   ScrollText,
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FirmCredentials from '@/components/FirmCredentials'
+import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
+import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
+import { criminalStages, criminalStatutes, criminalToc } from '@/lib/guides/criminalLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL } from '@/lib/contactLinks'
@@ -49,7 +51,7 @@ function ConsultationActions({ className }: { className: string }) {
 export const metadata: Metadata = {
   title: { absolute: 'Criminal Lawyer in Lucknow | Bail & FIR Quashing | Sumanjari' },
   description:
-    'Criminal lawyer and advocate in Lucknow for bail, anticipatory bail, FIR quashing, trials and appeals before District Courts and the High Court, Lucknow Bench.',
+    'Criminal lawyer in Lucknow: stage-by-stage guide from FIR and bail to trial and appeal before the Civil Court, Kaiserbagh and the Allahabad High Court, Lucknow Bench.',
   keywords: [
     'Criminal Lawyer in Lucknow',
     'Criminal Lawyer Lucknow',
@@ -67,15 +69,19 @@ export const metadata: Metadata = {
     'Cybercrime Lawyer Lucknow',
     'Police Notice Legal Advice Lucknow',
     'Criminal Summons Lawyer Lucknow',
+    'Section 528 BNSS Lawyer Lucknow',
+    'Section 482 CrPC Quashing Lucknow',
+    'Anticipatory Bail Lucknow High Court',
+    'Sessions Court Lucknow Lawyer',
   ],
   alternates: {
-    canonical: '/services/criminal-lawyer',
+    canonical: '/services/criminal-lawyer-lucknow',
   },
   openGraph: {
     title: 'Criminal Lawyer in Lucknow | Bail & FIR Quashing | Sumanjari & Co.',
     description:
       'Consult a criminal lawyer in Lucknow for bail, FIR quashing, trial defence, and appeals before the District & Sessions Courts and the Allahabad High Court, Lucknow Bench.',
-    url: '/services/criminal-lawyer',
+    url: '/services/criminal-lawyer-lucknow',
   },
   twitter: {
     card: 'summary_large_image',
@@ -88,7 +94,7 @@ const criminalMattersJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
   name: 'Sumanjari & Co. Advocates — Criminal Lawyer in Lucknow',
-  url: `${SITE_URL}/services/criminal-lawyer`,
+  url: `${SITE_URL}/services/criminal-lawyer-lucknow`,
   description:
     'Strategic criminal defence covering FIR quashing, bail and anticipatory bail, trial representation, appeals and revisions, cheque bounce, domestic violence and 498A matters, and cybercrime, before the District & Sessions Courts and the Allahabad High Court, Lucknow Bench.',
   telephone: '+91-83024-71764',
@@ -98,6 +104,16 @@ const criminalMattersJsonLd = {
     { '@type': 'State', name: 'Uttar Pradesh' },
   ],
   serviceType: 'Criminal Lawyer Services',
+}
+
+const criminalBreadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/#services` },
+    { '@type': 'ListItem', position: 3, name: 'Criminal Lawyer in Lucknow', item: `${SITE_URL}/services/criminal-lawyer-lucknow` },
+  ],
 }
 
 const matters = [
@@ -193,39 +209,6 @@ const jurisdiction = [
   },
 ]
 
-const workSteps = [
-  {
-    icon: Landmark,
-    title: 'FIR, Complaint & Police Investigation',
-    description:
-      'We review the allegations, FIR or police notice, relevant offences, and available records. Advice at this stage covers responding to lawful notices, preserving evidence, and identifying the appropriate remedy for an accused person or complainant.',
-  },
-  {
-    icon: Siren,
-    title: 'Arrest, Remand & Bail',
-    description:
-      'If arrest is apprehended, we assess whether anticipatory bail is available. After arrest, we examine remand and regular bail options, prior orders, and any special-law restrictions. Filing a bail application does not itself protect against arrest.',
-  },
-  {
-    icon: Scale,
-    title: 'Police Report, Cognizance & Charges',
-    description:
-      'After the police report, we examine the chargesheet or closure report, the court orders, and the supporting material. Depending on the record and procedural stage, advice may concern objections, discharge, framing of charges, or a High Court challenge.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Evidence & Criminal Trial',
-    description:
-      'Trial preparation includes reviewing witness statements, medical and forensic records, and electronic evidence. We prepare cross-examination and submissions on the prosecution case and any defence evidence, while explaining hearing requirements and bail conditions.',
-  },
-  {
-    icon: Gavel,
-    title: 'Judgment, Appeal & Further Remedies',
-    description:
-      'After an order or judgment, we assess appeal or revision rights, applicable deadlines, and whether suspension of sentence and bail pending appeal can be sought. The appropriate forum and remedy depend on the order and the governing law.',
-  },
-]
-
 const criminalInsights = [
   {
     icon: ShieldAlert,
@@ -281,6 +264,36 @@ const criminalInsights = [
     excerpt:
       'Check the advocate\'s relevant practice areas, experience with the court and type of proceeding, and who will handle drafting and appearances. Ask for an assessment of risks, communication arrangements, and fee scope. Be cautious of anyone promising bail, quashing, or a favourable judgment; the decision belongs to the court.',
   },
+  {
+    icon: Scale,
+    title: 'What is the difference between a writ petition and a Section 528 BNSS application at the Lucknow Bench?',
+    excerpt:
+      'A writ petition under Article 226 is typically used to challenge an FIR or restrain arrest while investigation is still pending, and is heard on constitutional grounds. An application under Section 528 BNSS (formerly Section 482 CrPC) is the ordinary route once a chargesheet, summoning order, or other proceeding exists, invoking the High Court\'s inherent powers to prevent abuse of process. The right remedy depends on the stage the case has reached.',
+  },
+  {
+    icon: KeyRound,
+    title: 'Is anticipatory bail available in Uttar Pradesh?',
+    excerpt:
+      'Yes. Anticipatory bail under Section 482 BNSS (formerly Section 438 CrPC) is available in Uttar Pradesh, though the remedy was withdrawn by the state from 1976 and restored only when the CrPC (Uttar Pradesh Amendment) Act, 2018 took effect in June 2019. Applications can be made to the Sessions Court at the Civil Court, Kaiserbagh, or to the Allahabad High Court, Lucknow Bench.',
+  },
+  {
+    icon: Gavel,
+    title: 'Which court in Lucknow hears my bail application first?',
+    excerpt:
+      'This depends on the offence and the stage of the case. Bail for offences within Magistrate jurisdiction is usually sought from the Magistrate at the Civil Court, Kaiserbagh; for graver offences, the Sessions Court and, in appropriate cases, the Allahabad High Court, Lucknow Bench have concurrent jurisdiction. Ordinarily, the Sessions Court is approached before the Lucknow Bench, though urgent circumstances can justify approaching the High Court directly.',
+  },
+  {
+    icon: ShieldAlert,
+    title: 'Can a matrimonial (BNS s.85 / 498A) FIR be quashed after settlement?',
+    excerpt:
+      'The Allahabad High Court, Lucknow Bench can quash proceedings under Section 528 BNSS where parties to a matrimonial dispute have genuinely settled, applying the principles in Gian Singh v. State of Punjab (2012). Quashing is more readily granted where the dispute is predominantly civil or matrimonial in nature and less so in cases involving grave or non-compoundable allegations. Our divorce and matrimonial settlement practice can help document the terms of any settlement.',
+  },
+  {
+    icon: Landmark,
+    title: 'What happens if the police do not register my FIR in Lucknow?',
+    excerpt:
+      'If a police station refuses to register an FIR for a cognizable offence, a written complaint can be made to the Deputy Commissioner of Police under Section 173(4) BNSS. If that does not help, an application can be filed before the Magistrate at the Civil Court, Kaiserbagh under Section 175(3) BNSS (formerly Section 156(3) CrPC), supported by an affidavit, directing the police to register and investigate the complaint.',
+  },
 ]
 
 const criminalFaqJsonLd = {
@@ -310,6 +323,11 @@ export default async function CriminalMattersPage() {
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(criminalFaqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(criminalBreadcrumbJsonLd) }}
       />
       <Navbar />
 
@@ -341,6 +359,10 @@ export default async function CriminalMattersPage() {
               and appeals before the District &amp; Sessions Courts, Lucknow,
               and the Allahabad High Court, Lucknow Bench.
             </p>
+            <p className="mt-4 max-w-2xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+              In Lucknow, a criminal case usually moves from FIR or complaint at a police station under the Lucknow Police Commissionerate, through bail and remand before the Magistrate and Sessions Courts at the Civil Court, Kaiserbagh, to trial and appeal. Quashing, anticipatory bail and appeals can be taken to the Allahabad High Court, Lucknow Bench at Gomti Nagar. The ten stages below explain each step.
+            </p>
+            <ServiceStats service="criminal" />
             <ConsultationActions className="mt-8 hidden md:flex" />
             </div>
             {criminalLead && (
@@ -359,8 +381,10 @@ export default async function CriminalMattersPage() {
             <ConsultationActions className="flex md:hidden" />
           </div>
 
+          <GuideToc items={criminalToc} />
+
           <section className="mb-16" aria-labelledby="criminal-team">
-            <h2 id="criminal-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="criminal-team" className="mb-4 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Our Criminal Law Team
             </h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
@@ -393,7 +417,7 @@ export default async function CriminalMattersPage() {
             </p>
           </div>
 
-          <div className="mb-16">
+          <div id="forums" className="mb-16 scroll-mt-28">
             <div className="mb-8 flex items-center gap-2">
               <Landmark className="h-5 w-5 text-gold-600 dark:text-gold-400" />
               <h2 className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
@@ -417,7 +441,18 @@ export default async function CriminalMattersPage() {
             </div>
           </div>
 
-          <div className="mb-16">
+          <StatuteTable
+            id="statutory-framework"
+            heading="Statutory Framework: BNS, BNSS & BSA"
+            intro="The codes and special statutes that govern a criminal case moving through Lucknow's police stations, the Civil Court at Kaiserbagh, and the Allahabad High Court, Lucknow Bench."
+            rows={criminalStatutes}
+          />
+
+          <p className="-mt-10 mb-16 max-w-3xl font-body text-sm leading-relaxed text-navy-700 dark:text-cream/55">
+            BNS, BNSS and BSA apply from 1 July 2024. FIRs and proceedings begun earlier generally continue under the IPC, CrPC and Evidence Act per Section 531 BNSS. The date of the offence and of registration decide which code applies.
+          </p>
+
+          <div id="matters" className="mb-16 scroll-mt-28">
             <h2 className="mb-8 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Types of Criminal Matters We Handle
             </h2>
@@ -479,7 +514,7 @@ export default async function CriminalMattersPage() {
             </div>
           </div>
 
-          <section className="mb-16 grid gap-10 md:grid-cols-2" aria-labelledby="criminal-consultation">
+          <section className="mb-16 grid gap-10 scroll-mt-28 md:grid-cols-2" id="documents" aria-labelledby="criminal-consultation">
             <div>
               <h2 id="criminal-consultation" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">
                 Documents to Bring to a Criminal Lawyer
@@ -511,7 +546,7 @@ export default async function CriminalMattersPage() {
                 Ask about the proposed scope of work, professional fees,
                 filing expenses, and who will appear. For matters involving
                 electronic evidence, see our{' '}
-                <Link href="/services/cyber-crime-lawyer" className="text-gold-700 underline underline-offset-4 dark:text-gold-400">cybercrime legal services</Link>.
+                <Link href="/services/cyber-crime-lawyer-lucknow" className="text-gold-700 underline underline-offset-4 dark:text-gold-400">cybercrime legal services</Link>.
                 {' '}Related matrimonial issues are covered in our{' '}
                 <Link href="/services/family-advocate" className="text-gold-700 underline underline-offset-4 dark:text-gold-400">family and matrimonial practice</Link>.
               </p>
@@ -523,41 +558,24 @@ export default async function CriminalMattersPage() {
             </div>
           </section>
 
-          <div className="mb-16">
-            <div className="mb-10 text-center">
-              <h2 className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-                Criminal Case Procedure <em className="text-gold-gradient">in Lucknow</em>
-              </h2>
-              <p className="mx-auto max-w-xl font-body text-navy-700 dark:text-cream/55">
-                A clear, structured process from first consultation to resolution.
-              </p>
-            </div>
-            <div className="relative">
-              <div className="absolute left-[10%] right-[10%] top-[22px] hidden h-px bg-gold-500/25 lg:block" aria-hidden />
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
-                {workSteps.map(({ icon: Icon, title, description }, index) => (
-                  <div key={title} className="relative flex flex-col items-center gap-4 text-center">
-                    <div className="glass-card z-10 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-gold-500/40">
-                      <Icon className="h-5 w-5 text-gold-600 dark:text-gold-400" />
-                    </div>
-                    <div className="glass-card w-full flex-1 rounded-sm border border-gold-500/20 p-5 dark:border-gold-500/15">
-                      <span className="mb-1 block font-caps text-xs uppercase tracking-widest text-gold-600 dark:text-gold-400">
-                        Step {index + 1}
-                      </span>
-                      <h3 className="mb-1.5 font-display text-lg font-bold text-navy-900 dark:text-cream">
-                        {title}
-                      </h3>
-                      <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">
-                        {description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <GuideStages
+            id="criminal-procedure"
+            heading="Criminal Case Procedure in Lucknow: Stage 1 to Stage 10"
+            intro="How a criminal case actually moves through Lucknow's police stations, the Civil Court at Kaiserbagh and the Allahabad High Court, Lucknow Bench, with the BNSS provisions that govern each step."
+            stages={criminalStages}
+          />
+
+          <div className="glass-card mb-16 rounded-sm border border-gold-500/20 p-6 md:p-8">
+            <h3 className="mb-3 font-display text-lg font-bold text-navy-900 dark:text-cream">Track B: Cheque Bounce (Section 138 NI Act) in Lucknow</h3>
+            <p className="mb-3 font-body leading-relaxed text-navy-800 dark:text-cream/75">
+              A cheque-bounce complaint follows its own track outside the ten stages above. After the bank returns a cheque unpaid, a legal notice must be sent within 30 days of the return memo, demanding payment within 15 days. If payment is not made, the complaint must be filed before a Magistrate court at the Civil Court, Lucknow within one month after that window closes, under Section 142 of the Negotiable Instruments Act.
+            </p>
+            <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">
+              The court can order interim compensation of up to 20% of the cheque amount under Section 143A, and an appellant against conviction must ordinarily deposit at least 20% of the compensation or fine awarded under Section 148 before the appeal is heard. The offence is compoundable, and many disputes settle once notice is served.
+            </p>
           </div>
 
-          <div className="mb-16">
+          <div id="faqs" className="mb-16 scroll-mt-28">
             <div className="mb-10 text-center">
               <span className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">
                 From Our Desk
@@ -600,7 +618,7 @@ export default async function CriminalMattersPage() {
             <h2 id="criminal-notice-review" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Received a Police Notice, Summons or FIR?</h2>
             <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">The next step depends on whether you are a complainant, witness, accused person or someone apprehending arrest. Share the complete notice or FIR, offence details, police station, hearing or attendance date and any existing order. Do not ignore a summons or assume that filing a quashing petition protects you from arrest; protection requires an applicable legal provision or a court order. Bail, anticipatory bail and quashing serve different purposes and require separate assessment.</p>
             <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Prepare the record without compromising evidence</h3>
-            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Preserve the chronology, original messages, medical records, transaction documents and previous applications. Do not delete records or approach witnesses to influence their account. We examine the offence date, procedural stage and transitional provisions before deciding whether the BNS, BNSS and Bharatiya Sakshya Adhiniyam or earlier legislation governs the issue. For electronic evidence and account restrictions, see our <Link href="/services/cyber-crime-lawyer" className="text-gold-700 underline dark:text-gold-400">cybercrime legal services</Link>.</p>
+            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Preserve the chronology, original messages, medical records, transaction documents and previous applications. Do not delete records or approach witnesses to influence their account. We examine the offence date, procedural stage and transitional provisions before deciding whether the BNS, BNSS and Bharatiya Sakshya Adhiniyam or earlier legislation governs the issue. For electronic evidence and account restrictions, see our <Link href="/services/cyber-crime-lawyer-lucknow" className="text-gold-700 underline dark:text-gold-400">cybercrime legal services</Link>.</p>
           </section>
 
           <ServiceBlogs
@@ -612,7 +630,7 @@ export default async function CriminalMattersPage() {
             viewAllHref={`/blog?category=${encodeURIComponent('Criminal Matters')}`}
           />
 
-          <div className="glass-card rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">
+          <div id="contact" className="glass-card scroll-mt-28 rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">
             <h2 className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Facing a Criminal Matter?
             </h2>

@@ -19,8 +19,11 @@ import {
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FirmCredentials from '@/components/FirmCredentials'
+import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
+import { GuideToc, GuideStages, StatuteTable } from '@/components/LucknowGuide'
+import { familyLucknowStages, familyLucknowToc, familyLucknowStatutes } from '@/lib/guides/familyLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL } from '@/lib/contactLinks'
@@ -119,7 +122,7 @@ const matters = [
   {
     icon: HeartCrack,
     title: 'Divorce & Matrimonial Disputes',
-    href: '/services/divorce-lawyer',
+    href: '/services/divorce-lawyer-lucknow',
     points: [
       'Mutual consent divorce petitions and settlement negotiations',
       'Contested divorce proceedings on grounds such as cruelty, desertion, or adultery',
@@ -201,39 +204,6 @@ const jurisdiction = [
     title: 'Mediation & Settlement',
     blurb:
       'Negotiated and mediated resolutions where both parties are open to an amicable settlement, in and outside court.',
-  },
-]
-
-const workSteps = [
-  {
-    icon: Landmark,
-    title: 'Private Consultation',
-    description:
-      'Discuss the marriage, children, financial position, existing cases, and immediate safety or support needs in confidence. Bring available records and a chronology of events.',
-  },
-  {
-    icon: Scale,
-    title: 'In-Depth Case Review',
-    description:
-      'Identify the applicable law, territorial jurisdiction, available evidence, and appropriate remedies. Review existing orders so connected proceedings and disclosures remain consistent.',
-  },
-  {
-    icon: HeartHandshake,
-    title: 'Strategy & Drafting',
-    description:
-      'Prepare petitions, replies, financial disclosures, and interim applications as needed. Discuss settlement options, the scope of representation, and fee terms before proceeding.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Focused Representation',
-    description:
-      'Represent you through notice, responses, interim hearings, mediation where appropriate, and evidence. Explain hearing outcomes and what documents or instructions are needed next.',
-  },
-  {
-    icon: HandCoins,
-    title: 'Resolution & Ongoing Support',
-    description:
-      'Review the decree, order, or settlement obligations. Advise on compliance, enforcement, variation, or an available challenge, including any applicable filing deadline.',
   },
 ]
 
@@ -361,6 +331,7 @@ export default async function FamilyMatrimonialServicePage() {
               and matrimonial disputes — before the Family Court, District Courts,
               and the Allahabad High Court, Lucknow Bench.
             </p>
+            <ServiceStats service="family" />
             <ConsultationActions className="mt-8 hidden md:flex" />
             </div>
             {familyLead && (
@@ -379,8 +350,10 @@ export default async function FamilyMatrimonialServicePage() {
             <ConsultationActions className="flex md:hidden" />
           </div>
 
+          <GuideToc items={familyLucknowToc} />
+
           <section className="mb-16" aria-labelledby="family-team">
-            <h2 id="family-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="family-team" className="mb-4 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Our Family Law Team
             </h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
@@ -413,7 +386,7 @@ export default async function FamilyMatrimonialServicePage() {
               between relatives belongs there. We assess maintenance, protection,
               custody, and property issues separately instead of treating divorce
               as the only solution. For dissolution of marriage, see our{' '}
-              <Link href="/services/divorce-lawyer" className="font-semibold text-gold-700 underline underline-offset-4 dark:text-gold-400">
+              <Link href="/services/divorce-lawyer-lucknow" className="font-semibold text-gold-700 underline underline-offset-4 dark:text-gold-400">
                 divorce lawyer in Lucknow
               </Link>{' '}
               page for mutual consent and contested divorce guidance.
@@ -533,39 +506,31 @@ export default async function FamilyMatrimonialServicePage() {
             </div>
           </div>
 
-          <div className="mb-16">
-            <div className="mb-10 text-center">
-              <h2 className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-                The Way <em className="text-gold-gradient">We Work</em>
-              </h2>
-              <p className="mx-auto max-w-xl font-body text-navy-700 dark:text-cream/55">
-                A clear, structured process from first consultation to resolution.
-              </p>
-            </div>
-            <div className="relative">
-              <div className="absolute left-[10%] right-[10%] top-[22px] hidden h-px bg-gold-500/25 lg:block" aria-hidden />
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
-                {workSteps.map(({ icon: Icon, title, description }, index) => (
-                  <div key={title} className="relative flex flex-col items-center gap-4 text-center">
-                    <div className="glass-card z-10 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-gold-500/40">
-                      <Icon className="h-5 w-5 text-gold-600 dark:text-gold-400" />
-                    </div>
-                    <div className="glass-card w-full flex-1 rounded-sm border border-gold-500/20 p-5 dark:border-gold-500/15">
-                      <span className="mb-1 block font-caps text-xs uppercase tracking-widest text-gold-600 dark:text-gold-400">
-                        Step {index + 1}
-                      </span>
-                      <h3 className="mb-1.5 font-display text-lg font-bold text-navy-900 dark:text-cream">
-                        {title}
-                      </h3>
-                      <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">
-                        {description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <StatuteTable
+            id="family-statutes"
+            heading="Family Law: Personal Law, Relief and the Correct Forum"
+            intro="Matrimonial, maintenance, custody and protection proceedings are distinct tracks. The governing marriage law, eligibility, territorial jurisdiction, existing orders and current local court practice determine the appropriate route; no single statute applies to every family."
+            rows={familyLucknowStatutes}
+          />
+
+          <GuideStages
+            id="family-procedure"
+            heading="Six Stages of Planning Family Proceedings"
+            intro="The appropriate sequence depends on safety, urgent support, child welfare and the relief sought. Mediation can assist suitable cases, but neither settlement nor a final order can be guaranteed."
+            stages={familyLucknowStages}
+          />
+
+          <section id="family-documents" aria-labelledby="family-documents-heading" className="mb-16 scroll-mt-28 border-t border-gold-500/20 pt-10">
+            <h2 id="family-documents-heading" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">First-Consultation Checklist</h2>
+            <p className="mb-4 font-body leading-relaxed text-navy-700 dark:text-cream/70">Prepare a factual account of the relationship, the immediate issue and the orders needed. Identify missing documents without delaying advice on an urgent safety, support or child-related concern.</p>
+            <ul className="list-disc space-y-3 pl-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">
+              <li>Marriage documents, relevant personal-law details, identity and residence records, and a chronology of important events.</li>
+              <li>All petitions, complaints, summons, interim orders and settlements, including connected or overseas proceedings and proof of payments already made.</li>
+              <li>Income, tax, bank, asset and liability records, essential household expenses, and any existing financial-disclosure affidavit.</li>
+              <li>For children: schooling, medical needs, caregiving routines, expenses, existing contact arrangements and specific safety or travel concerns.</li>
+              <li>Relevant original communications and lawfully obtained evidence. For overseas participation, include travel constraints and any authority documents; video attendance requires the court&apos;s permission.</li>
+            </ul>
+          </section>
 
           <div className="mb-16">
             <div className="mb-10 text-center">
@@ -607,10 +572,10 @@ export default async function FamilyMatrimonialServicePage() {
           </div>
 
           <section aria-labelledby="family-interim-relief-review" className="mb-16 border-t border-gold-500/20 pt-10">
-            <h2 id="family-interim-relief-review" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Planning Custody, Visitation and Interim Support</h2>
+            <h2 id="family-interim-relief-review" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream">Planning Custody, Visitation and Interim Support</h2>
             <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">Family proceedings may require workable interim arrangements before a final decision. For custody and access, prepare a child-focused account of schooling, health, daily care, safety and existing contact arrangements. The child&apos;s welfare is central; neither parent should assume custody follows automatically from gender, income or allegations. We assess requests for interim custody, visitation, communication and travel in light of the record and any existing order.</p>
             <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Financial disclosure and connected cases</h3>
-            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Bring income and asset records, bank statements, essential household and child-related expenses, marriage records and every pending maintenance or protection order. Disclose overlapping proceedings so relief and payments can be addressed consistently; support is not calculated by one universal percentage. Divorce, maintenance, domestic violence and guardianship may involve different provisions and forums. For marriage dissolution and settlement planning, see our <Link href="/services/divorce-lawyer" className="text-gold-700 underline dark:text-gold-400">divorce lawyer page</Link>.</p>
+            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Bring income and asset records, bank statements, essential household and child-related expenses, marriage records and every pending maintenance or protection order. Disclose overlapping proceedings so relief and payments can be addressed consistently; support is not calculated by one universal percentage. Divorce, maintenance, domestic violence and guardianship may involve different provisions and forums. For marriage dissolution and settlement planning, see our <Link href="/services/divorce-lawyer-lucknow" className="text-gold-700 underline dark:text-gold-400">divorce lawyer page</Link>.</p>
           </section>
 
           <ServiceBlogs

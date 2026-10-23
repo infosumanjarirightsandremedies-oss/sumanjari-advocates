@@ -13,15 +13,17 @@ import {
   MapPin,
   ShieldAlert,
   Banknote,
-  Gavel,
   MessageSquareWarning,
   ScrollText,
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FirmCredentials from '@/components/FirmCredentials'
+import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
+import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
+import { propertyStages, propertyStatutes, propertyToc } from '@/lib/guides/propertyLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL } from '@/lib/contactLinks'
@@ -65,13 +67,13 @@ export const metadata: Metadata = {
     'Sale Deed Cancellation Lawyer Lucknow',
   ],
   alternates: {
-    canonical: '/services/property-land-matters',
+    canonical: '/services/property-lawyer-lucknow',
   },
   openGraph: {
     title: 'Property Lawyer in Lucknow | Sumanjari & Co. Advocates',
     description:
       'Advice and representation for property title checks, partition, disputed mutation, possession and land acquisition matters in Lucknow and Uttar Pradesh.',
-    url: '/services/property-land-matters',
+    url: '/services/property-lawyer-lucknow',
   },
   twitter: {
     card: 'summary_large_image',
@@ -84,7 +86,7 @@ const propertyMattersJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
   name: 'Sumanjari & Co. Advocates — Property & Land Matters',
-  url: `${SITE_URL}/services/property-land-matters`,
+  url: `${SITE_URL}/services/property-lawyer-lucknow`,
   description:
     'Representation in property title verification and due diligence, sale and transfer transactions, partition suits, possession disputes, mutation and revenue proceedings, boundary disputes, benami property matters, and land acquisition compensation, before the Revenue Courts, District Courts, and the Allahabad High Court, Lucknow Bench.',
   telephone: '+91-83024-71764',
@@ -197,39 +199,6 @@ const jurisdiction = [
     title: 'Allahabad High Court, Lucknow Bench',
     blurb:
       'Appropriate writ and appellate proceedings arising from property and land matters. Maintainability, territorial jurisdiction, and available statutory remedies must first be assessed.',
-  },
-]
-
-const workSteps = [
-  {
-    icon: Landmark,
-    title: 'Private Consultation',
-    description:
-      'We begin with a confidential discussion of your matter, understanding the facts and your expectations while safeguarding your privacy.',
-  },
-  {
-    icon: FileWarning,
-    title: 'In-Depth Case Review',
-    description:
-      'Every document and detail is carefully examined so we can assess the strengths, risks, and best possible legal routes for you.',
-  },
-  {
-    icon: Scale,
-    title: 'Strategy & Drafting',
-    description:
-      'A clear, customised strategy is prepared and precise pleadings are drafted to present your case strongly before the court or authority.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Focused Representation',
-    description:
-      'We represent you with preparation and clarity, ensuring timely filings, effective arguments, and regular updates on each hearing.',
-  },
-  {
-    icon: Gavel,
-    title: 'Resolution & Ongoing Support',
-    description:
-      'Even after the matter is resolved, we guide you on next steps, compliance, and any further legal support you may require.',
   },
 ]
 
@@ -355,6 +324,7 @@ export default async function PropertyLandMattersPage() {
               land disputes, possession, disputed mutation, and property transfers
               in Lucknow and Uttar Pradesh.
             </p>
+            <ServiceStats service="property" />
             <ConsultationActions className="mt-8 hidden md:flex" />
             </div>
             {propertyLead && (
@@ -373,8 +343,10 @@ export default async function PropertyLandMattersPage() {
             <ConsultationActions className="flex md:hidden" />
           </div>
 
+          <GuideToc items={propertyToc} />
+
           <section className="mb-16" aria-labelledby="property-team">
-            <h2 id="property-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="property-team" className="mb-4 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Property &amp; Land Disputes Team
             </h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
@@ -406,7 +378,7 @@ export default async function PropertyLandMattersPage() {
             </p>
           </div>
 
-          <div className="mb-16">
+          <div id="property-forums" className="mb-16 scroll-mt-28">
             <div className="mb-8 flex items-center gap-2">
               <Landmark className="h-5 w-5 text-gold-600 dark:text-gold-400" />
               <h2 className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
@@ -430,7 +402,14 @@ export default async function PropertyLandMattersPage() {
             </div>
           </div>
 
-          <div className="mb-16">
+          <StatuteTable
+            id="property-statutory-framework"
+            heading="Property and Land Law: The Relevant Framework"
+            intro="The land classification, tenure, transaction and relief determine which provisions apply. Check current Uttar Pradesh amendments, rules and any saved earlier proceedings; a revenue entry or registered instrument does not eliminate the need to examine title."
+            rows={propertyStatutes}
+          />
+
+          <div id="property-matters" className="mb-16 scroll-mt-28">
             <h2 className="mb-8 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Types of Property &amp; Land Matters We Handle
             </h2>
@@ -460,7 +439,7 @@ export default async function PropertyLandMattersPage() {
           </div>
 
           <section className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75" aria-labelledby="property-purchase-checks">
-            <h2 id="property-purchase-checks" className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="property-purchase-checks" className="scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Before Buying a Plot, House or Flat in Lucknow
             </h2>
             <p>
@@ -489,7 +468,7 @@ export default async function PropertyLandMattersPage() {
           </section>
 
           <section className="mb-16" aria-labelledby="property-documents">
-            <h2 id="property-documents" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="property-documents" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Documents to Bring to a Property Consultation
             </h2>
             <p className="mb-5 font-body leading-relaxed text-navy-800 dark:text-cream/75">
@@ -541,41 +520,14 @@ export default async function PropertyLandMattersPage() {
             </div>
           </div>
 
-          <div className="mb-16">
-            <div className="mb-10 text-center">
-              <h2 className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-                The Way <em className="text-gold-gradient">We Work</em>
-              </h2>
-              <p className="mx-auto max-w-xl font-body text-navy-700 dark:text-cream/55">
-                A clear, structured process from first consultation to resolution.
-              </p>
-            </div>
-            <div className="relative">
-              <div className="absolute left-[10%] right-[10%] top-[22px] hidden h-px bg-gold-500/25 lg:block" aria-hidden />
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
-                {workSteps.map(({ icon: Icon, title, description }, index) => (
-                  <div key={title} className="relative flex flex-col items-center gap-4 text-center">
-                    <div className="glass-card z-10 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-gold-500/40">
-                      <Icon className="h-5 w-5 text-gold-600 dark:text-gold-400" />
-                    </div>
-                    <div className="glass-card w-full flex-1 rounded-sm border border-gold-500/20 p-5 dark:border-gold-500/15">
-                      <span className="mb-1 block font-caps text-xs uppercase tracking-widest text-gold-600 dark:text-gold-400">
-                        Step {index + 1}
-                      </span>
-                      <h3 className="mb-1.5 font-display text-lg font-bold text-navy-900 dark:text-cream">
-                        {title}
-                      </h3>
-                      <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">
-                        {description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <GuideStages
+            id="property-procedure"
+            heading="Property Matters in Lucknow: Seven Practical Stages"
+            intro="A title suit, mutation application and agricultural partition follow different routes. These stages explain the decisions and documents involved; the competent forum and applicable procedure must be confirmed for the particular property and relief."
+            stages={propertyStages}
+          />
 
-          <div className="mb-16">
+          <div id="property-faqs" className="mb-16 scroll-mt-28">
             <div className="mb-10 text-center">
               <span className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">
                 From Our Desk
@@ -615,16 +567,16 @@ export default async function PropertyLandMattersPage() {
           </div>
 
           <section className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75" aria-labelledby="related-property-services">
-            <h2 id="related-property-services" className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="related-property-services" className="scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Related Legal Assistance
             </h2>
             <p>
               A property matter may overlap with other areas of law. Read about
               our{' '}
-              <Link href="/services/civil-advocate" className="text-gold-700 underline underline-offset-4 dark:text-gold-400">civil litigation practice</Link>
+              <Link href="/services/civil-lawyer-lucknow" className="text-gold-700 underline underline-offset-4 dark:text-gold-400">civil litigation practice</Link>
               {' '}for declarations, injunctions, and contractual disputes, or
               our{' '}
-              <Link href="/services/rera-lawyer" className="text-gold-700 underline underline-offset-4 dark:text-gold-400">RERA legal services</Link>
+              <Link href="/services/rera-lawyer-lucknow" className="text-gold-700 underline underline-offset-4 dark:text-gold-400">RERA legal services</Link>
               {' '}for builder-buyer issues. Owners living abroad can also review
               our{' '}
               <Link href="/services/nri-lawyer" className="text-gold-700 underline underline-offset-4 dark:text-gold-400">legal assistance for NRIs</Link>
@@ -638,10 +590,10 @@ export default async function PropertyLandMattersPage() {
           </section>
 
           <section aria-labelledby="property-title-forum-review" className="mb-16 border-t border-gold-500/20 pt-10">
-            <h2 id="property-title-forum-review" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Title, Mutation or LDA Dispute: Identify the Issue First</h2>
+            <h2 id="property-title-forum-review" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream">Title, Mutation or LDA Dispute: Identify the Issue First</h2>
             <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">A mutation entry, registered instrument, development-authority allotment and right to physical possession are different parts of a property record. Mutation generally serves revenue administration and does not by itself settle ownership. A title or cancellation dispute, agricultural land proceeding and challenge to an LDA decision may require different remedies. We review the land classification, location, title chain and impugned action before advising on civil, revenue or other competent proceedings.</p>
             <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Property documents for a reliable first assessment</h3>
-            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Bring sale, gift, partition or inheritance records, previous title documents, current revenue entries, maps, possession evidence and any LDA allotment or lease papers. Include litigation records, encumbrance information and the date you first learned of a disputed transfer. An urgent injunction requires supporting facts, not only an allegation of fraud. For builder delays and project-specific relief, see our <Link href="/services/rera-lawyer" className="text-gold-700 underline dark:text-gold-400">Lucknow RERA practice</Link>.</p>
+            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Bring sale, gift, partition or inheritance records, previous title documents, current revenue entries, maps, possession evidence and any LDA allotment or lease papers. Include litigation records, encumbrance information and the date you first learned of a disputed transfer. An urgent injunction requires supporting facts, not only an allegation of fraud. For builder delays and project-specific relief, see our <Link href="/services/rera-lawyer-lucknow" className="text-gold-700 underline dark:text-gold-400">Lucknow RERA practice</Link>.</p>
           </section>
 
           <ServiceBlogs
@@ -653,7 +605,7 @@ export default async function PropertyLandMattersPage() {
             viewAllHref={`/blog?category=${encodeURIComponent('Property & Land Matters')}`}
           />
 
-          <div className="glass-card rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">
+          <div id="property-consultation" className="glass-card scroll-mt-28 rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">
             <h2 className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Facing a Property or Land Dispute?
             </h2>

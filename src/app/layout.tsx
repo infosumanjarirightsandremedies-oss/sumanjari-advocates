@@ -161,9 +161,11 @@ const legalServiceJsonLd = {
     'Sumanjari & Co. Advocates practises before the Allahabad High Court, Lucknow Bench, serving clients across Lucknow, Kanpur, Ayodhya, Prayagraj, Sultanpur, Ambedkar Nagar, Noida, and Delhi — handling civil, criminal, family, property, consumer, tax, RERA, banking recovery (DRT), armed forces tribunal (AFT), and mining matters.',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Chamber No. Block D – 311, Allahabad High Court, Lucknow Bench',
+    streetAddress: 'Chamber No. Block D – 311, Allahabad High Court, Lucknow Bench, Vibhuti Khand, Gomti Nagar',
     addressLocality: 'Lucknow',
     addressRegion: 'Uttar Pradesh',
+    // VERIFY: Lucknow Bench PIN code
+    postalCode: '226010',
     addressCountry: 'IN',
   },
   geo: {
@@ -214,8 +216,9 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning>
         <ThemeProvider>
-          <Disclaimer />
           {children}
+          {/* Last in the DOM so crawlers read the H1 first; it's position:fixed so placement is invisible. */}
+          <Disclaimer />
         </ThemeProvider>
       </body>
     </html>

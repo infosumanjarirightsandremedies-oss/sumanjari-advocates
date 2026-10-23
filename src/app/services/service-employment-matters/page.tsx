@@ -21,8 +21,11 @@ import {
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FirmCredentials from '@/components/FirmCredentials'
+import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
+import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
+import { serviceStages, serviceStatutes, serviceToc } from '@/lib/guides/serviceLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL } from '@/lib/contactLinks'
@@ -73,13 +76,13 @@ export const metadata: Metadata = {
     'Disciplinary Charge Sheet Reply Lawyer Lucknow',
   ],
   alternates: {
-    canonical: '/services/service-advocate',
+    canonical: '/services/service-lawyer-lucknow',
   },
   openGraph: {
     title: 'Service Matter Advocate in Lucknow | Sumanjari & Co.',
     description:
       'Representation for government, public sector, and private sector employees in service disputes, departmental inquiries, and employment litigation before CAT, the Service Tribunal, CGIT, and the Allahabad High Court, Lucknow Bench.',
-    url: '/services/service-advocate',
+    url: '/services/service-lawyer-lucknow',
   },
   twitter: {
     card: 'summary_large_image',
@@ -92,7 +95,7 @@ const serviceMattersJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
   name: 'Sumanjari & Co. Advocates — Service & Employment Matters',
-  url: `${SITE_URL}/services/service-advocate`,
+  url: `${SITE_URL}/services/service-lawyer-lucknow`,
   description:
     'Representation for government, public sector, and private sector employees in recruitment disputes, promotion and seniority matters, departmental and disciplinary proceedings, wrongful termination, pension and retirement benefits, and POSH Act compliance and inquiry matters before the Central Administrative Tribunal, U.P. Public Services Tribunal, CGIT, and the Allahabad High Court.',
   telephone: '+91-83024-71764',
@@ -225,39 +228,6 @@ const jurisdiction = [
   },
 ]
 
-const workSteps = [
-  {
-    icon: Landmark,
-    title: 'Private Consultation',
-    description:
-      'We begin with a confidential discussion of your matter, understanding the facts and your expectations while safeguarding your privacy.',
-  },
-  {
-    icon: BookOpen,
-    title: 'In-Depth Case Review',
-    description:
-      'Every document and detail is carefully examined so we can assess the strengths, risks, and best possible legal routes for you.',
-  },
-  {
-    icon: Gavel,
-    title: 'Strategy & Drafting',
-    description:
-      'A clear, customised strategy is prepared and precise pleadings are drafted to present your case strongly before the court or authority.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Focused Representation',
-    description:
-      'We represent you with preparation and clarity, ensuring timely filings, effective arguments, and regular updates on each hearing.',
-  },
-  {
-    icon: HandCoins,
-    title: 'Resolution & Ongoing Support',
-    description:
-      'Even after the matter is resolved, we guide you on next steps, compliance, and any further legal support you may require.',
-  },
-]
-
 const serviceInsights = [
   {
     icon: BookOpen,
@@ -375,6 +345,7 @@ export default async function ServiceEmploymentMattersPage() {
               U.P. Public Services Tribunal, labour forums, or the
               Allahabad High Court, Lucknow Bench.
             </p>
+            <ServiceStats service="service" />
             <ConsultationActions className="mt-8 hidden md:flex" />
             </div>
             {serviceLead && (
@@ -393,8 +364,10 @@ export default async function ServiceEmploymentMattersPage() {
             <ConsultationActions className="flex md:hidden" />
           </div>
 
+          <GuideToc items={serviceToc} />
+
           <section className="mb-16" aria-labelledby="service-team">
-            <h2 id="service-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="service-team" className="mb-4 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Our Service &amp; Employment Law Team
             </h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
@@ -428,7 +401,7 @@ export default async function ServiceEmploymentMattersPage() {
             </p>
           </div>
 
-          <div className="mb-16">
+          <div id="service-forums" className="mb-16 scroll-mt-28">
             <div className="mb-8 flex items-center gap-2">
               <Landmark className="h-5 w-5 text-gold-600 dark:text-gold-400" />
               <h2 className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
@@ -452,7 +425,14 @@ export default async function ServiceEmploymentMattersPage() {
             </div>
           </div>
 
-          <div className="mb-16">
+          <StatuteTable
+            id="service-statutory-framework"
+            heading="Service and Employment Law: Coverage Comes First"
+            intro="The employer, post, actual duties and applicable rules determine the remedy. Verify current notifications, labour-law commencement and transitional provisions, as well as tribunal coverage and limitation; public and private employment do not follow a single procedure."
+            rows={serviceStatutes}
+          />
+
+          <div id="service-matters" className="mb-16 scroll-mt-28">
             <h2 className="mb-8 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Types of Service &amp; Employment Matters We Handle
             </h2>
@@ -482,7 +462,7 @@ export default async function ServiceEmploymentMattersPage() {
           </div>
 
           <section className="mb-16" aria-labelledby="service-deadlines">
-            <h2 id="service-deadlines" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="service-deadlines" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Received a Service Order? Deadlines and Immediate Steps
             </h2>
             <div className="space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
@@ -512,7 +492,7 @@ export default async function ServiceEmploymentMattersPage() {
           </section>
 
           <section className="mb-16" aria-labelledby="service-documents">
-            <h2 id="service-documents" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="service-documents" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Documents to Bring to a Service-Law Consultation
             </h2>
             <ul className="list-disc space-y-3 pl-5 font-body leading-relaxed text-navy-800 dark:text-cream/75">
@@ -565,41 +545,14 @@ export default async function ServiceEmploymentMattersPage() {
             </div>
           </div>
 
-          <div className="mb-16">
-            <div className="mb-10 text-center">
-              <h2 className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-                The Way <em className="text-gold-gradient">We Work</em>
-              </h2>
-              <p className="mx-auto max-w-xl font-body text-navy-700 dark:text-cream/55">
-                A clear, structured process from first consultation to resolution.
-              </p>
-            </div>
-            <div className="relative">
-              <div className="absolute left-[10%] right-[10%] top-[22px] hidden h-px bg-gold-500/25 lg:block" aria-hidden />
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
-                {workSteps.map(({ icon: Icon, title, description }, index) => (
-                  <div key={title} className="relative flex flex-col items-center gap-4 text-center">
-                    <div className="glass-card z-10 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-gold-500/40">
-                      <Icon className="h-5 w-5 text-gold-600 dark:text-gold-400" />
-                    </div>
-                    <div className="glass-card w-full flex-1 rounded-sm border border-gold-500/20 p-5 dark:border-gold-500/15">
-                      <span className="mb-1 block font-caps text-xs uppercase tracking-widest text-gold-600 dark:text-gold-400">
-                        Step {index + 1}
-                      </span>
-                      <h3 className="mb-1.5 font-display text-lg font-bold text-navy-900 dark:text-cream">
-                        {title}
-                      </h3>
-                      <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">
-                        {description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <GuideStages
+            id="service-procedure"
+            heading="Service and Employment Matters: Seven Practical Stages"
+            intro="The route from an adverse order to relief depends on the employment category. These stages distinguish disciplinary safeguards, departmental remedies, tribunal proceedings, labour claims and judicial review; they do not assume CAT coverage or a writ remedy for every employee."
+            stages={serviceStages}
+          />
 
-          <div className="mb-16">
+          <div id="service-faqs" className="mb-16 scroll-mt-28">
             <div className="mb-10 text-center">
               <span className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">
                 From Our Desk
@@ -639,7 +592,7 @@ export default async function ServiceEmploymentMattersPage() {
           </div>
 
           <section aria-labelledby="service-disciplinary-record-review" className="mb-16 border-t border-gold-500/20 pt-10">
-            <h2 id="service-disciplinary-record-review" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Facing a Charge Sheet, Suspension or Adverse Service Order?</h2>
+            <h2 id="service-disciplinary-record-review" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream">Facing a Charge Sheet, Suspension or Adverse Service Order?</h2>
             <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">Identify the employer, appointment terms, applicable service rules and the stage of proceedings before choosing a remedy. A departmental inquiry, statutory appeal, CAT application, U.P. Public Services Tribunal claim, industrial dispute and High Court writ are not interchangeable. Armed forces service matters may engage the Armed Forces Tribunal, subject to its statutory jurisdiction and exclusions. Private employment claims require a separate assessment of the contract, duties and applicable labour law.</p>
             <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Prepare the full employment and disciplinary record</h3>
             <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Share the appointment letter, service rules, charge sheet and annexures, inquiry notices, replies, inquiry report, challenged order and proof of its communication. For pay or pension disputes, add service-book extracts, pay fixation and retirement records. Record each reply, appeal and hearing deadline. Repeated representations do not necessarily extend limitation or suspend the order. We assess natural justice, available departmental remedies and the basis for any interim relief; reinstatement or a stay cannot be assured.</p>
@@ -654,7 +607,7 @@ export default async function ServiceEmploymentMattersPage() {
             viewAllHref={`/blog?category=${encodeURIComponent('Service & Employment Matters')}`}
           />
 
-          <div className="glass-card rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">
+          <div id="service-consultation" className="glass-card scroll-mt-28 rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">
             <h2 className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Facing a Service or Employment Dispute?
             </h2>

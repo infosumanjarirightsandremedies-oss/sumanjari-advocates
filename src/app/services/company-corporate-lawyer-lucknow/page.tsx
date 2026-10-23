@@ -17,8 +17,11 @@ import {
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FirmCredentials from '@/components/FirmCredentials'
+import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
+import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
+import { corporateLucknowStages, corporateLucknowStatutes, corporateLucknowToc } from '@/lib/guides/corporateLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL } from '@/lib/contactLinks'
@@ -61,13 +64,13 @@ export const metadata: Metadata = {
     'Corporate Insolvency Legal Advice Uttar Pradesh',
   ],
   alternates: {
-    canonical: '/services/company-corporate-matters',
+    canonical: '/services/company-corporate-lawyer-lucknow',
   },
   openGraph: {
     title: 'Company & Corporate Lawyer in Lucknow | Sumanjari & Co. Advocates',
     description:
       'Advisory and litigation in company registration and compliance, shareholder and partnership disputes, LLP matters, and corporate disputes before the NCLT, Commercial Courts, and the Allahabad High Court, Lucknow Bench.',
-    url: '/services/company-corporate-matters',
+    url: '/services/company-corporate-lawyer-lucknow',
   },
   twitter: {
     card: 'summary_large_image',
@@ -80,7 +83,7 @@ const companyMattersJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
   name: 'Sumanjari & Co. Advocates — Company & Corporate Matters',
-  url: `${SITE_URL}/services/company-corporate-matters`,
+  url: `${SITE_URL}/services/company-corporate-lawyer-lucknow`,
   description:
     'Advisory and representation in company registration and compliance, shareholder and partnership disputes, LLP matters, and corporate litigation, before the National Company Law Tribunal (Allahabad Bench), the Commercial Courts, and the Allahabad High Court, Lucknow Bench.',
   telephone: '+91-83024-71764',
@@ -200,50 +203,22 @@ const jurisdiction = [
   {
     title: 'NCLT, Allahabad Bench',
     blurb:
-      'Company law petitions, oppression and mismanagement matters, and insolvency-related proceedings for Uttar Pradesh and Uttarakhand.',
+      'Company law petitions and eligible corporate insolvency proceedings, subject to the registered office and current territorial allocation.',
+  },
+  {
+    title: 'National Company Law Appellate Tribunal (NCLAT)',
+    blurb:
+      'Eligible appeals from NCLT orders under the Companies Act or Insolvency and Bankruptcy Code, each subject to its own statutory conditions.',
   },
   {
     title: 'Commercial Courts, Lucknow',
     blurb:
-      'Commercial disputes meeting the specified value of ₹3 lakh under the Commercial Courts Act, 2015.',
+      'Qualifying commercial disputes, subject to specified value, current local allocation, territorial jurisdiction and any applicable arbitration agreement.',
   },
   {
     title: 'Allahabad High Court, Lucknow Bench',
     blurb:
-      'Appeals and writ matters arising from corporate disputes, argued from our chambers at Block D-311.',
-  },
-]
-
-const workSteps = [
-  {
-    icon: Landmark,
-    title: 'Private Consultation',
-    description:
-      'We begin with a confidential discussion of your matter, understanding the facts and your expectations while safeguarding your privacy.',
-  },
-  {
-    icon: ScrollText,
-    title: 'In-Depth Case Review',
-    description:
-      'Every document and detail is carefully examined so we can assess the strengths, risks, and best possible legal routes for you.',
-  },
-  {
-    icon: Scale,
-    title: 'Strategy & Drafting',
-    description:
-      'A clear, customised strategy is prepared and precise pleadings are drafted to present your case strongly before the court or authority.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Focused Representation',
-    description:
-      'We represent you with preparation and clarity, ensuring timely filings, effective arguments, and regular updates on each hearing.',
-  },
-  {
-    icon: Gavel,
-    title: 'Resolution & Ongoing Support',
-    description:
-      'Even after the matter is resolved, we guide you on next steps, compliance, and any further legal support you may require.',
+      'Maintainable court and arbitration remedies subject to statutory and territorial jurisdiction; not the ordinary appellate forum for NCLT orders.',
   },
 ]
 
@@ -317,6 +292,7 @@ export default async function CompanyCorporateMattersPage() {
               compliance, shareholder and partnership disputes, and commercial litigation before the NCLT, the
               Commercial Courts, and the Allahabad High Court, Lucknow Bench.
             </p>
+            <ServiceStats service="corporate" />
             <ConsultationActions className="mt-8 hidden md:flex" />
             </div>
             {corporateLead && (
@@ -335,8 +311,10 @@ export default async function CompanyCorporateMattersPage() {
             <ConsultationActions className="flex md:hidden" />
           </div>
 
+          <GuideToc items={corporateLucknowToc} />
+
           <section className="mb-16" aria-labelledby="corporate-team">
-            <h2 id="corporate-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="corporate-team" className="mb-4 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Company &amp; Commercial Matters Team
             </h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
@@ -348,7 +326,7 @@ export default async function CompanyCorporateMattersPage() {
             <TeamCarousel members={corporateTeam} label="Company and commercial team members" />
           </section>
 
-          <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
+          <div id="corporate-overview" className="mb-16 scroll-mt-28 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>
               Companies, LLPs, and partnership firms each carry their own
               compliance obligations and their own forum for disputes — a
@@ -361,12 +339,21 @@ export default async function CompanyCorporateMattersPage() {
             <p>
               We handle company law petitions before the NCLT, Allahabad
               Bench, commercial disputes before the Commercial Courts,
-              Lucknow, and corporate litigation and appeals before the
-              Allahabad High Court, Lucknow Bench.
+              Lucknow, and maintainable corporate and arbitration matters
+              before the competent courts. Eligible NCLT appeals follow the
+              NCLAT route under the governing statute; court appeals and
+              arbitral challenges have separate routes and conditions.
             </p>
           </div>
 
-          <div className="mb-16">
+          <StatuteTable
+            id="corporate-statutes"
+            heading="Company, Contract and Insolvency Framework"
+            intro="Entity type and the relief sought determine the governing statute. Current amendments, thresholds, territorial allocation and procedural rules must be checked for the particular filing; these are distinct remedies, not interchangeable forums."
+            rows={corporateLucknowStatutes}
+          />
+
+          <div id="corporate-forums" className="mb-16 scroll-mt-28">
             <div className="mb-8 flex items-center gap-2">
               <Landmark className="h-5 w-5 text-gold-600 dark:text-gold-400" />
               <h2 className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
@@ -390,7 +377,7 @@ export default async function CompanyCorporateMattersPage() {
             </div>
           </div>
 
-          <div className="mb-16">
+          <div id="corporate-matters" className="mb-16 scroll-mt-28">
             <h2 className="mb-8 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Types of Company &amp; Corporate Matters We Handle
             </h2>
@@ -451,41 +438,14 @@ export default async function CompanyCorporateMattersPage() {
             </div>
           </div>
 
-          <div className="mb-16">
-            <div className="mb-10 text-center">
-              <h2 className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-                The Way <em className="text-gold-gradient">We Work</em>
-              </h2>
-              <p className="mx-auto max-w-xl font-body text-navy-700 dark:text-cream/55">
-                A clear, structured process from first consultation to resolution.
-              </p>
-            </div>
-            <div className="relative">
-              <div className="absolute left-[10%] right-[10%] top-[22px] hidden h-px bg-gold-500/25 lg:block" aria-hidden />
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
-                {workSteps.map(({ icon: Icon, title, description }, index) => (
-                  <div key={title} className="relative flex flex-col items-center gap-4 text-center">
-                    <div className="glass-card z-10 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-gold-500/40">
-                      <Icon className="h-5 w-5 text-gold-600 dark:text-gold-400" />
-                    </div>
-                    <div className="glass-card w-full flex-1 rounded-sm border border-gold-500/20 p-5 dark:border-gold-500/15">
-                      <span className="mb-1 block font-caps text-xs uppercase tracking-widest text-gold-600 dark:text-gold-400">
-                        Step {index + 1}
-                      </span>
-                      <h3 className="mb-1.5 font-display text-lg font-bold text-navy-900 dark:text-cream">
-                        {title}
-                      </h3>
-                      <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">
-                        {description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <GuideStages
+            id="corporate-procedure"
+            heading="Corporate Dispute Procedure and Practical Decisions"
+            intro="The stages below describe alternative routes as well as common preparation. Company governance, contractual recovery, arbitration and insolvency have different standing, evidence and appeal requirements; not every matter passes through every stage."
+            stages={corporateLucknowStages}
+          />
 
-          <div className="mb-16">
+          <div id="corporate-faqs" className="mb-16 scroll-mt-28">
             <div className="mb-10 text-center">
               <span className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">
                 From Our Desk
@@ -525,7 +485,7 @@ export default async function CompanyCorporateMattersPage() {
           </div>
 
           <section aria-labelledby="corporate-case-preparation" className="mb-16 border-t border-gold-500/20 pt-10">
-            <h2 id="corporate-case-preparation" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Company Dispute, Unpaid Invoice or Insolvency Notice?</h2>
+            <h2 id="corporate-case-preparation" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream">Company Dispute, Unpaid Invoice or Insolvency Notice?</h2>
             <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">The remedy depends on the dispute, not just the fact that a company is involved. Shareholder oppression and mismanagement may engage the Companies Act and NCLT jurisdiction; contractual recovery may belong before a commercial court or arbitrator. Insolvency proceedings have separate eligibility, default and procedural requirements and are not a substitute for ordinary debt recovery. We review the registered office, contractual forum and current tribunal allocation before advising on filing.</p>
             <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Corporate documents to share for review</h3>
             <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Bring incorporation and LLP records, constitutional documents, shareholder or partnership agreements, board resolutions, statutory notices, contracts, invoices, payment evidence and relevant ROC filings. Include any demand notice and its delivery date, pending orders and a chronology of the dispute. The consultation can then address authority to act, available remedies, interim protection, professional fees and coordination with company secretaries or other professionals where needed.</p>

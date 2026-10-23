@@ -196,18 +196,19 @@ export async function getBlogPostsByCategory(category: string): Promise<BlogPost
 // Maps each sheet Category value to the service page that renders it, so a
 // blog post's "Back" link can return to its own service page instead of home.
 const CATEGORY_TO_SERVICE_SLUG: Record<string, string> = {
-  RERA: 'rera-lawyer',
-  'Civil Matters': 'civil-advocate',
-  'Criminal Matters': 'criminal-lawyer',
+  RERA: 'rera-lawyer-lucknow',
+  'Civil Matters': 'civil-lawyer-lucknow',
+  'Criminal Matters': 'criminal-lawyer-lucknow',
   'Family & Matrimonial Matters': 'family-advocate',
-  'Property & Land Matters': 'property-land-matters',
-  'Banking & Recovery Matters': 'banking-recovery-matters',
-  'Company & Corporate Matters': 'company-corporate-matters',
-  'Constitutional & Writ Matters': 'constitutional-writ-matters',
-  'Consumer & Motor Accident Matters': 'consumer-motor-accident-matters',
-  'Service & Employment Matters': 'service-advocate',
-  'Tax & Revenue Matters': 'tax-revenue-advocate',
-  'Cyber Crime Matters': 'cyber-crime-lawyer',
+  'Property & Land Matters': 'property-lawyer-lucknow',
+  'Banking & Recovery Matters': 'banking-recovery-lawyer-lucknow',
+  'Company & Corporate Matters': 'company-corporate-lawyer-lucknow',
+  'Constitutional & Writ Matters': 'constitutional-writ-lawyer-lucknow',
+  'Consumer & Motor Accident Matters': 'consumer-motor-accident-lawyer-lucknow',
+  'Service & Employment Matters': 'service-lawyer-lucknow',
+  'Tax & Revenue Matters': 'tax-lawyer-lucknow',
+  'Cyber Crime Matters': 'cyber-crime-lawyer-lucknow',
+  'Armed Forces Tribunal & Mining Matters': 'armed-forces-tribunal-mining-lawyer-lucknow',
 }
 
 export function getServiceSlugForCategory(category: string): string | undefined {

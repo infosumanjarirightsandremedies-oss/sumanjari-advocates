@@ -47,20 +47,26 @@ export type LlmsLink = { path: string; title: string; description: string }
 
 export const SERVICE_LINKS: LlmsLink[] = [
   {
-    path: '/services/civil-advocate',
-    title: 'Civil Advocate & Lawyer',
+    path: '/services/civil-lawyer-lucknow',
+    title: 'Civil Lawyer in Lucknow',
     description: 'Recovery suits, injunctions, property disputes, and civil appeals, led by Adv. Jitendra Tiwari.',
   },
   {
-    path: '/services/criminal-lawyer',
-    title: 'Criminal Lawyer',
+    path: '/services/criminal-lawyer-lucknow',
+    title: 'Criminal Lawyer in Lucknow',
     description: 'Bail, anticipatory bail, FIR quashing, trial defence, and criminal appeals.',
   },
   {
-    path: '/services/cyber-crime-lawyer',
-    title: 'Cyber Crime Lawyer & Advocate',
+    path: '/services/cyber-crime-lawyer-lucknow',
+    title: 'Cyber Crime Lawyer in Lucknow',
     description:
       'Cyber crime complaints, IT Act prosecution and defence, bank account freeze/unfreeze, cyber fraud bail, and sextortion cases.',
+  },
+  {
+    path: '/services/armed-forces-tribunal-mining-lawyer-lucknow',
+    title: 'Armed Forces Tribunal & Mining Lawyer in Lucknow',
+    description:
+      'Disability and family pension, discharge and court-martial appeals before the AFT, Lucknow Bench, and mining lease, royalty and illegal-mining disputes.',
   },
   {
     path: '/services/family-advocate',
@@ -68,8 +74,8 @@ export const SERVICE_LINKS: LlmsLink[] = [
     description: 'Divorce, child custody, maintenance, and domestic violence matters, led by Adv. Aishwarya Pandey.',
   },
   {
-    path: '/services/divorce-lawyer',
-    title: 'Divorce Advocate & Lawyer',
+    path: '/services/divorce-lawyer-lucknow',
+    title: 'Divorce Lawyer in Lucknow',
     description:
       'Mutual consent and contested divorce, maintenance, alimony, and custody, led by Adv. Aishwarya Pandey.',
   },
@@ -80,13 +86,13 @@ export const SERVICE_LINKS: LlmsLink[] = [
       'Property, inheritance, powers of attorney, family disputes, and litigation in India for NRIs, led by Adv. Aishwarya Pandey.',
   },
   {
-    path: '/services/property-land-matters',
-    title: 'Property & Land Matters',
+    path: '/services/property-lawyer-lucknow',
+    title: 'Property Lawyer in Lucknow',
     description:
       'Title verification, partition suits, possession and boundary disputes, mutation, benami property, and land acquisition compensation.',
   },
   {
-    path: '/services/rera-lawyer',
+    path: '/services/rera-lawyer-lucknow',
     title: 'RERA Advocate & Real Estate Lawyer',
     description: 'Builder-buyer disputes, possession delays, refunds, and appeals before UP-RERA and the Appellate Tribunal.',
   },
@@ -97,42 +103,48 @@ export const SERVICE_LINKS: LlmsLink[] = [
       'Builder-buyer disputes, delayed possession, refund claims, and project compliance for Noida and Ghaziabad projects.',
   },
   {
-    path: '/services/service-advocate',
-    title: 'Service Advocate & Lawyer',
+    path: '/services/service-lawyer-lucknow',
+    title: 'Service Lawyer in Lucknow',
     description:
       'Departmental inquiries, wrongful termination, promotion and seniority disputes, pension matters, and POSH Act proceedings.',
   },
   {
-    path: '/services/tax-revenue-advocate',
-    title: 'Tax & Revenue Advocate and Lawyer',
+    path: '/services/tax-lawyer-lucknow',
+    title: 'Tax Lawyer in Lucknow',
     description:
       'Stamp duty and registration, property tax, circle rate valuation, income tax, and GST disputes, led by Adv. Jitendra Tiwari.',
   },
   {
-    path: '/services/company-corporate-matters',
+    path: '/services/company-corporate-lawyer-lucknow',
     title: 'Company & Corporate Matters',
     description:
       'Company and LLP compliance, shareholder and partnership disputes, and corporate litigation before the NCLT and Commercial Courts.',
   },
   {
-    path: '/services/constitutional-writ-matters',
+    path: '/services/constitutional-writ-lawyer-lucknow',
     title: 'Constitutional & Writ Matters',
     description: 'Writ petitions under Article 226, Public Interest Litigation, and fundamental rights matters.',
   },
   {
-    path: '/services/consumer-motor-accident-matters',
+    path: '/services/consumer-motor-accident-lawyer-lucknow',
     title: 'Consumer & Motor Accident Matters',
     description: 'Consumer forum complaints, motor accident compensation claims, and insurance disputes.',
   },
   {
-    path: '/services/banking-recovery-matters',
+    path: '/services/banking-recovery-lawyer-lucknow',
     title: 'Banking & Recovery Matters',
     description: 'DRT, SARFAESI, and bank recovery matters for banks, borrowers, and guarantors, led by Adv. Jitendra Tiwari.',
+  },
+  {
+    path: '/services/high-court-lawyer-lucknow',
+    title: 'High Court Lawyer in Lucknow (Lucknow Bench)',
+    description: 'Writs, bail, Section 528 BNSS quashing, and civil, criminal, and service appeals before the Allahabad High Court, Lucknow Bench.',
   },
 ]
 
 export const PAGE_LINKS: LlmsLink[] = [
   { path: '/', title: 'Home', description: 'Firm overview, practice areas, team, and contact.' },
+  { path: '/law-firm-in-lucknow', title: 'Law Firm in Lucknow', description: 'Firm overview, offices, practice-area directory, and Lucknow team.' },
   { path: '/blog', title: 'Blog', description: 'Legal articles and insights across all practice areas.' },
   { path: '/our-journey', title: 'Our Journey', description: "The story behind the firm's name and guiding values." },
   { path: '/publications', title: 'Publications', description: 'Research articles, theses, and legal writing.' },
@@ -148,62 +160,68 @@ export function linkLine({ path, title, description }: LlmsLink): string {
 export type PracticeAreaGuide = { slug: string; title: string; servicePaths: string[]; categories: string[] }
 
 export const PRACTICE_AREA_GUIDES: PracticeAreaGuide[] = [
-  { slug: 'civil-matters', title: 'Civil Matters', servicePaths: ['/services/civil-advocate'], categories: ['Civil Matters'] },
-  { slug: 'criminal-matters', title: 'Criminal Matters', servicePaths: ['/services/criminal-lawyer'], categories: ['Criminal Matters'] },
-  { slug: 'cyber-crime', title: 'Cyber Crime Matters', servicePaths: ['/services/cyber-crime-lawyer'], categories: ['Cyber Crime Matters'] },
+  { slug: 'civil-matters', title: 'Civil Matters', servicePaths: ['/services/civil-lawyer-lucknow'], categories: ['Civil Matters'] },
+  { slug: 'criminal-matters', title: 'Criminal Matters', servicePaths: ['/services/criminal-lawyer-lucknow'], categories: ['Criminal Matters'] },
+  { slug: 'cyber-crime', title: 'Cyber Crime Matters', servicePaths: ['/services/cyber-crime-lawyer-lucknow'], categories: ['Cyber Crime Matters'] },
+  {
+    slug: 'aft-mining',
+    title: 'Armed Forces Tribunal & Mining Matters',
+    servicePaths: ['/services/armed-forces-tribunal-mining-lawyer-lucknow'],
+    categories: ['Armed Forces Tribunal & Mining Matters'],
+  },
   {
     slug: 'family-matrimonial',
     title: 'Family, Matrimonial & Divorce Matters',
-    servicePaths: ['/services/family-advocate', '/services/divorce-lawyer'],
+    servicePaths: ['/services/family-advocate', '/services/divorce-lawyer-lucknow'],
     categories: ['Family & Matrimonial Matters'],
   },
   { slug: 'nri-legal-services', title: 'NRI Legal Services', servicePaths: ['/services/nri-lawyer'], categories: [] },
   {
     slug: 'property-land',
     title: 'Property & Land Matters',
-    servicePaths: ['/services/property-land-matters'],
+    servicePaths: ['/services/property-lawyer-lucknow'],
     categories: ['Property & Land Matters'],
   },
   {
     slug: 'rera',
     title: 'RERA & Real Estate Matters',
-    servicePaths: ['/services/rera-lawyer', '/services/rera-lawyer-noida-ghaziabad'],
+    servicePaths: ['/services/rera-lawyer-lucknow', '/services/rera-lawyer-noida-ghaziabad'],
     categories: ['RERA'],
   },
   {
     slug: 'service-employment',
     title: 'Service & Employment Matters',
-    servicePaths: ['/services/service-advocate'],
+    servicePaths: ['/services/service-lawyer-lucknow'],
     categories: ['Service & Employment Matters'],
   },
   {
     slug: 'tax-revenue',
     title: 'Tax & Revenue Matters',
-    servicePaths: ['/services/tax-revenue-advocate'],
+    servicePaths: ['/services/tax-lawyer-lucknow'],
     categories: ['Tax & Revenue Matters'],
   },
   {
     slug: 'company-corporate',
     title: 'Company & Corporate Matters',
-    servicePaths: ['/services/company-corporate-matters'],
+    servicePaths: ['/services/company-corporate-lawyer-lucknow'],
     categories: ['Company & Corporate Matters'],
   },
   {
     slug: 'constitutional-writ',
     title: 'Constitutional & Writ Matters',
-    servicePaths: ['/services/constitutional-writ-matters'],
+    servicePaths: ['/services/constitutional-writ-lawyer-lucknow', '/services/high-court-lawyer-lucknow'],
     categories: ['Constitutional & Writ Matters'],
   },
   {
     slug: 'consumer-motor-accident',
     title: 'Consumer & Motor Accident Matters',
-    servicePaths: ['/services/consumer-motor-accident-matters'],
+    servicePaths: ['/services/consumer-motor-accident-lawyer-lucknow'],
     categories: ['Consumer & Motor Accident Matters'],
   },
   {
     slug: 'banking-recovery',
     title: 'Banking & Recovery Matters',
-    servicePaths: ['/services/banking-recovery-matters'],
+    servicePaths: ['/services/banking-recovery-lawyer-lucknow'],
     categories: ['Banking & Recovery Matters'],
   },
 ]

@@ -13,21 +13,23 @@ import {
   Landmark,
   ShieldCheck,
   MessageSquareWarning,
-  Scale,
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FirmCredentials from '@/components/FirmCredentials'
+import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
+import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
+import { taxLucknowStages, taxLucknowStatutes, taxLucknowToc } from '@/lib/guides/taxLucknow'
 import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL } from '@/lib/contactLinks'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
 
-const taxLead = teamMembers.find((member) => member.slug === 'jitendra-tiwari')
-const taxTeam = ['arti-dwivedi', 'aditya-narayan-shukla', 'prabhash-yadav', 'vinod-arya', 'abhishek-mishra']
+const taxLead = teamMembers.find((member) => member.slug === 'aditya-narayan-shukla')
+const taxTeam = ['arti-dwivedi', 'jitendra-tiwari', 'prabhash-yadav', 'vinod-arya', 'abhishek-mishra']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
 
 function ConsultationActions({ className }: { className: string }) {
@@ -67,13 +69,13 @@ export const metadata: Metadata = {
     'GST Demand Notice Lawyer Lucknow',
   ],
   alternates: {
-    canonical: '/services/tax-revenue-advocate',
+    canonical: '/services/tax-lawyer-lucknow',
   },
   openGraph: {
     title: 'Tax & Revenue Advocate and Lawyer in Lucknow | Sumanjari & Co. Advocates',
     description:
       'Advisory and litigation in stamp duty, property tax, circle rate valuation, income tax, and GST disputes before the ITAT Lucknow Bench, GSTAT Lucknow, and the Allahabad High Court, Lucknow Bench.',
-    url: '/services/tax-revenue-advocate',
+    url: '/services/tax-lawyer-lucknow',
   },
   twitter: {
     card: 'summary_large_image',
@@ -86,7 +88,7 @@ const taxMattersJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
   name: 'Sumanjari & Co. Advocates — Tax & Revenue Advocate and Lawyer in Lucknow',
-  url: `${SITE_URL}/services/tax-revenue-advocate`,
+  url: `${SITE_URL}/services/tax-lawyer-lucknow`,
   description:
     'Advisory and representation in stamp duty and registration, property tax assessment, circle rate valuation, income tax, GST, and recovery of government dues, before the ITAT Lucknow Bench, the GST Appellate Tribunal, Lucknow, and the Allahabad High Court, Lucknow Bench.',
   telephone: '+91-83024-71764',
@@ -96,45 +98,6 @@ const taxMattersJsonLd = {
     { '@type': 'State', name: 'Uttar Pradesh' },
   ],
   serviceType: 'Tax & Revenue Legal Services',
-}
-
-const taxFaqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'How is stamp duty calculated on property in Uttar Pradesh?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Stamp duty under the Indian Stamp Act, 1899, as applicable in Uttar Pradesh, is calculated on whichever is higher — the declared sale value or the District Magistrate’s notified circle rate — with a concessional flat rate available for transfers between blood relatives.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What is the ITAT and where is the Lucknow Bench?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'The Income Tax Appellate Tribunal (ITAT) is a statutory tribunal under Section 252 of the Income Tax Act, 1961. Its Lucknow Bench hears income tax appeals from Lucknow and most of central and western Uttar Pradesh.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Is there a GST Appellate Tribunal in Lucknow now?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Yes. Uttar Pradesh has been allotted State Benches of the GST Appellate Tribunal (GSTAT) based in Lucknow, with circuit benches in Prayagraj and Agra, as the Tribunal is rolled out to hear GST appeals that were previously stalled for want of an appellate forum.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Who fixes the circle rate used for stamp duty?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'The circle rate — the government-notified minimum value of land or property for stamp duty purposes — is fixed by the District Magistrate, and disputes over undervaluation are referred to the Collector under the Stamp Act.',
-      },
-    },
-  ],
 }
 
 const matters = [
@@ -205,52 +168,39 @@ const jurisdiction = [
       'Registration of documents and stamp duty valuation, including references on undervaluation before the Collector.',
   },
   {
+    title: 'GST Proper Officer & Appellate Authority',
+    blurb:
+      'GST notice responses and first appeals before the designated Central or State authority; these are distinct from a further GSTAT appeal.',
+  },
+  {
+    title: 'Income Tax Authorities & First Appellate Authority',
+    blurb:
+      'Assessment responses and eligible first appeals before the allocated Joint Commissioner (Appeals) or Commissioner (Appeals), under the law and scheme applicable to the relevant proceeding.',
+  },
+  {
     title: 'ITAT, Lucknow Bench',
     blurb:
-      'Income tax appeals from Lucknow and most of central and western Uttar Pradesh.',
+      'Eligible income-tax appeals, subject to the governing enactment, prior appellate order where required, current territorial allocation and bench assignment.',
   },
   {
     title: 'GST Appellate Tribunal (GSTAT), Lucknow',
     blurb:
-      'GST appeals for Uttar Pradesh, with circuit benches at Prayagraj and Agra, as the Tribunal is rolled out.',
+      'Eligible further GST appeals, subject to the competent bench, current filing arrangements, transitional notifications and statutory conditions.',
+  },
+  {
+    title: 'Municipal Assessment & Appellate Authorities',
+    blurb:
+      'Property-tax objections and appeals before the relevant local body and designated forum under its governing legislation, separate from stamp valuation.',
+  },
+  {
+    title: 'Mining & Revenue Authorities',
+    blurb:
+      'The source authority decides the underlying demand; Collector or Tehsildar recovery proceedings require separate review of the certificate and applicable recovery law.',
   },
   {
     title: 'Allahabad High Court, Lucknow Bench',
     blurb:
-      'Tax references and writ petitions in stamp duty, property tax, and revenue matters, argued from our chambers at Block D-311.',
-  },
-]
-
-const workSteps = [
-  {
-    icon: Landmark,
-    title: 'Private Consultation',
-    description:
-      'We begin with a confidential discussion of your matter, understanding the facts and your expectations while safeguarding your privacy.',
-  },
-  {
-    icon: ScrollText,
-    title: 'In-Depth Case Review',
-    description:
-      'Every document and detail is carefully examined so we can assess the strengths, risks, and best possible legal routes for you.',
-  },
-  {
-    icon: Scale,
-    title: 'Strategy & Drafting',
-    description:
-      'A clear, customised strategy is prepared and precise pleadings are drafted to present your case strongly before the court or authority.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Focused Representation',
-    description:
-      'We represent you with preparation and clarity, ensuring timely filings, effective arguments, and regular updates on each hearing.',
-  },
-  {
-    icon: Gavel,
-    title: 'Resolution & Ongoing Support',
-    description:
-      'Even after the matter is resolved, we guide you on next steps, compliance, and any further legal support you may require.',
+      'Statutory court remedies or exceptional writ review, subject to the particular enactment, territorial jurisdiction and available alternative remedies.',
   },
 ]
 
@@ -259,27 +209,37 @@ const taxInsights = [
     icon: Receipt,
     title: 'How Is Stamp Duty Calculated on Property in UP?',
     excerpt:
-      'Stamp duty is calculated on whichever is higher — the declared sale value or the District Magistrate’s notified circle rate — with a concessional flat rate for transfers between blood relatives.',
+      'Stamp duty depends on the instrument and the Indian Stamp Act as applicable in Uttar Pradesh, including the relevant valuation rules and district rate schedule. Any concession for a family transfer depends on the current notification, qualifying relationship, instrument category and conditions; it is not automatic for every transfer between relatives.',
   },
   {
     icon: Landmark,
     title: 'What Is the ITAT and Where Is the Lucknow Bench?',
     excerpt:
-      'The Income Tax Appellate Tribunal is a statutory tribunal under Section 252 of the Income Tax Act, 1961. Its Lucknow Bench hears income tax appeals from Lucknow and most of central and western Uttar Pradesh.',
+      'The Income Tax Appellate Tribunal hears eligible income-tax appeals under the governing enactment. Whether a matter belongs before its Lucknow Bench depends on current territorial allocation and assignment. The relevant year, applicable income-tax law and any savings provisions must be checked, as must the first appellate route where required.',
   },
   {
     icon: Gavel,
     title: 'Is There a GST Appellate Tribunal in Lucknow Now?',
     excerpt:
-      'Yes — Uttar Pradesh has been allotted State Benches of the GST Appellate Tribunal based in Lucknow, with circuit benches in Prayagraj and Agra, as the Tribunal is rolled out to finally hear GST appeals.',
+      'Lucknow is a GSTAT location relevant to Uttar Pradesh matters, but the competent bench, current filing arrangements and transitional directions must be verified for the particular appeal. GSTAT ordinarily deals with eligible further appeals, not the initial reply to a GST notice or every first appeal under Section 107.',
   },
   {
     icon: MapPin,
     title: 'Who Fixes the Circle Rate Used for Stamp Duty?',
     excerpt:
-      'The circle rate — the government-notified minimum value of land or property for stamp duty purposes — is fixed by the District Magistrate, and undervaluation disputes are referred to the Collector.',
+      'District valuation schedules are issued under the applicable Uttar Pradesh framework. Use the schedule relevant to the instrument and property, including its category, use and location. An undervaluation proceeding may be considered by the competent Collector or stamp authority under the state-applicable Stamp Act; it is separate from municipal tax assessment and a title dispute.',
   },
 ]
+
+const taxFaqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: taxInsights.map(({ title, excerpt }) => ({
+    '@type': 'Question',
+    name: title,
+    acceptedAnswer: { '@type': 'Answer', text: excerpt },
+  })),
+}
 
 export default async function TaxRevenueMattersPage() {
   const taxBlogPosts = getBlogPostsByCategory('Tax & Revenue Matters')
@@ -326,6 +286,7 @@ export default async function TaxRevenueMattersPage() {
               the relevant authorities, tribunals, and the Allahabad High Court,
               Lucknow Bench.
             </p>
+            <ServiceStats service="tax" />
             <ConsultationActions className="mt-8 hidden md:flex" />
             </div>
             {taxLead && (
@@ -344,13 +305,15 @@ export default async function TaxRevenueMattersPage() {
             <ConsultationActions className="flex md:hidden" />
           </div>
 
+          <GuideToc items={taxLucknowToc} />
+
           <section className="mb-16" aria-labelledby="tax-revenue-team">
-            <h2 id="tax-revenue-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="tax-revenue-team" className="mb-4 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Our Tax &amp; Revenue Law Team
             </h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
-              Adv. Jitendra Tiwari leads our tax and revenue practice, supported
-              by Adv. Arti Dwivedi, Adv. Aditya Narayan Shukla and
+              Adv. Aditya Narayan Shukla leads our tax and revenue practice, supported
+              by Adv. Arti Dwivedi, Adv. Jitendra Tiwari and
               Adv. Prabhash Yadav in tax matters, and Adv. Vinod Arya and
               Adv. Abhishek Mishra in revenue matters. Each profile below
               sets out that member&apos;s individual practice areas.
@@ -358,13 +321,13 @@ export default async function TaxRevenueMattersPage() {
             <TeamCarousel members={taxTeam} label="Tax and revenue team members" />
           </section>
 
-          <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
+          <div id="tax-overview" className="mb-16 scroll-mt-28 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>
               Tax and revenue matters in Uttar Pradesh span several distinct
               forums — the Sub-Registrar and Collector for stamp duty and
               circle rate disputes, the Income Tax Appellate Tribunal for
-              direct tax appeals, and, since Uttar Pradesh was allotted its
-              own bench, the GST Appellate Tribunal for GST disputes.
+              eligible direct tax appeals, and the designated GST authorities
+              and GST Appellate Tribunal for their respective appellate stages.
               Sumanjari &amp; Co. Advocates advises individuals and
               businesses on compliance and represents them in disputes across
               these forums.
@@ -378,7 +341,14 @@ export default async function TaxRevenueMattersPage() {
             </p>
           </div>
 
-          <div className="mb-16">
+          <StatuteTable
+            id="tax-statutes"
+            heading="Tax and Revenue Laws: Separate Procedural Tracks"
+            intro="The relevant period, instrument and issuing authority decide the remedy. Check current amendments, income-tax transitional provisions, Uttar Pradesh notifications and forum arrangements; limitation, deposits and recovery protection differ between these tracks."
+            rows={taxLucknowStatutes}
+          />
+
+          <div id="tax-forums" className="mb-16 scroll-mt-28">
             <div className="mb-8 flex items-center gap-2">
               <Landmark className="h-5 w-5 text-gold-600 dark:text-gold-400" />
               <h2 className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
@@ -402,7 +372,7 @@ export default async function TaxRevenueMattersPage() {
             </div>
           </div>
 
-          <div className="mb-16">
+          <div id="tax-matters" className="mb-16 scroll-mt-28">
             <h2 className="mb-8 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Types of Tax &amp; Revenue Matters We Handle
             </h2>
@@ -465,41 +435,14 @@ export default async function TaxRevenueMattersPage() {
             </div>
           </div>
 
-          <div className="mb-16">
-            <div className="mb-10 text-center">
-              <h2 className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-                The Way <em className="text-gold-gradient">We Work</em>
-              </h2>
-              <p className="mx-auto max-w-xl font-body text-navy-700 dark:text-cream/55">
-                A clear, structured process from first consultation to resolution.
-              </p>
-            </div>
-            <div className="relative">
-              <div className="absolute left-[10%] right-[10%] top-[22px] hidden h-px bg-gold-500/25 lg:block" aria-hidden />
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
-                {workSteps.map(({ icon: Icon, title, description }, index) => (
-                  <div key={title} className="relative flex flex-col items-center gap-4 text-center">
-                    <div className="glass-card z-10 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-gold-500/40">
-                      <Icon className="h-5 w-5 text-gold-600 dark:text-gold-400" />
-                    </div>
-                    <div className="glass-card w-full flex-1 rounded-sm border border-gold-500/20 p-5 dark:border-gold-500/15">
-                      <span className="mb-1 block font-caps text-xs uppercase tracking-widest text-gold-600 dark:text-gold-400">
-                        Step {index + 1}
-                      </span>
-                      <h3 className="mb-1.5 font-display text-lg font-bold text-navy-900 dark:text-cream">
-                        {title}
-                      </h3>
-                      <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">
-                        {description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <GuideStages
+            id="tax-procedure"
+            heading="Tax and Revenue Procedure: Track-Specific Decisions"
+            intro="These stages identify alternative statutory routes, not a single sequence for every dispute. A GST notice, income-tax order, stamp valuation and revenue recovery certificate require separate authority, evidence, limitation and recovery analysis."
+            stages={taxLucknowStages}
+          />
 
-          <div className="mb-16">
+          <div id="tax-faqs" className="mb-16 scroll-mt-28">
             <div className="mb-10 text-center">
               <span className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">
                 From Our Desk
@@ -539,7 +482,7 @@ export default async function TaxRevenueMattersPage() {
           </div>
 
           <section aria-labelledby="tax-notice-appeal-review" className="mb-16 border-t border-gold-500/20 pt-10">
-            <h2 id="tax-notice-appeal-review" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Tax Notice, Demand Order or Revenue Recovery: What Comes Next?</h2>
+            <h2 id="tax-notice-appeal-review" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream">Tax Notice, Demand Order or Revenue Recovery: What Comes Next?</h2>
             <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">First distinguish a show-cause notice from a final assessment, penalty order or recovery action. The governing statute, period involved, issuing authority and communication date determine the reply or appeal route. GST, income tax, stamp duty, municipal property tax and mining revenue disputes have different procedures; a writ petition is not an automatic replacement for a statutory remedy. We check current forum arrangements, limitation, any pre-deposit and the separate requirements for protection from recovery.</p>
             <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Records for a tax or mining revenue consultation</h3>
             <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Share the full notice or order, portal acknowledgements, returns, ledgers, invoices, earlier replies and payment records. For stamp duty or property valuation, include the instrument and assessment material; for mining lease or royalty disputes, include the lease, permits, inspection records and demand calculation. Preparing a reply or appeal does not itself stay recovery. The legal team can coordinate with your accountant or technical adviser while reviewing the legal grounds and procedural deadlines.</p>

@@ -190,18 +190,19 @@ function paragraphText(paragraph) {
 // Mirror of src/lib/blogs.ts CATEGORY_TO_SERVICE_SLUG — which service page shows
 // each category's posts, so we can warm it on publish.
 var CATEGORY_TO_SERVICE_SLUG = {
-  'RERA': 'rera',
-  'Civil Matters': 'civil-matters',
-  'Criminal Matters': 'criminal-matters',
-  'Family & Matrimonial Matters': 'family-matrimonial-matters',
-  'Property & Land Matters': 'property-land-matters',
-  'Banking & Recovery Matters': 'banking-recovery-matters',
-  'Company & Corporate Matters': 'company-corporate-matters',
-  'Constitutional & Writ Matters': 'constitutional-writ-matters',
-  'Consumer & Motor Accident Matters': 'consumer-motor-accident-matters',
-  'Service & Employment Matters': 'service-employment-matters',
-  'Tax & Revenue Matters': 'tax-revenue-matters',
-  'Cyber Crime Matters': 'cyber-crime-lawyer'
+  'RERA': 'rera-lawyer',
+  'Civil Matters': 'civil-lawyer-lucknow',
+  'Criminal Matters': 'criminal-lawyer-lucknow',
+  'Family & Matrimonial Matters': 'family-advocate',
+  'Property & Land Matters': 'property-lawyer-lucknow',
+  'Banking & Recovery Matters': 'banking-recovery-lawyer-lucknow',
+  'Company & Corporate Matters': 'company-corporate-lawyer-lucknow',
+  'Constitutional & Writ Matters': 'constitutional-writ-lawyer-lucknow',
+  'Consumer & Motor Accident Matters': 'consumer-motor-accident-lawyer-lucknow',
+  'Service & Employment Matters': 'service-lawyer-lucknow',
+  'Tax & Revenue Matters': 'tax-lawyer-lucknow',
+  'Cyber Crime Matters': 'cyber-crime-lawyer-lucknow',
+  'Armed Forces Tribunal & Mining Matters': 'armed-forces-tribunal-mining-lawyer-lucknow'
 };
 
 // Run ONCE from the editor. Wires onSheetChange to both cell edits (onEdit) and

@@ -11,15 +11,17 @@ import {
   Gavel,
   FileWarning,
   Home,
-  Scale,
   MessageSquareWarning,
   ScrollText,
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FirmCredentials from '@/components/FirmCredentials'
+import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
+import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
+import { civilStages, civilStatutes, civilToc } from '@/lib/guides/civilLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL } from '@/lib/contactLinks'
@@ -43,11 +45,12 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'Civil Advocate in Lucknow | Suits & Injunctions | Sumanjari' },
+  title: { absolute: 'Civil Lawyer in Lucknow | Suits, Injunctions & Appeals | Sumanjari' },
   description:
-    'Civil advocate and lawyer in Lucknow for recovery suits, injunctions, property disputes and civil appeals. Civil practice led by Adv. Jitendra Tiwari.',
+    'Civil lawyer in Lucknow: stage-by-stage guide to suits, injunctions, decree execution and appeals before the Civil Court, Kaiserbagh and the Allahabad High Court, Lucknow Bench.',
   keywords: [
     'Civil Lawyer Lucknow',
+    'Civil Lawyer in Lucknow',
     'Civil Litigation Lawyer Lucknow',
     'Civil Advocate Lucknow',
     'Recovery Suit Lawyer Lucknow',
@@ -60,13 +63,13 @@ export const metadata: Metadata = {
     'CPC Lawyer Lucknow',
   ],
   alternates: {
-    canonical: '/services/civil-advocate',
+    canonical: '/services/civil-lawyer-lucknow',
   },
   openGraph: {
     title: 'Civil Advocate & Lawyer in Lucknow | Sumanjari & Co.',
     description:
       'Representation in civil suits, recovery of money, injunctions, contractual disputes, execution proceedings, and civil appeals before the District Courts and the Allahabad High Court, Lucknow Bench.',
-    url: '/services/civil-advocate',
+    url: '/services/civil-lawyer-lucknow',
   },
   twitter: {
     card: 'summary_large_image',
@@ -79,7 +82,7 @@ const civilMattersJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
   name: 'Sumanjari & Co. Advocates — Civil Advocate & Lawyer in Lucknow',
-  url: `${SITE_URL}/services/civil-advocate`,
+  url: `${SITE_URL}/services/civil-lawyer-lucknow`,
   description:
     'Representation in civil suits, recovery of money, injunctions and declaratory relief, contractual disputes, execution proceedings, easementary and partition disputes, and civil appeals, before the District Courts and the Allahabad High Court, Lucknow Bench.',
   telephone: '+91-83024-71764',
@@ -89,6 +92,16 @@ const civilMattersJsonLd = {
     { '@type': 'State', name: 'Uttar Pradesh' },
   ],
   serviceType: 'Civil Litigation Legal Services',
+}
+
+const civilBreadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/#services` },
+    { '@type': 'ListItem', position: 3, name: 'Civil Lawyer in Lucknow', item: `${SITE_URL}/services/civil-lawyer-lucknow` },
+  ],
 }
 
 const civilFaqJsonLd = {
@@ -214,39 +227,6 @@ const jurisdiction = [
   },
 ]
 
-const workSteps = [
-  {
-    icon: Landmark,
-    title: 'Private Consultation',
-    description:
-      'We begin with a confidential discussion of your matter, understanding the facts and your expectations while safeguarding your privacy.',
-  },
-  {
-    icon: Scale,
-    title: 'In-Depth Case Review',
-    description:
-      'Every document and detail is carefully examined so we can assess the strengths, risks, and best possible legal routes for you.',
-  },
-  {
-    icon: ScrollText,
-    title: 'Strategy & Drafting',
-    description:
-      'A clear, customised strategy is prepared and precise pleadings are drafted to present your case strongly before the court or authority.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Focused Representation',
-    description:
-      'We represent you with preparation and clarity, ensuring timely filings, effective arguments, and regular updates on each hearing.',
-  },
-  {
-    icon: Gavel,
-    title: 'Resolution & Ongoing Support',
-    description:
-      'Even after the matter is resolved, we guide you on next steps, compliance, and any further legal support you may require.',
-  },
-]
-
 const civilInsights = [
   {
     icon: ShieldCheck,
@@ -272,6 +252,48 @@ const civilInsights = [
     excerpt:
       'A first appeal under Section 96 CPC examines both facts and law, while a second appeal under Section 100 CPC before the High Court is confined to substantial questions of law.',
   },
+  {
+    icon: Home,
+    title: 'Should I file in the civil court or the revenue court for land in Lucknow?',
+    excerpt:
+      'It depends on the nature of the land and the relief sought. Section 206 of the UP Revenue Code bars the civil court from deciding matters the revenue courts are empowered to decide, such as mutation, partition of agricultural holdings, and declarations of bhumidhari rights, which instead go to the Tehsildar, SDM, Commissioner, or Board of Revenue. Non-agricultural property disputes, by contrast, are ordinarily filed in the civil court.',
+  },
+  {
+    icon: Landmark,
+    title: 'Do I need to send a notice to LDA or Nagar Nigam before suing?',
+    excerpt:
+      'Yes. Section 80 of the CPC requires two months\' prior written notice before suing a government body such as the Lucknow Development Authority or the Lucknow Municipal Corporation, except where the court grants leave for urgent relief under Section 80(2). Filing without the notice, or without obtaining leave, risks the suit being dismissed at the threshold.',
+  },
+  {
+    icon: FileWarning,
+    title: 'What is a commercial suit and where is it filed in Lucknow?',
+    excerpt:
+      'A commercial dispute of the specified value under the Commercial Courts Act, 2015 — such as a contract, partnership, or intellectual property dispute above the statutory threshold — is filed before the Commercial Court, Lucknow rather than the ordinary civil court. Mandatory pre-institution mediation under Section 12A applies unless urgent interim relief is sought.',
+  },
+  {
+    icon: MessageSquareWarning,
+    title: 'Can a Lucknow civil court order a survey of my plot boundary?',
+    excerpt:
+      'Yes. In a boundary or encroachment dispute, the court can appoint a local commissioner under Order XXVI Rule 9 of the CPC to inspect the site, verify boundaries against revenue records, and submit a report, which often becomes central evidence at trial.',
+  },
+  {
+    icon: ScrollText,
+    title: 'Where does an appeal from a Lucknow civil court decree go?',
+    excerpt:
+      'A first appeal under Section 96 CPC goes to the District Judge or the Allahabad High Court, Lucknow Bench, depending on the valuation of the suit. A second appeal, confined to a substantial question of law under Section 100, lies only to the Lucknow Bench. Confirm the applicable pecuniary threshold before assuming which forum hears a specific first appeal.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Can I get an urgent order before the other side is even heard?',
+    excerpt:
+      'An ex parte ad-interim injunction under Order XXXIX Rule 3 of the CPC can be granted without notice to the other side in genuinely urgent cases, but the applicant must then comply with strict conditions for promptly serving the opposite party and the application papers. Such orders are reviewed quickly once the other side appears.',
+  },
+  {
+    icon: Banknote,
+    title: 'Does winning a civil suit mean I get paid immediately?',
+    excerpt:
+      'Not automatically. A decree must be executed under Order XXI of the CPC through the executing court, which can take time depending on whether the judgment-debtor has identifiable assets, whether an appeal and stay are sought, and which mode of execution is pursued. We help clients identify realistic recovery options once a decree is in hand.',
+  },
 ]
 
 export default async function CivilMattersPage() {
@@ -288,6 +310,11 @@ export default async function CivilMattersPage() {
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(civilFaqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(civilBreadcrumbJsonLd) }}
       />
       <Navbar />
 
@@ -310,7 +337,7 @@ export default async function CivilMattersPage() {
               <div className="h-px w-12 bg-gold-500" />
             </div>
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-              Civil Advocate &amp; Lawyer <em className="text-gold-gradient">in Lucknow</em>
+              Civil Lawyer &amp; Advocate <em className="text-gold-gradient">in Lucknow</em>
             </h1>
             <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
               Sumanjari &amp; Co. Advocates provides civil advocate and lawyer
@@ -318,6 +345,10 @@ export default async function CivilMattersPage() {
               contractual disputes, and civil appeals before the District
               Courts and the Allahabad High Court, Lucknow Bench.
             </p>
+            <p className="mt-4 max-w-2xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+              A civil suit in Lucknow usually starts with a legal notice and plaint before the Civil Judge at the Civil Court, Kaiserbagh, moves through written statement, evidence and arguments, and can reach decree execution or appeal at the Allahabad High Court, Lucknow Bench. Agricultural land disputes instead go to the revenue courts. The ten stages below explain each step.
+            </p>
+            <ServiceStats service="civil" />
             <ConsultationActions className="mt-8 hidden md:flex" />
             </div>
             {civilLead && (
@@ -336,8 +367,10 @@ export default async function CivilMattersPage() {
             <ConsultationActions className="flex md:hidden" />
           </div>
 
+          <GuideToc items={civilToc} />
+
           <section className="mb-16" aria-labelledby="civil-team">
-            <h2 id="civil-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="civil-team" className="mb-4 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Our Civil Law Team
             </h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
@@ -368,7 +401,7 @@ export default async function CivilMattersPage() {
             </p>
           </div>
 
-          <div className="mb-16">
+          <div id="forums" className="mb-16 scroll-mt-28">
             <div className="mb-8 flex items-center gap-2">
               <Landmark className="h-5 w-5 text-gold-600 dark:text-gold-400" />
               <h2 className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
@@ -392,7 +425,14 @@ export default async function CivilMattersPage() {
             </div>
           </div>
 
-          <div className="mb-16">
+          <StatuteTable
+            id="statutory-framework"
+            heading="Statutory Framework for Civil Disputes"
+            intro="The codes and special statutes that decide which Lucknow forum hears a civil dispute and how it proceeds, from the Civil Court at Kaiserbagh to the revenue courts and the Allahabad High Court, Lucknow Bench."
+            rows={civilStatutes}
+          />
+
+          <div id="matters" className="mb-16 scroll-mt-28">
             <h2 className="mb-8 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Types of Civil Matters We Handle
             </h2>
@@ -454,41 +494,14 @@ export default async function CivilMattersPage() {
             </div>
           </div>
 
-          <div className="mb-16">
-            <div className="mb-10 text-center">
-              <h2 className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-                The Way <em className="text-gold-gradient">We Work</em>
-              </h2>
-              <p className="mx-auto max-w-xl font-body text-navy-700 dark:text-cream/55">
-                A clear, structured process from first consultation to resolution.
-              </p>
-            </div>
-            <div className="relative">
-              <div className="absolute left-[10%] right-[10%] top-[22px] hidden h-px bg-gold-500/25 lg:block" aria-hidden />
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
-                {workSteps.map(({ icon: Icon, title, description }, index) => (
-                  <div key={title} className="relative flex flex-col items-center gap-4 text-center">
-                    <div className="glass-card z-10 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-gold-500/40">
-                      <Icon className="h-5 w-5 text-gold-600 dark:text-gold-400" />
-                    </div>
-                    <div className="glass-card w-full flex-1 rounded-sm border border-gold-500/20 p-5 dark:border-gold-500/15">
-                      <span className="mb-1 block font-caps text-xs uppercase tracking-widest text-gold-600 dark:text-gold-400">
-                        Step {index + 1}
-                      </span>
-                      <h3 className="mb-1.5 font-display text-lg font-bold text-navy-900 dark:text-cream">
-                        {title}
-                      </h3>
-                      <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">
-                        {description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <GuideStages
+            id="civil-procedure"
+            heading="Civil Suit Procedure in Lucknow: Stage 1 to Stage 10"
+            intro="How a civil suit actually moves through the Civil Court at Kaiserbagh, the revenue courts, and the Allahabad High Court, Lucknow Bench, with the CPC and other provisions that govern each step."
+            stages={civilStages}
+          />
 
-          <div className="mb-16">
+          <div id="faqs" className="mb-16 scroll-mt-28">
             <div className="mb-10 text-center">
               <span className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">
                 From Our Desk
@@ -527,12 +540,12 @@ export default async function CivilMattersPage() {
             </div>
           </div>
 
-          <section aria-labelledby="civil-case-preparation" className="mb-16 border-t border-gold-500/20 pt-10">
+          <section aria-labelledby="civil-case-preparation" id="documents" className="mb-16 scroll-mt-28 border-t border-gold-500/20 pt-10">
             <h2 id="civil-case-preparation" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Before Filing a Civil Suit in Lucknow</h2>
             <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Identify the claim, court and limitation period</h3>
             <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">A recovery suit, declaration, partition claim and injunction do not follow an identical filing route. We review the cause of action, property location, claim value, court fees and limitation before recommending a civil court, commercial court or contractual arbitration. Do not assume that sending a legal notice extends the time to sue. Urgent interim relief requires evidence of the threatened harm and remains subject to the court&apos;s assessment.</p>
             <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Documents for your first consultation</h3>
-            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Bring the agreement or title documents, payment records, notices and delivery proofs, relevant messages, previous pleadings and orders, and a dated chronology. For an existing decree, include its certified copy and available information about the judgment-debtor&apos;s assets; execution may be available unless stayed and need not always await the end of every appeal. For title and possession issues, also see our <Link href="/services/property-land-matters" className="text-gold-700 underline dark:text-gold-400">property and land dispute practice</Link>.</p>
+            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Bring the agreement or title documents, payment records, notices and delivery proofs, relevant messages, previous pleadings and orders, and a dated chronology. For an existing decree, include its certified copy and available information about the judgment-debtor&apos;s assets; execution may be available unless stayed and need not always await the end of every appeal. For title and possession issues, also see our <Link href="/services/property-lawyer-lucknow" className="text-gold-700 underline dark:text-gold-400">property and land dispute practice</Link>.</p>
           </section>
 
           <ServiceBlogs
@@ -544,7 +557,7 @@ export default async function CivilMattersPage() {
             viewAllHref={`/blog?category=${encodeURIComponent('Civil Matters')}`}
           />
 
-          <div className="glass-card rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">
+          <div id="contact" className="glass-card scroll-mt-28 rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">
             <h2 className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Facing a Civil Dispute?
             </h2>

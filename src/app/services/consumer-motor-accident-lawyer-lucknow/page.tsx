@@ -11,7 +11,6 @@ import {
   ShieldAlert,
   HandCoins,
   FileWarning,
-  Scale,
   ShieldCheck,
   MessageSquareWarning,
   ScrollText,
@@ -19,8 +18,11 @@ import {
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FirmCredentials from '@/components/FirmCredentials'
+import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
+import { GuideToc, GuideStages, StatuteTable } from '@/components/LucknowGuide'
+import { consumerLucknowStages, consumerLucknowToc, consumerLucknowStatutes } from '@/lib/guides/consumerLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL } from '@/lib/contactLinks'
@@ -63,13 +65,13 @@ export const metadata: Metadata = {
     'Insurance Repudiation Lawyer Lucknow',
   ],
   alternates: {
-    canonical: '/services/consumer-motor-accident-matters',
+    canonical: '/services/consumer-motor-accident-lawyer-lucknow',
   },
   openGraph: {
     title: 'Consumer & Motor Accident Lawyer in Lucknow | Sumanjari & Co. Advocates',
     description:
       'Representation in consumer forum complaints, MACT compensation claims, no-fault and hit-and-run compensation, and insurance disputes before the Consumer Commissions, MACT, and the Allahabad High Court, Lucknow Bench.',
-    url: '/services/consumer-motor-accident-matters',
+    url: '/services/consumer-motor-accident-lawyer-lucknow',
   },
   twitter: {
     card: 'summary_large_image',
@@ -82,7 +84,7 @@ const consumerMattersJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
   name: 'Sumanjari & Co. Advocates — Consumer & Motor Accident Matters',
-  url: `${SITE_URL}/services/consumer-motor-accident-matters`,
+  url: `${SITE_URL}/services/consumer-motor-accident-lawyer-lucknow`,
   description:
     'Representation in consumer forum complaints under the Consumer Protection Act, 2019, Motor Accident Claims Tribunal proceedings under the Motor Vehicles Act, 1988, no-fault and hit-and-run compensation, and insurance claim disputes.',
   telephone: '+91-83024-71764',
@@ -92,45 +94,6 @@ const consumerMattersJsonLd = {
     { '@type': 'State', name: 'Uttar Pradesh' },
   ],
   serviceType: 'Consumer & Motor Accident Legal Services',
-}
-
-const consumerFaqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'What is the pecuniary jurisdiction of consumer commissions?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'As per the 2021 notification, the District Commission has jurisdiction up to ₹50 lakh, the State Commission from ₹50 lakh up to ₹2 crore, and the National Commission for claims exceeding ₹2 crore, based on the value of goods or services paid as consideration.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Is there a time limit to file a motor accident claim?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'A 2019 amendment to Section 166 of the Motor Vehicles Act reinstated a 6-month limitation period, effective from April 1, 2022, though this is subject to the Tribunal’s discretion to condone delay given the beneficial nature of the legislation.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What is no-fault liability compensation?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Under Section 140 of the Motor Vehicles Act, 1988, a claimant can receive fixed compensation — ₹50,000 for death and ₹25,000 for permanent disablement — without having to prove negligence or fault on the part of the vehicle owner or driver.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What compensation is available in hit-and-run cases?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Under the Compensation to Victims of Hit and Run Motor Accidents Scheme, 2022, ₹2 lakh is payable for death and ₹50,000 for grievous injury, disbursed from the Motor Vehicle Accident Fund constituted under Section 164B of the Motor Vehicles Act.',
-      },
-    },
-  ],
 }
 
 const matters = [
@@ -217,65 +180,45 @@ const jurisdiction = [
   },
 ]
 
-const workSteps = [
-  {
-    icon: Landmark,
-    title: 'Private Consultation',
-    description:
-      'We begin with a confidential discussion of your matter, understanding the facts and your expectations while safeguarding your privacy.',
-  },
-  {
-    icon: FileWarning,
-    title: 'In-Depth Case Review',
-    description:
-      'Every document and detail is carefully examined so we can assess the strengths, risks, and best possible legal routes for you.',
-  },
-  {
-    icon: Scale,
-    title: 'Strategy & Drafting',
-    description:
-      'A clear, customised strategy is prepared and precise pleadings are drafted to present your case strongly before the court or authority.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Focused Representation',
-    description:
-      'We represent you with preparation and clarity, ensuring timely filings, effective arguments, and regular updates on each hearing.',
-  },
-  {
-    icon: Gavel,
-    title: 'Resolution & Ongoing Support',
-    description:
-      'Even after the matter is resolved, we guide you on next steps, compliance, and any further legal support you may require.',
-  },
-]
-
 const consumerInsights = [
   {
     icon: Landmark,
     title: 'What Is the Pecuniary Jurisdiction of Consumer Commissions?',
     excerpt:
-      'As per the 2021 notification, the District Commission has jurisdiction up to ₹50 lakh, the State Commission from ₹50 lakh up to ₹2 crore, and the National Commission above ₹2 crore.',
+      'The appropriate Consumer Commission depends on the jurisdiction provisions and monetary rules currently in force, including the applicable basis for valuing the transaction. Territorial jurisdiction and consumer eligibility must also be established. A compensation demand alone does not determine the correct forum; bring the purchase or policy records for an individual assessment.',
   },
   {
     icon: Gavel,
     title: 'Is There a Time Limit to File a Motor Accident Claim?',
     excerpt:
-      'A 2019 amendment reinstated a 6-month limitation period under Section 166 of the Motor Vehicles Act, effective from April 2022 — though the Tribunal retains discretion to condone delay.',
+      'Motor accident filing requirements need prompt, case-specific review under the applicable Motor Vehicles Act provisions, amendments and binding decisions. The accident date, chosen route and procedural history matter. Do not assume that a delayed claim will be accepted or that the Tribunal can always excuse delay. Seek advice promptly with the available accident records.',
   },
   {
     icon: ShieldAlert,
     title: 'What Is No-Fault Liability Compensation?',
     excerpt:
-      'Under Section 140 of the Motor Vehicles Act, a claimant can receive ₹50,000 for death and ₹25,000 for permanent disablement without having to prove negligence or fault.',
+      'The Motor Vehicles Act provides statutory compensation routes, including section 164 where applicable, with different requirements from a fault-based claim. Eligibility, commencement provisions and interaction with other claims or payments must be examined. Older references to section 140 should not be applied mechanically to a current accident; no entitlement or payout is guaranteed by this guide.',
   },
   {
     icon: HandCoins,
     title: 'What Compensation Is Available in Hit-and-Run Cases?',
     excerpt:
-      'Under the 2022 Scheme, ₹2 lakh is payable for death and ₹50,000 for grievous injury, disbursed from the Motor Vehicle Accident Fund under Section 164B.',
+      'An accident involving an unidentified vehicle may fall within the statutory hit-and-run compensation framework and the applicable scheme. The designated authority examines eligibility, accident records and the prescribed application. This is distinct from an ordinary MACT claim against an identified driver, owner or insurer. Current scheme conditions and interaction with any other compensation must be reviewed before applying.',
   },
 ]
+
+const consumerFaqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: consumerInsights.map(({ title, excerpt }) => ({
+    '@type': 'Question',
+    name: title,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: excerpt,
+    },
+  })),
+}
 
 export default async function ConsumerMotorAccidentMattersPage() {
   const consumerBlogPosts = getBlogPostsByCategory('Consumer & Motor Accident Matters')
@@ -321,6 +264,7 @@ export default async function ConsumerMotorAccidentMattersPage() {
               Accident Claims Tribunal, and the Allahabad High Court, Lucknow
               Bench.
             </p>
+            <ServiceStats service="consumer" />
             <ConsultationActions className="mt-8 hidden md:flex" />
             </div>
             {consumerLead && (
@@ -339,8 +283,10 @@ export default async function ConsumerMotorAccidentMattersPage() {
             <ConsultationActions className="flex md:hidden" />
           </div>
 
+          <GuideToc items={consumerLucknowToc} />
+
           <section className="mb-16" aria-labelledby="consumer-team">
-            <h2 id="consumer-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="consumer-team" className="mb-4 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Consumer &amp; Accident Claims Team
             </h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
@@ -456,39 +402,31 @@ export default async function ConsumerMotorAccidentMattersPage() {
             </div>
           </div>
 
-          <div className="mb-16">
-            <div className="mb-10 text-center">
-              <h2 className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-                The Way <em className="text-gold-gradient">We Work</em>
-              </h2>
-              <p className="mx-auto max-w-xl font-body text-navy-700 dark:text-cream/55">
-                A clear, structured process from first consultation to resolution.
-              </p>
-            </div>
-            <div className="relative">
-              <div className="absolute left-[10%] right-[10%] top-[22px] hidden h-px bg-gold-500/25 lg:block" aria-hidden />
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
-                {workSteps.map(({ icon: Icon, title, description }, index) => (
-                  <div key={title} className="relative flex flex-col items-center gap-4 text-center">
-                    <div className="glass-card z-10 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-gold-500/40">
-                      <Icon className="h-5 w-5 text-gold-600 dark:text-gold-400" />
-                    </div>
-                    <div className="glass-card w-full flex-1 rounded-sm border border-gold-500/20 p-5 dark:border-gold-500/15">
-                      <span className="mb-1 block font-caps text-xs uppercase tracking-widest text-gold-600 dark:text-gold-400">
-                        Step {index + 1}
-                      </span>
-                      <h3 className="mb-1.5 font-display text-lg font-bold text-navy-900 dark:text-cream">
-                        {title}
-                      </h3>
-                      <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">
-                        {description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <StatuteTable
+            id="consumer-statutes"
+            heading="Consumer and Motor Accident Laws: Different Routes"
+            intro="Consumer complaints, MACT claims and hit-and-run assistance have different eligibility and forum requirements. Applicable amendments, filing periods, scheme conditions and current Uttar Pradesh practice must be checked for the particular matter."
+            rows={consumerLucknowStatutes}
+          />
+
+          <GuideStages
+            id="consumer-procedure"
+            heading="From Complaint or Accident Review to Enforcement"
+            intro="These six stages describe the main decisions in a consumer dispute or motor accident claim. They are not one combined filing process: the appropriate forum, evidence and available relief depend on the chosen statutory route."
+            stages={consumerLucknowStages}
+          />
+
+          <section id="consumer-documents" aria-labelledby="consumer-documents-heading" className="mb-16 scroll-mt-28 border-t border-gold-500/20 pt-10">
+            <h2 id="consumer-documents-heading" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">First-Consultation Checklist</h2>
+            <p className="mb-4 font-body leading-relaxed text-navy-700 dark:text-cream/70">Bring available records and identify what is missing. Do not delay urgent advice merely because a police, hospital or insurer document is still awaited.</p>
+            <ul className="list-disc space-y-3 pl-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">
+              <li>For consumer complaints: invoices, payment proof, contract or warranty, service requests, correspondence and the precise remedy sought.</li>
+              <li>For insurance disputes: the full policy and schedule, proposal details, claim submissions, survey material available to you and any rejection or settlement letter.</li>
+              <li>For accident claims: police papers, vehicle and insurance details, medical records, treatment bills and relevant witnesses or accident information.</li>
+              <li>For loss assessment: age and income proof, disability and work-impact records, ongoing treatment needs, dependency details and expenses actually incurred.</li>
+              <li>For any route: a dated chronology, jurisdictional connections, earlier proceedings, orders, payments and proposed releases or settlements.</li>
+            </ul>
+          </section>
 
           <div className="mb-16">
             <div className="mb-10 text-center">
@@ -530,7 +468,7 @@ export default async function ConsumerMotorAccidentMattersPage() {
           </div>
 
           <section aria-labelledby="consumer-mact-claim-review" className="mb-16 border-t border-gold-500/20 pt-10">
-            <h2 id="consumer-mact-claim-review" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Consumer Complaint or Motor Accident Claim: Which Route Applies?</h2>
+            <h2 id="consumer-mact-claim-review" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream">Consumer Complaint or Motor Accident Claim: Which Route Applies?</h2>
             <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">A complaint about defective goods, deficient services or an eligible insurance dispute may fall before a Consumer Commission. Compensation for injury or death arising from a motor accident follows the Motor Vehicles Act framework before the competent MACT; hit-and-run compensation has a separate scheme. We examine eligibility, territorial and monetary jurisdiction, the applicable filing period and existing proceedings before recommending a route. Not every insurance dispute belongs before the same forum.</p>
             <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Evidence to preserve before seeking compensation</h3>
             <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">For consumer matters, retain invoices, warranties, complaint numbers, correspondence and the insurer&apos;s rejection letter where relevant. For accident claims, preserve police papers, vehicle and policy details, treatment bills, income and age proof, disability assessments and dependency records. Compensation depends on proved facts and applicable law, not a promised payout. Prompt review is important because limitation and evidence requirements differ between remedies.</p>

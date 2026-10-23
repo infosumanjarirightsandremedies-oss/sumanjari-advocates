@@ -5,8 +5,12 @@ import { ArrowLeft, ArrowUpRight, Building2, FileCheck, MapPin, MessageCircle, P
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FirmCredentials from '@/components/FirmCredentials'
+import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
+import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
+import { reraNoidaGhaziabadStages, reraNoidaGhaziabadToc } from '@/lib/guides/reraNoidaGhaziabad'
+import { reraStatutes } from '@/lib/guides/reraLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { CHAMBER_TEL, CHAMBER_CALL_DISPLAY, whatsappUrl } from '@/lib/contactLinks'
 import { teamMembers } from '@/lib/team'
@@ -152,7 +156,7 @@ export default async function NoidaGhaziabadReraPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Navbar />
       <div className="mx-auto max-w-7xl px-6 pb-20 pt-32 md:pt-36">
-        <Link href="/services/rera-lawyer" className="mb-10 inline-flex items-center gap-2 font-caps text-xs uppercase tracking-widest text-navy-700/70 transition-colors hover:text-gold-600 dark:text-cream/45">
+        <Link href="/services/rera-lawyer-lucknow" className="mb-10 inline-flex items-center gap-2 font-caps text-xs uppercase tracking-widest text-navy-700/70 transition-colors hover:text-gold-600 dark:text-cream/45">
           <ArrowLeft className="h-3.5 w-3.5" /> RERA Services in Lucknow
         </Link>
 
@@ -173,6 +177,7 @@ export default async function NoidaGhaziabadReraPage() {
               guide the case assessment. Our team reviews the appropriate UP-RERA
               forum and the available remedies before advising on a complaint or appeal.
             </p>
+            <ServiceStats service="rera" />
             <ConsultationActions className="mt-8 hidden md:flex" />
           </div>
           {reraAdvocate && <div className="min-w-0 border-l border-gold-500/30 pl-6">
@@ -189,8 +194,10 @@ export default async function NoidaGhaziabadReraPage() {
           <ConsultationActions className="flex md:hidden" />
         </div>
 
+        <GuideToc items={reraNoidaGhaziabadToc} />
+
         <section className="mb-16" aria-labelledby="delhi-team">
-          <h2 id="delhi-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Our RERA Team</h2>
+          <h2 id="delhi-team" className="mb-4 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Our RERA Team</h2>
           <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
             Adv. Shishir Pandey leads our RERA practice for Noida and
             Ghaziabad alongside Adv. Prerna Yaduvanshi, Adv. Jyotish Raj,
@@ -202,7 +209,27 @@ export default async function NoidaGhaziabadReraPage() {
         </section>
 
         <section className="mb-16" aria-labelledby="project-locations">
-          <h2 id="project-locations" className="mb-6 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">RERA Matters by Project Location</h2>
+          <h2 id="project-locations" className="mb-6 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">RERA Matters by Project Location</h2>
+          <p className="mb-5 max-w-4xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+            UP-RERA has its principal office at Lucknow and a regional office at
+            Greater Noida in Gautam Buddh Nagar. Noida and Greater Noida projects
+            are in Gautam Buddh Nagar district; Ghaziabad is a separate district.
+            The regional office deals with matters allocated to it for western
+            Uttar Pradesh. Confirm the registered project, phase and current bench
+            allocation before filing rather than selecting a forum solely by the
+            buyer&apos;s residence, an NCR label or our chamber address.
+          </p>
+          <p className="mb-8 max-w-4xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+            Appeals from the Authority or adjudicating officer go to the Uttar
+            Pradesh Real Estate Appellate Tribunal (UP-REAT), Lucknow, subject to
+            the statutory requirements. This is not the same proceeding as the
+            original regional complaint. A challenge to a decision of NOIDA,
+            Greater Noida Industrial Development Authority (GNIDA) or Ghaziabad
+            Development Authority (GDA) may require a different remedy from
+            enforcing a promoter&apos;s RERA obligations. A later High Court remedy
+            needs its own territorial assessment; the Lucknow Bench is not a
+            universal filing destination for NCR project disputes.
+          </p>
           <div className="grid gap-8 md:grid-cols-2">
             <div className="border-t border-gold-500/30 pt-5">
               <h3 className="flex items-center gap-2 font-display text-xl font-bold text-navy-900 dark:text-cream"><MapPin className="h-5 w-5 shrink-0 text-gold-600" /> Noida</h3>
@@ -228,7 +255,7 @@ export default async function NoidaGhaziabadReraPage() {
         </section>
 
         <section className="mb-16" aria-labelledby="rera-matters">
-          <h2 id="rera-matters" className="mb-6 flex items-center gap-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl"><Building2 className="h-6 w-6 shrink-0 text-gold-600" /> Builder-Buyer &amp; RERA Matters</h2>
+          <h2 id="rera-matters" className="mb-6 flex scroll-mt-28 items-center gap-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl"><Building2 className="h-6 w-6 shrink-0 text-gold-600" /> Builder-Buyer &amp; RERA Matters</h2>
           <div className="grid gap-6 sm:grid-cols-2">
             {matters.map((matter) => (
               <div key={matter.title} className="glass-card rounded-sm border border-gold-500/20 p-6 dark:border-gold-500/15">
@@ -240,12 +267,24 @@ export default async function NoidaGhaziabadReraPage() {
         </section>
 
         <section className="mb-16 border-t border-gold-500/30 pt-8" aria-labelledby="case-review">
-          <h2 id="case-review" className="mb-5 flex items-center gap-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl"><FileCheck className="h-6 w-6 shrink-0 text-gold-600" /> Preparing Your Case for Review</h2>
+          <h2 id="case-review" className="mb-5 flex scroll-mt-28 items-center gap-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl"><FileCheck className="h-6 w-6 shrink-0 text-gold-600" /> Preparing Your Case for Review</h2>
+          <p className="mb-5 max-w-4xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+            At the first consultation, explain whether you want to retain the
+            unit, withdraw, challenge a demand, claim compensation or enforce an
+            existing order. Identify the nearest notice, hearing or appeal date
+            and who can give instructions for any joint allottees. Share the full
+            record, including documents that may support the other side; missing
+            receipts or an earlier settlement can materially change the advice.
+          </p>
           <ul className="list-disc space-y-3 pl-5 font-body leading-relaxed text-navy-700 dark:text-cream/60">
-            <li>Project registration details, unit number, booking form and allotment letter.</li>
-            <li>Builder-buyer agreement, payment receipts and the promised possession date.</li>
-            <li>Emails, notices, possession offers and records of disputed demands.</li>
-            <li>Any earlier complaint, settlement, RERA order or appeal papers.</li>
+            <li>Project and phase registration, promoter&apos;s legal name, district, unit number, booking form and allotment letter.</li>
+            <li>Signed builder-buyer agreement, payment schedule, committed possession date, grace clauses and written amendments.</li>
+            <li>A dated payment ledger supported by receipts, bank entries, loan disbursements and any refund already received.</li>
+            <li>Demand and cancellation notices, disputed charges, emails, written extensions and proof of notice delivery.</li>
+            <li>Possession offers, relevant occupancy or completion records, inspection photographs and any defect notice or technical report.</li>
+            <li>Earlier complaints, consumer or insolvency proceedings, settlements, complete RERA orders, appeals and stay directions.</li>
+            <li>Proof of receiving and serving orders, compliance dates, execution applications and any recovery certificate.</li>
+            <li>Allottee identity and authorisation, a one-page chronology, preferred relief and separately explained interest or loss calculations.</li>
           </ul>
           <p className="mt-5 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
             Tell us whether you seek possession, a refund, delay interest or
@@ -256,32 +295,28 @@ export default async function NoidaGhaziabadReraPage() {
           </p>
         </section>
 
-        <section className="mb-16" aria-labelledby="before-filing">
-          <h2 id="before-filing" className="mb-6 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Before You File a RERA Complaint</h2>
-          <ol className="grid list-none gap-8 md:grid-cols-3">
-            <li className="border-t border-gold-500/30 pt-5">
-              <h3 className="font-display text-xl font-bold text-navy-900 dark:text-cream">1. Verify the Project and Promoter</h3>
-              <p className="mt-3 font-body leading-relaxed text-navy-700 dark:text-cream/60">Check the registered phase and promoter against your documents. Note the contractual possession date and any disclosed extension; do not assume a registration extension alone resolves the buyer&apos;s claim.</p>
-            </li>
-            <li className="border-t border-gold-500/30 pt-5">
-              <h3 className="font-display text-xl font-bold text-navy-900 dark:text-cream">2. Define the Relief and Evidence</h3>
-              <p className="mt-3 font-body leading-relaxed text-navy-700 dark:text-cream/60">Decide whether you seek possession, refund, delay interest, compensation or compliance with an order. Prepare a dated payment and correspondence record, and disclose any previous settlement or pending proceeding.</p>
-            </li>
-            <li className="border-t border-gold-500/30 pt-5">
-              <h3 className="font-display text-xl font-bold text-navy-900 dark:text-cream">3. Plan Beyond the Complaint</h3>
-              <p className="mt-3 font-body leading-relaxed text-navy-700 dark:text-cream/60">Check the correct filing route and current requirements. After an order, preserve proof of receipt, track its compliance terms and review execution or appeal options promptly rather than assuming compliance is automatic.</p>
-            </li>
-          </ol>
-        </section>
+        <StatuteTable
+          id="ncr-rera-statutory-framework"
+          heading="The Statutory Framework for Your RERA Matter"
+          intro="These provisions separate promoter obligations, complaint remedies, compensation, appeals and enforcement. Check the current Uttar Pradesh rules, official directions and applicable decisions for your project before acting."
+          rows={reraStatutes}
+        />
+
+        <GuideStages
+          id="before-filing"
+          heading="Seven Stages: From Project Review to Order Enforcement"
+          intro="A Noida or Ghaziabad matter may follow different routes for refund, interest, compensation or an existing unpaid order. These stages explain the main decisions and documents; not every case needs every stage, and neither a disposal date nor recovery is guaranteed."
+          stages={reraNoidaGhaziabadStages}
+        />
 
         <section aria-labelledby="ncr-rera-enforcement-review" className="mb-16 border-t border-gold-500/20 pt-10">
-          <h2 id="ncr-rera-enforcement-review" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Noida &amp; Ghaziabad Projects: From Complaint to Order Compliance</h2>
+          <h2 id="ncr-rera-enforcement-review" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream">Noida &amp; Ghaziabad Projects: From Complaint to Order Compliance</h2>
           <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">Start with the project registration, promoter&apos;s legal name, unit and phase details, agreement, payment trail and current construction or possession status. A NOIDA, GNIDA or other development-authority issue is not necessarily the same as a promoter&apos;s RERA obligation. The project location and current UP-RERA allocation must be checked before choosing the filing route; an NCR address alone does not decide every jurisdiction question.</p>
           <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">If you already hold a refund or possession order, share its complete copy, service details, compliance dates, payments received and information about any appeal or stay. The next step may be compliance or recovery proceedings, not another complaint on the same facts. Promoter insolvency, competing proceedings or a settlement can affect strategy and recoverability. We assess those issues before advising on enforcement or an appeal, without promising a collection date or outcome.</p>
         </section>
 
         <section className="mb-16" aria-labelledby="rera-faqs">
-          <h2 id="rera-faqs" className="mb-6 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Noida &amp; Ghaziabad RERA FAQs</h2>
+          <h2 id="rera-faqs" className="mb-6 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Noida &amp; Ghaziabad RERA FAQs</h2>
           <div className="divide-y divide-gold-500/20 border-y border-gold-500/20">
             {reraFAQs.map((faq) => (
               <details key={faq.question} className="group py-5">
@@ -305,7 +340,7 @@ export default async function NoidaGhaziabadReraPage() {
         <ServiceBlogs posts={posts} fallbackIcon={<ScrollText className="h-5 w-5 text-gold-600" />} heading="Noida & Ghaziabad RERA Articles" description="Articles on builder-buyer disputes and RERA matters involving NCR projects." viewAllHref="/blog?category=RERA" />
 
         <section className="border-t border-gold-500/30 pt-8" aria-labelledby="contact-rera">
-          <h2 id="contact-rera" className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Discuss a Noida or Ghaziabad RERA Matter</h2>
+          <h2 id="contact-rera" className="scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Discuss a Noida or Ghaziabad RERA Matter</h2>
           <p className="mt-4 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
             Contact the firm to connect with our Delhi/NCR team and discuss
             document review and representation arrangements for your Noida or
@@ -318,7 +353,7 @@ export default async function NoidaGhaziabadReraPage() {
           </div>
           <p className="mt-6 font-body text-sm text-navy-700 dark:text-cream/60">
             For title, ownership or land disputes outside RERA, see{' '}
-            <Link href="/services/property-land-matters" className="font-semibold text-gold-700 underline underline-offset-4 dark:text-gold-400">property and land legal services</Link>.
+            <Link href="/services/property-lawyer-lucknow" className="font-semibold text-gold-700 underline underline-offset-4 dark:text-gold-400">property and land legal services</Link>.
           </p>
         </section>
       </div>

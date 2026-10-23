@@ -5,21 +5,24 @@ import { ArrowLeft, ArrowUpRight, Phone, HeartCrack, HeartHandshake, HandCoins, 
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FirmCredentials from '@/components/FirmCredentials'
+import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
+import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
+import { divorceStages, divorceStatutes, divorceToc } from '@/lib/guides/divorceLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
-const PAGE_PATH = '/services/divorce-lawyer'
+const PAGE_PATH = '/services/divorce-lawyer-lucknow'
 const divorceLead = teamMembers.find((member) => member.slug === 'aishwarya-pandey')
 const divorceTeam = ['akhilesh-yadav', 'prerna-yaduvanshi', 'jitendra-tiwari']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
 
 export const metadata: Metadata = {
   title: { absolute: 'Divorce Lawyer in Lucknow | Mutual & Contested | Sumanjari' },
-  description: 'Divorce lawyer and advocate in Lucknow for mutual consent and contested cases, alimony and custody. Consult the team led by Adv. Aishwarya Pandey.',
+  description: 'Divorce lawyer in Lucknow: 10-stage guide to mutual and contested divorce, alimony and custody at the Family Court, Qaiserbagh and appeals at the Lucknow Bench.',
   keywords: ['Divorce Advocate in Lucknow', 'Divorce Lawyer in Lucknow', 'Mutual Consent Divorce Lawyer Lucknow', 'Contested Divorce Lawyer Lucknow', 'Alimony Lawyer Lucknow', 'Child Custody Lawyer Lucknow', 'Family Court Advocate Lucknow'],
   alternates: { canonical: PAGE_PATH },
   openGraph: {
@@ -73,25 +76,10 @@ const services = [
   },
 ]
 
-const laws = [
-  { title: 'Hindu Marriage Act, 1955', text: 'For marriages governed by this Act, Section 13 provides statutory divorce grounds and Section 13B provides mutual consent divorce. Sections 24 and 25 concern interim support and permanent alimony; Section 26 concerns minor children. Judicial separation and nullity have separate statutory requirements.' },
-  { title: 'Special Marriage Act, 1954', text: 'Civil marriages governed by this Act have their own provisions, including contested divorce under Section 27 and mutual consent divorce under Section 28. Eligibility, jurisdiction, and procedure must be assessed under the Act rather than assumed from a different marriage law.' },
-  { title: 'Other Personal & Matrimonial Laws', text: 'Depending on the marriage and the parties, the Divorce Act, 1869, the Parsi Marriage and Divorce Act, 1936, or Muslim personal law and statutes such as the Dissolution of Muslim Marriages Act, 1939 may be relevant. Available remedies and procedures are not identical across these frameworks.' },
-  { title: 'Maintenance, Protection & Guardianship', text: 'Related relief may arise under Section 144 of the Bharatiya Nagarik Suraksha Sanhita, 2023, the Protection of Women from Domestic Violence Act, 2005, and applicable guardianship or personal-law provisions. Existing orders and transitional rules for older cases must also be considered.' },
-]
-
 const grounds = [
   { title: 'Cruelty', text: 'Physical or mental cruelty may be a divorce ground under the governing law. The court examines the conduct and its context; ordinary disagreements do not automatically establish cruelty. A careful chronology and reliable supporting material are important.' },
   { title: 'Desertion', text: 'Under the Hindu Marriage Act, desertion must ordinarily continue for at least two years immediately before the petition. Separation alone is not sufficient: intention, consent, reasonable cause, and the surrounding facts matter.' },
   { title: 'Adultery & Other Statutory Grounds', text: 'Adultery remains a civil divorce ground under relevant marriage laws even though it is no longer a criminal offence. Other grounds depend on the applicable statute and must meet its conditions. Evidence must be obtained lawfully, without unauthorised access to accounts or devices.' },
-]
-
-const process = [
-  { title: 'Consultation & Case Assessment', text: 'We review the marriage, separation history, applicable law, residence, children, finances, and existing cases. This helps identify jurisdiction, urgent relief, and whether a negotiated or contested route is appropriate.' },
-  { title: 'Documents & Settlement Preparation', text: 'We organise the documents and chronology. Where settlement is possible, discussions address alimony, child support, custody, belongings, assets, liabilities, and the lawful resolution of connected cases.' },
-  { title: 'Petition & Initial Court Proceedings', text: 'A joint petition is filed for mutual consent divorce, or a contested petition is filed and served on the other spouse. The court checks the pleadings and may direct counselling or mediation. Interim applications may be considered separately.' },
-  { title: 'Motions, Mediation or Evidence', text: 'A mutual consent matter proceeds through statutory motions, subject to any permissible waiver. A contested matter may involve a written response, framing of issues, evidence, cross-examination, and arguments if mediation does not resolve it.' },
-  { title: 'Decree & Follow-Through', text: 'After the court decides the matter, we advise on the decree, settlement compliance, certified copies, enforcement, and any appeal. Remarriage should be considered only after applicable legal conditions and the appeal position have been checked.' },
 ]
 
 const documents = [
@@ -117,6 +105,9 @@ const faqs = [
   { question: 'What if my spouse withdraws consent or refuses to attend?', answer: 'A mutual consent decree ordinarily requires continuing consent at the relevant stages. If consent is withdrawn or attendance becomes an issue, the available procedural options must be assessed. A contested petition is not an automatic substitute and requires its own legal basis.' },
   { question: 'Do connected criminal cases end with a divorce settlement?', answer: 'A settlement may provide for lawful steps in connected cases, but a divorce decree does not automatically close a criminal complaint or domestic violence proceeding. Withdrawal, compounding, or High Court quashing depends on the nature of the case and the court\'s approval where required.' },
   { question: 'What does divorce representation cost?', answer: 'Fees depend on the scope of advice, drafting, hearings, interim applications, evidence, and any appeal. After reviewing the matter, the team can explain the proposed scope and fee arrangement. Court fees and other expenses should be distinguished from professional fees.' },
+  { question: 'Where is the Family Court in Lucknow and which cases does it hear?', answer: 'The Family Court, Lucknow sits on Wala Qadar Road, Qaiserbagh, near Parivartan Chowk, and hears divorce, judicial separation, restitution, maintenance, custody, and guardianship matters for Lucknow residents and others who meet the jurisdiction requirements. Not every matrimonial dispute connected to Lucknow is automatically maintainable here; the statutory basis for jurisdiction must be checked.' },
+  { question: 'Can an NRI spouse take part in a Lucknow divorce by video-conference?', answer: 'Courts have increasingly permitted appearance and evidence by video-conference where travel is impractical, but this is allowed at the court\'s discretion and is not an automatic right. We assess whether video-conference participation is realistic for a given hearing, and coordinate service and representation where one spouse lives abroad. Our NRI legal services team can also assist with related cross-border issues.' },
+  { question: 'Where do I appeal a Lucknow Family Court divorce decree?', answer: 'An appeal from a decree of the Family Court, Lucknow lies to the Allahabad High Court, Lucknow Bench at Gomti Nagar. Limitation for filing the appeal is strict and should be confirmed immediately from the certified copy of the decree, since different provisions prescribe different periods depending on which statute is invoked.' },
 ]
 
 const structuredData = [
@@ -171,6 +162,8 @@ export default async function DivorceLawyerPage() {
               <h1 className="mb-5 font-display text-4xl font-bold leading-tight text-navy-900 dark:text-cream md:text-5xl">Divorce Advocate &amp; Lawyer <em className="text-gold-gradient">in Lucknow</em></h1>
               <p className={`mb-6 text-lg ${bodyClass}`}>Discreet representation for mutual consent divorce, contested proceedings, maintenance, and child custody before the Family Court, Lucknow and appropriate appellate forums.</p>
               <p className={`mb-8 ${bodyClass}`}>Our divorce and matrimonial practice is led by <strong className="text-navy-900 dark:text-cream">Adv. Aishwarya Pandey</strong>, Associate Partner at Sumanjari &amp; Co. Advocates. We help you understand the available remedies, prepare your case, and address the financial and parenting decisions that accompany separation.</p>
+              <p className={`mb-8 ${bodyClass}`}>Divorce petitions for Lucknow are heard by the Family Court, Lucknow at Wala Qadar Road, Qaiserbagh (Principal Judge and Additional Principal Judges); appeals go to the Allahabad High Court, Lucknow Bench at Gomti Nagar; the ten stages below explain each step.</p>
+              <ServiceStats service="divorce" />
               <div className="hidden md:block">
                 <ConsultationActions />
               </div>
@@ -190,8 +183,10 @@ export default async function DivorceLawyerPage() {
             </div>
           </header>
 
+          <GuideToc items={divorceToc} />
+
           <section className="mb-16" aria-labelledby="divorce-team">
-            <h2 id="divorce-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="divorce-team" className="mb-4 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Divorce &amp; Matrimonial Support Team
             </h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
@@ -223,7 +218,7 @@ export default async function DivorceLawyerPage() {
             ))}</div>
           </section>
 
-          <section className="mb-16 border-y border-gold-500/20 py-10">
+          <section id="mutual-vs-contested" className="mb-16 scroll-mt-28 border-y border-gold-500/20 py-10">
             <h2 className={headingClass}>Mutual Consent or Contested Divorce?</h2>
             <div className="grid gap-8 md:grid-cols-2">
               <div><h3 className="mb-3 font-display text-xl font-bold text-navy-900 dark:text-cream">An Agreed Separation</h3><p className={bodyClass}>Mutual consent divorce is based on a shared decision to end the marriage. Before filing, spouses should settle financial support, parenting arrangements, return of belongings, and how connected proceedings will be addressed. Clear payment milestones and compliance terms help prevent later disputes. Consent must remain voluntary through the legally required stages.</p></div>
@@ -231,30 +226,33 @@ export default async function DivorceLawyerPage() {
             </div>
           </section>
 
-          <section className="mb-16">
-            <h2 className={headingClass}>Which Law Applies to Your Marriage?</h2>
-            <p className={`mb-8 ${bodyClass}`}>The marriage framework determines the grounds, eligibility, procedure, and relief. A marriage certificate and details of the ceremony or registration help identify the correct starting point.</p>
-            <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">{laws.map(({ title, text }) => <div key={title}><h3 className="mb-3 font-display text-xl font-bold text-navy-900 dark:text-cream">{title}</h3><p className={bodyClass}>{text}</p></div>)}</div>
-          </section>
+          <StatuteTable
+            id="statutory-framework"
+            heading="Which Law Applies to Your Marriage?"
+            intro="The marriage framework determines the grounds, eligibility, procedure, and relief. A marriage certificate and details of the ceremony or registration help identify the correct starting point."
+            rows={divorceStatutes}
+          />
 
-          <section className="mb-16">
+          <section id="grounds" className="mb-16 scroll-mt-28">
             <h2 className={headingClass}>Grounds for a Contested Divorce</h2>
             <div className="space-y-6">{grounds.map(({ title, text }) => <div key={title} className="border-l-2 border-gold-500/50 pl-5"><h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{title}</h3><p className={bodyClass}>{text}</p></div>)}</div>
             <p className={`mt-6 text-sm ${bodyClass}`}>Long separation or relationship breakdown does not, by itself, create an ordinary Family Court ground called irretrievable breakdown under the Hindu Marriage Act. The Supreme Court&apos;s exceptional powers are distinct from statutory grounds available in a regular divorce petition.</p>
           </section>
 
-          <section className="mb-16">
-            <h2 className={headingClass}>The Divorce Process in Lucknow</h2>
-            <ol className="space-y-7">{process.map(({ title, text }, index) => <li key={title} className="flex gap-4 sm:gap-6"><span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm border border-gold-500/40 font-caps text-sm text-gold-700 dark:text-gold-400">{String(index + 1).padStart(2, '0')}</span><div><h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{title}</h3><p className={bodyClass}>{text}</p></div></li>)}</ol>
-          </section>
+          <GuideStages
+            id="divorce-procedure"
+            heading="Divorce Procedure in Lucknow: Stage 1 to Stage 10"
+            intro="How a divorce case moves through the Family Court, Lucknow, from first consultation to decree, enforcement, and appeal at the Allahabad High Court, Lucknow Bench."
+            stages={divorceStages}
+          />
 
-          <section className="mb-16 border-y border-gold-500/20 py-10">
+          <section id="documents" className="mb-16 scroll-mt-28 border-y border-gold-500/20 py-10">
             <h2 className={headingClass}>Documents to Prepare for Your Consultation</h2>
             <p className={`mb-6 ${bodyClass}`}>Exact filing requirements depend on your case. Bring the records you already have; missing documents can be discussed at the consultation. Preserve originals and avoid altering messages or other evidence.</p>
             <ul className="grid gap-4 md:grid-cols-2">{documents.map((document) => <li key={document} className={`flex gap-3 text-sm ${bodyClass}`}><ScrollText aria-hidden="true" className="mt-1 h-4 w-4 shrink-0 text-gold-600 dark:text-gold-400" /><span>{document}</span></li>)}</ul>
           </section>
 
-          <section className="mb-16">
+          <section id="settlement-children" className="mb-16 scroll-mt-28">
             <h2 className={headingClass}>Financial Settlements &amp; Your Child&apos;s Welfare</h2>
             <div className={`space-y-4 ${bodyClass}`}>
               <p>A workable settlement distinguishes spousal support from child support and records whether payments are lump-sum, periodic, or linked to specific expenses. It should address due dates, transfer or return of assets, outstanding loans, and consequences of non-compliance. Divorce does not automatically transfer jointly held property or cancel obligations to a lender.</p>
@@ -263,7 +261,7 @@ export default async function DivorceLawyerPage() {
             </div>
           </section>
 
-          <section className="mb-16">
+          <section id="courts" className="mb-16 scroll-mt-28">
             <h2 className={headingClass}>Courts, Jurisdiction &amp; Representation</h2>
             <div className="grid gap-8 md:grid-cols-2">
               <div><h3 className="mb-3 font-display text-xl font-bold text-navy-900 dark:text-cream">Family Court, Lucknow</h3><p className={bodyClass}>We assist with divorce petitions, matrimonial relief, maintenance, and custody before the Family Court where it has jurisdiction. Living in Lucknow does not automatically make every matrimonial case maintainable here: the statutory connections and facts must be checked before filing.</p></div>
@@ -276,7 +274,7 @@ export default async function DivorceLawyerPage() {
             <div className={`space-y-4 ${bodyClass}`}><p>Led by Adv. Aishwarya Pandey, our team explains the options and their practical implications, including the distinction between urgent interim relief and a final divorce decree. We discuss the scope of representation and fees after reviewing the matter, so advice, drafting, hearings, and connected proceedings can be understood separately.</p><p>Preparation includes checking the consistency of the case history, identifying evidence gaps, and reviewing existing orders before filing a new application. We approach settlement with care, but do not assume every matter can or should be resolved through mediation. Client instructions and lawful protection of rights remain central.</p></div>
           </section>
 
-          <section className="mb-16">
+          <section id="faqs" className="mb-16 scroll-mt-28">
             <h2 className={headingClass}>Frequently Asked Questions</h2>
             <div className="divide-y divide-gold-500/20 border-y border-gold-500/20">{faqs.map(({ question, answer }) => <details key={question} className="py-5"><summary className="cursor-pointer font-display text-lg font-bold leading-relaxed text-navy-900 transition-colors hover:text-gold-700 focus-visible:outline-gold-500 dark:text-cream dark:hover:text-gold-400">{question}</summary><p className={`mt-3 ${bodyClass}`}>{answer}</p></details>)}</div>
           </section>
@@ -289,7 +287,7 @@ export default async function DivorceLawyerPage() {
 
           <ServiceBlogs posts={familyBlogPosts} fallbackIcon={<ScrollText className="h-5 w-5 text-gold-600 dark:text-gold-400" />} eyebrow="From Our Desk" heading="Divorce & Matrimonial Blogs" description="Legal perspectives on divorce, maintenance, custody, and family disputes." viewAllHref={`/blog?category=${encodeURIComponent('Family & Matrimonial Matters')}`} />
 
-          <section className="border-t border-gold-500/25 pt-10 text-center">
+          <section id="contact" className="scroll-mt-28 border-t border-gold-500/25 pt-10 text-center">
             <h2 className={headingClass}>Speak with a Divorce Advocate in Lucknow</h2>
             <p className={`mx-auto mb-8 max-w-2xl ${bodyClass}`}>Discuss your circumstances with our divorce practice led by Adv. Aishwarya Pandey, whether you are considering separation, seeking an agreed divorce, or responding to a matrimonial petition.</p>
             <div className="flex justify-center"><ConsultationActions /></div>

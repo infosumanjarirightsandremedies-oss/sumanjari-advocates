@@ -32,10 +32,12 @@ function readStoredTheme(): Theme {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(readStoredTheme)
+  const [theme, setThemeState] = useState<Theme>('dark')
 
   useEffect(() => {
-    applyDomTheme(readStoredTheme())
+    const storedTheme = readStoredTheme()
+    setThemeState(storedTheme)
+    applyDomTheme(storedTheme)
   }, [])
 
   const setTheme = useCallback((next: Theme) => {

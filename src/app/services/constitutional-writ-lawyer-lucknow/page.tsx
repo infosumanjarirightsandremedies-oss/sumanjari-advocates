@@ -12,14 +12,16 @@ import {
   Unlock,
   Scale,
   MessageSquareWarning,
-  Gavel,
   ScrollText,
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FirmCredentials from '@/components/FirmCredentials'
+import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
+import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
+import { constitutionalStages, constitutionalStatutes, constitutionalToc } from '@/lib/guides/constitutionalLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL } from '@/lib/contactLinks'
@@ -63,13 +65,13 @@ export const metadata: Metadata = {
     'Writ Maintainability Legal Advice',
   ],
   alternates: {
-    canonical: '/services/constitutional-writ-matters',
+    canonical: '/services/constitutional-writ-lawyer-lucknow',
   },
   openGraph: {
     title: 'Constitutional & Writ Lawyer in Lucknow | Sumanjari & Co. Advocates',
     description:
       'Representation in writ petitions, PIL, and fundamental rights matters under Article 226 before the Allahabad High Court, Lucknow Bench.',
-    url: '/services/constitutional-writ-matters',
+    url: '/services/constitutional-writ-lawyer-lucknow',
   },
   twitter: {
     card: 'summary_large_image',
@@ -82,7 +84,7 @@ const constitutionalJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
   name: 'Sumanjari & Co. Advocates — Constitutional & Writ Matters',
-  url: `${SITE_URL}/services/constitutional-writ-matters`,
+  url: `${SITE_URL}/services/constitutional-writ-lawyer-lucknow`,
   description:
     'Representation in writ petitions under Article 226, Public Interest Litigation, fundamental rights matters, and service-related writs, before the Allahabad High Court, Lucknow Bench.',
   telephone: '+91-83024-71764',
@@ -92,45 +94,6 @@ const constitutionalJsonLd = {
     { '@type': 'State', name: 'Uttar Pradesh' },
   ],
   serviceType: 'Constitutional & Writ Legal Services',
-}
-
-const constitutionalFaqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'What is a writ petition under Article 226?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Article 226 empowers the High Court to issue writs — habeas corpus, mandamus, prohibition, certiorari, or quo warranto — for the enforcement of fundamental rights and for any other legal right, against the State, public authorities, and in appropriate cases, private bodies.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What are the five types of writs?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Habeas corpus secures the release of a person unlawfully detained; mandamus compels a public authority to perform a legal duty; prohibition restrains a lower court or tribunal from exceeding its jurisdiction; certiorari quashes an order already passed by a subordinate court, tribunal, or authority; and quo warranto challenges a person’s right to hold a public office.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'When can I file a Public Interest Litigation (PIL)?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'A PIL can be filed where the issue affects the public at large or a class of citizens rather than a single individual, and courts have relaxed the ordinary rule of standing to allow such petitions in the interest of justice.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Can a writ be filed for a service matter?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Yes. Where a service dispute falls outside the jurisdiction of a service tribunal, or challenges a decision of the tribunal itself, a writ petition under Article 226 before the High Court remains available.',
-      },
-    },
-  ],
 }
 
 const matters = [
@@ -179,7 +142,8 @@ const matters = [
     title: 'Mandamus, Prohibition, Certiorari & Quo Warranto',
     points: [
       'Mandamus compelling a public authority to perform a statutory duty',
-      'Prohibition and certiorari against subordinate courts, tribunals, and authorities acting beyond jurisdiction',
+      'Prohibition and certiorari where maintainable against tribunals and public authorities acting beyond jurisdiction',
+      'Supervisory challenges to civil-court judicial orders under Article 227 where justified, distinct from Article 226 certiorari',
       'Quo warranto challenging illegal appointment to a public office',
     ],
   },
@@ -217,39 +181,6 @@ const jurisdiction = [
   },
 ]
 
-const workSteps = [
-  {
-    icon: Landmark,
-    title: 'Private Consultation',
-    description:
-      'We begin with a confidential discussion of your matter, understanding the facts and your expectations while safeguarding your privacy.',
-  },
-  {
-    icon: Scale,
-    title: 'In-Depth Case Review',
-    description:
-      'Every document and detail is carefully examined so we can assess the strengths, risks, and best possible legal routes for you.',
-  },
-  {
-    icon: Gavel,
-    title: 'Strategy & Drafting',
-    description:
-      'A clear, customised strategy is prepared and precise pleadings are drafted to present your case strongly before the court or authority.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Focused Representation',
-    description:
-      'We represent you with preparation and clarity, ensuring timely filings, effective arguments, and regular updates on each hearing.',
-  },
-  {
-    icon: Briefcase,
-    title: 'Resolution & Ongoing Support',
-    description:
-      'Even after the matter is resolved, we guide you on next steps, compliance, and any further legal support you may require.',
-  },
-]
-
 const constitutionalInsights = [
   {
     icon: Landmark,
@@ -261,7 +192,7 @@ const constitutionalInsights = [
     icon: Scale,
     title: 'What Are the Five Types of Writs?',
     excerpt:
-      'Habeas corpus, mandamus, prohibition, certiorari, and quo warranto — each addresses a different kind of illegality, from unlawful detention to a public authority exceeding its powers.',
+      'Habeas corpus addresses unlawful detention; mandamus concerns performance of a public legal duty; prohibition restrains a proceeding exceeding jurisdiction; certiorari may quash an unlawful tribunal or public-authority decision; and quo warranto tests entitlement to a public office. Their requirements differ. Judicial orders of civil courts are ordinarily considered, where intervention is justified, under Article 227 supervision rather than Article 226 certiorari.',
   },
   {
     icon: Megaphone,
@@ -273,9 +204,22 @@ const constitutionalInsights = [
     icon: Briefcase,
     title: 'Can a Writ Be Filed for a Service Matter?',
     excerpt:
-      'Yes — where a dispute falls outside a service tribunal’s jurisdiction, or challenges the tribunal’s own order, a writ petition under Article 226 before the High Court remains available.',
+      'A public-service writ may be considered where maintainable, including judicial review of a tribunal decision or a matter outside tribunal coverage. Employer status, the public-law issue, territorial jurisdiction and effective alternative remedies still need assessment. A private employment dispute does not automatically qualify for a writ, and an available statutory remedy cannot be bypassed as of right.',
   },
 ]
+
+const constitutionalFaqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: constitutionalInsights.map(({ title, excerpt }) => ({
+    '@type': 'Question',
+    name: title,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: excerpt,
+    },
+  })),
+}
 
 export default async function ConstitutionalWritMattersPage() {
   const constitutionalBlogPosts = getBlogPostsByCategory('Constitutional & Writ Matters')
@@ -320,6 +264,7 @@ export default async function ConstitutionalWritMattersPage() {
               Public Interest Litigation and fundamental rights matters under Article 226 before the
               Allahabad High Court, Lucknow Bench.
             </p>
+            <ServiceStats service="writ" />
             <ConsultationActions className="mt-8 hidden md:flex" />
             </div>
             {constitutionalLead && (
@@ -338,8 +283,10 @@ export default async function ConstitutionalWritMattersPage() {
             <ConsultationActions className="flex md:hidden" />
           </div>
 
+          <GuideToc items={constitutionalToc} />
+
           <section className="mb-16" aria-labelledby="constitutional-team">
-            <h2 id="constitutional-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="constitutional-team" className="mb-4 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Constitutional &amp; Writ Matters Team
             </h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
@@ -366,11 +313,14 @@ export default async function ConstitutionalWritMattersPage() {
               by a government department, a service dispute outside tribunal
               jurisdiction, or an issue of public importance, we prepare each
               petition with careful attention to maintainability, alternative
-              remedy, and the relief available under Article 226.
+              remedy, and the relief available under Article 226. For a
+              step-by-step look at how a case moves through the Lucknow
+              Bench — from filing to judgment and appeal — see our{' '}
+              <Link href="/services/high-court-lawyer-lucknow" className="text-gold-700 underline underline-offset-4 dark:text-gold-400">High Court lawyer in Lucknow guide</Link>.
             </p>
           </div>
 
-          <div className="mb-16">
+          <div id="constitutional-forums" className="mb-16 scroll-mt-28">
             <div className="mb-8 flex items-center gap-2">
               <Landmark className="h-5 w-5 text-gold-600 dark:text-gold-400" />
               <h2 className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
@@ -394,7 +344,14 @@ export default async function ConstitutionalWritMattersPage() {
             </div>
           </div>
 
-          <div className="mb-16">
+          <StatuteTable
+            id="constitutional-statutory-framework"
+            heading="Constitutional and Procedural Framework"
+            intro="Article 226 writs and Article 227 supervision are distinct. The challenged action, respondent, territorial connection and statutory remedies determine the available route; current High Court rules and directions must be checked for filing and further challenge."
+            rows={constitutionalStatutes}
+          />
+
+          <div id="constitutional-matters" className="mb-16 scroll-mt-28">
             <h2 className="mb-8 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Types of Constitutional &amp; Writ Matters We Handle
             </h2>
@@ -456,41 +413,14 @@ export default async function ConstitutionalWritMattersPage() {
             </div>
           </div>
 
-          <div className="mb-16">
-            <div className="mb-10 text-center">
-              <h2 className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-                The Way <em className="text-gold-gradient">We Work</em>
-              </h2>
-              <p className="mx-auto max-w-xl font-body text-navy-700 dark:text-cream/55">
-                A clear, structured process from first consultation to resolution.
-              </p>
-            </div>
-            <div className="relative">
-              <div className="absolute left-[10%] right-[10%] top-[22px] hidden h-px bg-gold-500/25 lg:block" aria-hidden />
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
-                {workSteps.map(({ icon: Icon, title, description }, index) => (
-                  <div key={title} className="relative flex flex-col items-center gap-4 text-center">
-                    <div className="glass-card z-10 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-gold-500/40">
-                      <Icon className="h-5 w-5 text-gold-600 dark:text-gold-400" />
-                    </div>
-                    <div className="glass-card w-full flex-1 rounded-sm border border-gold-500/20 p-5 dark:border-gold-500/15">
-                      <span className="mb-1 block font-caps text-xs uppercase tracking-widest text-gold-600 dark:text-gold-400">
-                        Step {index + 1}
-                      </span>
-                      <h3 className="mb-1.5 font-display text-lg font-bold text-navy-900 dark:text-cream">
-                        {title}
-                      </h3>
-                      <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">
-                        {description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <GuideStages
+            id="constitutional-procedure"
+            heading="Writ and Supervisory Matters: Seven Practical Stages"
+            intro="The route depends on the decision and the jurisdiction invoked. These stages cover maintainability, statutory alternatives, the record, filing, interim relief, hearing and compliance. Neither filing nor admission guarantees a stay or the final remedy requested."
+            stages={constitutionalStages}
+          />
 
-          <div className="mb-16">
+          <div id="constitutional-faqs" className="mb-16 scroll-mt-28">
             <div className="mb-10 text-center">
               <span className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">
                 From Our Desk
@@ -530,10 +460,10 @@ export default async function ConstitutionalWritMattersPage() {
           </div>
 
           <section aria-labelledby="writ-maintainability-review" className="mb-16 border-t border-gold-500/20 pt-10">
-            <h2 id="writ-maintainability-review" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream">Can Your Administrative Order Be Challenged by Writ?</h2>
+            <h2 id="writ-maintainability-review" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream">Can Your Administrative Order Be Challenged by Writ?</h2>
             <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">A writ petition is not an automatic alternative to a statutory appeal or a civil suit. We examine whether the respondent is amenable to writ jurisdiction, whether an effective alternative remedy exists, delay in approaching the court, and whether the cause of action falls within the Lucknow Bench&apos;s territorial allocation. Questions of natural justice, jurisdiction and fundamental rights may affect maintainability, but the facts and applicable law must support the chosen remedy.</p>
-            <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Records needed for a writ consultation</h3>
-            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Share the complete challenged order, its communication date, notices, your replies and representations, supporting records and previous proceedings. Identify the public authority, the action requested and any urgent consequence. For PIL, disclose the public injury, your interest and prior approaches to the authorities; a private grievance does not become a public-interest case merely by its label. For employment orders, see our <Link href="/services/service-advocate" className="text-gold-700 underline dark:text-gold-400">service law practice</Link>.</p>
+            <h3 id="constitutional-documents" className="mb-2 scroll-mt-28 font-display text-xl font-bold text-navy-900 dark:text-cream">Records needed for a writ consultation</h3>
+            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Share the complete challenged order, its communication date, notices, your replies and representations, supporting records and previous proceedings. Identify the public authority, the action requested and any urgent consequence. For PIL, disclose the public injury, your interest and prior approaches to the authorities; a private grievance does not become a public-interest case merely by its label. For employment orders, see our <Link href="/services/service-lawyer-lucknow" className="text-gold-700 underline dark:text-gold-400">service law practice</Link>.</p>
           </section>
 
           <ServiceBlogs
@@ -545,7 +475,7 @@ export default async function ConstitutionalWritMattersPage() {
             viewAllHref={`/blog?category=${encodeURIComponent('Constitutional & Writ Matters')}`}
           />
 
-          <div className="glass-card rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">
+          <div id="constitutional-consultation" className="glass-card scroll-mt-28 rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">
             <h2 className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Considering a Writ Petition?
             </h2>

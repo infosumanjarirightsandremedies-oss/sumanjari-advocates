@@ -9,6 +9,7 @@
     "dev:webpack": "cross-env NEXT_IGNORE_INCORRECT_LOCKFILE=1 next dev",
     "build": "cross-env NEXT_IGNORE_INCORRECT_LOCKFILE=1 next build",
     "start": "cross-env NEXT_IGNORE_INCORRECT_LOCKFILE=1 next start",
+    "test": "node --test --test-concurrency=1 tests/production/*.test.cjs",
     "lint": "next lint"
   },
   "dependencies": {

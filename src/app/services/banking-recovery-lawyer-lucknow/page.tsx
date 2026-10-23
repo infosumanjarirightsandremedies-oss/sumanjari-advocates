@@ -11,7 +11,6 @@ import {
   Banknote,
   Home,
   Users,
-  Scale,
   ShieldCheck,
   MessageSquareWarning,
   ScrollText,
@@ -19,8 +18,11 @@ import {
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FirmCredentials from '@/components/FirmCredentials'
+import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
+import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
+import { bankingLucknowStages, bankingLucknowStatutes, bankingLucknowToc } from '@/lib/guides/bankingLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL } from '@/lib/contactLinks'
@@ -68,7 +70,7 @@ export const metadata: Metadata = {
     'DRT-II Lucknow Advocate',
   ],
   alternates: {
-    canonical: '/services/banking-recovery-matters',
+    canonical: '/services/banking-recovery-lawyer-lucknow',
   },
   twitter: {
     card: 'summary_large_image',
@@ -79,7 +81,7 @@ export const metadata: Metadata = {
     title: 'DRT Lawyer in Lucknow | Sumanjari & Co. Advocates',
     description:
       'Legal assistance for borrowers, guarantors, banks and financial institutions in DRT proceedings, SARFAESI possession and auction disputes, settlements and DRAT appeals.',
-    url: '/services/banking-recovery-matters',
+    url: '/services/banking-recovery-lawyer-lucknow',
   },
 }
 
@@ -87,7 +89,7 @@ const bankingRecoveryJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
   name: 'Sumanjari & Co. Advocates — Banking, Recovery & Negotiable Instruments Matters',
-  url: `${SITE_URL}/services/banking-recovery-matters`,
+  url: `${SITE_URL}/services/banking-recovery-lawyer-lucknow`,
   description:
     'Representation for banks, financial institutions, borrowers, and guarantors in Debts Recovery Tribunal proceedings, SARFAESI enforcement, bank loan recovery and settlement, and negotiable instrument disputes, before the DRT, Lucknow, DRAT Allahabad, and the Allahabad High Court, Lucknow Bench.',
   telephone: '+91-83024-71764',
@@ -247,39 +249,6 @@ const jurisdiction = [
   },
 ]
 
-const workSteps = [
-  {
-    icon: Landmark,
-    title: 'Private Consultation',
-    description:
-      'We begin with a confidential discussion of your matter, understanding the facts and your expectations while safeguarding your privacy.',
-  },
-  {
-    icon: Scale,
-    title: 'In-Depth Case Review',
-    description:
-      'Every document and detail is carefully examined so we can assess the strengths, risks, and best possible legal routes for you.',
-  },
-  {
-    icon: HandCoins,
-    title: 'Strategy & Drafting',
-    description:
-      'A clear, customised strategy is prepared and precise pleadings are drafted to present your case strongly before the court or authority.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Focused Representation',
-    description:
-      'We represent you with preparation and clarity, ensuring timely filings, effective arguments, and regular updates on each hearing.',
-  },
-  {
-    icon: Banknote,
-    title: 'Resolution & Ongoing Support',
-    description:
-      'Even after the matter is resolved, we guide you on next steps, compliance, and any further legal support you may require.',
-  },
-]
-
 export default async function BankingRecoveryMattersPage() {
   const bankingBlogPosts = getBlogPostsByCategory('Banking & Recovery Matters')
 
@@ -329,6 +298,7 @@ export default async function BankingRecoveryMattersPage() {
               possession and property auction disputes, loan recovery claims,
               one-time settlements and DRAT appeals.
             </p>
+            <ServiceStats service="banking" />
             <ConsultationActions className="mt-8 hidden md:flex" />
             </div>
             {bankingLead && (
@@ -347,8 +317,10 @@ export default async function BankingRecoveryMattersPage() {
             <ConsultationActions className="flex md:hidden" />
           </div>
 
+          <GuideToc items={bankingLucknowToc} />
+
           <section className="mb-16" aria-labelledby="banking-team">
-            <h2 id="banking-team" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="banking-team" className="mb-4 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Our Banking &amp; Recovery Team
             </h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
@@ -361,7 +333,7 @@ export default async function BankingRecoveryMattersPage() {
             <TeamCarousel members={bankingTeam} label="Banking and recovery team members" />
           </section>
 
-          <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
+          <div id="banking-overview" className="mb-16 scroll-mt-28 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>
               Loan defaults and recovery proceedings move on strict timelines
               — a demand notice under the SARFAESI Act, an Original
@@ -383,7 +355,7 @@ export default async function BankingRecoveryMattersPage() {
           </div>
 
           <section className="mb-16" aria-labelledby="sarfaesi-next-steps">
-            <h2 id="sarfaesi-next-steps" className="mb-6 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="sarfaesi-next-steps" className="mb-6 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Received a Bank Notice, DRT Summons or Auction Notice?
             </h2>
             <div className="space-y-6 font-body leading-relaxed text-navy-700 dark:text-cream/70">
@@ -403,7 +375,7 @@ export default async function BankingRecoveryMattersPage() {
           </section>
 
           <section className="mb-16 border-y border-gold-500/20 py-8" aria-labelledby="drt-documents">
-            <h2 id="drt-documents" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            <h2 id="drt-documents" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Documents for Your DRT Consultation
             </h2>
             <ul className="list-disc space-y-3 pl-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">
@@ -417,7 +389,14 @@ export default async function BankingRecoveryMattersPage() {
             <ConsultationActions className="mt-6 flex" />
           </section>
 
-          <div className="mb-16">
+          <StatuteTable
+            id="banking-statutes"
+            heading="Laws Governing Bank Recovery and Secured Assets"
+            intro="The remedy depends on the creditor, transaction and challenged action. Check current amendments, notifications and tribunal allocation before relying on a provision; the tracks below have different requirements."
+            rows={bankingLucknowStatutes}
+          />
+
+          <div id="banking-forums" className="mb-16 scroll-mt-28">
             <div className="mb-8 flex items-center gap-2">
               <Landmark className="h-5 w-5 text-gold-600 dark:text-gold-400" />
               <h2 className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
@@ -441,7 +420,7 @@ export default async function BankingRecoveryMattersPage() {
             </div>
           </div>
 
-          <div className="mb-16">
+          <div id="banking-matters" className="mb-16 scroll-mt-28">
             <h2 className="mb-8 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Types of Banking &amp; Recovery Matters We Handle
             </h2>
@@ -504,41 +483,14 @@ export default async function BankingRecoveryMattersPage() {
             </div>
           </div>
 
-          <div className="mb-16">
-            <div className="mb-10 text-center">
-              <h2 className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-                The Way <em className="text-gold-gradient">We Work</em>
-              </h2>
-              <p className="mx-auto max-w-xl font-body text-navy-700 dark:text-cream/55">
-                A clear, structured process from first consultation to resolution.
-              </p>
-            </div>
-            <div className="relative">
-              <div className="absolute left-[10%] right-[10%] top-[22px] hidden h-px bg-gold-500/25 lg:block" aria-hidden />
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
-                {workSteps.map(({ icon: Icon, title, description }, index) => (
-                  <div key={title} className="relative flex flex-col items-center gap-4 text-center">
-                    <div className="glass-card z-10 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-gold-500/40">
-                      <Icon className="h-5 w-5 text-gold-600 dark:text-gold-400" />
-                    </div>
-                    <div className="glass-card w-full flex-1 rounded-sm border border-gold-500/20 p-5 dark:border-gold-500/15">
-                      <span className="mb-1 block font-caps text-xs uppercase tracking-widest text-gold-600 dark:text-gold-400">
-                        Step {index + 1}
-                      </span>
-                      <h3 className="mb-1.5 font-display text-lg font-bold text-navy-900 dark:text-cream">
-                        {title}
-                      </h3>
-                      <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">
-                        {description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <GuideStages
+            id="banking-procedure"
+            heading="Bank Recovery Procedure and Practical Decisions"
+            intro="These are alternative and sometimes parallel tracks, not mandatory consecutive steps in every case. The notice, asset, existing orders and available statutory remedy determine which stages apply. No filing or settlement request automatically stops recovery."
+            stages={bankingLucknowStages}
+          />
 
-          <div className="mb-16">
+          <div id="banking-faqs" className="mb-16 scroll-mt-28">
             <div className="mb-10 text-center">
               <span className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">
                 From Our Desk
@@ -575,10 +527,10 @@ export default async function BankingRecoveryMattersPage() {
           </div>
 
           <section className="mb-12 font-body text-sm leading-relaxed text-navy-700 dark:text-cream/60" aria-labelledby="drt-official-resources">
-            <h2 id="drt-official-resources" className="mb-3 font-display text-xl font-bold text-navy-900 dark:text-cream">Official DRT and SARFAESI Resources</h2>
+            <h2 id="drt-official-resources" className="mb-3 scroll-mt-28 font-display text-xl font-bold text-navy-900 dark:text-cream">Official DRT and SARFAESI Resources</h2>
             <p>Check tribunal details, cause lists and case status on the <a href="https://drt.gov.in/" className="text-gold-700 underline dark:text-gold-400">official DRT portal</a>. The Recovery of Debts and Bankruptcy Act, 1993, the SARFAESI Act, 2002 and related rules are available through <a href="https://www.indiacode.nic.in/" className="text-gold-700 underline dark:text-gold-400">India Code</a>. Confirm current notifications and filing requirements before taking action.</p>
             <p className="mt-3">This page provides general legal information, not advice on an individual notice or proceeding. Deadlines, jurisdiction and available relief depend on the facts and applicable law.</p>
-            <p className="mt-3">For related disputes, see our <Link href="/services/civil-advocate" className="text-gold-700 underline dark:text-gold-400">civil litigation</Link> and <Link href="/services/property-land-matters" className="text-gold-700 underline dark:text-gold-400">property and land matters</Link> practice pages.</p>
+            <p className="mt-3">For related disputes, see our <Link href="/services/civil-lawyer-lucknow" className="text-gold-700 underline dark:text-gold-400">civil litigation</Link> and <Link href="/services/property-lawyer-lucknow" className="text-gold-700 underline dark:text-gold-400">property and land matters</Link> practice pages.</p>
           </section>
 
           <ServiceBlogs

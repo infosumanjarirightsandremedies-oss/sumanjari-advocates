@@ -53,7 +53,7 @@ const services: Service[] = [
     icon: Home,
     title: 'Property & Land Matters',
     description: 'Comprehensive legal assistance in property ownership, transfers, title verification, land disputes, revenue proceedings, and documentation.',
-    href: '/services/property-land-matters',
+    href: '/services/property-lawyer-lucknow',
     items: [
       'Sale, purchase & transfer of immovable property',
       'Property title verification & due diligence',
@@ -88,7 +88,7 @@ const services: Service[] = [
     icon: Receipt,
     title: 'Tax & Revenue Matters',
     description: 'Legal assistance in stamp duty, registration, taxation, valuation disputes, and revenue matters.',
-    href: '/services/tax-revenue-advocate',
+    href: '/services/tax-lawyer-lucknow',
     items: [
       'Stamp duty & registration matters',
       'Property tax assessment disputes',
@@ -102,7 +102,7 @@ const services: Service[] = [
     icon: Scale,
     title: 'Civil Matters',
     description: 'Representation in civil litigation, recovery proceedings, contractual disputes, and appeals.',
-    href: '/services/civil-advocate',
+    href: '/services/civil-lawyer-lucknow',
     items: [
       'Civil suits & recovery of money',
       'Injunction & declaratory suits',
@@ -117,7 +117,7 @@ const services: Service[] = [
     icon: Gavel,
     title: 'Criminal Matters',
     description: 'Strategic criminal defence, bail, trial representation, and appellate advocacy.',
-    href: '/services/criminal-lawyer',
+    href: '/services/criminal-lawyer-lucknow',
     items: [
       'FIR quashing petitions',
       'Bail matters',
@@ -147,7 +147,7 @@ const services: Service[] = [
     icon: Users,
     title: 'Service & Employment Matters',
     description: 'Representation in service disputes, tribunals, and employment litigation.',
-    href: '/services/service-advocate',
+    href: '/services/service-lawyer-lucknow',
     items: [
       'Wrongful termination & reinstatement',
       'Departmental inquiry representation',
@@ -161,7 +161,7 @@ const services: Service[] = [
     icon: ShoppingBag,
     title: 'Consumer & Motor Accident Matters',
     description: 'Consumer litigation, MACT claims, and insurance dispute resolution.',
-    href: '/services/consumer-motor-accident-matters',
+    href: '/services/consumer-motor-accident-lawyer-lucknow',
     items: [
       'Consumer forum complaints',
       'Motor Accident Claims Tribunal (MACT) cases',
@@ -173,7 +173,7 @@ const services: Service[] = [
     icon: Briefcase,
     title: 'Company & Corporate Matters',
     description: 'Corporate advisory, compliance, shareholder disputes, and commercial litigation.',
-    href: '/services/company-corporate-matters',
+    href: '/services/company-corporate-lawyer-lucknow',
     items: [
       'Company registration & compliance advisory',
       'Shareholder & partnership disputes',
@@ -186,7 +186,7 @@ const services: Service[] = [
     icon: Landmark,
     title: 'Constitutional & Writ Matters',
     description: 'Representation before the High Court in constitutional and writ jurisdiction.',
-    href: '/services/constitutional-writ-matters',
+    href: '/services/constitutional-writ-lawyer-lucknow',
     items: [
       'Writ petitions (Article 226 - High Court)',
       'Public Interest Litigation (PIL) support',
@@ -212,7 +212,7 @@ const services: Service[] = [
     icon: Building2,
     title: 'RERA & Real Estate Matters',
     description: 'Representation in real estate regulatory disputes before UP-RERA, builder-buyer conflicts, and project compliance matters.',
-    href: '/services/rera-lawyer',
+    href: '/services/rera-lawyer-lucknow',
     items: [
       'Builder-buyer disputes',
       'UP-RERA complaints',
@@ -225,7 +225,7 @@ const services: Service[] = [
     icon: Banknote,
     title: 'Banking, Recovery & Negotiable Instruments Matters',
     description: 'Representation in bank loan recovery, DRT proceedings, and negotiable instruments disputes.',
-    href: '/services/banking-recovery-matters',
+    href: '/services/banking-recovery-lawyer-lucknow',
     items: [
       'Debts Recovery Tribunal (DRT) proceedings',
       'SARFAESI Act matters',
@@ -237,6 +237,7 @@ const services: Service[] = [
     id: 'aft-mining',
     icon: ShieldHalf,
     title: 'Armed Forces Tribunal & Mining Matters',
+    href: '/services/armed-forces-tribunal-mining-lawyer-lucknow',
     description: 'Representation before the Armed Forces Tribunal for defence personnel, and in mining lease and revenue disputes.',
     items: [
       'Armed Forces Tribunal (AFT) service disputes',
@@ -250,7 +251,7 @@ const services: Service[] = [
     icon: Laptop,
     title: 'Cyber Crime Matters',
     description: 'Cyber crime complaints, bank account freeze/unfreeze matters, IT Act prosecution and defence, and cyber fraud bail.',
-    href: '/services/cyber-crime-lawyer',
+    href: '/services/cyber-crime-lawyer-lucknow',
     items: [
       'Cyber crime complaints & cyber thana proceedings',
       'Bank account freeze & unfreeze matters',
