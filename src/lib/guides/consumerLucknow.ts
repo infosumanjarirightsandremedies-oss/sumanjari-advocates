@@ -68,6 +68,8 @@ export const consumerLucknowToc: GuideTocItem[] = [
   { id: 'consumer-team', label: 'Our Team' },
   { id: 'consumer-statutes', label: 'Applicable Laws and Forums' },
   { id: 'consumer-procedure', label: 'Complaint and Claim Procedure', children: consumerLucknowStages.map(({ id, title }) => ({ id, label: title })) },
+  { id: 'consumer-mact-multiplier-fafo', label: 'MACT Compensation & FAFO Appeals' },
+  { id: 'consumer-edakhil-filing', label: 'DCDRC & SCDRC E-Daakhil Filing' },
   { id: 'consumer-documents', label: 'First-Consultation Checklist' },
   { id: 'consumer-mact-claim-review', label: 'Consumer or MACT: Choosing the Route' },
 ]

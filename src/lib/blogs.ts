@@ -193,6 +193,26 @@ export async function getBlogPostsByCategory(category: string): Promise<BlogPost
   return posts.filter((post) => post.category === category)
 }
 
+// Several service pages have no dedicated sheet category yet; they surface
+// closely related clusters instead of rendering zero cards.
+export async function getBlogPostsByCategories(categories: string[], limit?: number): Promise<BlogPostMeta[]> {
+  const posts = await getBlogPosts()
+  const wanted = new Set(categories)
+  const matched = posts.filter((post) => wanted.has(post.category))
+  return typeof limit === 'number' ? matched.slice(0, limit) : matched
+}
+
+// Hand-picked posts by slug, in the order given (used for exact cross-links
+// such as the UP Revenue Code series on the property page).
+export async function getBlogPostsBySlugs(slugs: string[]): Promise<BlogPostMeta[]> {
+  const posts = await getBlogPosts()
+  const bySlug = new Map(posts.map((post) => [post.slug, post]))
+  return slugs.flatMap((slug) => {
+    const post = bySlug.get(slug)
+    return post ? [post] : []
+  })
+}
+
 // Maps each sheet Category value to the service page that renders it, so a
 // blog post's "Back" link can return to its own service page instead of home.
 const CATEGORY_TO_SERVICE_SLUG: Record<string, string> = {

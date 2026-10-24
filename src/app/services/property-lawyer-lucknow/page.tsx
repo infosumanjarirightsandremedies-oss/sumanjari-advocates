@@ -23,14 +23,14 @@ import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
 import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
-import { propertyStages, propertyStatutes, propertyToc } from '@/lib/guides/propertyLucknow'
-import { getBlogPostsByCategory } from '@/lib/blogs'
+import { propertyForumJurisdiction, propertyStages, propertyStatutes, propertyToc } from '@/lib/guides/propertyLucknow'
+import { getBlogPostsBySlugs } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
 const propertyLead = teamMembers.find((member) => member.slug === 'jitendra-tiwari')
-const propertyTeam = ['vinod-arya', 'akhilesh-yadav', 'abhishek-mishra', 'aditya-narayan-shukla']
+const propertyTeam = ['vinod-arya', 'akhilesh-yadav', 'abhishek-mishra']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
 
 function ConsultationActions({ className }: { className: string }) {
@@ -47,9 +47,9 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'Property Lawyer in Lucknow | Sumanjari & Co. Advocates' },
+  title: { absolute: 'Property Lawyer in Lucknow | Land Disputes, Title & Revenue' },
   description:
-    'Property lawyer and land dispute advocate in Lucknow for title checks, partition, mutation and possession matters. Consult our team for a document review.',
+    'Property Lawyer in Lucknow for land disputes, 30-year title verification, partition suits, mutation, UP Revenue Code 2006, LDA matters & High Court writs.',
   keywords: [
     'Property Lawyer Lucknow',
     'Land Dispute Lawyer Lucknow',
@@ -272,6 +272,16 @@ const propertyFaqJsonLd = {
   })),
 }
 
+const propertyBreadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/#services` },
+    { '@type': 'ListItem', position: 3, name: 'Property Lawyer in Lucknow', item: `${SITE_URL}/services/property-lawyer-lucknow` },
+  ],
+}
+
 const consultationDocuments = [
   'Sale deed, gift deed, partition deed, will, or other document through which ownership is claimed, together with available earlier deeds',
   'Current and earlier khatauni, khasra, mutation orders, and revenue maps where relevant to the land',
@@ -282,7 +292,14 @@ const consultationDocuments = [
 ]
 
 export default async function PropertyLandMattersPage() {
-  const propertyBlogPosts = getBlogPostsByCategory('Property & Land Matters')
+  const propertyBlogPosts = getBlogPostsBySlugs([
+    'mutation-proceedings-dakhil-kharij-section-34-35',
+    'agricultural-land-partition-batwara-section-116',
+    'boundary-demarcation-encroachments-section-24',
+    'gram-sabha-land-encroachment-section-67',
+    'non-agricultural-land-conversion-section-80',
+    'challenging-revenue-decisions-section-210-writ-b',
+  ])
 
   return (
     <main className="relative min-h-screen">
@@ -295,6 +312,11 @@ export default async function PropertyLandMattersPage() {
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(propertyFaqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(propertyBreadcrumbJsonLd) }}
       />
       <Navbar />
 
@@ -317,7 +339,7 @@ export default async function PropertyLandMattersPage() {
               <div className="h-px w-12 bg-gold-500" />
             </div>
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-              Property Lawyer in <em className="text-gold-gradient">Lucknow</em>
+              Property &amp; Land Dispute Lawyer in <em className="text-gold-gradient">Lucknow</em> — Title Verification, Civil Suits &amp; Revenue Courts
             </h1>
             <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
               Our property lawyers and land dispute advocates provide advice and representation for title verification, partition,
@@ -350,10 +372,10 @@ export default async function PropertyLandMattersPage() {
               Property &amp; Land Disputes Team
             </h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
-              Adv. Jitendra Tiwari leads the property and land practice
-              assessment, supported by advocates whose recorded expertise
-              includes land and revenue matters, property disputes and civil
-              litigation.
+              Adv. Jitendra Tiwari (Director — Property, Civil &amp; Revenue
+              Lead) heads the property and land practice, supported by Adv.
+              Vinod Arya (Land &amp; Revenue), Adv. Akhilesh Yadav (Property
+              &amp; Waqf Matters) and Adv. Abhishek Mishra (Revenue &amp; PIL).
             </p>
             <TeamCarousel members={propertyTeam} label="Property and land team members" />
           </section>
@@ -407,6 +429,13 @@ export default async function PropertyLandMattersPage() {
             heading="Property and Land Law: The Relevant Framework"
             intro="The land classification, tenure, transaction and relief determine which provisions apply. Check current Uttar Pradesh amendments, rules and any saved earlier proceedings; a revenue entry or registered instrument does not eliminate the need to examine title."
             rows={propertyStatutes}
+          />
+
+          <StatuteTable
+            id="property-court-jurisdiction"
+            heading="Civil Court (Kaiserbagh) vs. Revenue Court (Tehsil / SDM / Board of Revenue) Jurisdiction Table in Lucknow"
+            intro="Filing a land dispute in the wrong forum invites a return of plaint under Section 206 of the U.P. Revenue Code, 2006. This table maps the dispute type to the competent Lucknow forum and the governing provisions."
+            rows={propertyForumJurisdiction}
           />
 
           <div id="property-matters" className="mb-16 scroll-mt-28">
@@ -465,6 +494,29 @@ export default async function PropertyLandMattersPage() {
               of the agreement, a refund, cancellation, or another remedy depends
               on its terms, the facts, and applicable time limits.
             </p>
+          </section>
+
+          <section id="property-title-verification" className="mb-16 scroll-mt-28" aria-labelledby="property-title-verification-heading">
+            <h2 id="property-title-verification-heading" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Pre-Purchase Property Title Verification &amp; 30-Year Due Diligence in Lucknow
+            </h2>
+            <p className="mb-6 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+              Before buying a plot or flat in Gomti Nagar, Gomti Nagar Extension, Shaheed Path, Sultanpur Road, Faizabad Road, Kanpur Road or Sitapur Road, we run a three-layer title audit:
+            </p>
+            <ol className="space-y-6 border-l border-gold-500/30 pl-6 md:pl-8">
+              <li>
+                <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">1. Sub-Registrar Index-II &amp; 12-to-30-Year Non-Encumbrance Search (Barahsala)</h3>
+                <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">We pull the Index-II of every registered deed in the chain and a 12-to-30-year non-encumbrance certificate (Barahsala) across the Lucknow Sub-Registrar Offices (Sadar I–V, BKT, Mohanlalganj, Malihabad, Sarojini Nagar) to trace the ownership chain and surface mortgages, agreements and prior transfers.</p>
+              </li>
+              <li>
+                <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">2. Bhulekh UP Khatauni, Khasra &amp; Consolidation Record Audit</h3>
+                <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">We audit the Bhulekh UP Khatauni (from 1359 Fasli to the current Fasli year), the Khasra, and the CH Form 41 &amp; 45 consolidation records to verify Bhumidhar with Transferable Rights status — and to confirm the land is not Gram Sabha, Talab (pond), Chakmarg (pathway), Ceiling, Enemy, Waqf or SC/ST restricted land barred from transfer under Section 98 of the U.P. Revenue Code.</p>
+              </li>
+              <li>
+                <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">3. Section 80 Non-Agricultural Declaration &amp; Layout Sanction Check</h3>
+                <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">We verify the Section 80 U.P. Revenue Code (erstwhile Section 143 UPZA&amp;LR Act) non-agricultural declaration for converted land, and the Section 143 Zila Panchayat / LDA layout sanction so the plotted colony itself is lawful before any advance is paid.</p>
+              </li>
+            </ol>
           </section>
 
           <section className="mb-16" aria-labelledby="property-documents">
@@ -600,9 +652,9 @@ export default async function PropertyLandMattersPage() {
             posts={propertyBlogPosts}
             fallbackIcon={<ScrollText className="h-5 w-5 text-gold-600 dark:text-gold-400" />}
             eyebrow="From Our Desk"
-            heading="Property & Land Blogs"
-            description="Short reads on property disputes, title issues, and land matters."
-            viewAllHref={`/blog?category=${encodeURIComponent('Property & Land Matters')}`}
+            heading="From Our Desk: Property & Revenue Law Blogs"
+            description="Our six-part UP Revenue Code series — mutation, partition, demarcation, Gram Sabha encroachment, land conversion and revenue revisions."
+            viewAllHref="/blog?category=Tax%20%26%20Revenue%20Matters"
           />
 
           <div id="property-consultation" className="glass-card scroll-mt-28 rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">

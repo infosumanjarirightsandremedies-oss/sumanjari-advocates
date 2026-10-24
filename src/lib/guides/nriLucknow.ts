@@ -3,6 +3,8 @@ import type { GuideStage, GuideTocItem, StatuteRow } from './types'
 export const nriToc: GuideTocItem[] = [
   { id: 'nri-team', label: 'Our Team' },
   { id: 'nri-overview', label: 'Legal representation for Indians living abroad' },
+  { id: 'nri-remote-representation', label: 'End-to-end remote representation for NRIs in Lucknow & UP' },
+  { id: 'nri-core-services', label: 'Core NRI legal services in Lucknow' },
   { id: 'nri-forums', label: 'Which court or authority can hear your matter?' },
   { id: 'nri-statutory-framework', label: 'Statutory framework' },
   { id: 'nri-matters', label: 'Legal matters we assist with' },

@@ -16,24 +16,24 @@ function RedditIcon({ className }: { className?: string }) {
 }
 
 const services = [
-  { label: 'NRI Legal Services', href: '/services/nri-lawyer' },
-  { label: 'Property Lawyer in Lucknow', href: '/services/property-lawyer-lucknow' },
+  { label: 'Armed Forces Tribunal (AFT) & Mining Lawyer in Lucknow', href: '/services/armed-forces-tribunal-mining-lawyer-lucknow' },
+  { label: 'DRT & Bank Recovery Lawyer in Lucknow', href: '/services/banking-recovery-lawyer-lucknow' },
   { label: 'Civil Lawyer in Lucknow', href: '/services/civil-lawyer-lucknow' },
+  { label: 'Corporate & NCLT Lawyer in Lucknow', href: '/services/company-corporate-lawyer-lucknow' },
+  { label: 'Constitutional & Writ Lawyer in Lucknow', href: '/services/constitutional-writ-lawyer-lucknow' },
+  { label: 'Consumer Court & MACT Lawyer in Lucknow', href: '/services/consumer-motor-accident-lawyer-lucknow' },
   { label: 'Criminal Lawyer in Lucknow', href: '/services/criminal-lawyer-lucknow' },
+  { label: 'Cyber Crime Lawyer in Lucknow', href: '/services/cyber-crime-lawyer-lucknow' },
   { label: 'Divorce Lawyer in Lucknow', href: '/services/divorce-lawyer-lucknow' },
+  { label: 'Family Court Lawyer in Lucknow', href: '/services/family-advocate' },
   { label: 'High Court Lawyer in Lucknow', href: '/services/high-court-lawyer-lucknow' },
-  { label: 'Tax Lawyer in Lucknow', href: '/services/tax-lawyer-lucknow' },
-  { label: 'Family & Matrimonial Matters', href: '/services/family-advocate' },
-  { label: 'Service Lawyer in Lucknow', href: '/services/service-lawyer-lucknow' },
-  { label: 'Consumer & Motor Accident Matters', href: '/services/consumer-motor-accident-lawyer-lucknow' },
-  { label: 'Constitutional & Writ Matters', href: '/services/constitutional-writ-lawyer-lucknow' },
+  { label: 'NRI Lawyer in Lucknow', href: '/services/nri-lawyer' },
+  { label: 'Property Lawyer in Lucknow', href: '/services/property-lawyer-lucknow' },
+  { label: 'UP RERA Lawyer in Lucknow', href: '/services/rera-lawyer-lucknow' },
+  { label: 'RERA Lawyer in Noida & Ghaziabad', href: '/services/rera-lawyer-noida-ghaziabad' },
+  { label: 'Service Matter Lawyer in Lucknow', href: '/services/service-lawyer-lucknow' },
+  { label: 'Tax & GST Lawyer in Lucknow', href: '/services/tax-lawyer-lucknow' },
   { label: 'Drafting & Legal Opinions', href: '/#services' },
-  { label: 'Company & Corporate Matters', href: '/services/company-corporate-lawyer-lucknow' },
-  { label: 'RERA Matters', href: '/services/rera-lawyer-lucknow' },
-  { label: 'RERA Advocate & Lawyer in Noida & Ghaziabad', href: '/services/rera-lawyer-noida-ghaziabad' },
-  { label: 'Banking & Recovery (DRT) Matters', href: '/services/banking-recovery-lawyer-lucknow' },
-  { label: 'Cyber Crime Lawyer & Advocate', href: '/services/cyber-crime-lawyer-lucknow' },
-  { label: 'Armed Forces Tribunal & Mining Matters', href: '/services/armed-forces-tribunal-mining-lawyer-lucknow' },
 ]
 
 const links = [

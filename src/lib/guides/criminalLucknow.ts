@@ -129,6 +129,8 @@ export const criminalToc: GuideTocItem[] = [
   { id: 'criminal-team', label: 'Our Team' },
   { id: 'forums', label: 'Criminal Courts in Lucknow' },
   { id: 'statutory-framework', label: 'Statutory Framework: BNS, BNSS, BSA' },
+  { id: 'bnss-cross-reference', label: 'IPC/CrPC vs. BNS/BNSS Cross-Reference' },
+  { id: 'special-statute-defence', label: 'NDPS, Gangsters, POCSO, SC/ST & CBI/ED Defence' },
   {
     id: 'criminal-procedure',
     label: 'Criminal Case Procedure: Stage 1 to Stage 10',
@@ -138,6 +140,41 @@ export const criminalToc: GuideTocItem[] = [
   { id: 'documents', label: 'Documents to Bring' },
   { id: 'faqs', label: 'FAQs' },
   { id: 'contact', label: 'Speak to a Criminal Lawyer in Lucknow' },
+]
+
+export type CriminalCrossRefRow = { remedy: string; oldToNew: string; forum: string }
+
+export const criminalCrossRefRows: CriminalCrossRefRow[] = [
+  {
+    remedy: 'Anticipatory Bail',
+    oldToNew: 'Section 438 CrPC → Section 482 BNSS, 2023',
+    forum: 'Sessions Court, Lucknow & Allahabad High Court, Lucknow Bench (Ankit Bharti v. State of U.P. Full Bench criteria for direct High Court filing).',
+  },
+  {
+    remedy: 'Regular Bail & Default Statutory Bail',
+    oldToNew: 'Section 437/439 & 167(2) CrPC → Section 480/483 & 187(3) BNSS, 2023',
+    forum: 'CJM/Magistrate Court, Sessions Court (Kaiserbagh), High Court Lucknow Bench (60/90-day default bail on incomplete investigation).',
+  },
+  {
+    remedy: 'Quashing of FIR, Chargesheet & Summoning Order',
+    oldToNew: 'Section 482 CrPC & Art. 226 → Section 528 BNSS, 2023 & Art. 226',
+    forum: 'Division Bench (Criminal Misc. Writ pre-chargesheet) & Single Judge (Section 528 BNSS post-chargesheet/cognizance) at Lucknow Bench.',
+  },
+  {
+    remedy: 'Notice of Appearance Before Arrest (offences ≤ 7 years)',
+    oldToNew: 'Section 41A CrPC → Section 35(3) BNSS, 2023',
+    forum: 'Mandatory police notice safeguard under Arnesh Kumar v. State of Bihar and Satender Kumar Antil v. CBI.',
+  },
+  {
+    remedy: 'Discharge Before Framing of Charge',
+    oldToNew: 'Section 227/239/245 CrPC → Section 250/262/268 BNSS, 2023',
+    forum: 'Sessions Court & Magistrate Court, Lucknow.',
+  },
+  {
+    remedy: 'Criminal Appeals & Suspension of Sentence',
+    oldToNew: 'Section 374 & 389 CrPC → Section 415 & 430 BNSS, 2023',
+    forum: 'Sessions Court & Allahabad High Court, Lucknow Bench.',
+  },
 ]
 
 export const criminalStatutes: StatuteRow[] = [

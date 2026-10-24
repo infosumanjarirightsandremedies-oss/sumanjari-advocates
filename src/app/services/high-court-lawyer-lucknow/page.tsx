@@ -19,9 +19,9 @@ import Footer from '@/components/Footer'
 import FirmCredentials from '@/components/FirmCredentials'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
-import { GuideStages, GuideToc } from '@/components/LucknowGuide'
-import { highCourtStages, highCourtToc, lucknowBenchDistricts } from '@/lib/guides/highCourtLucknow'
-import { getBlogPostsByCategory } from '@/lib/blogs'
+import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
+import { highCourtStages, highCourtStatutes, highCourtToc, lucknowBenchDistricts } from '@/lib/guides/highCourtLucknow'
+import { getBlogPostsByCategories } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL } from '@/lib/contactLinks'
 
@@ -45,9 +45,9 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'High Court Lawyer in Lucknow | Lucknow Bench Advocates | Sumanjari' },
+  title: { absolute: 'High Court Lawyer in Lucknow Bench | Allahabad HC Advocates' },
   description:
-    'High Court lawyers in Lucknow for writs, bail, Section 528 BNSS quashing, civil and criminal appeals and service matters at the Allahabad High Court, Lucknow Bench.',
+    'High Court Lawyer at Allahabad High Court, Lucknow Bench (Chamber D-311, Gomti Nagar). Writ petitions, Special Appeals, bail, Sec 528 BNSS quashing & appeals.',
   keywords: [
     'High Court Lawyer Lucknow',
     'Lucknow Bench Advocate',
@@ -90,8 +90,7 @@ const faqs = [
   { question: 'How are High Court fees decided?', answer: 'Court fee is calculated on the nature of the relief claimed and, in money or property matters, the valuation of the claim, under the Court Fees Act as applied in Uttar Pradesh. We confirm the applicable fee during drafting so the filing is not held up at the stamp-reporting stage.' },
 ]
 
-const structuredData = [
-  {
+const highCourtServiceJsonLd = {
     '@context': 'https://schema.org', '@type': 'LegalService',
     name: 'Sumanjari & Co. Advocates — High Court Lawyer in Lucknow',
     url: `${SITE_URL}${PAGE_PATH}`,
@@ -103,30 +102,44 @@ const structuredData = [
       { '@type': 'State', name: 'Uttar Pradesh' },
     ],
     serviceType: 'High Court Legal Services',
-  },
-  {
+}
+
+const highCourtFaqJsonLd = {
     '@context': 'https://schema.org', '@type': 'FAQPage',
     mainEntity: faqs.map(({ question, answer }) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })),
-  },
-  {
+}
+
+const highCourtBreadcrumbJsonLd = {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/#services` },
+      { '@type': 'ListItem', position: 2, name: 'Law Firm in Lucknow', item: `${SITE_URL}/#services` },
       { '@type': 'ListItem', position: 3, name: 'High Court Lawyer in Lucknow', item: `${SITE_URL}${PAGE_PATH}` },
     ],
-  },
-]
+}
 
 export default async function HighCourtLawyerLucknowPage() {
-  const highCourtBlogPosts = getBlogPostsByCategory('Constitutional & Writ Matters')
+  const highCourtBlogPosts = getBlogPostsByCategories(
+    ['Criminal Matters', 'Service & Employment Matters', 'RERA', 'Tax & Revenue Matters'],
+    10,
+  )
 
   return (
     <main className="relative min-h-screen">
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(highCourtServiceJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(highCourtFaqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(highCourtBreadcrumbJsonLd) }}
       />
       <Navbar />
 
@@ -149,7 +162,7 @@ export default async function HighCourtLawyerLucknowPage() {
                 <div className="h-px w-12 bg-gold-500" />
               </div>
               <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-                High Court Lawyers <em className="text-gold-gradient">in Lucknow</em>
+                High Court Lawyer <em className="text-gold-gradient">in Lucknow</em> — Allahabad High Court, Lucknow Bench Advocates (Chamber D-311)
               </h1>
               <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
                 Representation before the Allahabad High Court, Lucknow Bench for writ petitions, bail and quashing applications, and civil, criminal, family, service and tax appeals from the Awadh region.
@@ -233,6 +246,44 @@ export default async function HighCourtLawyerLucknowPage() {
             </div>
           </section>
 
+          <StatuteTable
+            id="hc-jurisdiction-roster"
+            heading="Appellate & Original Jurisdiction Roster at Allahabad High Court, Lucknow Bench"
+            intro="The Lucknow Bench exercises both appellate jurisdiction over decrees and orders of the District Courts of the 16 Awadh districts and original jurisdiction in writ, bail and quashing matters. The correct case type determines the roster Bench, the court fee and the limitation period."
+            rows={highCourtStatutes}
+          />
+
+          <section id="hc-when-to-approach" className="mb-16 scroll-mt-28">
+            <h2 className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              When Should You Approach the Allahabad High Court, Lucknow Bench Directly vs. District Courts?
+            </h2>
+            <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+              Filing in the wrong forum costs months. These five situations are where a direct approach to the Lucknow Bench is the correct — or the only — route.
+            </p>
+            <ol className="space-y-6 border-l border-gold-500/30 pl-6 md:pl-8">
+              <li>
+                <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">1. FIR quashing</h3>
+                <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">Quashing of an FIR, chargesheet or summoning order is exclusive to the High Court, by a Criminal Misc. Writ Petition or an application under Section 528 BNSS (formerly Section 482 CrPC) — no District Court can exercise this power.</p>
+              </li>
+              <li>
+                <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">2. Article 226 writ petitions against State action</h3>
+                <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">Challenges to State, LDA, Municipal, Revenue or Service orders lie directly to the High Court under Article 226 where no efficacious alternative remedy exists — bypassing the District Court hierarchy entirely.</p>
+              </li>
+              <li>
+                <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">3. Direct anticipatory bail in exceptional circumstances</h3>
+                <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">Anticipatory bail is ordinarily sought first before the Sessions Court; a direct application to the High Court is maintainable only in exceptional circumstances per the Ankit Bharti Full Bench guidelines, or after the Sessions Court has rejected the plea.</p>
+              </li>
+              <li>
+                <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">4. Section 11 Arbitration &amp; Conciliation Act petitions</h3>
+                <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">Petitions for appointment of an arbitrator under Section 11 of the Arbitration and Conciliation Act, 1996 are filed directly before the High Court where the statute so designates, not before the District Court.</p>
+              </li>
+              <li>
+                <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">5. Article 227 supervisory petitions</h3>
+                <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">Where a District Court or Tribunal refuses to decide an urgent stay application or acts without jurisdiction, the supervisory jurisdiction of the High Court under Article 227 can be invoked directly.</p>
+              </li>
+            </ol>
+          </section>
+
           <GuideStages
             id="hc-procedure"
             heading="How a Case Moves at the Lucknow Bench: 8 Steps"
@@ -275,9 +326,9 @@ export default async function HighCourtLawyerLucknowPage() {
             posts={highCourtBlogPosts}
             fallbackIcon={<ScrollText className="h-5 w-5 text-gold-600 dark:text-gold-400" />}
             eyebrow="From Our Desk"
-            heading="High Court & Writ Matters Blogs"
-            description="Short reads on writs, appeals, and practice before the Allahabad High Court, Lucknow Bench."
-            viewAllHref={`/blog?category=${encodeURIComponent('Constitutional & Writ Matters')}`}
+            heading="High Court Litigation Insights & Guides"
+            description="Short reads on criminal writs, service writs, RERA appeals and revenue writ-B practice before the Allahabad High Court, Lucknow Bench."
+            viewAllHref="/blog"
           />
 
           <div id="contact" className="glass-card scroll-mt-28 rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">

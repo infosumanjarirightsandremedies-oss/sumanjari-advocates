@@ -45,9 +45,9 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'Corporate Lawyer in Lucknow | Company & NCLT | Sumanjari' },
+  title: { absolute: 'Corporate Lawyer in Lucknow | NCLT, Commercial Disputes & M&A' },
   description:
-    'Corporate lawyer and company law advocate in Lucknow for shareholder disputes, LLP advice, contracts, NCLT matters and commercial litigation. Arrange a review.',
+    'Corporate Lawyer in Lucknow for company registration, commercial disputes, arbitration, shareholder petitions & NCLT Allahabad / Commercial Court litigation.',
   keywords: [
     'Corporate Lawyer Lucknow',
     'Company Law Advocate Lucknow',
@@ -93,6 +93,16 @@ const companyMattersJsonLd = {
     { '@type': 'State', name: 'Uttar Pradesh' },
   ],
   serviceType: 'Company & Corporate Legal Services',
+}
+
+const companyBreadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/#services` },
+    { '@type': 'ListItem', position: 3, name: 'Corporate Lawyer in Lucknow', item: `${SITE_URL}/services/company-corporate-lawyer-lucknow` },
+  ],
 }
 
 const companyFaqJsonLd = {
@@ -185,6 +195,63 @@ const matters = [
   },
 ]
 
+const corporateAdvisoryBlocks = [
+  {
+    title: 'Company Incorporation & Structuring',
+    body: 'End-to-end incorporation and structuring for Private Limited Companies, LLPs under the LLP Act, 2008, One Person Companies, Section 8 Non-Profit Companies and Partnership Firm registration — with advice on the entity form that best fits the ownership, funding and compliance profile of the venture.',
+  },
+  {
+    title: 'ROC Uttar Pradesh (Kanpur) Compliance & Director Disqualification',
+    body: 'Annual filings, statutory registers and event-based compliance before the Registrar of Companies, Kanpur, which covers Uttar Pradesh — including remediation and representation where directors face disqualification under Section 164(2) of the Companies Act, 2013 for filing defaults.',
+  },
+  {
+    title: 'Commercial Contract Drafting',
+    body: 'Drafting and negotiation of Shareholder Agreements (SHA), Share Subscription Agreements (SSA), Master Service Agreements (MSA), NDAs and Non-Compete arrangements, and Vendor & Franchise Contracts — with enforceable dispute-resolution, termination and indemnity architecture.',
+  },
+  {
+    title: 'MSME Samadhaan Delayed Payment Recovery',
+    body: 'Recovery of delayed payments owed to MSME suppliers through the Micro and Small Enterprises Facilitation Council under Section 18 of the MSMED Act, 2006, including MSME Samadhaan portal references, conciliation and the arbitration that follows failed conciliation.',
+  },
+]
+
+const ncltInsolvencyBlocks = [
+  {
+    title: 'NCLT Allahabad Bench — The Forum for Lucknow Enterprises',
+    body: 'Companies registered in Lucknow and elsewhere in Uttar Pradesh fall within the jurisdiction of the NCLT, Allahabad Bench (which also covers Uttarakhand), with eligible appeals lying to the NCLAT, New Delhi. Bench allocation and the registered office are verified before any filing.',
+  },
+  {
+    title: 'Section 8 Statutory Demand Notice & Section 9 Operational Creditor Petitions',
+    body: 'For operational creditors — suppliers, service providers and workmen — we issue the Section 8 statutory demand notice and prosecute or defend Section 9 petitions, including the decisive pre-existing dispute defence settled by the Supreme Court in Mobilox Innovations v. Kirusa Software.',
+  },
+  {
+    title: 'Section 7 Financial Creditor Petitions & Section 10A / Threshold Defenses',
+    body: 'Representation of banks, NBFCs and lenders in Section 7 petitions, and defence of corporate debtors on eligibility grounds — the ₹1 Crore minimum default threshold under Section 4 and the Section 10A bar on petitions for defaults arising during the notified pandemic period.',
+  },
+  {
+    title: 'Sections 241–244: Oppression & Mismanagement and Director Removal Disputes',
+    body: 'Member petitions alleging oppression and mismanagement under Sections 241–242 of the Companies Act, 2013 — with Section 244 eligibility or waiver analysis — and disputes over the removal or resignation of directors, deadlocked boards and prejudicial corporate actions.',
+  },
+]
+
+const commercialArbitrationBlocks = [
+  {
+    title: 'Commercial Courts Act, 2015 — Practice before the Commercial Court, Lucknow',
+    body: 'Commercial suits proceed on an accelerated, rule-bound track: mandatory Section 12A Pre-Institution Mediation except where urgent interim relief is sought, the strict 120-day written statement forfeiture under amended Order 8 Rule 1 CPC, and Case Management Hearings that lock in the trial schedule.',
+  },
+  {
+    title: 'Section 9 Interim Measures — Bank Guarantee Stays & Asset Attachment',
+    body: 'Urgent pre-arbitration and pending-arbitration protection under Section 9 of the Arbitration and Conciliation Act, 1996 — stays on invocation of bank guarantees, attachment and preservation of assets, and interim custody of goods or funds in dispute.',
+  },
+  {
+    title: 'Section 11 Appointment of Arbitrator',
+    body: 'Applications before the Allahabad High Court, Lucknow Bench for appointment of an arbitrator under Section 11 where the agreed mechanism fails — including disputes over the existence and scope of the arbitration clause.',
+  },
+  {
+    title: 'Section 34 Challenges & Section 36/37 Enforcement and Appeals',
+    body: 'Setting aside arbitral awards under Section 34 on the limited statutory grounds, enforcement of awards under Section 36 as decrees of the court, and appeals under Section 37 — with interim strategy to protect or challenge the award debtor’s position.',
+  },
+]
+
 const whyIssues = [
   'Company registration and statutory compliance',
   'Shareholder disputes and allegations of oppression or mismanagement',
@@ -264,6 +331,11 @@ export default async function CompanyCorporateMattersPage() {
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(companyFaqJsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(companyBreadcrumbJsonLd) }}
+      />
       <Navbar />
 
       <section className="py-24 md:py-32">
@@ -285,7 +357,8 @@ export default async function CompanyCorporateMattersPage() {
               <div className="h-px w-12 bg-gold-500" />
             </div>
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-              Company &amp; <em className="text-gold-gradient">Corporate Matters</em>
+              Corporate &amp; Company Lawyer in Lucknow{' '}
+              <em className="text-gold-gradient">— NCLT, Commercial Disputes &amp; Advisory</em>
             </h1>
             <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
               Our corporate lawyers and company law advocates in Lucknow advise on
@@ -401,6 +474,69 @@ export default async function CompanyCorporateMattersPage() {
                       </li>
                     ))}
                   </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div id="corporate-advisory" className="mb-16 scroll-mt-28">
+            <h2 className="mb-8 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Corporate Advisory, Company Registration &amp; Startup Legal Services in Lucknow
+            </h2>
+            <div className="grid gap-5 sm:grid-cols-2">
+              {corporateAdvisoryBlocks.map(({ title, body }) => (
+                <div
+                  key={title}
+                  className="glass-card rounded-sm border border-gold-500/20 p-6 dark:border-gold-500/15"
+                >
+                  <h3 className="mb-3 font-display text-lg font-bold text-navy-900 dark:text-cream">
+                    {title}
+                  </h3>
+                  <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">
+                    {body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div id="nclt-insolvency" className="mb-16 scroll-mt-28">
+            <h2 className="mb-8 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              NCLT Allahabad Bench &amp; Insolvency (IBC, 2016) Representation for Lucknow Enterprises
+            </h2>
+            <div className="grid gap-5 sm:grid-cols-2">
+              {ncltInsolvencyBlocks.map(({ title, body }) => (
+                <div
+                  key={title}
+                  className="glass-card rounded-sm border border-gold-500/20 p-6 dark:border-gold-500/15"
+                >
+                  <h3 className="mb-3 font-display text-lg font-bold text-navy-900 dark:text-cream">
+                    {title}
+                  </h3>
+                  <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">
+                    {body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div id="commercial-arbitration" className="mb-16 scroll-mt-28">
+            <h2 className="mb-8 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Commercial Court Litigation &amp; Arbitration in Lucknow
+            </h2>
+            <div className="grid gap-5 sm:grid-cols-2">
+              {commercialArbitrationBlocks.map(({ title, body }) => (
+                <div
+                  key={title}
+                  className="glass-card rounded-sm border border-gold-500/20 p-6 dark:border-gold-500/15"
+                >
+                  <h3 className="mb-3 font-display text-lg font-bold text-navy-900 dark:text-cream">
+                    {title}
+                  </h3>
+                  <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">
+                    {body}
+                  </p>
                 </div>
               ))}
             </div>

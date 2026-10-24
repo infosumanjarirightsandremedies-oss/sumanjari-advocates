@@ -25,7 +25,7 @@ import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
 import { GuideToc, GuideStages, StatuteTable } from '@/components/LucknowGuide'
 import { cyberCrimeLucknowStages, cyberCrimeLucknowToc, cyberCrimeLucknowStatutes } from '@/lib/guides/cyberCrimeLucknow'
-import { getBlogPostsByCategory } from '@/lib/blogs'
+import { getBlogPostsByCategories } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL } from '@/lib/contactLinks'
 
@@ -48,9 +48,9 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'Cyber Crime Lawyer in Lucknow | Fraud & Bank Freeze | Sumanjari' },
+  title: { absolute: 'Cyber Crime Lawyer in Lucknow | Bank Account Unfreeze & IT Act' },
   description:
-    'Cyber crime lawyer and advocate in Lucknow for online fraud complaints, bank account freeze or unfreeze, IT Act defence and bail. Consult our legal team.',
+    'Cyber Crime Lawyer in Lucknow at Cyber Thana Gomti Nagar & High Court. Bank account freeze/lien removal (Sec 106/503 BNSS), cyber fraud bail & IT Act defence.',
   keywords: [
     'Cyber Crime Lawyer Lucknow',
     'Cyber Crime Complaint Lucknow',
@@ -96,6 +96,16 @@ const cyberCrimeJsonLd = {
     { '@type': 'State', name: 'Uttar Pradesh' },
   ],
   serviceType: 'Cyber Crime & IT Act Legal Services',
+}
+
+const cyberCrimeBreadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/#services` },
+    { '@type': 'ListItem', position: 3, name: 'Cyber Crime Lawyer in Lucknow', item: `${SITE_URL}/services/cyber-crime-lawyer-lucknow` },
+  ],
 }
 
 const matters = [
@@ -168,7 +178,7 @@ const jurisdiction = [
   {
     title: 'Cyber Thana & Cyber Cell, Lucknow',
     blurb:
-      'Filing and follow-up of complaints, representations for account unfreezing, and coordination with investigating officers.',
+      'Filing and follow-up of complaints at the Cyber Crime Police Station (Cyber Thana), Vibhuti Khand, Gomti Nagar, Lucknow, and the UP Police Cyber Crime Headquarters, Signature Building, Gomti Nagar Extension, Lucknow — including representations for account unfreezing and coordination with investigating officers.',
   },
   {
     title: 'Local Police Stations',
@@ -292,7 +302,7 @@ const cyberCrimeFaqJsonLd = {
 }
 
 export default async function CyberCrimeLawyerAdvocatePage() {
-  const cyberCrimeBlogPosts = getBlogPostsByCategory('Cyber Crime Matters')
+  const cyberCrimeBlogPosts = getBlogPostsByCategories(['Criminal Matters', 'Banking & Recovery Matters'], 8)
 
   return (
     <main className="relative min-h-screen">
@@ -305,6 +315,11 @@ export default async function CyberCrimeLawyerAdvocatePage() {
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(cyberCrimeFaqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(cyberCrimeBreadcrumbJsonLd) }}
       />
       <Navbar />
 
@@ -327,7 +342,7 @@ export default async function CyberCrimeLawyerAdvocatePage() {
                 <div className="h-px w-12 bg-gold-500" />
               </div>
               <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-                Cyber Crime <em className="text-gold-gradient">Lawyer in Lucknow</em>
+                Cyber Crime Lawyer in Lucknow — <em className="text-gold-gradient">Bank Account Unfreeze, Cyber Fraud &amp; IT Act Defence</em>
               </h1>
               <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
                 Our cyber crime lawyers and advocates in Lucknow assist with complaints, bank account freeze &amp; unfreeze
@@ -486,6 +501,18 @@ export default async function CyberCrimeLawyerAdvocatePage() {
             </p>
           </section>
 
+          <section id="unfreeze-bank-account-bnss" className="mb-16 scroll-mt-28 space-y-5 border-t border-gold-500/20 pt-10" aria-labelledby="unfreeze-bank-account-bnss-heading">
+            <h2 id="unfreeze-bank-account-bnss-heading" className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              How to Unfreeze a Bank Account Frozen by Cyber Cell (Section 106 &amp; 503 BNSS / Section 102 &amp; 457 CrPC)
+            </h2>
+            <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">
+              Cyber Cell freezes take two forms, and the distinction decides the remedy. A <strong className="text-navy-900 dark:text-cream">Total Debit Freeze</strong> blocks the entire account, while a <strong className="text-navy-900 dark:text-cream">Specific Disputed Lien</strong> holds only the disputed credit in a Layer-2, Layer-3 or Layer-4 account through which fraud proceeds were routed. Settled High Court principles hold that investigating agencies acting under Section 102 CrPC / Section 106 BNSS should ordinarily mark a specific lien on the disputed transaction amount rather than paralyzing the entire bank account of an innocent merchant, salaried employee or P2P trader.
+            </p>
+            <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">
+              The remedy is a release application under Section 451/457 CrPC (Section 497/503 BNSS) before the jurisdictional Magistrate, or — where the freeze is arbitrary or disproportionate — a Writ-C petition under Article 226 before the Allahabad High Court, Lucknow Bench. We routinely handle freezes arising from P2P crypto/USDT trades on Binance and Telegram task-fraud chains, gathering exchange KYC records, order IDs and transaction proofs to demonstrate the legitimate source of the frozen credit.
+            </p>
+          </section>
+
           <section className="mb-16 space-y-5" aria-labelledby="cyber-law-remedies">
             <h2 id="cyber-law-remedies" className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Cyber Law, Police Notices and Court Remedies
@@ -630,9 +657,9 @@ export default async function CyberCrimeLawyerAdvocatePage() {
             posts={cyberCrimeBlogPosts}
             fallbackIcon={<FileX className="h-5 w-5 text-gold-600 dark:text-gold-400" />}
             eyebrow="From Our Desk"
-            heading="Cyber Crime Blogs"
-            description="Short reads on cyber crime complaints, bank account freezing, and IT Act cases."
-            viewAllHref={`/blog?category=${encodeURIComponent('Cyber Crime Matters')}`}
+            heading="Cyber Fraud, Bank Freeze & Criminal Procedure Blogs"
+            description="Short reads on criminal procedure, bail, bank account freezes and fund recovery relevant to cyber crime matters."
+            viewAllHref="/blog"
           />
 
           <div className="glass-card rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">

@@ -83,6 +83,8 @@ export const propertyStages: GuideStage[] = [
 export const propertyToc: GuideTocItem[] = [
   { id: 'property-team', label: 'Our Team' },
   { id: 'property-forums', label: 'Civil and Revenue Forums' },
+  { id: 'property-court-jurisdiction', label: 'Civil Court vs. Revenue Court Jurisdiction in Lucknow' },
+  { id: 'property-title-verification', label: 'Pre-Purchase Title Verification & 30-Year Due Diligence' },
   { id: 'property-statutory-framework', label: 'Property and Land Law Framework' },
   { id: 'property-matters', label: 'Property Matters We Handle' },
   { id: 'property-purchase-checks', label: 'Checks Before a Property Purchase' },
@@ -138,5 +140,22 @@ export const propertyStatutes: StatuteRow[] = [
     law: 'U.P. Urban Planning and Development Act, 1973; applicable acquisition law',
     provisions: 'Order-specific notice, appeal, reference and review provisions; applicable allotment or lease terms',
     relevance: 'LDA and acquisition disputes require scrutiny of the particular order and statutory route, distinct from an ordinary ownership dispute. Check the governing enactment and any saved earlier acquisition proceedings.',
+  },
+]
+export const propertyForumJurisdiction: StatuteRow[] = [
+  {
+    law: 'Urban Residential / Commercial House & Plot Disputes (Freehold, LDA, Avas Vikas, Nagar Nigam Abadi)',
+    provisions: 'Transfer of Property Act, 1882; Specific Relief Act, 1963 (s.5, 6, 31, 34, 38); CPC Order 39 Rules 1 & 2',
+    relevance: 'Forum: Civil Judge (Junior/Senior Division), Kaiserbagh, Lucknow — possession, title declaration, cancellation and injunction suits for urban property.',
+  },
+  {
+    law: 'Agricultural Land Mutation (Dakhil-Kharij), Boundary Demarcation (Hadbandi), Partition (Batwara) & Title Declaration',
+    provisions: 'U.P. Revenue Code, 2006 — s.24 (demarcation), s.34/35 (mutation), s.67 (Gram Sabha eviction defense), s.80 (non-agricultural declaration), s.116/117 (Kurra partition), s.144 (declaratory suit by tenure holder), s.206 (bar of civil court jurisdiction), s.210 (revision)',
+    relevance: "Forum: Tehsildar / Sub-Divisional Magistrate (SDM) across Lucknow's 5 Tehsils (Sadar, Bakshi Ka Talab [BKT], Mohanlalganj, Malihabad, Sarojini Nagar), Additional Commissioner (Lucknow Division), and Board of Revenue, U.P. (Lucknow).",
+  },
+  {
+    law: 'LDA / Avas Vikas Demolition, Sealing, Nazul Land & Land Acquisition Compensation Disputes',
+    provisions: 'U.P. Urban Planning and Development Act, 1973 (s.27/28); RFCTLARR Act, 2013; Articles 226/300A, Constitution of India',
+    relevance: 'Forum: LDA Appellate Authority / Commercial Tribunal / Allahabad High Court, Lucknow Bench (Writ-C & Writ-B) for challenges to demolition, sealing and acquisition awards.',
   },
 ]

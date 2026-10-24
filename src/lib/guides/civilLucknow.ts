@@ -120,6 +120,8 @@ export const civilToc: GuideTocItem[] = [
   { id: 'civil-team', label: 'Our Team' },
   { id: 'forums', label: 'Forums We Appear Before' },
   { id: 'statutory-framework', label: 'Statutory Framework for Civil Disputes' },
+  { id: 'civil-core-matters', label: 'Core Civil Litigation Matters' },
+  { id: 'civil-forum-hierarchy', label: 'Civil Court Hierarchy & Forum Selection' },
   { id: 'matters', label: 'Types of Civil Matters We Handle' },
   {
     id: 'civil-procedure',

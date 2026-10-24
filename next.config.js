@@ -109,6 +109,11 @@ const nextConfig = {
         destination: '/services/rera-lawyer-lucknow',
         permanent: true,
       },
+      {
+        source: '/services/high-court-lawyer',
+        destination: '/services/high-court-lawyer-lucknow',
+        permanent: true,
+      },
     ]
   },
 }

@@ -35,8 +35,8 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'RERA Lawyer in Noida & Ghaziabad | Builder Claims | Sumanjari' },
-  description: 'RERA advocate and real estate lawyer for Noida and Ghaziabad builder-buyer disputes, delayed possession, refund claims, project compliance and appeals.',
+  title: { absolute: 'RERA Lawyer in Noida, Greater Noida & Ghaziabad | UP-RERA' },
+  description: 'RERA Lawyer for Noida, Greater Noida & Ghaziabad projects. Representation before UP-RERA Greater Noida Bench, UP-REAT Lucknow, RC Execution & NCLT by NCR team.',
   alternates: { canonical: PAGE_PATH },
   keywords: ['RERA Lawyer Noida', 'RERA Lawyer Ghaziabad', 'UP RERA Greater Noida Lawyer', 'Builder Buyer Dispute Noida', 'Delayed Possession Lawyer Ghaziabad', 'RERA Refund Claim Noida', 'UP RERA Order Enforcement NCR', 'RERA Appeal Lawyer Uttar Pradesh'],
   twitter: {
@@ -53,8 +53,8 @@ export const metadata: Metadata = {
 
 const serviceSchema = {
   '@context': 'https://schema.org',
-  '@type': 'Service',
-  name: 'RERA Legal Services for Noida & Ghaziabad',
+  '@type': 'LegalService',
+  name: 'RERA Legal Services for Noida, Greater Noida & Ghaziabad',
   url: `${SITE_URL}${PAGE_PATH}`,
   description: 'RERA representation for homebuyers and developers with projects in Noida and Ghaziabad, including builder-buyer disputes, possession delays, refunds and appeals.',
   provider: { '@id': `${SITE_URL}/#organization` },
@@ -145,6 +145,15 @@ const faqSchema = {
   })),
 }
 
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'RERA Lawyer in Noida, Greater Noida & Ghaziabad', item: `${SITE_URL}${PAGE_PATH}` },
+  ],
+}
+
 export default async function NoidaGhaziabadReraPage() {
   const posts = getBlogPostsByCategory('RERA').then((posts) => posts.filter(
     (post) => /\b(?:Noida|Ghaziabad)\b/i.test(`${post.title} ${post.excerpt}`)
@@ -154,6 +163,7 @@ export default async function NoidaGhaziabadReraPage() {
     <main className="relative min-h-screen">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Navbar />
       <div className="mx-auto max-w-7xl px-6 pb-20 pt-32 md:pt-36">
         <Link href="/services/rera-lawyer-lucknow" className="mb-10 inline-flex items-center gap-2 font-caps text-xs uppercase tracking-widest text-navy-700/70 transition-colors hover:text-gold-600 dark:text-cream/45">
@@ -164,8 +174,8 @@ export default async function NoidaGhaziabadReraPage() {
           <div>
             <span className="font-caps text-xs uppercase tracking-[0.25em] text-gold-700 dark:text-gold-400">UP-RERA &amp; Appellate Matters</span>
             <h1 className="mt-4 font-display text-4xl font-bold leading-[1.12] text-navy-900 dark:text-cream md:text-[3.25rem]">
-              RERA Advocate &amp; Lawyer in{' '}
-              <em className="text-gold-gradient">Noida &amp; Ghaziabad</em>
+              RERA Lawyer in Noida, Greater Noida &amp; Ghaziabad —{' '}
+              <em className="text-gold-gradient">UP-RERA NCR Bench &amp; UP-REAT Appeals</em>
             </h1>
             <p className="mt-5 max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
               Real estate legal representation for homebuyers and developers with
@@ -206,6 +216,40 @@ export default async function NoidaGhaziabadReraPage() {
             individual practice areas.
           </p>
           <TeamCarousel members={pageTeam} label="RERA team members" />
+        </section>
+
+        <section className="mb-16" aria-labelledby="ncr-lucknow-advantage">
+          <h2 id="ncr-lucknow-advantage" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            The NCR-to-Lucknow RERA Advantage: Seamless Representation Across UP-RERA Greater Noida &amp; UP-REAT Lucknow
+          </h2>
+          <div className="max-w-4xl space-y-4 font-body leading-relaxed text-navy-700 dark:text-cream/60">
+            <p>
+              First-instance UP-RERA complaints for projects in Noida, Greater
+              Noida (Gautam Budh Nagar), the Yamuna Expressway region (YEIDA)
+              and Ghaziabad are heard at the UP-RERA NCR Regional Office in
+              Greater Noida. First appeals against UP-RERA Greater Noida orders
+              lie exclusively before the Uttar Pradesh Real Estate Appellate
+              Tribunal (UP-REAT) sitting in Lucknow. Recovery Certificates (RCs)
+              go to the District Magistrate, Gautam Budh Nagar (Dadri, Sadar and
+              Jewar Tehsils) or the District Magistrate, Ghaziabad, while NCLT
+              CIRP proceedings are filed before the NCLT New Delhi or Allahabad
+              benches.
+            </p>
+            <p>
+              Our Delhi NCR team at A-247, Defence Colony, New Delhi — Adv.
+              Shishir Pandey, Adv. Prerna Yaduvanshi, Adv. Jyotish Raj and Adv.
+              Aniket Bose — handles complaints, conciliations and tehsil RC
+              executions on the ground in the NCR, while our Lucknow Bench team
+              at Chamber D-311, High Court Lucknow (Adv. Jitendra Tiwari)
+              conducts UP-REAT appeals in Lucknow under Section 44. Homebuyers
+              never need to travel to Lucknow or hire a second firm. For
+              projects in Lucknow itself, see our{' '}
+              <Link href="/services/rera-lawyer-lucknow" className="font-semibold text-gold-700 underline underline-offset-4 hover:text-gold-600 dark:text-gold-400">
+                UP RERA lawyer in Lucknow
+              </Link>
+              .
+            </p>
+          </div>
         </section>
 
         <section className="mb-16" aria-labelledby="project-locations">
@@ -263,6 +307,41 @@ export default async function NoidaGhaziabadReraPage() {
                 <p className="mt-3 font-body leading-relaxed text-navy-700 dark:text-cream/60">{matter.text}</p>
               </div>
             ))}
+          </div>
+        </section>
+
+        <section className="mb-16" aria-labelledby="ncr-specific-disputes">
+          <h2 id="ncr-specific-disputes" className="mb-6 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+            Noida, Greater Noida, YEIDA &amp; Ghaziabad Specific Real Estate Disputes We Handle
+          </h2>
+          <div className="grid gap-8 md:grid-cols-3">
+            <div className="border-t border-gold-500/30 pt-5">
+              <h3 className="font-display text-lg font-bold text-navy-900 dark:text-cream">Stalled Tripartite Sub-Lease Deeds, OC/CC Blocks &amp; Authority Dues (NOIDA, GNIDA, YEIDA &amp; GDA)</h3>
+              <p className="mt-3 font-body text-sm leading-relaxed text-navy-700 dark:text-cream/60">
+                Projects where builders defaulted on land premium dues to NOIDA,
+                Greater Noida (GNIDA), Yamuna Expressway (YEIDA) or Ghaziabad
+                (GDA) authorities, blocking Occupancy/Completion Certificates
+                and sub-lease deed execution for homebuyers.
+              </p>
+            </div>
+            <div className="border-t border-gold-500/30 pt-5">
+              <h3 className="font-display text-lg font-bold text-navy-900 dark:text-cream">Dadri, Sadar, Jewar &amp; Ghaziabad Tehsil Recovery Certificate (RC) Realization &amp; Mandamus Writs</h3>
+              <p className="mt-3 font-body text-sm leading-relaxed text-navy-700 dark:text-cream/60">
+                Tracking Section 40 Recovery Certificates before the District
+                Magistrate, Gautam Budh Nagar and the District Magistrate,
+                Ghaziabad, with mandamus writs where revenue officials fail to
+                execute.
+              </p>
+            </div>
+            <div className="border-t border-gold-500/30 pt-5">
+              <h3 className="font-display text-lg font-bold text-navy-900 dark:text-cream">Bank Subvention / Pre-EMI Tripartite Traps &amp; NCLT Insolvency (IBC) Homebuyer Claims</h3>
+              <p className="mt-3 font-body text-sm leading-relaxed text-navy-700 dark:text-cream/60">
+                Protecting homebuyers when builders stop paying pre-EMIs under
+                subvention schemes, and filing Form CA (Class of Creditors)
+                claims before the Resolution Professional when an NCR developer
+                enters CIRP before the NCLT.
+              </p>
+            </div>
           </div>
         </section>
 

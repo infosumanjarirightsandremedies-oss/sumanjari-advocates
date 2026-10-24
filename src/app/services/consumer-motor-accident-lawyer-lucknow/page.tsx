@@ -46,9 +46,9 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'Consumer & MACT Lawyer in Lucknow | Claims | Sumanjari' },
+  title: { absolute: 'Consumer Court & MACT Lawyer in Lucknow | Insurance Claims' },
   description:
-    'Consumer lawyer and MACT advocate in Lucknow for deficient services, insurance disputes and motor accident compensation. Get advice on documents and claims.',
+    'Consumer Court Lawyer & MACT Advocate in Lucknow. Representation before District/State Consumer Commission (SCDRC UP), MACT Lucknow & Insurance Disputes.',
   keywords: [
     'Consumer Lawyer Lucknow',
     'Consumer Forum Advocate Lucknow',
@@ -96,6 +96,16 @@ const consumerMattersJsonLd = {
   serviceType: 'Consumer & Motor Accident Legal Services',
 }
 
+const consumerBreadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/#services` },
+    { '@type': 'ListItem', position: 3, name: 'Consumer Court & MACT Lawyer in Lucknow', item: `${SITE_URL}/services/consumer-motor-accident-lawyer-lucknow` },
+  ],
+}
+
 const matters = [
   {
     icon: ShoppingBag,
@@ -126,8 +136,8 @@ const matters = [
     icon: ShieldAlert,
     title: 'No-Fault & Hit-and-Run Compensation',
     points: [
-      'No-fault liability claims under Section 140 of the Motor Vehicles Act',
-      'Hit-and-run compensation under the 2022 Scheme, payable from the Motor Vehicle Accident Fund under Section 164B',
+      'Statutory no-fault compensation under Section 164 of the Motor Vehicles Act (₹5,00,000 for death and ₹2,50,000 for grievous hurt, replacing erstwhile Section 140)',
+      'Hit-and-Run Compensation Scheme, 2022 claims under Section 161/164B (₹2,00,000 for death and ₹50,000 for grievous injury), payable from the Motor Vehicle Accident Fund',
     ],
   },
   {
@@ -235,6 +245,11 @@ export default async function ConsumerMotorAccidentMattersPage() {
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(consumerFaqJsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(consumerBreadcrumbJsonLd) }}
+      />
       <Navbar />
 
       <section className="py-24 md:py-32">
@@ -256,7 +271,7 @@ export default async function ConsumerMotorAccidentMattersPage() {
               <div className="h-px w-12 bg-gold-500" />
             </div>
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-              Consumer &amp; <em className="text-gold-gradient">Motor Accident Matters</em>
+              Consumer Court Lawyer &amp; <em className="text-gold-gradient">Motor Accident Claims (MACT) Advocate in Lucknow</em>
             </h1>
             <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
               Our consumer lawyers and motor accident claims advocates in Lucknow handle
@@ -338,6 +353,9 @@ export default async function ConsumerMotorAccidentMattersPage() {
                 </div>
               ))}
             </div>
+            <p className="mt-6 max-w-3xl font-body text-sm leading-relaxed text-navy-700 dark:text-cream/60">
+              Under the Consumer Protection (Jurisdiction) Rules, 2021, the pecuniary jurisdiction of the District Commission (up to ₹50 lakh), the State Commission (₹50 lakh–₹2 crore) and the NCDRC (above ₹2 crore) is calculated on the actual consideration <strong className="text-navy-900 dark:text-cream">paid</strong> for the goods or services — not on the compensation claimed in the complaint.
+            </p>
           </div>
 
           <div className="mb-16">
@@ -415,6 +433,34 @@ export default async function ConsumerMotorAccidentMattersPage() {
             intro="These six stages describe the main decisions in a consumer dispute or motor accident claim. They are not one combined filing process: the appropriate forum, evidence and available relief depend on the chosen statutory route."
             stages={consumerLucknowStages}
           />
+
+          <section id="consumer-mact-multiplier-fafo" aria-labelledby="consumer-mact-multiplier-fafo-heading" className="mb-16 scroll-mt-28 border-t border-gold-500/20 pt-10">
+            <h2 id="consumer-mact-multiplier-fafo-heading" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              MACT Compensation Multiplier Formula &amp; First Appeal From Order (FAFO) at High Court Lucknow
+            </h2>
+            <div className="space-y-4 font-body leading-relaxed text-navy-700 dark:text-cream/70">
+              <p>
+                MACT Lucknow assesses &quot;just compensation&quot; under Sections 166 and 168 of the Motor Vehicles Act using the structured multiplier method settled by the Supreme Court. The age-based multiplier table in <strong className="text-navy-900 dark:text-cream">Sarla Verma v. DTC</strong>, as affirmed and standardised by the Constitution Bench in <strong className="text-navy-900 dark:text-cream">National Insurance Co. Ltd. v. Pranay Sethi</strong>, fixes the multiplier by the victim&apos;s age, mandates an addition of 40% (50% for victims under 40) towards future prospects, and standardises conventional heads — loss of consortium, loss of estate and funeral expenses. For injuries, permanent functional disability — as distinct from mere medical disability — is assessed on the principles in <strong className="text-navy-900 dark:text-cream">Raj Kumar v. Ajay Kumar</strong>.
+              </p>
+              <p>
+                Since the April 2022 amendment, Section 166(3) imposes a strict six-month limitation period for filing a MACT claim, so prompt filing is essential. A challenge to the Tribunal&apos;s award lies as a First Appeal From Order (FAFO) under Section 173 before the Allahabad High Court, Lucknow Bench, within 90 days — and an insurer&apos;s appeal is entertained only on the statutory deposit of ₹25,000 or 50% of the awarded amount, whichever is less.
+              </p>
+            </div>
+          </section>
+
+          <section id="consumer-edakhil-filing" aria-labelledby="consumer-edakhil-filing-heading" className="mb-16 scroll-mt-28 border-t border-gold-500/20 pt-10">
+            <h2 id="consumer-edakhil-filing-heading" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              District Commission (DCDRC Lucknow I &amp; II) &amp; UP State Consumer Commission (SCDRC Lucknow) Filing via E-Daakhil / E-Jagriti
+            </h2>
+            <div className="space-y-4 font-body leading-relaxed text-navy-700 dark:text-cream/70">
+              <p>
+                Consumer complaints before the District Consumer Disputes Redressal Commissions (DCDRC Lucknow I &amp; II) and the U.P. State Consumer Disputes Redressal Commission (SCDRC), Lucknow are filed electronically through the E-Daakhil portal (and its successor E-Jagriti platform), with e-payment of court fees and virtual hearing facilities. Section 35 complaints before these Commissions cover insurance repudiation across health, life, motor and fire/commercial policies, medical negligence assessed on the standards in <strong className="text-navy-900 dark:text-cream">Jacob Mathew v. State of Punjab</strong> and the Bolam-based benchmarks restated in <strong className="text-navy-900 dark:text-cream">Kusum Sharma v. Batra Hospital</strong>, and banking and credit-card cyber deficiencies.
+              </p>
+              <p>
+                Where an opposite party fails to comply with a Commission&apos;s order, we move execution applications under Section 71 and seek penal consequences — including imprisonment and fine — under Section 72 of the Consumer Protection Act, 2019, with recovery also enforceable as arrears of land revenue through certificate proceedings.
+              </p>
+            </div>
+          </section>
 
           <section id="consumer-documents" aria-labelledby="consumer-documents-heading" className="mb-16 scroll-mt-28 border-t border-gold-500/20 pt-10">
             <h2 id="consumer-documents-heading" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">First-Consultation Checklist</h2>

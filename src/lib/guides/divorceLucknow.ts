@@ -123,7 +123,10 @@ export const divorceToc: GuideTocItem[] = [
   { id: 'courts', label: 'Courts, Jurisdiction & Representation' },
   { id: 'statutory-framework', label: 'Which Law Applies to Your Marriage?' },
   { id: 'mutual-vs-contested', label: 'Mutual Consent or Contested Divorce?' },
+  { id: 'mutual-contested-comparison', label: 'Mutual vs. Contested Comparison' },
+  { id: 'mutual-consent-steps', label: 'Mutual Consent: Stage 1 to Stage 6' },
   { id: 'grounds', label: 'Grounds for a Contested Divorce' },
+  { id: 'contested-alimony-annulment', label: 'Grounds, Alimony & Annulment' },
   {
     id: 'divorce-procedure',
     label: 'Divorce Procedure: Stage 1 to Stage 10',

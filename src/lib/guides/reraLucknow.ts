@@ -76,6 +76,7 @@ export const reraLucknowToc: GuideTocItem[] = [
   { id: 'services', label: 'RERA matters we handle' },
   { id: 'rights', label: 'Know your RERA rights' },
   { id: 'rera-statutory-framework', label: 'Statutory framework' },
+  { id: 'rera-lucknow-forum-matrix', label: 'Lucknow Bench, AO and UP-REAT matrix' },
   {
     id: 'process',
     label: 'From project review to order enforcement',
@@ -121,6 +122,34 @@ export const reraStatutes: StatuteRow[] = [
     law: 'Uttar Pradesh Real Estate (Regulation and Development) Rules, 2016; applicable regulations and directions',
     provisions: 'Prescribed interest, complaint forms and fees, service, compensation and execution procedures',
     relevance: 'Check the current amended rules and official filing directions for the project and remedy; rates, forms and administrative allocation should not be assumed from an older case.',
+  },
+]
+
+export const reraLucknowForumMatrix: StatuteRow[] = [
+  {
+    law: 'UP-RERA Regulatory Authority Bench (Kalakankar House, Old Hyderabad, Lucknow)',
+    provisions: 'Section 18(1) & Section 31, RERA Act, 2016',
+    relevance: 'Full refund of principal with prescribed delay interest (SBI Highest MCLR + 1% as per UP RERA Rules), or monthly delay interest until valid Occupancy/Completion Certificate (OC/CC) handover (Newtech Promoters and Developers Pvt. Ltd. v. State of U.P. jurisdiction rule).',
+  },
+  {
+    law: 'Adjudicating Officer (AO), UP-RERA',
+    provisions: 'Sections 12, 14, 18(2), 18(3) & 71, RERA Act, 2016',
+    relevance: 'Adjudicating unliquidated compensation for false brochure promises (Section 12), unauthorized layout or structural alterations (Section 14), defective title (Section 18(2)), and mental harassment.',
+  },
+  {
+    law: 'Execution & Recovery Certificate (RC) Enforcement',
+    provisions: 'Section 40(1), RERA Act & U.P. Revenue Code, 2006',
+    relevance: 'Online execution application after 45/60 days of builder non-compliance, issuance of a Recovery Certificate (RC) to the District Magistrate (Lucknow), then tehsil attachment of builder bank accounts and unsold inventory as arrears of land revenue.',
+  },
+  {
+    law: 'Uttar Pradesh Real Estate Appellate Tribunal (UP-REAT), Lucknow',
+    provisions: 'Sections 43(5) & 44(2), RERA Act, 2016',
+    relevance: '60-day appeal window against UP-RERA orders; mandatory pre-deposit of at least 30% of a penalty or 100% of principal plus interest awarded to the allottee before a promoter appeal can be heard (Newtech Promoters).',
+  },
+  {
+    law: 'Allahabad High Court, Lucknow Bench (Chamber D-311)',
+    provisions: 'Section 58, RERA Act (second appeal within 60 days on a substantial question of law) & Article 226 writ of mandamus',
+    relevance: 'Enforcing unexecuted RCs against inactive District Magistrates/Tehsildars and defending homebuyer decrees against builder appeals.',
   },
 ]
 

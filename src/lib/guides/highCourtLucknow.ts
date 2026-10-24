@@ -1,4 +1,4 @@
-import type { GuideStage, GuideTocItem } from '@/lib/guides/types'
+import type { GuideStage, GuideTocItem, StatuteRow } from '@/lib/guides/types'
 
 export const highCourtStages: GuideStage[] = [
   {
@@ -96,6 +96,8 @@ export const highCourtToc: GuideTocItem[] = [
   { id: 'about-bench', label: 'About the Lucknow Bench' },
   { id: 'districts', label: 'Districts Under the Lucknow Bench' },
   { id: 'matters', label: 'Matters We Handle at the Lucknow Bench' },
+  { id: 'hc-jurisdiction-roster', label: 'Appellate & Original Jurisdiction Roster' },
+  { id: 'hc-when-to-approach', label: 'High Court vs. District Courts: When to Approach Directly' },
   {
     id: 'hc-procedure',
     label: 'How a Case Moves at the Lucknow Bench: 8 Steps',
@@ -111,4 +113,37 @@ export const lucknowBenchDistricts = [
   'Lucknow', 'Hardoi', 'Lakhimpur Kheri', 'Rae Bareli', 'Sitapur', 'Unnao',
   'Ayodhya (Faizabad)', 'Ambedkar Nagar', 'Bahraich', 'Shravasti', 'Barabanki',
   'Gonda', 'Balrampur', 'Pratapgarh', 'Sultanpur', 'Amethi',
+]
+
+export const highCourtStatutes: StatuteRow[] = [
+  {
+    law: 'Special Appeal',
+    provisions: 'Chapter VIII Rule 5, Allahabad High Court Rules, 1952',
+    relevance: 'Intra-court appeals against Single Judge writ orders to a Division Bench of the Lucknow Bench.',
+  },
+  {
+    law: 'First Appeal & First Appeal From Order (FAFO)',
+    provisions: 'Section 96 CPC / Section 19 Family Courts Act; Order 43 Rule 1 CPC / Section 173 MV Act (FAFO)',
+    relevance: 'Challenging decrees and appealable interim injunction or MACT orders from all 16 Awadh districts under the Lucknow Bench.',
+  },
+  {
+    law: 'Second Appeal',
+    provisions: 'Section 100, Code of Civil Procedure, 1908',
+    relevance: 'Challenging appellate decrees of District Judges on framed substantial questions of law.',
+  },
+  {
+    law: 'Criminal Misc. Bail, Anticipatory Bail & Quashing Applications',
+    provisions: 'Section 483 BNSS (439 CrPC); Section 482 BNSS (438 CrPC); Section 528 BNSS (482 CrPC)',
+    relevance: 'Pre-arrest protection, post-arrest bail, and quashing of chargesheets and summoning orders before the Lucknow Bench.',
+  },
+  {
+    law: 'Writ-A (Service), Writ-B (Revenue), Writ-C (Civil/Misc) & Criminal Misc. Writ',
+    provisions: 'Articles 226/227, Constitution of India',
+    relevance: 'Constitutional and supervisory remedies against state authorities, tribunals, and subordinate courts within the Lucknow Bench jurisdiction.',
+  },
+  {
+    law: 'Contempt Application (Civil)',
+    provisions: 'Section 12, Contempt of Courts Act, 1971',
+    relevance: 'Enforcing time-bound compliance with High Court mandamus and stay directions against defaulting officials.',
+  },
 ]

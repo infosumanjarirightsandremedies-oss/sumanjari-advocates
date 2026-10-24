@@ -28,7 +28,7 @@ import { CHAMBER_TEL } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
 const constitutionalLead = teamMembers.find((member) => member.slug === 'aishwarya-pandey')
-const constitutionalTeam = ['abhishek-mishra', 'priyesh-dwivedi', 'adarsh-pratap-singh', 'devesh-tiwari']
+const constitutionalTeam = ['jitendra-tiwari', 'prabhash-yadav', 'abhishek-mishra', 'priyesh-dwivedi']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
 
 function ConsultationActions({ className }: { className: string }) {
@@ -45,9 +45,9 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'Writ Petition Lawyer in Lucknow | Article 226 | Sumanjari' },
+  title: { absolute: 'Writ Petition Lawyer High Court Lucknow | Art 226 & 227 Writs' },
   description:
-    'Writ petition lawyer and constitutional advocate in Lucknow for Article 226, PIL and administrative orders before Allahabad High Court, Lucknow Bench.',
+    'Constitutional & Writ Petition Lawyer at Allahabad High Court, Lucknow Bench (Chamber D-311). Article 226/227 writs, Mandamus, Certiorari, Habeas Corpus & PIL.',
   keywords: [
     'Constitutional Lawyer Lucknow',
     'Writ Petition Lawyer Lucknow',
@@ -94,6 +94,16 @@ const constitutionalJsonLd = {
     { '@type': 'State', name: 'Uttar Pradesh' },
   ],
   serviceType: 'Constitutional & Writ Legal Services',
+}
+
+const constitutionalBreadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/#services` },
+    { '@type': 'ListItem', position: 3, name: 'Writ Petition Lawyer in Lucknow', item: `${SITE_URL}/services/constitutional-writ-lawyer-lucknow` },
+  ],
 }
 
 const matters = [
@@ -146,6 +156,63 @@ const matters = [
       'Supervisory challenges to civil-court judicial orders under Article 227 where justified, distinct from Article 226 certiorari',
       'Quo warranto challenging illegal appointment to a public office',
     ],
+  },
+]
+
+const writCategories = [
+  {
+    law: 'Writ-A (Service Writs)',
+    provisions: 'Article 226 challenges to government employee suspension, disciplinary dismissal, transfer, promotion, and recovery from retiral dues (Union of India v. Rafiq Masih), and challenges to UPPST / CAT orders.',
+    relevance: 'Single Bench writ petitions for state and covered public-sector employees aggrieved by service decisions.',
+  },
+  {
+    law: 'Writ-B (Revenue & Consolidation Writs)',
+    provisions: 'Article 226 / 227 challenges to Board of Revenue, Commissioner, Collector and DDC orders under the U.P. Revenue Code, 2006 and the U.P. Consolidation of Holdings Act, 1953.',
+    relevance: 'Revenue and consolidation matters arising from the Tehsildar / SDM / Commissioner hierarchy in the Lucknow division.',
+  },
+  {
+    law: 'Writ-C (Civil & Miscellaneous Administrative Writs)',
+    provisions: 'Challenges to LDA / Uphav demolition or sealing notices, land acquisition compensation, arbitrary blacklisting of government contractors, passport impoundment, stamp valuation, and college / university regulations.',
+    relevance: 'The residual administrative-law category for public-authority action affecting Lucknow residents and businesses.',
+  },
+  {
+    law: 'Criminal Misc. Writ Petition (Division Bench)',
+    provisions: 'Quashing of FIRs prior to chargesheet and protection against arbitrary arrest where the ingredients of a cognizable offence are absent (the Bhajan Lal parameters).',
+    relevance: 'Heard by the Division Bench of the Lucknow Bench; distinct from Section 482 BNSS (formerly CrPC) quashing strategy.',
+  },
+  {
+    law: 'Habeas Corpus Writ Petition',
+    provisions: 'Urgent remedy against illegal detention by state authorities or unlawful private custody, seeking production and release of the detenu.',
+    relevance: 'Listed on priority before the Lucknow Bench; the oldest and most immediate protection of personal liberty.',
+  },
+  {
+    law: 'Article 227 Supervisory Petitions',
+    provisions: 'Challenging interlocutory orders of Lucknow civil courts, family courts or tribunals that exceed jurisdiction or violate natural justice (Shalini Shyam Shetty; Radhey Shyam v. Chhabi Nath).',
+    relevance: 'Supervisory — not appellate — jurisdiction over courts and tribunals within the Lucknow Bench’s territory.',
+  },
+  {
+    law: 'Public Interest Litigation (WPIL)',
+    provisions: 'Bona fide PILs complying with Chapter XXII Rule 1(3-A) of the Allahabad High Court Rules, with the credential disclosures mandated by State of Uttaranchal v. Balwant Singh Chaufal.',
+    relevance: 'Genuine public-injury litigation; private grievances repackaged as PILs are liable to be dismissed with costs.',
+  },
+]
+
+const alternativeRemedyExceptions = [
+  {
+    title: 'Enforcement of Fundamental Rights (Part III)',
+    body: 'Where the petition seeks enforcement of a fundamental right under Part III of the Constitution, the Lucknow Bench entertains the writ without insisting on the statutory appellate route.',
+  },
+  {
+    title: 'Violation of Principles of Natural Justice',
+    body: 'Orders passed without hearing (audi alteram partem) or unreasoned orders by the authority are a settled exception — the aggrieved party need not first exhaust the alternative remedy.',
+  },
+  {
+    title: 'Order Passed Wholly Without Jurisdiction (Coram Non Judice)',
+    body: 'Where the impugned order is passed by an authority wholly without jurisdiction, the writ court intervenes directly, since the order is a nullity and the statutory appeal is no adequate answer.',
+  },
+  {
+    title: 'Challenge to the Constitutional Vires of a Statute or Rule',
+    body: 'A petition challenging the constitutional validity of the very statute, rule or notification under which the authority acted can be entertained directly, as the appellate authority cannot decide the vires of its parent statute.',
   },
 ]
 
@@ -236,6 +303,11 @@ export default async function ConstitutionalWritMattersPage() {
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(constitutionalFaqJsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(constitutionalBreadcrumbJsonLd) }}
+      />
       <Navbar />
 
       <section className="py-24 md:py-32">
@@ -257,7 +329,8 @@ export default async function ConstitutionalWritMattersPage() {
               <div className="h-px w-12 bg-gold-500" />
             </div>
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-              Constitutional &amp; <em className="text-gold-gradient">Writ Matters</em>
+              Constitutional &amp; Writ Petition Lawyer at{' '}
+              <em className="text-gold-gradient">Allahabad High Court, Lucknow Bench</em>
             </h1>
             <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
               Our writ petition lawyers and constitutional advocates in Lucknow represent clients in
@@ -290,10 +363,11 @@ export default async function ConstitutionalWritMattersPage() {
               Constitutional &amp; Writ Matters Team
             </h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
-              Adv. Aishwarya Pandey leads the constitutional practice
-              assessment, supported by advocates with recorded experience in
-              PIL, civil rights and High Court litigation. Case allocation
-              depends on the subject matter and forum.
+              Adv. Aishwarya Pandey (Associate Partner) and Adv. Jitendra
+              Tiwari (Director) lead the constitutional and writ practice,
+              supported by Adv. Prabhash Yadav (LL.M. Constitutional Law) and
+              Adv. Abhishek Mishra (PIL &amp; Writs). Case allocation depends on
+              the subject matter and forum.
             </p>
             <TeamCarousel members={constitutionalTeam} label="Constitutional and writ team members" />
           </section>
@@ -350,6 +424,40 @@ export default async function ConstitutionalWritMattersPage() {
             intro="Article 226 writs and Article 227 supervision are distinct. The challenged action, respondent, territorial connection and statutory remedies determine the available route; current High Court rules and directions must be checked for filing and further challenge."
             rows={constitutionalStatutes}
           />
+
+          <StatuteTable
+            id="writ-categories"
+            heading="Allahabad High Court, Lucknow Bench Writ Categories (Writ-A, Writ-B, Writ-C, Criminal Misc. Writ & PIL)"
+            intro="The Lucknow Bench assigns writ petitions to rostered benches by category. Selecting the correct category — and confirming whether the matter belongs before a Single Bench or Division Bench — is the first filing decision."
+            rows={writCategories}
+          />
+
+          <div id="alternative-remedy-exceptions" className="mb-16 scroll-mt-28">
+            <h2 className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Exceptions to the Rule of Alternative Remedy Under Article 226 (Whirlpool Corporation Principles)
+            </h2>
+            <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+              The Lucknow Bench ordinarily requires a petitioner to exhaust the
+              statutory appellate remedy first. But the Supreme Court in
+              Whirlpool Corporation v. Registrar of Trade Marks settled four
+              grounds on which a writ lies despite an appellate statute:
+            </p>
+            <div className="grid gap-5 sm:grid-cols-2">
+              {alternativeRemedyExceptions.map(({ title, body }) => (
+                <div
+                  key={title}
+                  className="glass-card rounded-sm border border-gold-500/20 p-6 dark:border-gold-500/15"
+                >
+                  <h3 className="mb-3 font-display text-lg font-bold text-navy-900 dark:text-cream">
+                    {title}
+                  </h3>
+                  <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">
+                    {body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
 
           <div id="constitutional-matters" className="mb-16 scroll-mt-28">
             <h2 className="mb-8 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">

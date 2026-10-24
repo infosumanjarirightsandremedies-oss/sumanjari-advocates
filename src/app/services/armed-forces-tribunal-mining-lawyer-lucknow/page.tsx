@@ -24,7 +24,7 @@ import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
 import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
 import { aftMiningStages, aftMiningStatutes, aftMiningToc } from '@/lib/guides/aftMiningLucknow'
-import { getBlogPostsByCategory } from '@/lib/blogs'
+import { getBlogPostsByCategories, getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL } from '@/lib/contactLinks'
 
@@ -48,9 +48,9 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'Armed Forces Tribunal & Mining Lawyer in Lucknow | Sumanjari' },
+  title: { absolute: 'Armed Forces Tribunal (AFT) & Mining Lawyer in Lucknow | Sumanjari' },
   description:
-    'Armed Forces Tribunal & mining lawyer in Lucknow: disability pension, discharge and court-martial appeals before the AFT, Lucknow Bench, and mining lease, royalty and illegal-mining disputes.',
+    'Armed Forces Tribunal (AFT) Lucknow Bench & Mining Lawyer in Lucknow. Representation in disability pension, court-martial, OA filing & UP mining lease disputes.',
   keywords: [
     'Armed Forces Tribunal Lawyer Lucknow',
     'AFT Lucknow Bench Advocate',
@@ -209,6 +209,30 @@ const aftMiningInsights = [
     excerpt:
       'Yes, including challenges to Release and Review Medical Board findings on attributability, aggravation, and disability percentage, and claims for broad-banding where applicable.',
   },
+  {
+    icon: ShieldHalf,
+    title: 'How is disability pension broad-banded from 20% to 50% at AFT Lucknow Bench?',
+    excerpt:
+      'Applying the Supreme Court\u2019s ruling in Union of India v. Ram Avtar, disability elements below 50% are rounded up — 20% to 50%, 50% to 75%, and 75% to 100% — for qualifying personnel. We seek broad-banding with arrears and PPO revision in the Original Application, and pursue execution before PCDA (Pensions) under Section 19 of the AFT Act if the revised pension is not credited.',
+  },
+  {
+    icon: ClipboardList,
+    title: 'What is the limitation period under Section 22 of the Armed Forces Tribunal Act, 2007, and can delay in pension cases be condoned?',
+    excerpt:
+      'Section 22 prescribes the limitation window for an Original Application, counted from the final rejection of the statutory complaint or the cause of action. The Tribunal may condone delay on sufficient cause, and continuing wrongs such as pension underpayment are treated as recurring causes of action — we assess limitation at the first review of the service record.',
+  },
+  {
+    icon: Mountain,
+    title: 'How do I challenge a District Magistrate\u2019s penalty order or e-MM-11 suspension under the UP Minor Minerals (Concession) Rules, 2021?',
+    excerpt:
+      'A DM or Mining Officer penalty for alleged excavation beyond leased coordinates can be challenged through the statutory appellate/revision route under the 2021 Rules and the MMDR Act, 1957, while blockage of MineMitra portal IDs or e-MM-11 transit passes can be challenged by representation and, where coercive recovery follows, a Writ-C petition before the Allahabad High Court, Lucknow Bench.',
+  },
+  {
+    icon: Scale,
+    title: 'When does a writ petition lie before the Allahabad High Court, Lucknow Bench against an order of the Armed Forces Tribunal?',
+    excerpt:
+      'Under L. Chandra Kumar v. Union of India, tribunal orders remain amenable to judicial review under Articles 226/227 before the jurisdictional High Court, even though Sections 30–31 of the AFT Act provide a statutory appeal to the Supreme Court on points of law. The correct route depends on the grounds raised — we evaluate both before advising.',
+  },
 ]
 
 const aftMiningFaqJsonLd = {
@@ -225,7 +249,13 @@ const aftMiningFaqJsonLd = {
 }
 
 export default async function ArmedForcesTribunalMiningMattersPage() {
-  const aftMiningBlogPosts = getBlogPostsByCategory('Armed Forces Tribunal & Mining Matters')
+  const aftMiningBlogPosts = getBlogPostsByCategory('Armed Forces Tribunal & Mining Matters').then(async (own) => {
+    if (own.length > 0) return own
+    // No dedicated sheet category yet — surface the closest related clusters
+    // (defence-pension service law + revenue/mining recovery) instead of
+    // rendering an empty "From Our Desk" section.
+    return getBlogPostsByCategories(['Service & Employment Matters', 'Tax & Revenue Matters'], 8)
+  })
 
   return (
     <main className="relative min-h-screen">
@@ -265,10 +295,10 @@ export default async function ArmedForcesTribunalMiningMattersPage() {
                 <div className="h-px w-12 bg-gold-500" />
               </div>
               <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-                Armed Forces Tribunal &amp; Mining Lawyer <em className="text-gold-gradient">in Lucknow</em>
+                Armed Forces Tribunal (AFT Lucknow Bench) &amp; Mining Lawyer <em className="text-gold-gradient">in Lucknow</em>
               </h1>
               <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
-                Representation for defence personnel in disability pension, discharge, and court-martial appeals before the Armed Forces Tribunal, Lucknow Bench, and for lessees and complainants in mining lease, royalty, and illegal-mining disputes across Uttar Pradesh.
+                Sumanjari &amp; Co. Advocates represents serving and retired Army, Navy, and Air Force personnel before the Armed Forces Tribunal (AFT), Regional Bench Lucknow (Rafi Ahmed Kidwai Marg, Cantonment) in Original Applications (s.14), Court-Martial Appeals (s.15), disability pension broad-banding, and PCDA (P) execution matters, alongside representing mining lessees before the Directorate of Geology &amp; Mining (Khanij Bhawan, Lucknow), Mining Tribunal, and Allahabad High Court, Lucknow Bench (Chamber Block D-311).
               </p>
               <p className="mt-4 max-w-2xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
                 Most service matters require a statutory representation before the Tribunal can be approached, and most mining disputes turn on the lease terms and the authority that passed the impugned order. The eight stages below explain how each type of case actually proceeds.
@@ -385,6 +415,78 @@ export default async function ArmedForcesTribunalMiningMattersPage() {
             </div>
           </div>
 
+          <div id="aft-lucknow-bench" className="mb-16 scroll-mt-28">
+            <h2 className="mb-8 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Defence Personnel Legal Services at AFT Lucknow Bench (Sections 14 &amp; 15, AFT Act 2007)
+            </h2>
+            <div className="grid gap-5 sm:grid-cols-2">
+              {[
+                {
+                  title: 'Disability Pension, Attributability & Broad-Banding Claims (RMB / IMB Challenges)',
+                  body: 'Challenges to Release Medical Board (RMB) and Invaliding Medical Board (IMB) rejections where illnesses — hypertension, ischemic heart disease, psychiatric conditions, spinal injuries — are labelled "Neither Attributable to Nor Aggravated by Military Service (NANA)", applying the Supreme Court\u2019s presumption principles in Dharamvir Singh v. Union of India and rounding-off / broad-banding of the disability element (20% \u2192 50%, 50% \u2192 75%, 75% \u2192 100%) with arrears and PPO revision execution before PCDA (Pensions) under Section 19 of the AFT Act.',
+                },
+                {
+                  title: 'Court-Martial Appeals (GCM, SGCM, DCM & SCM) & Summary Discharges',
+                  body: 'Section 15 appeals against General Court Martial (GCM), District Court Martial (DCM), and Summary Court Martial (SCM) findings and sentences, bail and suspension of sentence during pendency under Section 15(3)/(6), and challenges to administrative discharge under Army Rule 13, Air Force Rule 15, or the Navy Regulations.',
+                },
+                {
+                  title: 'Statutory & Non-Statutory Complaints (Section 21 Exhaustion & 6-Month Rule)',
+                  body: 'Drafting of statutory complaints under Sections 26/27 of the Army Act (and the Navy and Air Force equivalents), and tracking the six-month statutory waiting window under Section 21(1)(b) before the Original Application (OA) is filed at the AFT Lucknow Bench registry.',
+                },
+                {
+                  title: 'Jurisdiction of AFT Regional Bench, Lucknow (UP & Uttarakhand)',
+                  body: 'The AFT Lucknow Bench at Gulistan Colony, Cantonment, Lucknow exercises territorial jurisdiction over all districts of Uttar Pradesh and Uttarakhand for serving and retired defence personnel and families claiming Ordinary, Special, or Liberalized Family Pension.',
+                },
+              ].map(({ title, body }) => (
+                <div
+                  key={title}
+                  className="glass-card rounded-sm border border-gold-500/20 p-6 dark:border-gold-500/15"
+                >
+                  <h3 className="mb-3 font-display text-lg font-bold text-navy-900 dark:text-cream">
+                    {title}
+                  </h3>
+                  <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">
+                    {body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div id="mining-disputes-up" className="mb-16 scroll-mt-28">
+            <h2 className="mb-8 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Mining Lease, Royalty &amp; MineMitra Portal Disputes in Uttar Pradesh
+            </h2>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                {
+                  title: 'UP Minor Minerals (Concession) Rules, 2021 & MMDR Act, 1957 Litigation',
+                  body: 'E-tender and e-auction bid disputes, Letter of Intent (LoI) cancellation challenges, District Survey Report (DSR) and SEIAA environmental-clearance delays affecting lease execution, and Section 30 MMDR Act revision petitions before the Central Government (Mines Tribunal).',
+                },
+                {
+                  title: 'Illegal Mining Show-Cause Notices, e-MM-11 Transit Pass Blocks & Tehsil Recovery',
+                  body: 'Replies to District Magistrate and Mining Officer penalty notices alleging excavation beyond leased coordinates, unblocking of MineMitra portal IDs and e-MM-11 transit pass generation, and Writ-C challenges before the Allahabad High Court, Lucknow Bench against arbitrary lease termination or coercive recovery certificates (RC).',
+                },
+                {
+                  title: 'Royalty & Penalty Recovery Certificates (Rule 58 / Rule 60) & DGM Representations',
+                  body: 'Challenges to royalty and penalty recovery certificates issued under Rules 58 and 60 of the UP Minor Minerals (Concession) Rules, 2021, and reasoned representations before the Directorate of Geology and Mining (DGM), Khanij Bhawan, Lucknow before escalation to the Tribunal or the High Court.',
+                },
+              ].map(({ title, body }) => (
+                <div
+                  key={title}
+                  className="glass-card rounded-sm border border-gold-500/20 p-6 dark:border-gold-500/15"
+                >
+                  <h3 className="mb-3 font-display text-lg font-bold text-navy-900 dark:text-cream">
+                    {title}
+                  </h3>
+                  <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">
+                    {body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <GuideStages
             id="aft-mining-procedure"
             heading="How a Case Proceeds: Stage 1 to Stage 8"
@@ -476,9 +578,9 @@ export default async function ArmedForcesTribunalMiningMattersPage() {
             posts={aftMiningBlogPosts}
             fallbackIcon={<ScrollText className="h-5 w-5 text-gold-600 dark:text-gold-400" />}
             eyebrow="From Our Desk"
-            heading="Armed Forces Tribunal & Mining Blogs"
-            description="Short reads on defence-service pension matters and mining lease disputes."
-            viewAllHref={`/blog?category=${encodeURIComponent('Armed Forces Tribunal & Mining Matters')}`}
+            heading="Armed Forces Tribunal, Service & Revenue Law Blogs"
+            description="Short reads on defence-service pension matters, service law, and revenue and mining recovery disputes."
+            viewAllHref="/blog"
           />
 
           <div id="contact" className="glass-card scroll-mt-28 rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">

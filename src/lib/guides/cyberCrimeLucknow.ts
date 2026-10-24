@@ -69,6 +69,7 @@ export const cyberCrimeLucknowToc: GuideTocItem[] = [
   { id: 'urgent-cyber-fraud', label: 'Immediate Fraud Reporting' },
   { id: 'cyber-complaint-lucknow', label: 'Complaint and FIR Routes' },
   { id: 'frozen-bank-account', label: 'Bank Freeze and Release Authority' },
+  { id: 'unfreeze-bank-account-bnss', label: 'Unfreezing Under BNSS/CrPC' },
   { id: 'cyber-statutes', label: 'Applicable Laws and Transitional Rules' },
   { id: 'cyber-procedure', label: 'Cybercrime Procedure', children: cyberCrimeLucknowStages.map(({ id, title }) => ({ id, label: title })) },
   { id: 'cyber-documents', label: 'First-Consultation Checklist' },

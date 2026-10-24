@@ -10,19 +10,19 @@ import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
 import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
 import { divorceStages, divorceStatutes, divorceToc } from '@/lib/guides/divorceLucknow'
-import { getBlogPostsByCategory } from '@/lib/blogs'
+import { getBlogPostsBySlugs } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
 const PAGE_PATH = '/services/divorce-lawyer-lucknow'
 const divorceLead = teamMembers.find((member) => member.slug === 'aishwarya-pandey')
-const divorceTeam = ['akhilesh-yadav', 'prerna-yaduvanshi', 'jitendra-tiwari']
+const divorceTeam = ['jitendra-tiwari', 'akhilesh-yadav', 'prerna-yaduvanshi']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
 
 export const metadata: Metadata = {
-  title: { absolute: 'Divorce Lawyer in Lucknow | Mutual & Contested | Sumanjari' },
-  description: 'Divorce lawyer in Lucknow: 10-stage guide to mutual and contested divorce, alimony and custody at the Family Court, Qaiserbagh and appeals at the Lucknow Bench.',
+  title: { absolute: 'Divorce Lawyer in Lucknow | Mutual Consent & Contested Divorce' },
+  description: 'Divorce Lawyer in Lucknow at Family Court Kaiserbagh & Allahabad High Court (Chamber D-311). Mutual consent divorce (Sec 13B), contested divorce & alimony.',
   keywords: ['Divorce Advocate in Lucknow', 'Divorce Lawyer in Lucknow', 'Mutual Consent Divorce Lawyer Lucknow', 'Contested Divorce Lawyer Lucknow', 'Alimony Lawyer Lucknow', 'Child Custody Lawyer Lucknow', 'Family Court Advocate Lucknow'],
   alternates: { canonical: PAGE_PATH },
   openGraph: {
@@ -143,8 +143,23 @@ function ConsultationActions() {
   )
 }
 
+const divorceBlogSlugs = [
+  'cruelty-as-ground-divorce-mental-physical',
+  'irretrievable-breakdown-marriage-article-142-dissolution',
+  'desertion-adultery-hindu-marriage-act-evidentiary-standards',
+  'mutual-consent-divorce-strategy-section-13b-hma-28-special',
+  'annulment-void-voidable-marriages-section-11-12-hma',
+  'permanent-alimony-computation-lumpsum-vs-monthly',
+  'matrimonial-property-joint-assets-benami-transactions',
+  'master-settlement-agreements-clean-slate-exits',
+  'high-court-writs-quashing-tactics-section-482-crpc-528',
+  'rajnesh-v-neha-masterclass-affidavits-assets-liabilities',
+  'quantum-determination-interim-maintenance-aditi-jitesh-sharma',
+  'nri-marriages-cross-border-matrimonial-abandonment',
+]
+
 export default async function DivorceLawyerPage() {
-  const familyBlogPosts = getBlogPostsByCategory('Family & Matrimonial Matters')
+  const divorceBlogPosts = getBlogPostsBySlugs(divorceBlogSlugs)
   const headingClass = 'mb-6 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl'
   const bodyClass = 'font-body leading-relaxed text-navy-700 dark:text-cream/65'
 
@@ -159,7 +174,7 @@ export default async function DivorceLawyerPage() {
           <header className="mb-16 grid gap-10 md:grid-cols-[minmax(0,1fr)_252px]">
             <div className="min-w-0">
               <p className="mb-4 font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">Family Law</p>
-              <h1 className="mb-5 font-display text-4xl font-bold leading-tight text-navy-900 dark:text-cream md:text-5xl">Divorce Advocate &amp; Lawyer <em className="text-gold-gradient">in Lucknow</em></h1>
+              <h1 className="mb-5 font-display text-4xl font-bold leading-tight text-navy-900 dark:text-cream md:text-5xl">Divorce Lawyer &amp; Advocate in Lucknow — <em className="text-gold-gradient">Mutual Consent &amp; Contested Divorce</em></h1>
               <p className={`mb-6 text-lg ${bodyClass}`}>Discreet representation for mutual consent divorce, contested proceedings, maintenance, and child custody before the Family Court, Lucknow and appropriate appellate forums.</p>
               <p className={`mb-8 ${bodyClass}`}>Our divorce and matrimonial practice is led by <strong className="text-navy-900 dark:text-cream">Adv. Aishwarya Pandey</strong>, Associate Partner at Sumanjari &amp; Co. Advocates. We help you understand the available remedies, prepare your case, and address the financial and parenting decisions that accompany separation.</p>
               <p className={`mb-8 ${bodyClass}`}>Divorce petitions for Lucknow are heard by the Family Court, Lucknow at Wala Qadar Road, Qaiserbagh (Principal Judge and Additional Principal Judges); appeals go to the Allahabad High Court, Lucknow Bench at Gomti Nagar; the ten stages below explain each step.</p>
@@ -171,7 +186,7 @@ export default async function DivorceLawyerPage() {
             {divorceLead && (
               <div className="min-w-0 border-l border-gold-500/30 pl-6">
                 {divorceLead.img && <Image src={divorceLead.img} alt={divorceLead.name} width={252} height={288} priority sizes="(min-width: 768px) 252px, 280px" className="mb-5 h-72 w-full max-w-[280px] rounded-sm object-cover" style={{ objectPosition: divorceLead.focus }} />}
-                <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">Divorce Practice Lead</p>
+                <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">Divorce &amp; Matrimonial Lead</p>
                 <h2 className="mt-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{divorceLead.name}</h2>
                 <p className={`mt-2 text-sm ${bodyClass}`}>{divorceLead.role}</p>
                 <p className={`mt-2 text-sm ${bodyClass}`}>{divorceLead.credentials}</p>
@@ -226,6 +241,69 @@ export default async function DivorceLawyerPage() {
             </div>
           </section>
 
+          <section id="mutual-contested-comparison" className="mb-16 scroll-mt-28">
+            <h2 className={headingClass}>Mutual Consent Divorce vs. Contested Divorce in Family Court, Lucknow (430, Wala Qadar Road, Kaiserbagh)</h2>
+            <p className={`mb-6 ${bodyClass}`}>The two tracks differ fundamentally in prerequisite, procedure and appellate exposure. The comparison below reflects how each proceeds before the Principal Judge, Family Court, Lucknow at 430, Wala Qadar Road, Kaiserbagh.</p>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[640px] border-collapse text-left font-body text-sm">
+                <thead>
+                  <tr className="border-b border-gold-500/30 text-navy-900 dark:text-cream">
+                    <th scope="col" className="py-3 pr-4 font-semibold">Aspect</th>
+                    <th scope="col" className="py-3 pr-4 font-semibold">Mutual Consent Divorce (Section 13B Hindu Marriage Act, 1955 / Section 28 Special Marriage Act, 1954 / Mubarat)</th>
+                    <th scope="col" className="py-3 font-semibold">Contested Divorce (Section 13(1) HMA / Section 27 SMA / Section 2 Dissolution of Muslim Marriages Act, 1939)</th>
+                  </tr>
+                </thead>
+                <tbody className="text-navy-800 dark:text-cream/75">
+                  <tr className="border-b border-gold-500/10 align-top">
+                    <th scope="row" className="py-3 pr-4 font-semibold">Statutory Separation Prerequisite</th>
+                    <td className="py-3 pr-4">One year of living separately under Section 13B HMA before the joint petition is maintainable.</td>
+                    <td className="py-3">Immediate filing on grounds such as cruelty or adultery, or after two years of desertion under Section 13(1) HMA.</td>
+                  </tr>
+                  <tr className="border-b border-gold-500/10 align-top">
+                    <th scope="row" className="py-3 pr-4 font-semibold">Key Procedural Stages at Family Court, Kaiserbagh</th>
+                    <td className="py-3 pr-4">Joint Petition + Settlement MOU → First Motion Statement → 6-Month Cooling-Off or Waiver Application under Amardeep Singh v. Harleen Kaur → Second Motion → Divorce Decree.</td>
+                    <td className="py-3">Petition → Notice &amp; Mediation Center Referral → Written Statement &amp; Rajnesh v. Neha Income Affidavits → Issues &amp; Cross-Examination → Final Arguments &amp; Decree.</td>
+                  </tr>
+                  <tr className="border-b border-gold-500/10 align-top">
+                    <th scope="row" className="py-3 pr-4 font-semibold">Appellate Forum</th>
+                    <td className="py-3 pr-4">No appeal lies from a consent decree, except on grounds such as fraud or coercion vitiating consent.</td>
+                    <td className="py-3">First Appeal under Section 19 of the Family Courts Act, 1984 within 30/90 days before a Division Bench of the Allahabad High Court, Lucknow Bench.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="mutual-consent-steps" className="mb-16 scroll-mt-28 border-y border-gold-500/20 py-10">
+            <h2 className={headingClass}>Step-by-Step Mutual Consent Divorce Process in Lucknow (Stage 1 to Stage 6)</h2>
+            <ol className="space-y-6">
+              <li className="border-l-2 border-gold-500/50 pl-5">
+                <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Stage 1: Master Settlement Agreement / MOU</h3>
+                <p className={bodyClass}>Drafting a comprehensive Master Settlement Agreement covering lumpsum permanent alimony under Section 25 HMA, the Stridhan inventory return, child custody and visitation, and the withdrawal or quashing of parallel criminal cases (Section 498A IPC / Section 85 BNS, Section 125 CrPC / Section 144 BNSS, and PWDVA Section 12 proceedings).</p>
+              </li>
+              <li className="border-l-2 border-gold-500/50 pl-5">
+                <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Stage 2: Jurisdiction &amp; Filing</h3>
+                <p className={bodyClass}>Jurisdictional verification under Section 19 HMA — where the marriage was solemnized, where the parties last resided together in Lucknow, or where the respondent/wife currently resides — and filing of the joint petition before the Principal Judge, Family Court, Kaiserbagh, Lucknow.</p>
+              </li>
+              <li className="border-l-2 border-gold-500/50 pl-5">
+                <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Stage 3: First Motion</h3>
+                <p className={bodyClass}>Recording of the First Motion statements of both spouses and the Family Court&apos;s endorsement referring the matter to the Mediation Center.</p>
+              </li>
+              <li className="border-l-2 border-gold-500/50 pl-5">
+                <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Stage 4: Cooling-Off Waiver</h3>
+                <p className={bodyClass}>Filing a Cooling-Off Period Waiver Application where the parties have been separated for more than 18 months and all rehabilitation, alimony and custody terms stand settled, on the principles in Amardeep Singh v. Harleen Kaur.</p>
+              </li>
+              <li className="border-l-2 border-gold-500/50 pl-5">
+                <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Stage 5: Quashing of Parallel Criminal Cases</h3>
+                <p className={bodyClass}>Coordinating compromise quashing of the parallel FIR/chargesheet under Section 528 BNSS (formerly Section 482 CrPC) before the Allahabad High Court, Lucknow Bench, before the final alimony tranche is released.</p>
+              </li>
+              <li className="border-l-2 border-gold-500/50 pl-5">
+                <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Stage 6: Second Motion &amp; Decree</h3>
+                <p className={bodyClass}>Recording of the Second Motion statements and passing of the final decree of divorce — including the video-conferencing appearance protocol for NRI spouses unable to travel to Lucknow.</p>
+              </li>
+            </ol>
+          </section>
+
           <StatuteTable
             id="statutory-framework"
             heading="Which Law Applies to Your Marriage?"
@@ -237,6 +315,14 @@ export default async function DivorceLawyerPage() {
             <h2 className={headingClass}>Grounds for a Contested Divorce</h2>
             <div className="space-y-6">{grounds.map(({ title, text }) => <div key={title} className="border-l-2 border-gold-500/50 pl-5"><h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{title}</h3><p className={bodyClass}>{text}</p></div>)}</div>
             <p className={`mt-6 text-sm ${bodyClass}`}>Long separation or relationship breakdown does not, by itself, create an ordinary Family Court ground called irretrievable breakdown under the Hindu Marriage Act. The Supreme Court&apos;s exceptional powers are distinct from statutory grounds available in a regular divorce petition.</p>
+          </section>
+
+          <section id="contested-alimony-annulment" className="mb-16 scroll-mt-28">
+            <h2 className={headingClass}>Contested Divorce Grounds, Alimony Computation (Rajnesh v. Neha) &amp; Annulment (Sections 11 &amp; 12 HMA)</h2>
+            <div className={`space-y-4 ${bodyClass}`}>
+              <p>Mental and physical cruelty remain the most-litigated contested ground, assessed on the standards in <strong className="text-navy-900 dark:text-cream">Samar Ghosh v. Jaya Ghosh</strong>, with sustained false criminal prosecution itself recognised as cruelty. Desertion requires two years of continuous abandonment without reasonable cause, while adultery is now proved largely through electronic evidence — call records, chats, photographs and location data — certified under Section 63 of the Bharatiya Sakshya Adhiniyam, 2023 (the successor to Section 65B of the Evidence Act).</p>
+              <p>Annulment is a distinct remedy: a void marriage (Section 11 HMA) can be declared so at any time, while a voidable marriage on grounds of impotency or fraud must be annulled under Section 12 HMA within one year of discovering the ground. On the financial side, we defend against inflated maintenance demands and build accurate computations using the Assets &amp; Liabilities Affidavits mandated by <strong className="text-navy-900 dark:text-cream">Rajnesh v. Neha</strong>, so that interim maintenance and permanent alimony reflect disclosed income rather than speculation.</p>
+            </div>
           </section>
 
           <GuideStages
@@ -285,7 +371,7 @@ export default async function DivorceLawyerPage() {
             <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">For the first review, bring marriage and identity records, address details, the separation chronology, income disclosures and all existing notices, petitions and orders. Identify the applicable marriage law and any overseas connection before assuming eligibility or a filing timeline. Consent must remain voluntary; a cooling-off waiver is subject to legal conditions and the court&apos;s decision. For broader support and protection issues, visit our <Link href="/services/family-advocate" className="text-gold-700 underline dark:text-gold-400">family law practice</Link>.</p>
           </section>
 
-          <ServiceBlogs posts={familyBlogPosts} fallbackIcon={<ScrollText className="h-5 w-5 text-gold-600 dark:text-gold-400" />} eyebrow="From Our Desk" heading="Divorce & Matrimonial Blogs" description="Legal perspectives on divorce, maintenance, custody, and family disputes." viewAllHref={`/blog?category=${encodeURIComponent('Family & Matrimonial Matters')}`} />
+          <ServiceBlogs posts={divorceBlogPosts} fallbackIcon={<ScrollText className="h-5 w-5 text-gold-600 dark:text-gold-400" />} eyebrow="From Our Desk" heading="Divorce & Alimony Blogs" description="Divorce-specific reads on mutual consent strategy, contested grounds, alimony computation, annulment and settlement exits." viewAllHref="/blog?category=Family%20%26%20Matrimonial%20Matters" />
 
           <section id="contact" className="scroll-mt-28 border-t border-gold-500/25 pt-10 text-center">
             <h2 className={headingClass}>Speak with a Divorce Advocate in Lucknow</h2>

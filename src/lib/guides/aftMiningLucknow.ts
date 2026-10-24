@@ -96,6 +96,8 @@ export const aftMiningToc: GuideTocItem[] = [
   { id: 'forums', label: 'Forums We Appear Before' },
   { id: 'statutory-framework', label: 'Statutory Framework' },
   { id: 'matters', label: 'Matters We Handle' },
+  { id: 'aft-lucknow-bench', label: 'Defence Services at AFT Lucknow Bench' },
+  { id: 'mining-disputes-up', label: 'Mining & MineMitra Disputes' },
   {
     id: 'aft-mining-procedure',
     label: 'How a Case Proceeds: Stage 1 to Stage 8',

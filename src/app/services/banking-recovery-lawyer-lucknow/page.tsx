@@ -30,7 +30,7 @@ import { CHAMBER_TEL } from '@/lib/contactLinks'
 const SITE_URL = 'https://www.sumanjariadvocates.com'
 
 const bankingLead = teamMembers.find((member) => member.slug === 'jitendra-tiwari')
-const bankingTeam = ['aniket-bose', 'prerna-yaduvanshi', 'aditya-narayan-shukla', 'priyesh-dwivedi']
+const bankingTeam = ['shishir-pandey', 'aniket-bose', 'prerna-yaduvanshi', 'aditya-narayan-shukla', 'priyesh-dwivedi']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
 
 function ConsultationActions({ className }: { className: string }) {
@@ -47,9 +47,9 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'DRT Lawyer in Lucknow | SARFAESI & Bank Recovery | Sumanjari' },
+  title: { absolute: 'DRT Lawyer in Lucknow | SARFAESI, Bank Recovery & 138 NI Act' },
   description:
-    'DRT lawyer and banking advocate in Lucknow for SARFAESI notices, bank recovery, property auctions, guarantor disputes and DRAT appeals. Arrange a review.',
+    'Experienced DRT Lawyer in Lucknow & Bank Recovery Advocate. SARFAESI Sec 13(2)/13(4) & Sec 17 SA defense, OA recovery, OTS & Sec 138 Cheque Bounce litigation.',
   keywords: [
     'DRT Lawyer Lucknow',
     'DRT Advocate Lucknow',
@@ -104,6 +104,16 @@ const bankingRecoveryJsonLd = {
     { '@type': 'State', name: 'Uttar Pradesh' },
   ],
   serviceType: 'Banking, Recovery & Negotiable Instruments Legal Services',
+}
+
+const bankingBreadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/#services` },
+    { '@type': 'ListItem', position: 3, name: 'DRT Lawyer in Lucknow', item: `${SITE_URL}/services/banking-recovery-lawyer-lucknow` },
+  ],
 }
 
 const bankingFaqs = [
@@ -264,6 +274,11 @@ export default async function BankingRecoveryMattersPage() {
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(drtFaqJsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(bankingBreadcrumbJsonLd) }}
+      />
       <Navbar />
 
       <section className="py-24 md:py-32">
@@ -285,8 +300,8 @@ export default async function BankingRecoveryMattersPage() {
               <div className="h-px w-12 bg-gold-500" />
             </div>
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-              DRT Lawyer in Lucknow{' '}
-              <em className="text-gold-gradient">for SARFAESI &amp; Bank Recovery</em>
+              DRT Lawyer &amp; Bank Recovery Advocate in Lucknow{' '}
+              <em className="text-gold-gradient">(SARFAESI &amp; Section 138 NI Act)</em>
             </h1>
             <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
               Our DRT lawyers and banking advocates in Lucknow provide representation before the{' '}
@@ -308,7 +323,7 @@ export default async function BankingRecoveryMattersPage() {
                 )}
                 <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">Banking &amp; Recovery Practice Lead</p>
                 <h2 className="mt-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{bankingLead.name}</h2>
-                <p className="mt-2 font-body text-sm text-navy-700 dark:text-cream/60">{bankingLead.role}</p>
+                <p className="mt-2 font-body text-sm text-navy-700 dark:text-cream/60">{bankingLead.role}, {bankingLead.credentials} — 8+ years of High Court &amp; DRT practice</p>
                 <Link href={`/team/${bankingLead.slug}`} className="mt-4 inline-flex items-center gap-2 font-body text-sm font-semibold text-gold-700 dark:text-gold-400">
                   View Profile <ArrowUpRight className="h-4 w-4" />
                 </Link>
@@ -324,11 +339,13 @@ export default async function BankingRecoveryMattersPage() {
               Our Banking &amp; Recovery Team
             </h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
-              Adv. Jitendra Tiwari leads our banking and recovery practice,
-              supported by Adv. Aniket Bose in cheque-dishonour and commercial
-              disputes, alongside Adv. Prerna Yaduvanshi, Adv. Aditya Narayan
-              Shukla and Adv. Priyesh Dwivedi in related civil litigation.
-              Each profile below sets out that member&apos;s individual practice areas.
+              Adv. Jitendra Tiwari (Director, B.A. LL.B. Hons.) leads our
+              banking and recovery practice, supported by Adv. Shishir Pandey
+              and Adv. Aniket Bose in DRT, SARFAESI and cheque-dishonour
+              litigation, alongside Adv. Prerna Yaduvanshi, Adv. Aditya Narayan
+              Shukla and Adv. Priyesh Dwivedi in related civil and commercial
+              disputes. Each profile below sets out that member&apos;s
+              individual practice areas.
             </p>
             <TeamCarousel members={bankingTeam} label="Banking and recovery team members" />
           </section>
@@ -391,7 +408,7 @@ export default async function BankingRecoveryMattersPage() {
 
           <StatuteTable
             id="banking-statutes"
-            heading="Laws Governing Bank Recovery and Secured Assets"
+            heading="Statutory Framework Governing DRT, SARFAESI & Cheque Bounce in Lucknow"
             intro="The remedy depends on the creditor, transaction and challenged action. Check current amendments, notifications and tribunal allocation before relying on a provision; the tracks below have different requirements."
             rows={bankingLucknowStatutes}
           />
@@ -485,7 +502,7 @@ export default async function BankingRecoveryMattersPage() {
 
           <GuideStages
             id="banking-procedure"
-            heading="Bank Recovery Procedure and Practical Decisions"
+            heading="How a SARFAESI / DRT Case Proceeds in Lucknow: Stage 1 to Stage 7"
             intro="These are alternative and sometimes parallel tracks, not mandatory consecutive steps in every case. The notice, asset, existing orders and available statutory remedy determine which stages apply. No filing or settlement request automatically stops recovery."
             stages={bankingLucknowStages}
           />

@@ -84,6 +84,8 @@ export const constitutionalToc: GuideTocItem[] = [
   { id: 'constitutional-team', label: 'Our Team' },
   { id: 'constitutional-forums', label: 'High Court and Statutory Forums' },
   { id: 'constitutional-statutory-framework', label: 'Constitutional and Procedural Framework' },
+  { id: 'writ-categories', label: 'Writ Categories at the Lucknow Bench' },
+  { id: 'alternative-remedy-exceptions', label: 'Exceptions to Alternative Remedy' },
   { id: 'constitutional-matters', label: 'Constitutional and Writ Matters We Handle' },
   {
     id: 'constitutional-procedure',

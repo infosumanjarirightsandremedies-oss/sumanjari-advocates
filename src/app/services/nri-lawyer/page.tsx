@@ -14,12 +14,12 @@ import { CHAMBER_TEL, whatsappUrl } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
 const nriLead = teamMembers.find((member) => member.slug === 'aishwarya-pandey')
-const nriTeam = ['shishir-pandey', 'aniket-bose', 'arti-dwivedi', 'prabhash-yadav']
+const nriTeam = ['jitendra-tiwari', 'shishir-pandey']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
 
 export const metadata: Metadata = {
-  title: { absolute: 'NRI Lawyer in Lucknow | Property & Family Matters | Sumanjari' },
-  description: 'NRI lawyer in Lucknow for property, inheritance, powers of attorney and family disputes. Overseas-document requirements and an eight-stage legal guide.',
+  title: { absolute: 'NRI Lawyer in Lucknow | NRI Property Disputes, POA & Divorce' },
+  description: 'NRI Lawyer in Lucknow & UP for overseas Indians. Remote representation in NRI property disputes, illegal possession, Power of Attorney (POA) & NRI divorce.',
   keywords: ['NRI Lawyer', 'NRI Advocate', 'NRI Legal Services', 'NRI Lawyer in Lucknow', 'NRI Property Dispute Lawyer', 'NRI Power of Attorney', 'NRI Inheritance Lawyer', 'NRI Divorce Lawyer'],
   alternates: { canonical: '/services/nri-lawyer' },
   twitter: {
@@ -191,9 +191,9 @@ const faqs = [
 const serviceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
-  name: 'Sumanjari & Co. Advocates - NRI Legal Services',
+  name: 'Sumanjari & Co. Advocates — NRI Lawyer in Lucknow',
   url: `${SITE_URL}/services/nri-lawyer`,
-  description: 'Legal assistance for Non-Resident Indians with property, inheritance, powers of attorney, family matters, and litigation in India.',
+  description: 'Legal assistance for Non-Resident Indians with property disputes, inheritance, powers of attorney, family matters, and litigation in Lucknow, Uttar Pradesh and across India.',
   telephone: CHAMBER_TEL.replace('tel:', ''),
   areaServed: { '@type': 'Country', name: 'India' },
   serviceType: 'NRI Legal Services',
@@ -211,7 +211,7 @@ const breadcrumbJsonLd = {
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
     { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/#services` },
-    { '@type': 'ListItem', position: 3, name: 'NRI Legal Services', item: `${SITE_URL}/services/nri-lawyer` },
+    { '@type': 'ListItem', position: 3, name: 'NRI Lawyer in Lucknow', item: `${SITE_URL}/services/nri-lawyer` },
   ],
 }
 
@@ -258,13 +258,13 @@ export default function NriLegalServicesPage() {
                 <span className="font-caps text-xs uppercase tracking-widest">NRI Legal Services</span>
               </div>
               <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-                NRI Lawyer &amp; Advocate <em className="text-gold-gradient">in Lucknow</em>
+                NRI Lawyer &amp; Legal Services <em className="text-gold-gradient">in Lucknow</em> — Property Disputes, Power of Attorney &amp; Matrimonial Representation
               </h1>
               <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
-                Living abroad should not leave your legal affairs in India unattended. Our NRI lawyers and advocates assist Non-Resident Indians with property, inheritance, family disputes, documentation, and litigation, with Adv. Aishwarya Pandey as lead advocate.
+                Living abroad should not leave your legal affairs in Lucknow and India unattended. Our NRI lawyers and advocates in Lucknow assist Non-Resident Indians with property disputes, inheritance, family disputes, documentation, and litigation, with Adv. Aishwarya Pandey as lead advocate.
               </p>
               <p className="mt-4 max-w-2xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
-                From an overseas power of attorney to proceedings before the competent Indian forum, the guide below explains the records, authorisation and participation each stage may require. Remote coordination is assessed alongside any court-directed attendance.
+                From an overseas power of attorney to proceedings before the competent forum in Lucknow or elsewhere in India, the guide below explains the records, authorisation and participation each stage may require. Remote coordination is assessed alongside any court-directed attendance.
               </p>
               <ServiceStats service="nri" />
               <div className="hidden md:block">
@@ -298,10 +298,16 @@ export default function NriLegalServicesPage() {
             <p>NRI status, OCI status, citizenship and residence under tax or foreign-exchange law can have different consequences. The country in which you live, the asset involved and the transaction history may affect the advice. Where foreign law or overseas proceedings are involved, advice from a suitably qualified lawyer in that jurisdiction may also be necessary.</p>
           </section>
 
+          <section id="nri-remote-representation" aria-labelledby="nri-remote-representation-heading" className="mb-16 scroll-mt-28 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
+            <h2 id="nri-remote-representation-heading" className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">End-to-End Remote Legal Representation for NRIs in Lucknow &amp; Uttar Pradesh (Without Frequent Travel to India)</h2>
+            <p>Overseas clients in the USA, UK, Canada, UAE, Australia, Singapore and Europe instruct Sumanjari &amp; Co. Advocates in Lucknow remotely: matters begin with a scheduled video consultation, documents are reviewed electronically, and clients receive tracked court status updates after every hearing so the file never depends on a visit to India.</p>
+            <p>Where a step requires personal authority, we prepare a lawfully executed Special Power of Attorney (SPOA) — drafted in Lucknow, attested before the Indian Embassy or Consulate or apostilled under the Hague Convention, and adjudicated before the Collector of Stamps in Lucknow — so an attorney holder can appear, sign and present documents on your behalf. Video-conferencing statements and exemption applications are sought from the competent court where permitted; nothing requires frequent travel to India unless the court specifically directs personal attendance.</p>
+          </section>
+
           <section className="mb-16" aria-labelledby="nri-team">
             <h2 id="nri-team" className="mb-4 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Our NRI Legal Services Team</h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
-              Led by Adv. Aishwarya Pandey, our NRI legal services team includes Adv. Shishir Pandey, Adv. Aniket Bose, Adv. Arti Dwivedi, and Adv. Prabhash Yadav.
+              Our NRI legal services in Lucknow are led by Adv. Aishwarya Pandey (Associate Partner) and Adv. Jitendra Tiwari (Director), supported by Adv. Shishir Pandey (Delhi NCR — FEMA &amp; cross-border matters).
             </p>
             <TeamCarousel members={nriTeam} label="NRI legal services team members" />
           </section>
@@ -340,6 +346,28 @@ export default function NriLegalServicesPage() {
                   </ul>
                 </div>
               ))}
+            </div>
+          </section>
+
+          <section id="nri-core-services" aria-labelledby="nri-core-services-heading" className="mb-16 scroll-mt-28">
+            <h2 id="nri-core-services-heading" className="mb-8 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Core NRI Legal Services in Lucknow</h2>
+            <div className="space-y-8">
+              <div className="border-t border-gold-500/25 pt-6">
+                <h3 className="mb-3 font-display text-xl font-bold text-navy-900 dark:text-cream">NRI Property Disputes, Anti-Encroachment &amp; Eviction of Illegal Occupants in Lucknow</h3>
+                <p className="font-body leading-relaxed text-navy-700 dark:text-cream/65">We file civil suits for possession under Sections 5 and 6 of the Specific Relief Act, 1963, seek permanent and mandatory injunctions under Order 39 Rules 1 and 2 CPC against further dispossession or construction, pursue tenant eviction under the Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021 before the Rent Authority / Rent Tribunal, Lucknow, and initiate criminal FIRs against land grabbing and forgery where the facts disclose an offence.</p>
+              </div>
+              <div className="border-t border-gold-500/25 pt-6">
+                <h3 className="mb-3 font-display text-xl font-bold text-navy-900 dark:text-cream">Foreign Power of Attorney (SPOA / GPA) Drafting, Indian Embassy Apostille &amp; Collector Stamp Adjudication in Lucknow</h3>
+                <p className="font-body leading-relaxed text-navy-700 dark:text-cream/65">We manage the complete chain: (1) drafting a compliant Special Power of Attorney in Lucknow, (2) attestation before the Indian Embassy or Consulate, or Hague Apostille where applicable, (3) dispatch of the original to India, and (4) mandatory adjudication and stamping before the Collector of Stamps / ADM (Finance &amp; Revenue), Lucknow within three months of receipt in India under Section 18 of the Indian Stamp Act, 1899. As held in Suraj Lamp &amp; Industries v. State of Haryana, a GPA cannot substitute for a registered conveyance or sale deed — but a valid SPOA can authorise an attorney to appear in court or present a deed for registration under Sections 32 and 33 of the Registration Act, 1908.</p>
+              </div>
+              <div className="border-t border-gold-500/25 pt-6">
+                <h3 className="mb-3 font-display text-xl font-bold text-navy-900 dark:text-cream">NRI Ancestral Property Partition, Succession Certificate, Probate &amp; Mutation (Dakhil-Kharij)</h3>
+                <p className="font-body leading-relaxed text-navy-700 dark:text-cream/65">We handle Lucknow Nagar Nigam house-tax mutation, LDA freehold and mutation transfers, partition suits and mutation proceedings under Sections 34/35 and Section 116 of the U.P. Revenue Code, 2006, and succession certificates for debts and securities under Section 372 of the Indian Succession Act, 1925 — coordinating each revenue and civil step so heirs abroad do not need repeated travel.</p>
+              </div>
+              <div className="border-t border-gold-500/25 pt-6">
+                <h3 className="mb-3 font-display text-xl font-bold text-navy-900 dark:text-cream">NRI Divorce, Child Custody, LOC / Passport Impoundment &amp; 498A / 85 BNS Defense</h3>
+                <p className="font-body leading-relaxed text-navy-700 dark:text-cream/65">We represent NRIs before the Principal Judge, Family Court, Kaiserbagh through SPOA holders and video-conferencing statements where permitted, and before the Allahabad High Court, Lucknow Bench to challenge Look Out Circulars (LOC), passport impoundment notices under Section 10(3) of the Passports Act, 1967, and Section 84 BNSS (formerly Section 82 CrPC) proclaimed offender proceedings, alongside defence against Section 498A IPC / Section 85 BNS matrimonial prosecutions.</p>
+              </div>
             </div>
           </section>
 

@@ -133,6 +133,7 @@ export default function Disclaimer() {
   return (
     <div
       className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+      data-nosnippet
       role="dialog"
       aria-modal="true"
       aria-labelledby="bci-disclaimer-title"
