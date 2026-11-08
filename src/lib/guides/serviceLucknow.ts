@@ -6,10 +6,10 @@ export const serviceStages: GuideStage[] = [
     title: 'Challenge a Prolonged Suspension Order',
     forum: 'Disciplinary authority; UPPST, Indira Bhawan, Hazratganj or CAT, Lucknow Bench, Vipin Khand, Gomti Nagar, as applicable',
     body: [
-      'Suspension is not a punishment in itself, but an unreviewed suspension can be challenged. Under the 90-day unreviewed suspension rule in Ajay Kumar Choudhary v. Union of India and the Rule 4(1) proviso of the U.P. CCA Rules, 1999, a suspension continued without timely review or charge sheet is vulnerable. We examine the suspension order, its review record and the applicable rule before seeking revocation, subsistence allowance review or tribunal intervention.',
+      'Suspension is not a punishment in itself, but a prolonged or procedurally defective suspension may be challenged. We examine the order, review record, charge-sheet status and governing rules, including the principles discussed in Ajay Kumar Choudhary v. Union of India. Central and State service rules are not interchangeable: a 90-day review requirement must not be assumed to apply identically to every employee. Revocation, subsistence allowance and interim relief depend on the applicable rules and facts.',
       'Preserve the suspension order, proof of the date it was served and every review order or extension. For Central Government employees, CCS (CCA) Rule 10 applies; for State employees, Rule 4 of the U.P. Government Servant (Discipline and Appeal) Rules, 1999. The remedy and forum differ between the two, so the governing rule must be confirmed before filing.',
     ],
-    provisions: ['Ajay Kumar Choudhary v. Union of India (90-day unreviewed suspension rule)', 'Rule 4(1) proviso, U.P. Government Servant (Discipline and Appeal) Rules, 1999', 'Rule 10, CCS (CCA) Rules, 1965'],
+    provisions: ['Ajay Kumar Choudhary v. Union of India (principles on prolonged suspension)', 'Rule 4, U.P. Government Servant (Discipline and Appeal) Rules, 1999 where applicable', 'Rule 10, CCS (CCA) Rules, 1965 where applicable'],
     checklist: ['Suspension order and service date', 'Review/extension orders on record', 'Applicable disciplinary rules'],
   },
   {
@@ -39,7 +39,7 @@ export const serviceStages: GuideStage[] = [
     title: 'File the Original Application or Claim Petition Before the Tribunal',
     forum: 'CAT, Lucknow Bench, Vipin Khand, Gomti Nagar; or UPPST, Indira Bhawan, Hazratganj, Lucknow',
     body: [
-      'Central Government, Railways, Postal, Income Tax and central autonomous body employees file an Original Application under Section 19 of the Administrative Tribunals Act, 1985 before the CAT Lucknow Bench at Gomti Nagar. State Government and UP PSU employees file a claim petition under Section 4 of the U.P. Public Services (Tribunal) Act, 1976 before the UPPST at Indira Bhawan, Hazratganj. The two forums have different coverage, forms and limitation rules.',
+      'Employees and recruitment applicants within CAT coverage may file an Original Application under Section 19 of the Administrative Tribunals Act, 1985 before the territorially competent bench. Coverage of central autonomous bodies and public-sector organisations depends on the applicable notifications, not the employer label alone. Public servants covered by the U.P. Public Services (Tribunal) Act, 1976 may pursue a Section 4 claim before the UPPST at Indira Bhawan, Hazratganj. The two forums have different exclusions, forms and limitation rules.',
       'The pleading must identify the exact relief, the necessary parties and the complete record, with the challenged order and earlier proceedings annexed. Interim protection, where justified, needs a specific reasoned request; filing alone does not stay the order. Coverage, territorial allocation and limitation are verified before filing.',
     ],
     provisions: ['Section 19, Administrative Tribunals Act, 1985 (Original Applications)', 'Section 4, U.P. Public Services (Tribunal) Act, 1976 (claim petitions)', 'L. Chandra Kumar (High Court review of tribunal decisions)'],
@@ -50,7 +50,7 @@ export const serviceStages: GuideStage[] = [
     title: 'Move a Direct Writ-A Petition Before the High Court, Lucknow Bench',
     forum: 'Allahabad High Court, Lucknow Bench (Chamber D-311), under Article 226',
     body: [
-      'Certain service grievances justify a direct Writ-A petition under Article 226 before the Allahabad High Court, Lucknow Bench: punitive mid-term transfers, arbitrary suspension, dying-in-harness rejections under the 1974 Rules, sealed-cover promotion delays (K.V. Jankiraman) and post-retirement gratuity or pension withholding barred by State of Punjab v. Rafiq Masih. Article 351-A CSR also bars disciplinary proceedings initiated more than four years after retirement without the Governor\'s sanction.',
+      'A direct service writ under Article 226 requires a separate maintainability assessment; transfer, suspension, promotion or pension grievances do not automatically permit bypassing the competent tribunal. Review the available statutory remedy, any recognised exception and territorial jurisdiction before approaching the Allahabad High Court, Lucknow Bench. K.V. Jankiraman concerns sealed-cover promotion procedure, while State of Punjab v. Rafiq Masih concerns recovery of excess payments in specified circumstances, not a general bar on withholding pension or gratuity. Post-retirement proceedings require checking the applicable pension rules, sanction requirements and restrictions on the events that may be investigated.',
       'Writ review of a tribunal decision is not a fresh merits appeal; the petition must identify illegality, procedural unfairness or a recognised ground of interference. Maintainability, alternative remedies and territorial jurisdiction are assessed before filing from Chamber D-311.',
     ],
     provisions: ['Articles 14, 16, 226 and 311(2), Constitution of India', 'State of Punjab v. Rafiq Masih (bar on recovery from Class III/IV and retired employees)', 'K.V. Jankiraman (sealed-cover promotion procedure)'],
@@ -61,10 +61,10 @@ export const serviceStages: GuideStage[] = [
     title: 'Pursue Industrial and Private Employment Litigation',
     forum: 'CGIT-cum-Labour Court, Sector H, Aliganj, Lucknow; Labour Court Lucknow; Civil/Commercial Courts',
     body: [
-      'Industrial workmen, bank employees and private-sector staff follow the industrial-dispute and labour-law track rather than the service tribunals. Sections 2A, 10, 25F and 33C(2) of the Industrial Disputes Act, 1947 and the U.P. Industrial Disputes Act, 1947 cover illegal retrenchment, termination disputes, back wages and statutory dues recovery before the CGIT-cum-Labour Court at Aliganj and the Labour Court, Lucknow.',
+      'Covered industrial employees may follow the industrial-dispute track rather than the public-service tribunals. Check actual duties, establishment coverage, the appropriate government and current commencement, savings and transitional provisions before selecting a remedy under the Industrial Relations Code, 2020 or earlier industrial-disputes legislation. A bank or private-sector job title does not itself establish workman status or CGIT jurisdiction. Conciliation, adjudication and recovery proceedings have different requirements, and some contractual claims belong before a civil court.',
       'Wrongful dismissal, notice-pay recovery and wage claims are built on the employment contract, appointment terms, payslips and termination record. Statutory coverage depends on actual duties, not the job title; POSH Act, 2013 matters follow their own Internal Committee procedure, in which legal practitioners advise on preparation but cannot appear as representatives.',
     ],
-    provisions: ['Sections 2A, 10, 25F and 33C(2), Industrial Disputes Act, 1947', 'U.P. Industrial Disputes Act, 1947', 'POSH Act, 2013 and Rules, 2013'],
+    provisions: ['Industrial Relations Code, 2020; applicable commencement, savings and transitional provisions', 'Earlier industrial-disputes legislation where applicable', 'POSH Act, 2013 and Rules, 2013'],
     checklist: ['Employment contract and termination record', 'Payslips and wage calculation', 'Conciliation and reference record'],
   },
   {
@@ -85,6 +85,8 @@ export const serviceToc: GuideTocItem[] = [
   { id: 'lucknow-chambers', label: 'Our Lucknow Chambers' },
   { id: 'choosing-an-advocate', label: 'Choosing a Lawyer or Advocate' },
   { id: 'service-forums', label: 'Departmental, Tribunal and Court Forums' },
+  { id: 'service-localities', label: 'Consultations Across Lucknow' },
+  { id: 'service-forum-logistics', label: 'Preparing for a Tribunal or Court Visit' },
   { id: 'service-forum-jurisdiction', label: 'Statutory framework and forum jurisdiction' },
   { id: 'service-statutory-framework', label: 'Service and Employment Law Framework' },
   { id: 'service-matters', label: 'Service and Employment Matters We Handle' },
@@ -96,35 +98,36 @@ export const serviceToc: GuideTocItem[] = [
     children: serviceStages.map((stage, index) => ({ id: stage.id, label: `Stage ${index + 1}: ${stage.title}` })),
   },
   { id: 'service-faqs', label: 'Frequently Asked Questions' },
+  { id: 'hindi-faqs', label: 'Service Matters: Hindi FAQs' },
   { id: 'service-disciplinary-record-review', label: 'Charge Sheet and Adverse Order Review' },
   { id: 'service-consultation', label: 'Discuss Your Employment Matter' },
 ]
 
 export const serviceForumJurisdiction: StatuteRow[] = [
   {
-    law: 'State Government & UP PSU Employees',
+    law: 'Covered State Government & UP PSU Employees',
     provisions: 'U.P. Public Services (Tribunal) Act, 1976 (Section 4 claim petitions) & U.P. Government Servant (Discipline and Appeal) Rules, 1999 (Rule 4 suspension, Rule 7 major penalty inquiry)',
-    relevance: 'Forum: U.P. State Public Services Tribunal (UPPST), Indira Bhawan, Hazratganj, Lucknow, and Allahabad High Court, Lucknow Bench (Writ-A under Article 226).',
+    relevance: 'Forum: U.P. Public Services Tribunal (UPPST), Indira Bhawan, Hazratganj, subject to statutory coverage and exclusions. High Court review is subject to maintainability and territorial jurisdiction.',
   },
   {
-    law: 'Central Government, Railways, Postal, Income Tax & Central Autonomous Body Employees',
+    law: 'Covered Central Government Posts & Notified Organisations',
     provisions: 'Administrative Tribunals Act, 1985 (Section 19 Original Applications, Section 20 exhaustion of remedies, Section 21 limitation) & CCS (CCA) Rules, 1965 (Rule 10 & Rule 14)',
     relevance: 'Forum: Central Administrative Tribunal (CAT), Lucknow Bench, Vipin Khand, Gomti Nagar, Lucknow, with Division Bench writ review before the Allahabad High Court, Lucknow Bench per L. Chandra Kumar.',
   },
   {
     law: 'Constitutional Protections & Retiral Recovery',
-    provisions: 'Articles 14, 16, 226 & 311(2), Constitution of India; Article 351-A Civil Service Regulations (CSR) (4-year bar on post-retirement disciplinary proceedings without Governor sanction)',
-    relevance: 'State of Punjab v. Rafiq Masih bars recovery of excess payment from Class III/IV and retired employees; protects pension, gratuity and retiral dues from arbitrary withholding.',
+    provisions: 'Articles 14, 16, 226 & 311(2) where applicable; applicable pension rules, including Article 351-A Civil Service Regulations where governing the employee',
+    relevance: 'Review pension withholding separately from recovery of excess payments. Rafiq Masih concerns specified recovery situations; sanction, event-based restrictions, exceptions and the applicable service rules require individual assessment.',
   },
   {
     law: 'Compassionate Appointment (Dying-in-Harness)',
     provisions: 'U.P. Recruitment of Dependants of Government Servants Dying in Harness Rules, 1974',
-    relevance: "Claims for dependent employment, including married daughters' entitlement under settled Allahabad High Court Full Bench rulings.",
+    relevance: 'Assess dependency, eligibility, financial circumstances, time limits and the current scheme. Compassionate appointment is not an automatic entitlement.',
   },
   {
-    law: 'Industrial Workmen, Bank Employees & Private Sector Staff',
-    provisions: 'Industrial Disputes Act, 1947 (Sections 2A, 10, 25F, 33C(2)), U.P. Industrial Disputes Act, 1947 & POSH Act, 2013',
-    relevance: 'Forum: CGIT-cum-Labour Court (Sector H, Aliganj, Lucknow), Labour Court Lucknow, and Civil/Commercial Courts.',
+    law: 'Covered Industrial Employees & Private Employment Claims',
+    provisions: 'Industrial Relations Code, 2020 and applicable earlier industrial-disputes legislation, subject to commencement and transitional provisions; POSH Act, 2013',
+    relevance: 'Verify actual duties, appropriate-government jurisdiction and the currently competent labour forum. Contractual claims may require a civil remedy; POSH inquiries follow a separate procedure.',
   },
 ]
 

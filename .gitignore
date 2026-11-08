@@ -15,4 +15,7 @@ scripts/google-indexing-api/*.json
 scripts/supabase-blog-cache/__pycache__/
 
 /docs/
-/tests/
+/tests/*
+!/tests/production/
+/tests/production/*
+!/tests/production/divorce-seo.test.cjs

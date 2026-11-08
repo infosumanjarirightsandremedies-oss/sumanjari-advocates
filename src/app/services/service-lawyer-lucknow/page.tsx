@@ -21,7 +21,7 @@ import {
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ServiceSelection from '@/components/ServiceSelection'
-import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
+import { serviceSearchContent, serviceSelectionQuestion } from '@/lib/serviceSearch'
 import LucknowChambers from '@/components/LucknowChambers'
 import FirmCredentials from '@/components/FirmCredentials'
 import ServiceStats from '@/components/ServiceStats'
@@ -34,6 +34,8 @@ import { teamMembers } from '@/lib/team'
 import { CHAMBER_TEL, LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const PAGE_PATH = '/services/service-lawyer-lucknow'
+const PAGE_URL = `${SITE_URL}${PAGE_PATH}`
 const searchContent = serviceSearchContent['service-lawyer-lucknow']
 const serviceLead = teamMembers.find((member) => member.slug === 'jitendra-tiwari')
 const serviceTeam = ['aditya-narayan-shukla', 'devesh-tiwari', 'abhishek-mishra']
@@ -80,13 +82,13 @@ export const metadata: Metadata = {
     'Disciplinary Charge Sheet Reply Lawyer Lucknow',
   ],
   alternates: {
-    canonical: '/services/service-lawyer-lucknow',
+    canonical: PAGE_PATH,
   },
   openGraph: {
     title: 'Service Matter Advocate in Lucknow | Sumanjari & Co.',
     description:
       'Representation for government, public sector, and private sector employees in service disputes, departmental inquiries, and employment litigation before CAT, the Service Tribunal, CGIT, and the Allahabad High Court, Lucknow Bench.',
-    url: '/services/service-lawyer-lucknow',
+    url: PAGE_PATH,
   },
   twitter: {
     card: 'summary_large_image',
@@ -95,19 +97,31 @@ export const metadata: Metadata = {
   },
 }
 
+const localityGroups = [
+  { region: 'Trans-Gomti', localities: ['Gomti Nagar', 'Vibhuti Khand', 'Indira Nagar', 'Aliganj', 'Jankipuram', 'Mahanagar'] },
+  { region: 'Central Lucknow', localities: ['Hazratganj', 'Kaiserbagh', 'Lalbagh'] },
+  { region: 'Southern Lucknow', localities: ['Ashiyana', 'Alambagh', 'Telibagh', 'Transport Nagar'] },
+  { region: 'Western Lucknow', localities: ['Rajajipuram', 'Chowk', 'Thakurganj', 'Dubagga'] },
+]
+
 const serviceMattersJsonLd = {
-  '@context': 'https://schema.org',
   '@type': 'LegalService',
+  '@id': `${PAGE_URL}#legal-service`,
   ...LUCKNOW_SERVICE_LOCATION,
+  branchOf: { '@id': `${SITE_URL}/#organization` },
   name: 'Sumanjari & Co. Advocates — Service & Employment Matters',
-  url: `${SITE_URL}/services/service-lawyer-lucknow`,
+  url: PAGE_URL,
+  logo: `${SITE_URL}/favicon.png`,
   description:
     'Representation for government, public sector, and private sector employees in recruitment disputes, promotion and seniority matters, departmental and disciplinary proceedings, wrongful termination, pension and retirement benefits, and POSH Act compliance and inquiry matters before the Central Administrative Tribunal, U.P. Public Services Tribunal, CGIT, and the Allahabad High Court.',
-  telephone: '+91-83024-71764',
+  telephone: CHAMBER_TEL.replace('tel:', ''),
   email: 'info.sumanjarirightsandremedies@gmail.com',
   areaServed: [
     { '@type': 'City', name: 'Lucknow' },
     { '@type': 'State', name: 'Uttar Pradesh' },
+    ...localityGroups.flatMap(({ localities }) => localities.map((name) => ({
+      '@type': 'Place', name, containedInPlace: { '@type': 'City', name: 'Lucknow' },
+    }))),
   ],
   serviceType: 'Service & Employment Legal Services',
 }
@@ -290,25 +304,126 @@ const serviceInsights = [
   },
 ]
 
+const hindiFaqs = [
+  {
+    question: 'लखनऊ में सेवा विवाद के लिए CAT, राज्य सेवा अधिकरण या हाईकोर्ट में कहाँ जाएँ?',
+    answer: 'सही मंच नियोक्ता, पद, लागू सेवा नियमों और विवाद के प्रकार पर निर्भर करता है। CAT में अधिनियम के दायरे में आने वाले केंद्रीय कर्मचारियों और अधिसूचित संस्थाओं के मामले जाते हैं। उत्तर प्रदेश लोक सेवा अधिकरण में उसके कानून के अंतर्गत आने वाले लोक सेवकों के दावे जाते हैं। निजी रोजगार और श्रम विवादों की प्रक्रिया अलग हो सकती है। अधिकरण के अधिकार क्षेत्र वाले मामलों में सामान्यतः पहले वहीं जाना होता है; हाईकोर्ट की न्यायिक समीक्षा अलग प्रक्रिया है। केवल लखनऊ में रहने से हर मामले का अधिकार क्षेत्र यहाँ नहीं बनता।',
+  },
+  {
+    question: 'विभागीय आरोप पत्र या निलंबन आदेश मिलने पर क्या करना चाहिए?',
+    answer: 'आदेश मिलने की तारीख और जवाब की अंतिम तारीख लिखें। पूरा आरोप पत्र, संलग्न दस्तावेज, नियुक्ति पत्र और लागू सेवा नियम सुरक्षित रखें। हर आरोप का रिकॉर्ड के आधार पर जवाब तैयार करें और आवश्यक दस्तावेज माँगें। समय चाहिए तो विस्तार का अनुरोध करें, लेकिन स्वीकृति अपने आप मिली हुई न मानें। निलंबन की समीक्षा और निर्वाह भत्ते के नियम कर्मचारी की सेवा के अनुसार अलग होते हैं। अपील या मुकदमा दाखिल करने से आदेश अपने आप स्थगित नहीं होता।',
+  },
+  {
+    question: 'पेंशन, पदोन्नति या सेवा आदेश को चुनौती देने की समय-सीमा क्या है?',
+    answer: 'सभी सेवा विवादों की एक जैसी समय-सीमा नहीं है। विभागीय अपील, CAT की अर्जी और राज्य अधिकरण के दावे की अवधि अलग हो सकती है। आदेश की प्रति, प्राप्ति का प्रमाण, सेवा पुस्तिका, वेतन या पेंशन रिकॉर्ड और पहले किए गए आवेदन साथ रखें। बार-बार प्रार्थना पत्र देने से समय-सीमा अपने आप नहीं बढ़ती। देरी माफ करने की शक्ति भी मंच के अनुसार बदलती है, इसलिए जल्द मामले की समीक्षा कराएँ। किसी लाभ, स्थगन या निर्णय की गारंटी नहीं दी जा सकती।',
+  },
+  {
+    question: 'क्या स्थानांतरण या तबादले के आदेश को चुनौती दी जा सकती है?',
+    answer: 'स्थानांतरण सामान्यतः सेवा का हिस्सा है और केवल असुविधा होने से आदेश रद्द नहीं होता। सक्षम अधिकारी का अधिकार, लागू वैधानिक नियम, दुर्भावना के ठोस तथ्य और आदेश की वास्तविक प्रकृति की समीक्षा की जा सकती है। स्थानांतरण आदेश, नीति, सेवा नियम और संबंधित पत्राचार सुरक्षित रखें। केवल नीति से विचलन हर मामले में न्यायिक हस्तक्षेप का आधार नहीं होता। जब तक सक्षम अधिकारी या मंच स्थगन न दे, आदेश को अपने आप निष्प्रभावी न मानें।',
+  },
+  {
+    question: 'पदोन्नति न मिलने या वरिष्ठता सूची गलत होने पर क्या करें?',
+    answer: 'भर्ती और पदोन्नति नियम, पात्रता, रिक्तियाँ, वरिष्ठता सूची, सेवा रिकॉर्ड और विभागीय पदोन्नति समिति की प्रक्रिया देखें। सूची पर आपत्ति के लिए निर्धारित अवधि हो तो उसके भीतर तथ्य और दस्तावेज सहित आपत्ति दें। पात्रता होने से पदोन्नति अपने आप सुनिश्चित नहीं होती। यदि किसी अन्य कर्मचारी की वरिष्ठता या पदोन्नति प्रभावित होगी, तो कार्यवाही में आवश्यक पक्षकारों का भी ध्यान रखना पड़ता है। उपलब्ध उपाय और समय-सीमा की अलग समीक्षा कराएँ।',
+  },
+  {
+    question: 'विभागीय जाँच में दस्तावेज या जाँच रिपोर्ट नहीं मिले तो क्या करें?',
+    answer: 'आरोपों के समर्थन में जिन दस्तावेजों पर भरोसा किया गया है, उनकी प्रतियाँ और आवश्यक रिकॉर्ड लिखित रूप से माँगें। अनुरोध, जवाब और सुनवाई में उठाई गई आपत्तियों का प्रमाण रखें। लागू नियमों के अनुसार गवाहों से प्रश्न करने, अपना पक्ष रखने और प्रतिकूल जाँच रिपोर्ट पर जवाब देने का अवसर जाँचा जाता है। किसी प्रक्रियात्मक कमी का परिणाम उसके प्रभाव, लागू नियमों और मामले के तथ्यों पर निर्भर करता है; हर कमी से दंड आदेश अपने आप रद्द नहीं होता।',
+  },
+  {
+    question: 'निलंबन के दौरान निर्वाह भत्ता नहीं मिल रहा हो तो क्या उपाय है?',
+    answer: 'निर्वाह भत्ते की पात्रता और दर लागू सेवा नियमों तथा आवश्यक प्रमाणपत्रों पर निर्भर करती है। निलंबन आदेश, वेतन विवरण, भुगतान रिकॉर्ड और विभाग को दिए गए आवेदन इकट्ठा करें। भुगतान न होने या गलत गणना की लिखित शिकायत सक्षम अधिकारी को दें और प्राप्ति का प्रमाण रखें। यदि इससे जाँच में अपना बचाव करने में कठिनाई हो रही है, तो उसे भी रिकॉर्ड पर रखें। आगे की राहत सही मंच और तथ्य देखकर तय होती है।',
+  },
+  {
+    question: 'बर्खास्तगी या सेवा से हटाए जाने के बाद बहाली और पिछला वेतन मिलेगा?',
+    answer: 'बहाली और पिछला वेतन हर मामले में स्वतः नहीं मिलता। नियुक्ति की प्रकृति, सेवा समाप्ति का कारण, जाँच की निष्पक्षता, लागू कानून और माँगी गई राहत की समीक्षा करनी होती है। अंतिम आदेश, जाँच रिकॉर्ड, नियुक्ति पत्र और अपील से संबंधित कागजात रखें। सक्षम मंच आदेश रद्द करने, पुनर्विचार, बहाली या अन्य राहत पर विचार कर सकता है। पिछला वेतन, अन्य रोजगार और परिणामी लाभ अलग प्रश्न हैं; किसी निश्चित परिणाम का वादा नहीं किया जा सकता।',
+  },
+  {
+    question: 'पेंशन या ग्रेच्युटी रुकी हो, या अधिक भुगतान की वसूली हो रही हो, तो क्या करें?',
+    answer: 'पेंशन या ग्रेच्युटी रोकना और पहले हुए अधिक भुगतान की वसूली अलग कानूनी प्रश्न हैं। पेंशन भुगतान आदेश, गणना पत्र, सेवा रिकॉर्ड, रोकने या वसूली का आदेश और विभाग का कारण देखें। संबंधित पेंशन नियम, लंबित कार्यवाही और आदेश देने वाले अधिकारी की शक्ति की जाँच जरूरी है। रफीक मसीह का निर्णय कुछ परिस्थितियों में अधिक भुगतान की वसूली से संबंधित है; उसे हर पेंशन रोकने के मामले पर लागू न मानें। बकाया या ब्याज की राहत लागू कानून और तथ्यों पर निर्भर करती है।',
+  },
+  {
+    question: 'क्या निजी कंपनी का कर्मचारी भी CAT या राज्य सेवा अधिकरण में जा सकता है?',
+    answer: 'सामान्य निजी रोजगार विवाद केवल नौकरी से संबंधित होने के कारण CAT या राज्य सेवा अधिकरण के अधिकार क्षेत्र में नहीं आता। वास्तविक कार्य, नियुक्ति अनुबंध, प्रतिष्ठान का स्वरूप और लागू श्रम कानून देखकर सही प्रक्रिया चुनी जाती है। कुछ विवाद श्रम मंच, वैधानिक प्राधिकारी या दीवानी अदालत में जा सकते हैं; निजी नियोक्ता के खिलाफ रिट भी अपने आप उपलब्ध नहीं होती। नियुक्ति पत्र, वेतन पर्चियाँ, समाप्ति नोटिस और पत्राचार साथ रखें।',
+  },
+  {
+    question: 'अनुकंपा नियुक्ति का आवेदन अस्वीकार होने पर क्या किया जा सकता है?',
+    answer: 'अनुकंपा नियुक्ति सामान्य भर्ती का विकल्प या स्वतः मिलने वाला अधिकार नहीं है। लागू योजना, आश्रित की पात्रता, परिवार की आर्थिक स्थिति, आवेदन की अवधि और अस्वीकृति के कारण देखें। मृत्यु प्रमाणपत्र, सेवा विवरण, परिवार और आय से संबंधित रिकॉर्ड तथा आवेदन और आदेश की प्रतियाँ रखें। समीक्षा में नियमों के पालन और निर्णय के कारणों को परखा जाता है; केवल पारिवारिक संबंध होने से नियुक्ति सुनिश्चित नहीं होती।',
+  },
+  {
+    question: 'क्या संविदा या दैनिक वेतन पर लंबे समय तक काम करने से नियमित नियुक्ति मिल जाती है?',
+    answer: 'लंबे समय तक काम करने से नियमितीकरण अपने आप नहीं होता। नियुक्ति की प्रक्रिया, स्वीकृत पद, योग्यता, लागू नियम या योजना और बाध्यकारी न्यायिक निर्णय देखना जरूरी है। नियुक्ति और नवीनीकरण पत्र, भुगतान रिकॉर्ड, काम की अवधि और पद से संबंधित उपलब्ध दस्तावेज रखें। समान वेतन, बकाया भुगतान और नियमितीकरण अलग दावे हो सकते हैं; प्रत्येक की कानूनी शर्तों की अलग समीक्षा की जाती है।',
+  },
+  {
+    question: 'क्या POSH की आंतरिक समिति की जाँच में वकील साथ बैठ सकता है?',
+    answer: 'POSH नियमों के तहत आंतरिक समिति की जाँच में कोई भी पक्ष विधिक व्यवसायी के माध्यम से प्रतिनिधित्व नहीं कर सकता। वकील शिकायत या जवाब तैयार करने, दस्तावेज समझने, प्रक्रिया की समीक्षा और उपलब्ध अपील पर सलाह दे सकता है। शिकायत, जवाब, समिति के नोटिस, रिपोर्ट और संचार सुरक्षित रखें तथा कार्यवाही की गोपनीयता का पालन करें। शिकायत या अपील की समय-सीमा और सही प्राधिकारी की तुरंत जाँच करें।',
+  },
+  {
+    question: 'अधिकरण या अदालत से अनुकूल आदेश मिलने के बाद विभाग पालन न करे तो क्या करें?',
+    answer: 'पहले आदेश के वास्तविक निर्देश, पालन की अवधि और किसी बाद के स्थगन आदेश को देखें। आदेश विभाग को उचित माध्यम से भेजें और प्राप्ति का प्रमाण रखें। वेतन, वरिष्ठता, बहाली या पेंशन के लाभ उतने ही माँगें जितने आदेश में दिए गए हैं। अनुपालन आवेदन, निष्पादन या अवमानना जैसे उपाय संबंधित मंच की शक्तियों और परिस्थितियों पर निर्भर करते हैं। केवल अपील दाखिल होने से आदेश अपने आप स्थगित नहीं होता।',
+  },
+  {
+    question: 'सेवा विवाद की पहली कानूनी सलाह के लिए कौन से कागजात और खर्च की जानकारी चाहिए?',
+    answer: 'नियुक्ति पत्र, लागू सेवा नियम, विवादित आदेश और उसकी प्राप्ति का प्रमाण, संबंधित वेतन या पेंशन रिकॉर्ड, पहले किए गए आवेदन और अदालत के आदेश लाएँ। घटनाओं और आगामी तारीखों की छोटी सूची भी उपयोगी है। कोई दस्तावेज न हो तो केवल उसी कारण सलाह लेने में देरी न करें। काम का दायरा, सलाह और ड्राफ्टिंग की फीस, सुनवाई का खर्च तथा अलग दाखिला या प्रतिलिपि शुल्क पहले स्पष्ट कर लें। फीस और मामले की अवधि एक जैसी नहीं होती।',
+  },
+]
+
 const serviceFaqJsonLd = {
-  '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: serviceInsights.map(({ title, excerpt }) => ({
-    '@type': 'Question',
-    name: title,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: excerpt,
-    },
-  })),
+  '@id': `${PAGE_URL}#service-faqs`,
+  inLanguage: ['en-IN', 'hi-IN'],
+  mainEntity: [
+    ...serviceInsights.map(({ title, excerpt }) => ({
+      '@type': 'Question',
+      inLanguage: 'en-IN',
+      name: title,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: excerpt,
+      },
+    })),
+    ...hindiFaqs.map(({ question, answer }) => ({
+      '@type': 'Question', inLanguage: 'hi-IN', name: question,
+      acceptedAnswer: { '@type': 'Answer', text: answer },
+    })),
+    serviceSelectionQuestion(searchContent),
+  ],
 }
 
 const serviceBreadcrumbJsonLd = {
-  '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
+  '@id': `${PAGE_URL}#breadcrumbs`,
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-    { '@type': 'ListItem', position: 2, name: 'Service Matter Advocate in Lucknow', item: `${SITE_URL}/services/service-lawyer-lucknow` },
+    { '@type': 'ListItem', position: 2, name: 'Service Matter Advocate in Lucknow', item: PAGE_URL },
+  ],
+}
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    serviceMattersJsonLd,
+    ...(serviceLead ? [{
+      '@type': 'Person',
+      '@id': `${SITE_URL}/#${serviceLead.slug}`,
+      name: serviceLead.name,
+      url: `${SITE_URL}/team/${serviceLead.slug}`,
+      jobTitle: serviceLead.role,
+      worksFor: { '@id': `${SITE_URL}/#organization` },
+      hasCredential: { '@type': 'EducationalOccupationalCredential', name: serviceLead.credentials },
+    }] : []),
+    serviceFaqJsonLd,
+    {
+      '@type': 'HowTo',
+      '@id': `${PAGE_URL}#service-procedure`,
+      name: 'How a Service Matter Proceeds in Lucknow: Stage 1 to Stage 7',
+      description: 'An informational overview of alternative departmental, tribunal, labour and writ routes. Not every stage applies to every case; employment coverage, applicable rules and forum directions govern.',
+      inLanguage: 'en-IN',
+      step: serviceStages.map((stage, index) => ({
+        '@type': 'HowToStep', position: index + 1, name: stage.title,
+        text: stage.body.join(' '), url: `${PAGE_URL}#${stage.id}`,
+      })),
+    },
+    serviceBreadcrumbJsonLd,
   ],
 }
 
@@ -317,21 +432,7 @@ export default async function ServiceEmploymentMattersPage() {
 
   return (
     <main className="relative min-h-screen">
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceMattersJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(withServiceSelectionFaq(serviceFaqJsonLd, searchContent)) }}
-      />
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceBreadcrumbJsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }} />
       <Navbar />
 
       <section className="py-24 md:py-32">
@@ -343,7 +444,7 @@ export default async function ServiceEmploymentMattersPage() {
             <ArrowLeft className="h-3.5 w-3.5" /> Back to Services
           </Link>
 
-          <div className="mb-12 grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_280px]">
+          <header className="mb-12 grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_280px]">
             <div className="min-w-0">
             <div className="mb-4 flex items-center gap-4">
               <div className="h-px w-12 bg-gold-500" />
@@ -376,13 +477,14 @@ export default async function ServiceEmploymentMattersPage() {
                 <p className="font-caps text-xs uppercase tracking-widest text-gold-700 dark:text-gold-400">Service &amp; Employment Practice Lead</p>
                 <h2 className="mt-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{serviceLead.name}</h2>
                 <p className="mt-2 font-body text-sm text-navy-700 dark:text-cream/60">{serviceLead.role}</p>
+                <p className="mt-2 font-body text-sm text-navy-700 dark:text-cream/60">{serviceLead.credentials}</p>
                 <Link href={`/team/${serviceLead.slug}`} className="mt-4 inline-flex items-center gap-2 font-body text-sm font-semibold text-gold-700 dark:text-gold-400">
                   View Profile <ArrowUpRight className="h-4 w-4" />
                 </Link>
               </div>
             )}
             <ConsultationActions className="flex md:hidden" />
-          </div>
+          </header>
 
           <GuideToc items={serviceToc} />
 
@@ -447,6 +549,28 @@ export default async function ServiceEmploymentMattersPage() {
               ))}
             </div>
           </div>
+
+          <section id="service-localities" aria-labelledby="service-localities-heading" className="mb-16 scroll-mt-28">
+            <h2 id="service-localities-heading" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Service-Law Consultations Across Lucknow</h2>
+            <p className="mb-6 font-body leading-relaxed text-navy-700 dark:text-cream/60">Consultations can be arranged by prior appointment for employees across these Lucknow localities. These are areas served, not separate branch offices. A Lucknow address alone does not establish tribunal or court jurisdiction; employer coverage, the challenged order and territorial rules determine where to file.</p>
+            <ul className="grid gap-5 sm:grid-cols-2">
+              {localityGroups.map(({ region, localities }) => (
+                <li key={region} className="border-l-2 border-gold-500/50 pl-5">
+                  <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{region}</h3>
+                  <p className="font-body leading-relaxed text-navy-700 dark:text-cream/60">{localities.join(', ')}</p>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section id="service-forum-logistics" aria-labelledby="service-forum-logistics-heading" className="mb-16 scroll-mt-28">
+            <h2 id="service-forum-logistics-heading" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Preparing for a Tribunal or Court Visit in Lucknow</h2>
+            <dl className="space-y-5 font-body leading-relaxed text-navy-700 dark:text-cream/60">
+              <div><dt className="font-semibold text-navy-900 dark:text-cream">Venue and assigned bench</dt><dd>Check the cause list, case number, current venue and bench with the relevant registry. CAT Lucknow Bench is at Vipin Khand, Gomti Nagar; the U.P. Public Services Tribunal is at Indira Bhawan, Hazratganj. Labour forum assignments and territorial jurisdiction require a separate check. A consultation at our High Court chamber is not a tribunal filing or hearing.</dd></div>
+              <div><dt className="font-semibold text-navy-900 dark:text-cream">Working hours and filing requirements</dt><dd>Confirm current working hours, filing-counter cut-off times, holidays and e-filing directions with the relevant registry before travelling. Check required forms, annexures, copies, affidavits and any applicable filing fees. Professional fees, court or tribunal fees and copying expenses are distinct; there is no single fee or completion time for every service dispute.</dd></div>
+              <div><dt className="font-semibold text-navy-900 dark:text-cream">Records and attendance</dt><dd>Carry government-issued photo identification, filed papers, relevant orders and the employment records your advocate or registry requests. Preserve originals and proof of communication of the challenged order. Follow the hearing directions on personal attendance; an advocate appointment does not excuse attendance required by the forum.</dd></div>
+            </dl>
+          </section>
 
           <StatuteTable
             id="service-statutory-framework"
@@ -620,6 +744,19 @@ export default async function ServiceEmploymentMattersPage() {
               ))}
             </div>
           </div>
+
+          <section id="hindi-faqs" lang="hi" aria-labelledby="hindi-faqs-heading" className="mb-16 scroll-mt-28">
+            <h2 id="hindi-faqs-heading" className="mb-6 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">लखनऊ में सेवा और रोजगार विवाद: हिंदी में सामान्य प्रश्न</h2>
+            <p className="mb-6 font-body leading-relaxed text-navy-700 dark:text-cream/60">यह सामान्य कानूनी जानकारी है, किसी विशेष मामले की सलाह नहीं। लागू सेवा नियमों, तथ्यों और संबंधित मंच के आदेश के अनुसार प्रक्रिया बदल सकती है।</p>
+            <div className="divide-y divide-gold-500/20 border-y border-gold-500/20">
+              {hindiFaqs.map(({ question, answer }) => (
+                <details key={question} className="py-5">
+                  <summary className="cursor-pointer font-display text-lg font-bold leading-relaxed text-navy-900 transition-colors hover:text-gold-700 focus-visible:outline-gold-500 dark:text-cream dark:hover:text-gold-400">{question}</summary>
+                  <p className="mt-3 font-body leading-relaxed text-navy-700 dark:text-cream/60">{answer}</p>
+                </details>
+              ))}
+            </div>
+          </section>
 
           <section aria-labelledby="service-disciplinary-record-review" className="mb-16 border-t border-gold-500/20 pt-10">
             <h2 id="service-disciplinary-record-review" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream">Facing a Charge Sheet, Suspension or Adverse Service Order?</h2>

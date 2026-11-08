@@ -15,11 +15,12 @@ import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
 import { divorceStages, divorceStatutes, divorceToc } from '@/lib/guides/divorceLucknow'
 import { getBlogPostsBySlugs } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
-import { CHAMBER_TEL, LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
+import { CHAMBER_TEL, HIGH_COURT_CHAMBER_ADDRESS, LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
 const searchContent = serviceSearchContent['divorce-lawyer-lucknow']
 const PAGE_PATH = '/services/divorce-lawyer-lucknow'
+const PAGE_URL = `${SITE_URL}${PAGE_PATH}`
 const divorceLead = teamMembers.find((member) => member.slug === 'aishwarya-pandey')
 const divorceTeam = ['jitendra-tiwari', 'akhilesh-yadav', 'prerna-yaduvanshi']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
@@ -100,7 +101,7 @@ const documents = [
 const faqs = [
   { question: 'How do I choose between mutual consent and contested divorce?', answer: 'Mutual consent divorce requires both spouses to agree to dissolve the marriage and maintain consent through the required proceedings. A contested divorce may be appropriate when one spouse does not agree or key issues remain unresolved, but a recognised statutory ground must be established. We assess the applicable law and evidence before recommending a route.' },
   { question: 'How long does a divorce take in Lucknow?', answer: 'There is no fixed completion time for every case. The applicable statute, service of notice, settlement, evidence, connected applications, and the court\'s schedule all affect duration. Mutual consent proceedings are generally less extensive than a contested trial, but no decree date can be guaranteed.' },
-  { question: 'Can the six-month cooling-off period be waived?', answer: 'In appropriate mutual consent cases under Section 13B of the Hindu Marriage Act, the court may waive the six-month interval between motions after considering the applicable legal criteria. Waiver is discretionary, not automatic, and does not remove other eligibility requirements or the need for continuing consent.' },
+  { question: 'Can the six-month cooling-off period be waived in Lucknow Family Court?', answer: 'Yes, in appropriate mutual consent cases under Section 13B(2) of the Hindu Marriage Act. Under Amardeep Singh v. Harveen Kaur (2017), the court considers separation, unsuccessful reconciliation efforts, genuine settlement of alimony, custody and connected issues, and whether further waiting serves any purpose. Amit Kumar v. Suman Beniwal (2021) explains that these factors are not a rigid checklist. Waiver is discretionary, not automatic, and continuing consent remains necessary.' },
   { question: 'Is one year of separation necessary for mutual consent divorce?', answer: 'Section 13B of the Hindu Marriage Act ordinarily requires the spouses to have lived separately for at least one year, to be unable to live together, and to agree to dissolve the marriage. Living separately concerns the marital relationship and does not always mean different addresses. Requirements under other laws must be checked separately.' },
   { question: 'Can I file in Lucknow if my spouse lives elsewhere?', answer: 'Possibly, depending on the applicable jurisdiction provisions. Under the Hindu Marriage Act, relevant connections can include where the marriage was solemnised, where the respondent resides, where the spouses last resided together, and, for a wife filing a petition, where she resides when filing. Special situations and other marriage laws require a separate assessment.' },
   { question: 'How are maintenance and permanent alimony decided?', answer: 'Courts consider factors such as income, earning capacity, assets, reasonable needs, dependants, and the circumstances of the parties. There is no universal percentage or automatic entitlement to a particular amount. Existing maintenance orders and financial disclosures are important to the assessment.' },
@@ -109,38 +110,150 @@ const faqs = [
   { question: 'What if my spouse withdraws consent or refuses to attend?', answer: 'A mutual consent decree ordinarily requires continuing consent at the relevant stages. If consent is withdrawn or attendance becomes an issue, the available procedural options must be assessed. A contested petition is not an automatic substitute and requires its own legal basis.' },
   { question: 'Do connected criminal cases end with a divorce settlement?', answer: 'A settlement may provide for lawful steps in connected cases, but a divorce decree does not automatically close a criminal complaint or domestic violence proceeding. Withdrawal, compounding, or High Court quashing depends on the nature of the case and the court\'s approval where required.' },
   { question: 'What does divorce representation cost?', answer: 'Fees depend on the scope of advice, drafting, hearings, interim applications, evidence, and any appeal. After reviewing the matter, the team can explain the proposed scope and fee arrangement. Court fees and other expenses should be distinguished from professional fees.' },
-  { question: 'Where is the Family Court in Lucknow and which cases does it hear?', answer: 'The Family Court, Lucknow sits on Wala Qadar Road, Qaiserbagh, near Parivartan Chowk, and hears divorce, judicial separation, restitution, maintenance, custody, and guardianship matters for Lucknow residents and others who meet the jurisdiction requirements. Not every matrimonial dispute connected to Lucknow is automatically maintainable here; the statutory basis for jurisdiction must be checked.' },
+  { question: 'Where is the Family Court in Lucknow and which cases does it hear?', answer: 'The Family Court, Lucknow is at 430, Wala Qadar Road, Kaiserbagh (also spelled Qaiserbagh), Lucknow, Uttar Pradesh 226001, near Parivartan Chowk. Under the Family Courts Act, 1984, it hears dissolution of marriage, judicial separation, restitution of conjugal rights, maintenance, custody and guardianship matters where it has jurisdiction. Confirm the assigned courtroom and current venue with the registry before travelling; residence in Lucknow alone does not establish jurisdiction for every petition.' },
   { question: 'Can an NRI spouse take part in a Lucknow divorce by video-conference?', answer: 'Courts have increasingly permitted appearance and evidence by video-conference where travel is impractical, but this is allowed at the court\'s discretion and is not an automatic right. We assess whether video-conference participation is realistic for a given hearing, and coordinate service and representation where one spouse lives abroad. Our NRI legal services team can also assist with related cross-border issues.' },
-  { question: 'Where do I appeal a Lucknow Family Court divorce decree?', answer: 'An appeal from a decree of the Family Court, Lucknow lies to the Allahabad High Court, Lucknow Bench at Gomti Nagar. Limitation for filing the appeal is strict and should be confirmed immediately from the certified copy of the decree, since different provisions prescribe different periods depending on which statute is invoked.' },
+  { question: 'Where do appeals from the Lucknow Family Court lie?', answer: 'Appeals from appealable judgments and orders of the Family Court, Lucknow lie before a Division Bench of the Allahabad High Court, Lucknow Bench at Gomti Nagar under Section 19 of the Family Courts Act, 1984. Consent decrees and interlocutory orders are excluded; certain maintenance orders have a different review route. Confirm maintainability and the applicable limitation period promptly from the certified copy rather than assuming that every order can be appealed.' },
+  { question: 'What should I check before my first Family Court hearing in Lucknow?', answer: 'Check the case number, cause list, assigned courtroom, hearing date and current venue. Confirm working hours, filing-counter cut-off times and any mediation referral with the Family Court registry; these can change with notices and holidays. Carry original government-issued photo identification, copies of filed papers and court orders, and photographs or other documents if directed. Statutory court fees are separate from professional fees and other expenses.' },
 ]
 
-const structuredData = [
+const hindiFaqs = [
   {
-    '@context': 'https://schema.org', '@type': 'LegalService',
-    ...LUCKNOW_SERVICE_LOCATION,
-    name: 'Sumanjari & Co. Advocates - Divorce Advocate & Lawyer in Lucknow',
-    url: `${SITE_URL}${PAGE_PATH}`, description: metadata.description,
-    telephone: CHAMBER_TEL.replace('tel:', ''),
-    email: 'info.sumanjarirightsandremedies@gmail.com',
-    areaServed: [{ '@type': 'City', name: 'Lucknow' }, { '@type': 'State', name: 'Uttar Pradesh' }],
-    serviceType: 'Divorce and Matrimonial Legal Services',
+    question: 'लखनऊ फैमिली कोर्ट में आपसी सहमति से तलाक की क्या प्रक्रिया है?',
+    answer: 'हिंदू विवाह अधिनियम की धारा 13B के तहत सामान्यतः कम से कम एक वर्ष से अलग रह रहे पति-पत्नी संयुक्त याचिका और समझौते की शर्तें प्रस्तुत करते हैं। पहले मोशन में बयान दर्ज होते हैं। दूसरा मोशन सामान्यतः याचिका प्रस्तुत होने के छह महीने बाद और अठारह महीने के भीतर होता है। अमरदीप सिंह बनाम हरवीन कौर (2017) के अनुसार अदालत उचित मामलों में छह महीने की अवधि से छूट दे सकती है। अलगाव, सुलह के प्रयास, भरण-पोषण, बच्चों की देखभाल और संबंधित विवादों के वास्तविक समझौते पर विचार होता है। छूट स्वतः नहीं मिलती; डिक्री तक दोनों की स्वैच्छिक सहमति बनी रहनी चाहिए।',
   },
   {
-    '@context': 'https://schema.org', '@type': 'FAQPage',
+    question: 'क्या भरण-पोषण तय करने के लिए आय का शपथ पत्र देना अनिवार्य है?',
+    answer: 'रजनेश बनाम नेहा (2020) में सर्वोच्च न्यायालय ने भरण-पोषण मामलों में दोनों पक्षों से निर्धारित प्रारूप में संपत्ति और देनदारियों का विस्तृत शपथ पत्र दाखिल करने का निर्देश दिया है। इसमें आय, खर्च, संपत्ति, ऋण और आश्रितों का सही विवरण तथा उपलब्ध दस्तावेज दिए जाते हैं। पहले से मिले भरण-पोषण आदेश भी बताने चाहिए। अदालत के निर्देश और लागू प्रारूप की जाँच करें; हर तलाक याचिका में अपने आप ऐसा दावा नहीं होता।',
+  },
+  {
+    question: 'फैमिली कोर्ट के आदेश के खिलाफ अपील कहाँ होती है?',
+    answer: 'लखनऊ फैमिली कोर्ट के अपील योग्य निर्णय और आदेश के विरुद्ध फैमिली कोर्ट्स एक्ट, 1984 की धारा 19 के तहत इलाहाबाद हाईकोर्ट की लखनऊ बेंच, गोमती नगर में दो न्यायाधीशों की पीठ के समक्ष अपील होती है। सहमति की डिक्री और अंतरिम प्रकृति के आदेशों पर धारा 19 की अपील नहीं होती; कुछ भरण-पोषण आदेशों के लिए अलग समीक्षा प्रक्रिया है। प्रमाणित प्रति लेकर अपील की उपलब्धता और समय-सीमा तुरंत जाँचें।',
+  },
+  {
+    question: 'लखनऊ का फैमिली कोर्ट कहाँ है और वहाँ कौन-से मामले सुने जाते हैं?',
+    answer: 'लखनऊ का फैमिली कोर्ट 430, वाला कदर रोड, कैसरबाग, लखनऊ, उत्तर प्रदेश 226001 में परिवर्तन चौक के पास स्थित है। फैमिली कोर्ट्स एक्ट, 1984 के तहत यहाँ विवाह-विच्छेद, न्यायिक पृथक्करण, दाम्पत्य अधिकारों की पुनर्स्थापना, भरण-पोषण, बच्चों की अभिरक्षा और संरक्षकता जैसे मामले सुने जाते हैं, जहाँ अदालत को क्षेत्राधिकार हो। अदालत जाने से पहले वर्तमान पता, कक्ष संख्या और कार्य समय रजिस्ट्री या वाद-सूची से सुनिश्चित करें।',
+  },
+  {
+    question: 'क्या लखनऊ में रहने भर से मैं वहाँ तलाक की याचिका दायर कर सकता या सकती हूँ?',
+    answer: 'हमेशा नहीं। हिंदू विवाह अधिनियम की धारा 19 के अनुसार याचिका वहाँ दायर हो सकती है जहाँ विवाह संपन्न हुआ, जहाँ प्रतिवादी रहता है, जहाँ पति-पत्नी अंतिम बार साथ रहे, और पत्नी द्वारा याचिका दायर करने पर जहाँ वह याचिका के समय रह रही है। विशेष विवाह अधिनियम की धारा 31 में अलग प्रावधान है। लखनऊ जिले के पते के साथ भी अधिकार-क्षेत्र का वैधानिक आधार होना चाहिए। अन्य जिलों के निवासी प्रायः अपने जिले के फैमिली कोर्ट में जाते हैं।',
+  },
+  {
+    question: 'आपसी सहमति से तलाक में क्या एक वर्ष अलग रहना ज़रूरी है?',
+    answer: 'हिंदू विवाह अधिनियम की धारा 13B के अनुसार सामान्यतः पति-पत्नी को याचिका प्रस्तुत करने से पहले कम से कम एक वर्ष से अलग रह रहा होना चाहिए, साथ रहना संभव न होना चाहिए और तलाक के लिए आपसी सहमति होनी चाहिए। "अलग रहना" का अर्थ वैवाहिक संबंध की स्थिति से है और हर मामले में अलग पते का होना आवश्यक नहीं। विवाह के पहले वर्ष में धारा 14 की रोक भी जाँचनी होती है। अन्य विवाह कानूनों की शर्तें अलग से देखी जाती हैं।',
+  },
+  {
+    question: 'अगर पति या पत्नी बीच में सहमति वापस ले ले या अदालत न आए तो क्या होगा?',
+    answer: 'आपसी सहमति की डिक्री के लिए डिक्री पारित होने तक सहमति बनी रहनी चाहिए। सुरेष्टा देवी बनाम ओम प्रकाश (1991) के अनुसार कोई भी पक्ष डिक्री से पहले सहमति वापस ले सकता है, और केवल संयुक्त याचिका के आधार पर किसी को तलाक के लिए बाध्य नहीं किया जा सकता। ऐसी स्थिति में उपलब्ध प्रक्रियात्मक विकल्पों का आकलन करना होता है। विवादित (कंटेस्टेड) याचिका अपने आप विकल्प नहीं बनती; उसके लिए धारा 13 के तहत वैधानिक आधार सिद्ध करना आवश्यक है।',
+  },
+  {
+    question: 'विवादित तलाक के मुख्य आधार क्या हैं?',
+    answer: 'हिंदू विवाह अधिनियम की धारा 13 के तहत क्रूरता, परित्याग और जारकर्म (एडल्टरी) जैसे आधार हैं। परित्याग में सामान्यतः याचिका से ठीक पहले कम से कम दो वर्ष की निरंतर अवधि आवश्यक होती है; केवल अलग रहना पर्याप्त नहीं है, इरादा, सहमति और उचित कारण भी देखे जाते हैं। क्रूरता में आचरण और उसके संदर्भ को परखा जाता है; साधारण मतभेद स्वतः क्रूरता नहीं होते। केवल लंबे समय का अलगाव सामान्य फैमिली कोर्ट में "असुधार्य विघटन" का स्वतंत्र आधार नहीं है। साक्ष्य वैध तरीके से जुटाए जाने चाहिए।',
+  },
+  {
+    question: 'स्थायी गुजारा भत्ता (एलिमनी) और अंतरिम भरण-पोषण कैसे तय होता है?',
+    answer: 'अदालत दोनों पक्षों की आय, कमाने की क्षमता, संपत्ति, उचित आवश्यकताओं, आश्रितों और परिस्थितियों को देखती है; कोई निश्चित प्रतिशत या स्वतः अधिकार नहीं है। मुकदमा लंबित रहने पर धारा 24 के तहत अंतरिम भरण-पोषण और मुकदमे का खर्च माँगा जा सकता है, जबकि स्थायी गुजारा भत्ता धारा 25 के तहत तय होता है, जो एकमुश्त या किस्तों में हो सकता है। पहले से चल रहे भरण-पोषण के आदेश अदालत को बताने चाहिए।',
+  },
+  {
+    question: 'तलाक के बाद बच्चों की कस्टडी किसे मिलती है?',
+    answer: 'बच्चे का कल्याण सबसे महत्वपूर्ण कारक है। अदालत देखभाल, स्थिरता, शिक्षा, सुरक्षा और उचित मामलों में बच्चे की इच्छा जैसे तथ्यों पर विचार करती है। कस्टडी केवल माता-पिता के लिंग या आय से तय नहीं होती। मुकदमे के दौरान अंतरिम कस्टडी और मुलाकात की व्यवस्था धारा 26 जैसे प्रावधानों के तहत माँगी जा सकती है। मुलाकात का अधिकार और बच्चे का खर्च अलग से भी तय हो सकता है।',
+  },
+  {
+    question: 'क्या तलाक में संपत्ति अपने आप बराबर बँट जाती है? स्त्रीधन का क्या होता है?',
+    answer: 'नहीं, भारत में तलाक पर सारी संपत्ति अपने आप बराबर नहीं बँटती। स्वामित्व, योगदान, संपत्ति की प्रकृति, लागू कानून और आपसी समझौते की शर्तें महत्वपूर्ण होती हैं। स्त्रीधन संयुक्त संपत्ति से अलग माना जाता है, और समझौते में उसकी वापसी तथा हर संपत्ति के हस्तांतरण के चरण स्पष्ट लिखे जाने चाहिए। विवाह के समय या उसके आसपास दी गई संपत्ति पर धारा 27 के तहत आदेश माँगा जा सकता है; संयुक्त रूप से खरीदी गई संपत्ति के लिए प्रायः अलग समाधान चाहिए।',
+  },
+  {
+    question: 'क्या एनआरआई पति या पत्नी वीडियो कॉन्फ्रेंसिंग से लखनऊ की तलाक कार्यवाही में शामिल हो सकते हैं?',
+    answer: 'अदालतें यात्रा कठिन होने पर कई मामलों में वीडियो कॉन्फ्रेंसिंग से उपस्थिति या साक्ष्य की अनुमति देती हैं, लेकिन यह अदालत के विवेक पर है, स्वतः अधिकार नहीं। नोटिस की तामील, वकील के माध्यम से प्रतिनिधित्व और सुनवाई की तारीख की व्यावहारिकता का पहले आकलन करना चाहिए। अनुमति और सुनवाई के निर्देश रजिस्ट्री या अदालत के आदेश से पुष्टि करें।',
+  },
+  {
+    question: 'क्या तलाक के समझौते से जुड़े आपराधिक मामले अपने आप खत्म हो जाते हैं?',
+    answer: 'नहीं। तलाक की डिक्री या निजी समझौता किसी आपराधिक शिकायत या घरेलू हिंसा की कार्यवाही को स्वतः समाप्त नहीं करता। मामले की प्रकृति के अनुसार समझौता, वापसी या हाईकोर्ट में धारा 528 BNSS (पूर्व में धारा 482 CrPC) के तहत निरस्तीकरण जैसे वैधानिक उपाय अपनाने पड़ सकते हैं, जो अदालत की अनुमति और कानून की उपलब्धता पर निर्भर हैं। पुलिस को केवल निजी वापसी-पत्र देने से मामला समाप्त नहीं होता।',
+  },
+  {
+    question: 'पहली परामर्श बैठक में कौन-से दस्तावेज़ लेकर आना चाहिए?',
+    answer: 'विवाह प्रमाणपत्र या विवाह का अन्य प्रमाण, पहचान और पते के दस्तावेज़, अलगाव की तारीखों का क्रमवार विवरण, आय के कागज़ात (वेतन पर्ची, आयकर रिटर्न, बैंक विवरण), संपत्ति और देनदारियों की जानकारी, बच्चों के जन्म प्रमाणपत्र और स्कूल रिकॉर्ड, तथा पहले से मिले नोटिस, शिकायतें, याचिकाएँ और अदालती आदेश साथ लाएँ। सभी साक्ष्य वैध तरीके से प्राप्त किए गए होने चाहिए, और मूल दस्तावेज़ सुरक्षित रखें। कोई दस्तावेज़ उपलब्ध न हो तो परामर्श में उस पर चर्चा हो सकती है।',
+  },
+]
+
+const localityGroups = [
+  { region: 'Trans-Gomti', localities: ['Gomti Nagar', 'Gomti Nagar Extension', 'Vibhuti Khand', 'Indira Nagar', 'Aliganj', 'Jankipuram', 'Vikas Nagar', 'Mahanagar'] },
+  { region: 'Central & Cis-Gomti', localities: ['Hazratganj', 'Kaiserbagh', 'Lalbagh', 'Mall Avenue', 'Raj Bhavan vicinity'] },
+  { region: 'South & Industrial Lucknow', localities: ['Ashiyana', 'LDA Colony', 'Alambagh', 'Transport Nagar', 'Telibagh', 'Sushant Golf City (Amar Shaheed Path)'] },
+  { region: 'Western Lucknow', localities: ['Rajajipuram', 'Chowk', 'Thakurganj', 'Dubagga'] },
+]
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+  {
+    '@type': 'LegalService',
+    '@id': `${PAGE_URL}#legal-service`,
+    ...LUCKNOW_SERVICE_LOCATION,
+    branchOf: { '@id': `${SITE_URL}/#organization` },
+    name: 'Sumanjari & Co. Advocates - Divorce Advocate & Lawyer in Lucknow',
+    url: PAGE_URL, description: metadata.description,
+    logo: `${SITE_URL}/favicon.png`,
+    telephone: CHAMBER_TEL.replace('tel:', ''),
+    email: 'info.sumanjarirightsandremedies@gmail.com',
+    areaServed: [
+      { '@type': 'City', name: 'Lucknow' },
+      { '@type': 'State', name: 'Uttar Pradesh' },
+      ...localityGroups.flatMap(({ localities }) => localities.map((name) => ({
+        '@type': 'Place', name, containedInPlace: { '@type': 'City', name: 'Lucknow' },
+      }))),
+    ],
+    serviceType: 'Divorce and Matrimonial Legal Services',
+  },
+  ...(divorceLead ? [{
+    '@type': 'Person',
+    '@id': `${SITE_URL}/#aishwarya-pandey`,
+    name: divorceLead.name,
+    url: `${SITE_URL}/team/${divorceLead.slug}`,
+    jobTitle: divorceLead.role,
+    worksFor: { '@id': `${SITE_URL}/#organization` },
+    memberOf: { '@type': 'Organization', name: 'Bar Council of Uttar Pradesh' },
+    hasCredential: { '@type': 'EducationalOccupationalCredential', name: divorceLead.credentials },
+    alumniOf: [
+      { '@type': 'CollegeOrUniversity', name: 'Banasthali Vidyapith' },
+      { '@type': 'CollegeOrUniversity', name: 'Ram Swaroop Memorial University' },
+    ],
+    knowsAbout: ['Family Law', 'Mutual Consent Divorce', 'Contested Divorce', 'Child Custody', 'Maintenance & Alimony'],
+  }] : []),
+  {
+    '@type': 'FAQPage',
+    '@id': `${PAGE_URL}#faqs`,
+    inLanguage: ['en-IN', 'hi-IN'],
     mainEntity: [
-      ...faqs.map(({ question, answer }) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })),
+      ...faqs.map(({ question, answer }) => ({ '@type': 'Question', inLanguage: 'en-IN', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })),
+      ...hindiFaqs.map(({ question, answer }) => ({ '@type': 'Question', inLanguage: 'hi-IN', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })),
       serviceSelectionQuestion(searchContent),
     ],
   },
   {
-    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    '@type': 'HowTo',
+    '@id': `${PAGE_URL}#divorce-procedure`,
+    name: 'Divorce Procedure in Lucknow: Stage 1 to Stage 10',
+    description: 'An informational overview of alternative mutual consent and contested routes, from assessment to decree, appeal and enforcement. Not every stage applies to every case; court directions and the applicable marriage law govern.',
+    inLanguage: 'en-IN',
+    step: divorceStages.map((stage, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      name: stage.title,
+      text: stage.body.join(' '),
+      url: `${PAGE_URL}#${stage.id}`,
+    })),
+  },
+  {
+    '@type': 'BreadcrumbList',
+    '@id': `${PAGE_URL}#breadcrumbs`,
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
       { '@type': 'ListItem', position: 2, name: 'Family Advocate & Lawyer in Lucknow', item: `${SITE_URL}/services/family-advocate` },
       { '@type': 'ListItem', position: 3, name: 'Divorce Advocate & Lawyer in Lucknow', item: `${SITE_URL}${PAGE_PATH}` },
     ],
   },
-]
+  ],
+}
 
 function ConsultationActions() {
   return (
@@ -272,12 +385,12 @@ export default async function DivorceLawyerPage() {
                   </tr>
                   <tr className="border-b border-gold-500/10 align-top">
                     <th scope="row" className="py-3 pr-4 font-semibold">Key Procedural Stages at Family Court, Kaiserbagh</th>
-                    <td className="py-3 pr-4">Joint Petition + Settlement MOU → First Motion Statement → 6-Month Cooling-Off or Waiver Application under Amardeep Singh v. Harleen Kaur → Second Motion → Divorce Decree.</td>
+                    <td className="py-3 pr-4">Joint Petition + Settlement MOU → First Motion Statement → 6-Month Cooling-Off or Waiver Application under Amardeep Singh v. Harveen Kaur → Second Motion → Divorce Decree.</td>
                     <td className="py-3">Petition → Notice &amp; Mediation Center Referral → Written Statement &amp; Rajnesh v. Neha Income Affidavits → Issues &amp; Cross-Examination → Final Arguments &amp; Decree.</td>
                   </tr>
                   <tr className="border-b border-gold-500/10 align-top">
                     <th scope="row" className="py-3 pr-4 font-semibold">Appellate Forum</th>
-                    <td className="py-3 pr-4">No appeal lies from a consent decree, except on grounds such as fraud or coercion vitiating consent.</td>
+                    <td className="py-3 pr-4">Section 19 excludes appeals from consent decrees. Allegations of fraud or coercion require advice on the appropriate remedy, not an assumption that an ordinary appeal is available.</td>
                     <td className="py-3">First Appeal under Section 19 of the Family Courts Act, 1984 within 30/90 days before a Division Bench of the Allahabad High Court, Lucknow Bench.</td>
                   </tr>
                 </tbody>
@@ -302,7 +415,7 @@ export default async function DivorceLawyerPage() {
               </li>
               <li className="border-l-2 border-gold-500/50 pl-5">
                 <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Stage 4: Cooling-Off Waiver</h3>
-                <p className={bodyClass}>Filing a Cooling-Off Period Waiver Application where the parties have been separated for more than 18 months and all rehabilitation, alimony and custody terms stand settled, on the principles in Amardeep Singh v. Harleen Kaur.</p>
+                <p className={bodyClass}>Seeking a discretionary cooling-off waiver under Amardeep Singh v. Harveen Kaur (2017), considering separation, unsuccessful reconciliation efforts, genuine settlement of alimony, custody and connected issues, and whether further waiting serves a purpose. Amit Kumar v. Suman Beniwal (2021) clarifies that the factors are not a rigid checklist; waiver is not automatic.</p>
               </li>
               <li className="border-l-2 border-gold-500/50 pl-5">
                 <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Stage 5: Quashing of Parallel Criminal Cases</h3>
@@ -310,7 +423,7 @@ export default async function DivorceLawyerPage() {
               </li>
               <li className="border-l-2 border-gold-500/50 pl-5">
                 <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Stage 6: Second Motion &amp; Decree</h3>
-                <p className={bodyClass}>Recording of the Second Motion statements and passing of the final decree of divorce — including the video-conferencing appearance protocol for NRI spouses unable to travel to Lucknow.</p>
+                <p className={bodyClass}>Recording of the Second Motion statements and, where the statutory requirements and continuing consent are established, passing of the final decree of divorce. An NRI spouse may seek permission to appear by video-conference; court approval and the applicable hearing directions must be confirmed.</p>
               </li>
             </ol>
           </section>
@@ -366,6 +479,34 @@ export default async function DivorceLawyerPage() {
             </div>
           </section>
 
+          <section id="lucknow-localities" aria-labelledby="lucknow-localities-heading" className="mb-16 scroll-mt-28">
+            <h2 id="lucknow-localities-heading" className={headingClass}>Jurisdiction &amp; Filing for Lucknow Sub-Localities</h2>
+            <p className={`mb-6 ${bodyClass}`}>Under Section 19 of the Hindu Marriage Act, 1955 and Section 31 of the Special Marriage Act, 1954, the place of marriage, the respondent&apos;s residence, the last shared matrimonial home and, for a wife filing a petition, her current residence can establish jurisdiction, subject to the statutory conditions. A Lucknow address alone does not entitle every petitioner to file here.</p>
+            <p className={`mb-6 ${bodyClass}`}>For a petition with the required connection to Lucknow, residents of the localities below ordinarily present it before the Family Court, Kaiserbagh. The registry assigns the case to the Principal Judge or an Additional Principal Judge; the neighbourhood does not determine a separate divorce court.</p>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[560px] border-collapse text-left font-body text-sm">
+                <caption className={`mb-3 text-left ${bodyClass}`}>Lucknow locality groups and the ordinary filing forum, subject to jurisdiction</caption>
+                <thead><tr className="border-b border-gold-500/30 text-navy-900 dark:text-cream"><th scope="col" className="py-3 pr-4">Area</th><th scope="col" className="py-3 pr-4">Localities</th><th scope="col" className="py-3">Filing forum</th></tr></thead>
+                <tbody className="text-navy-800 dark:text-cream/75">{localityGroups.map(({ region, localities }) => (
+                  <tr key={region} className="border-b border-gold-500/10 align-top"><th scope="row" className="py-3 pr-4 font-semibold">{region}</th><td className="py-3 pr-4">{localities.join(', ')}</td><td className="py-3">Family Court, Lucknow, Kaiserbagh, where statutory jurisdiction is established</td></tr>
+                ))}</tbody>
+              </table>
+            </div>
+            <p className={`mt-6 ${bodyClass}`}>Appealable Family Court judgments and orders go to the Allahabad High Court, Lucknow Bench, subject to Section 19 of the Family Courts Act. Chamber consultations, including for residents of Gomti Nagar and Indira Nagar, can be arranged by prior appointment at {HIGH_COURT_CHAMBER_ADDRESS.street}. A chamber appointment is separate from filing or attending the Family Court.</p>
+          </section>
+
+          <section id="family-court-logistics" aria-labelledby="family-court-logistics-heading" className="mb-16 scroll-mt-28">
+            <h2 id="family-court-logistics-heading" className={headingClass}>Practical Guide to Attending Family Court, Lucknow (Kaiserbagh)</h2>
+            <dl className={`space-y-5 ${bodyClass}`}>
+              <div><dt className="font-semibold text-navy-900 dark:text-cream">Address &amp; assigned court</dt><dd>430, Wala Qadar Road, Kaiserbagh (Qaiserbagh), Lucknow, Uttar Pradesh 226001, near Parivartan Chowk. Confirm the current venue and courtroom on the cause list or with the registry. The Family Court has a Principal Judge and Additional Principal Judges; assignments can change.</dd></div>
+              <div><dt className="font-semibold text-navy-900 dark:text-cream">Counselling &amp; mediation</dt><dd>Section 9 of the Family Courts Act, 1984 requires efforts at settlement where appropriate. The court may refer parties to counsellors or the Mediation and Conciliation Centre at the Civil Court compound, Kaiserbagh. Follow the referral order for the actual location and appointment; do not assume every hearing is a mediation session.</dd></div>
+              <div><dt className="font-semibold text-navy-900 dark:text-cream">Working hours &amp; filing</dt><dd>Confirm current working hours, filing-counter cut-off times, holidays and any e-filing directions with the Family Court registry before travelling. Check the hearing date and cause list; an office opening time is not a guarantee of when your case will be called.</dd></div>
+              <div><dt className="font-semibold text-navy-900 dark:text-cream">Identification &amp; preparation</dt><dd>Carry original government-issued photo identification, such as Aadhaar, passport or voter ID, and copies of filed papers and relevant orders. Bring passport-size photographs and additional originals if the court or registry directs, particularly for first- or second-motion statements. Wear respectful attire and follow security and courtroom instructions.</dd></div>
+              <div><dt className="font-semibold text-navy-900 dark:text-cream">Court fees</dt><dd>Statutory court fees under the Court Fees Act, 1870, as applicable in Uttar Pradesh, are distinct from professional representation fees, copying charges and other expenses. Verify the fee for the particular petition and relief at the filing counter; there is no single published amount here for every matrimonial case.</dd></div>
+            </dl>
+            <p className={`mt-6 text-sm ${bodyClass}`}>Check current notices, cause lists and case-status links on the <a href="https://lucknow.dcourts.gov.in/" className="text-gold-700 underline underline-offset-4 dark:text-gold-400">official Lucknow District Court website</a>. This guide does not replace registry instructions or an order in your case.</p>
+          </section>
+
           <section className="mb-16">
             <h2 className={headingClass}>Our Approach to Divorce Representation</h2>
             <div className={`space-y-4 ${bodyClass}`}><p>Led by Adv. Aishwarya Pandey, our team explains the options and their practical implications, including the distinction between urgent interim relief and a final divorce decree. We discuss the scope of representation and fees after reviewing the matter, so advice, drafting, hearings, and connected proceedings can be understood separately.</p><p>Preparation includes checking the consistency of the case history, identifying evidence gaps, and reviewing existing orders before filing a new application. We approach settlement with care, but do not assume every matter can or should be resolved through mediation. Client instructions and lawful protection of rights remain central.</p></div>
@@ -374,6 +515,12 @@ export default async function DivorceLawyerPage() {
           <section id="faqs" className="mb-16 scroll-mt-28">
             <h2 className={headingClass}>Frequently Asked Questions</h2>
             <div className="divide-y divide-gold-500/20 border-y border-gold-500/20">{faqs.map(({ question, answer }) => <details key={question} className="py-5"><summary className="cursor-pointer font-display text-lg font-bold leading-relaxed text-navy-900 transition-colors hover:text-gold-700 focus-visible:outline-gold-500 dark:text-cream dark:hover:text-gold-400">{question}</summary><p className={`mt-3 ${bodyClass}`}>{answer}</p></details>)}</div>
+          </section>
+
+          <section id="hindi-faqs" lang="hi" aria-labelledby="hindi-faqs-heading" className="mb-16 scroll-mt-28">
+            <h2 id="hindi-faqs-heading" className={headingClass}>लखनऊ में तलाक और फैमिली कोर्ट: हिंदी में सामान्य प्रश्न</h2>
+            <p className={`mb-6 ${bodyClass}`}>यह सामान्य कानूनी जानकारी है, किसी विशेष मामले की सलाह नहीं। लागू विवाह कानून, तथ्यों और अदालत के आदेश के अनुसार प्रक्रिया बदल सकती है। किसी परिणाम या समय-सीमा की गारंटी नहीं है।</p>
+            <div className="divide-y divide-gold-500/20 border-y border-gold-500/20">{hindiFaqs.map(({ question, answer }) => <details key={question} className="py-5"><summary className="cursor-pointer font-display text-lg font-bold leading-relaxed text-navy-900 transition-colors hover:text-gold-700 focus-visible:outline-gold-500 dark:text-cream dark:hover:text-gold-400">{question}</summary><p className={`mt-3 ${bodyClass}`}>{answer}</p></details>)}</div>
           </section>
 
           <section aria-labelledby="divorce-settlement-review" className="mb-16 border-t border-gold-500/20 pt-10">

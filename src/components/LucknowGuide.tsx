@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import type { GuideStage, GuideTocItem, StatuteRow } from '@/lib/guides/types'
 
 const linkClass = 'underline-offset-4 hover:text-gold-700 hover:underline dark:hover:text-gold-400'
@@ -37,9 +38,22 @@ export function GuideStages({ id, heading, intro, stages }: { id: string; headin
             <p className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">Stage {index + 1}</p>
             <h3 className="mb-2 mt-1 font-display text-xl font-bold text-navy-900 dark:text-cream">{stage.title}</h3>
             <p className="mb-3 font-body text-sm text-navy-700 dark:text-cream/60"><strong>Forum:</strong> {stage.forum}</p>
-            {stage.body.map((paragraph, i) => (
-              <p key={i} className="mb-3 font-body leading-relaxed text-navy-800 dark:text-cream/75">{paragraph}</p>
-            ))}
+            {stage.body.map((paragraph, i) => {
+              const links = (stage.bodyLinks ?? [])
+                .filter((link) => link.paragraph === i)
+                .map((link) => ({ ...link, start: paragraph.indexOf(link.text) }))
+                .sort((a, b) => a.start - b.start)
+              let end = 0
+              const content = links.map((link) => {
+                if (!link.text || link.start < end) {
+                  throw new Error(`Invalid inline link in ${stage.id}, paragraph ${i}: ${link.text}`)
+                }
+                const before = paragraph.slice(end, link.start)
+                end = link.start + link.text.length
+                return <span key={`${link.start}-${link.href}`}>{before}<Link href={link.href} className="text-gold-700 underline underline-offset-4 hover:text-gold-600 dark:text-gold-400">{link.text}</Link></span>
+              })
+              return <p key={i} className="mb-3 font-body leading-relaxed text-navy-800 dark:text-cream/75">{content}{paragraph.slice(end)}</p>
+            })}
             <p className="font-body text-sm text-navy-700 dark:text-cream/60"><strong>Key provisions:</strong> {stage.provisions.join('; ')}</p>
             {stage.checklist && (
               <ul className="mt-3 list-disc space-y-1 pl-5 font-body text-sm text-navy-700 dark:text-cream/60">

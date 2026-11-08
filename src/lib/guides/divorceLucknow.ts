@@ -34,6 +34,7 @@ export const divorceStages: GuideStage[] = [
       'Filing requires proof of marriage, identity and address documents, the applicable court fee, and a vakalatnama authorising the advocate to appear. Where maintenance is claimed, the Supreme Court\'s direction in Rajnesh v. Neha (2020) requires a sworn affidavit of assets, income and liabilities in a prescribed format, which both parties must eventually file.',
       'Draft pleadings carefully: inconsistencies between the petition and later affidavits or cross-examination are commonly used to challenge credibility, particularly in a contested matter.',
     ],
+    bodyLinks: [{ paragraph: 1, text: 'Rajnesh v. Neha (2020) requires a sworn affidavit', href: '/blog/rajnesh-v-neha-masterclass-affidavits-assets-liabilities' }],
     provisions: ['Section 13, Hindu Marriage Act, 1955', 'Section 13B, Hindu Marriage Act, 1955', 'Rajnesh v. Neha (2020) disclosure affidavit'],
     checklist: ['Draft petition and supporting affidavit', 'Settlement deed, for a mutual consent petition', 'Proof of marriage and identity documents'],
   },
@@ -45,6 +46,7 @@ export const divorceStages: GuideStage[] = [
       'Once filed, the court issues notice to the respondent, served through the court process, registered post, or, where the court permits, electronic means such as email or WhatsApp. If the respondent avoids service and stays away despite valid notice, the court can proceed ex parte on the record before it.',
       'In a mutual consent petition, both spouses must ordinarily appear and have their statements recorded at the first motion confirming their joint consent to the terms filed. For an NRI respondent, appearance through video-conference may be permitted where the court allows it, though this should not be assumed without confirming the practice with the registry.',
     ],
+    bodyLinks: [{ paragraph: 1, text: 'appearance through video-conference', href: '/blog/nri-marriages-cross-border-matrimonial-abandonment' }],
     provisions: ['Order V, Code of Civil Procedure, 1908', 'Section 13B(1), Hindu Marriage Act, 1955'],
     checklist: ['Correct current address for service on the respondent', 'Proof of service, once effected', 'Travel or availability constraints for NRI parties'],
   },
@@ -78,8 +80,10 @@ export const divorceStages: GuideStage[] = [
     body: [
       'In a contested matter, the respondent files a written statement responding to the grounds pleaded, and may raise a counter-claim. The court then frames the issues that need to be decided, and Section 14 of the Family Courts Act allows it to receive any report, statement, or material it considers helpful to settling the dispute, in addition to conventional oral evidence.',
       'Evidence is led by affidavit and tested through cross-examination. Under Section 13 of the Family Courts Act, a party is not entitled to representation by a legal practitioner as of right, though in practice advocates regularly appear with the leave of the court. Section 21B of the Hindu Marriage Act directs that a petition should, as far as possible, be disposed of within six months of service of notice — a directory aim rather than a guaranteed timeline given the court\'s overall caseload.',
+      'For electronic records, Section 63 of Bharatiya Sakshya Adhiniyam, 2023 governs certification where applicable. Preserve the original device, source records and supporting certificate; the applicable evidence law, transitional provisions and the Family Court\'s evidentiary powers must be considered together.',
     ],
-    provisions: ['Section 14, Family Courts Act, 1984', 'Section 13, Family Courts Act, 1984', 'Section 21B, Hindu Marriage Act, 1955'],
+    bodyLinks: [{ paragraph: 2, text: 'Section 63 of Bharatiya Sakshya Adhiniyam, 2023', href: '/blog/desertion-adultery-hindu-marriage-act-evidentiary-standards' }],
+    provisions: ['Section 14, Family Courts Act, 1984', 'Section 13, Family Courts Act, 1984', 'Section 21B, Hindu Marriage Act, 1955', 'Section 63, Bharatiya Sakshya Adhiniyam, 2023'],
     checklist: ['Written statement and any counter-claim', 'List of witnesses and documents to be proved', 'Evidence affidavits for examination-in-chief'],
   },
   {
@@ -87,9 +91,10 @@ export const divorceStages: GuideStage[] = [
     title: 'Mutual Consent: Second Motion & Cooling-Off Waiver',
     forum: 'Family Court, Lucknow',
     body: [
-      'For a mutual consent petition, Section 13B(2) requires a second motion confirming that consent has not been withdrawn, to be moved not earlier than six months and not later than eighteen months after the first motion. The six-month interval can be waived in appropriate cases following the Supreme Court\'s conditions in Amardeep Singh v. Harveen Kaur (2017) — typically where the statutory period for mediation has already been observed and the court is satisfied that settlement is unlikely.',
+      'For a mutual consent petition, Section 13B(2) requires a second motion confirming continuing consent, ordinarily not earlier than six months and not later than eighteen months after presentation of the joint petition. The six-month interval can be waived in appropriate cases following Amardeep Singh v. Harveen Kaur (2017). The court considers the period of separation, unsuccessful reconciliation efforts, genuine settlement of alimony, custody and connected issues, and whether further waiting would only prolong hardship. Waiver is discretionary; the factors are not a rigid checklist, as explained in Amit Kumar v. Suman Beniwal (2021).',
       'Consent can lawfully be withdrawn by either spouse at any point before the decree is passed, as held in Sureshta Devi v. Om Prakash (1991); a decree cannot be forced on an unwilling party merely because a petition was jointly filed. Where the court permits, personal appearance at the second motion may be substituted by video-conference, but this should be confirmed with the registry rather than assumed.',
     ],
+    bodyLinks: [{ paragraph: 0, text: 'Amardeep Singh v. Harveen Kaur (2017)', href: '/blog/mutual-consent-divorce-strategy-section-13b-hma-28-special' }],
     provisions: ['Section 13B(2), Hindu Marriage Act, 1955', 'Amardeep Singh v. Harveen Kaur (2017)', 'Sureshta Devi v. Om Prakash (1991)'],
     checklist: ['Confirmation that both parties still consent', 'Compliance so far with settlement terms', 'Grounds for seeking waiver of the six-month interval'],
   },
@@ -110,9 +115,10 @@ export const divorceStages: GuideStage[] = [
     forum: 'Allahabad High Court, Lucknow Bench (appeal); Family Court, Lucknow (execution)',
     body: [
       // VERIFY: which limitation period the Lucknow Bench currently applies to Family Court appeals
-      'An appeal against a Family Court decree lies to the Allahabad High Court, Lucknow Bench under Section 19 of the Family Courts Act, 1984, for decrees passed by the Lucknow Family Court. Limitation is strict, and the period stated in Section 19(3) of the Family Courts Act and the period stated in Section 28(4) of the Hindu Marriage Act are not identical; confirm which applies with the certified copy in hand and seek advice immediately rather than estimate the deadline.',
-      'Where maintenance or alimony falls into arrears, execution proceedings can be filed before the Family Court, Lucknow to recover the amount. Where a settlement has resolved a connected criminal complaint — for instance cruelty under Section 85 BNS, a domestic violence case, or a dowry-related FIR — a quashing application under Section 528 BNSS at the Lucknow Bench, following the approach in Gian Singh v. State of Punjab (2012), is the usual route to formally close it; a private withdrawal letter to the police does not by itself end a criminal case.',
+      'An appeal against an appealable Family Court judgment or order lies to a Division Bench of the Allahabad High Court, Lucknow Bench under Section 19 of the Family Courts Act, 1984. Consent decrees and interlocutory orders are excluded, and certain maintenance orders follow a different review route. Limitation is strict, and the periods in Section 19(3) of the Family Courts Act and Section 28(4) of the Hindu Marriage Act are not identical; confirm which applies with the certified copy in hand rather than estimate the deadline.',
+      'Where maintenance or alimony falls into arrears, execution proceedings can be filed before the Family Court, Lucknow to recover the amount. For connected criminal proceedings resolved by settlement, Section 528 BNSS / 482 CrPC quashing may be sought at the Lucknow Bench where legally available, following principles such as those in Gian Singh v. State of Punjab (2012). The court considers the nature of the offence and the governing procedure; quashing is not automatic. Domestic violence proceedings may require separate disposal orders, and a private withdrawal letter to the police does not itself end a criminal case.',
     ],
+    bodyLinks: [{ paragraph: 1, text: 'Section 528 BNSS / 482 CrPC quashing', href: '/blog/high-court-writs-quashing-tactics-section-482-crpc-528' }],
     provisions: ['Section 19, Family Courts Act, 1984', 'Section 28, Hindu Marriage Act, 1955', 'Section 528 BNSS (formerly s.482 CrPC)'],
     checklist: ['Certified copy and date of the decree', 'Arrears statement, if enforcing maintenance', 'Status of any connected FIR or DV case'],
   },
@@ -123,6 +129,8 @@ export const divorceToc: GuideTocItem[] = [
   { id: 'lucknow-chambers', label: 'Our Lucknow Chambers' },
   { id: 'choosing-an-advocate', label: 'Choosing a Lawyer or Advocate' },
   { id: 'courts', label: 'Courts, Jurisdiction & Representation' },
+  { id: 'lucknow-localities', label: 'Jurisdiction by Lucknow Locality' },
+  { id: 'family-court-logistics', label: 'Attending Family Court, Kaiserbagh' },
   { id: 'statutory-framework', label: 'Which Law Applies to Your Marriage?' },
   { id: 'mutual-vs-contested', label: 'Mutual Consent or Contested Divorce?' },
   { id: 'mutual-contested-comparison', label: 'Mutual vs. Contested Comparison' },
@@ -137,6 +145,7 @@ export const divorceToc: GuideTocItem[] = [
   { id: 'documents', label: 'Documents to Prepare' },
   { id: 'settlement-children', label: "Financial Settlements & Child's Welfare" },
   { id: 'faqs', label: 'FAQs' },
+  { id: 'hindi-faqs', label: 'हिंदी में कानूनी जानकारी' },
   { id: 'contact', label: 'Speak to a Divorce Advocate in Lucknow' },
 ]
 

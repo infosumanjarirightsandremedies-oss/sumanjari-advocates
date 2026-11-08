@@ -12,6 +12,42 @@ A premium law firm website built with **Next.js 14**, **Tailwind CSS**, and **Re
 - SEO-ready metadata
 - Ready to deploy on Vercel in minutes
 
+### Divorce page SEO content
+
+The [divorce page](src/app/services/divorce-lawyer-lucknow/page.tsx) renders a linked
+JSON-LD graph for its LegalService, advocate profile, visible English/Hindi FAQs,
+ten-stage procedural overview and breadcrumbs. Its service entity references the
+site-wide organization without replacing the firm's shared contact details.
+The graph is server-rendered in the page using Next.js's JSON-LD pattern.
+Schema markup does not guarantee rankings or rich results; Google has discontinued
+FAQ and HowTo rich results.
+
+Hindi information is an on-page section (`#hindi-faqs`), not a separate translated
+route. Locality coverage is subject to statutory jurisdiction, and court hours,
+filing arrangements and assignments must be checked with the registry.
+The [stage data](src/lib/guides/divorceLucknow.ts) keeps plain-text paragraphs for
+structured data and optional inline links to published blog URLs. Update a link's
+text and paragraph index together when changing its source paragraph.
+Run the focused rendering regression tests with
+`node --test tests/production/divorce-seo.test.cjs`.
+Informational wording and disclaimers do not constitute certification of BCI Rule
+36 compliance; publication should be reviewed by the responsible advocate.
+
+### Service Matters page
+
+The [Service Matters page](src/app/services/service-lawyer-lucknow/page.tsx) uses
+the same server-rendered JSON-LD graph pattern for the service, existing practice
+lead, visible English/Hindi FAQs, seven-stage overview and breadcrumbs. Hindi
+information includes 15 FAQs on-page at `#hindi-faqs`, covering forums, disciplinary
+proceedings, transfers, benefits and employment remedies. Locality coverage is not a list
+of branch offices or a guarantee of tribunal jurisdiction.
+The [procedure data](src/lib/guides/serviceLucknow.ts) distinguishes employer
+coverage, suspension rules, pension withholding and excess-payment recovery.
+Verify current rules, labour-law transitions and registry directions for each
+case. These pages provide general information, not individual legal advice.
+Run the rendering regressions for both pages with
+`node --test tests/production/divorce-seo.test.cjs`.
+
 ---
 
 ## 🚀 Deploy to Vercel (Step-by-Step)

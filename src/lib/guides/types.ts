@@ -5,6 +5,7 @@ export type GuideStage = {
   title: string
   forum: string // the real Lucknow forum where this stage happens
   body: string[] // 2–3 paragraphs, 60–110 words each
+  bodyLinks?: { paragraph: number; text: string; href: string }[]
   provisions: string[] // e.g. 'Section 173 BNSS (formerly s.154 CrPC)'
   checklist?: string[] // optional practical points / documents
 }
