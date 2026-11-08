@@ -16,6 +16,9 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceSelection from '@/components/ServiceSelection'
+import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
+import LucknowChambers from '@/components/LucknowChambers'
 import FirmCredentials from '@/components/FirmCredentials'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
@@ -23,9 +26,10 @@ import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
 import { highCourtStages, highCourtStatutes, highCourtToc, lucknowBenchDistricts } from '@/lib/guides/highCourtLucknow'
 import { getBlogPostsByCategories } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
-import { CHAMBER_TEL } from '@/lib/contactLinks'
+import { CHAMBER_TEL, LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const searchContent = serviceSearchContent['high-court-lawyer-lucknow']
 const PAGE_PATH = '/services/high-court-lawyer-lucknow'
 const highCourtLead = teamMembers.find((member) => member.slug === 'jitendra-tiwari')
 const highCourtTeam = ['aishwarya-pandey', 'aditya-narayan-shukla', 'priyesh-dwivedi', 'adarsh-pratap-singh', 'devesh-tiwari']
@@ -45,10 +49,10 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'High Court Lawyer in Lucknow Bench | Allahabad HC Advocates' },
-  description:
-    'High Court Lawyer at Allahabad High Court, Lucknow Bench (Chamber D-311, Gomti Nagar). Writ petitions, Special Appeals, bail, Sec 528 BNSS quashing & appeals.',
+  title: { absolute: searchContent.title },
+  description: searchContent.description,
   keywords: [
+    searchContent.attorneyKeyword,
     'High Court Lawyer Lucknow',
     'Lucknow Bench Advocate',
     'Allahabad High Court Lucknow Bench Lawyer',
@@ -92,6 +96,7 @@ const faqs = [
 
 const highCourtServiceJsonLd = {
     '@context': 'https://schema.org', '@type': 'LegalService',
+    ...LUCKNOW_SERVICE_LOCATION,
     name: 'Sumanjari & Co. Advocates — High Court Lawyer in Lucknow',
     url: `${SITE_URL}${PAGE_PATH}`,
     description: metadata.description,
@@ -134,7 +139,7 @@ export default async function HighCourtLawyerLucknowPage() {
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(highCourtFaqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(withServiceSelectionFaq(highCourtFaqJsonLd, searchContent)) }}
       />
       <script
         type="application/ld+json"
@@ -199,6 +204,9 @@ export default async function HighCourtLawyerLucknowPage() {
             </p>
             <TeamCarousel members={highCourtTeam} label="High Court team members" />
           </section>
+
+          <LucknowChambers />
+          <ServiceSelection content={searchContent} />
 
           <section id="about-bench" className="mb-16 scroll-mt-28">
             <h2 className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">About the Lucknow Bench</h2>

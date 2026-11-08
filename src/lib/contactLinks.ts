@@ -13,6 +13,38 @@ export const NCR_CHAMBER_ADDRESS = {
   city: 'New Delhi',
 } as const
 
+export const LUCKNOW_CHAMBER_ADDRESS = {
+  street: 'Block C 105, Santushti Enclave-1, Shushant Golf City',
+  city: 'Lucknow',
+} as const
+
+export const HIGH_COURT_CHAMBER_ADDRESS = {
+  street: 'Chamber Block D-311, Allahabad High Court, Lucknow Bench, Vibhuti Khand, Gomti Nagar',
+  city: 'Lucknow',
+} as const
+
+export const LUCKNOW_CHAMBERS = [
+  { name: 'Lucknow Chamber', ...LUCKNOW_CHAMBER_ADDRESS },
+  { name: 'High Court Chamber, Lucknow Bench', ...HIGH_COURT_CHAMBER_ADDRESS },
+] as const
+
+const lucknowChamberLocations = LUCKNOW_CHAMBERS.map(({ name, street, city }) => ({
+  '@type': 'Place',
+  name,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: street,
+    addressLocality: city,
+    addressRegion: 'Uttar Pradesh',
+    addressCountry: 'IN',
+  },
+}))
+
+export const LUCKNOW_SERVICE_LOCATION = {
+  address: lucknowChamberLocations[0].address,
+  location: lucknowChamberLocations,
+}
+
 export const GENERIC_WHATSAPP_MESSAGE =
   'Hello, I need legal consultation. Please connect me with an advocate.'
 

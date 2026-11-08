@@ -20,6 +20,9 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceSelection from '@/components/ServiceSelection'
+import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
+import LucknowChambers from '@/components/LucknowChambers'
 import FirmCredentials from '@/components/FirmCredentials'
 import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
@@ -28,9 +31,10 @@ import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
 import { criminalStages, criminalStatutes, criminalToc, criminalCrossRefRows } from '@/lib/guides/criminalLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
-import { CHAMBER_TEL } from '@/lib/contactLinks'
+import { CHAMBER_TEL, LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const searchContent = serviceSearchContent['criminal-lawyer-lucknow']
 const criminalLead = teamMembers.find((member) => member.slug === 'aditya-narayan-shukla')
 const criminalTeam = ['jitendra-tiwari', 'abhishek-mishra', 'shishir-pandey', 'priyesh-dwivedi']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
@@ -49,10 +53,10 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'Criminal Lawyer in Lucknow | Bail, FIR Quashing & Trial Defence' },
-  description:
-    'Criminal Lawyer in Lucknow at Sessions Court & Allahabad High Court (Chamber D-311). Anticipatory bail, regular bail, Sec 528 BNSS FIR quashing & trial defence.',
+  title: { absolute: searchContent.title },
+  description: searchContent.description,
   keywords: [
+    searchContent.attorneyKeyword,
     'Criminal Lawyer in Lucknow',
     'Criminal Lawyer Lucknow',
     'Bail Lawyer Lucknow',
@@ -93,6 +97,7 @@ export const metadata: Metadata = {
 const criminalMattersJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
+  ...LUCKNOW_SERVICE_LOCATION,
   name: 'Sumanjari & Co. Advocates — Criminal Lawyer in Lucknow',
   url: `${SITE_URL}/services/criminal-lawyer-lucknow`,
   description:
@@ -322,7 +327,7 @@ export default async function CriminalMattersPage() {
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(criminalFaqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(withServiceSelectionFaq(criminalFaqJsonLd, searchContent)) }}
       />
       <script
         type="application/ld+json"
@@ -350,7 +355,7 @@ export default async function CriminalMattersPage() {
               <div className="h-px w-12 bg-gold-500" />
             </div>
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-              Criminal Lawyer in Lucknow — <em className="text-gold-gradient">Anticipatory Bail, FIR Quashing &amp; Trial Defence</em>
+              Criminal Lawyer &amp; Advocate in Lucknow — <em className="text-gold-gradient">Anticipatory Bail, FIR Quashing &amp; Trial Defence</em>
             </h1>
             <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
               Facing an FIR, a police notice, or an arrest in Lucknow?
@@ -395,6 +400,9 @@ export default async function CriminalMattersPage() {
             </p>
             <TeamCarousel members={criminalTeam} label="Criminal law team members" />
           </section>
+
+          <LucknowChambers />
+          <ServiceSelection content={searchContent} />
 
           <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>

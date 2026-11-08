@@ -93,6 +93,8 @@ export const aftMiningStages: GuideStage[] = [
 
 export const aftMiningToc: GuideTocItem[] = [
   { id: 'aft-mining-team', label: 'Our Team' },
+  { id: 'lucknow-chambers', label: 'Our Lucknow Chambers' },
+  { id: 'choosing-an-advocate', label: 'Choosing a Lawyer or Advocate' },
   { id: 'forums', label: 'Forums We Appear Before' },
   { id: 'statutory-framework', label: 'Statutory Framework' },
   { id: 'matters', label: 'Matters We Handle' },

@@ -4,6 +4,9 @@ import type { Metadata } from 'next'
 import { ArrowLeft, ArrowUpRight, Phone, HeartCrack, HeartHandshake, HandCoins, Baby, ShieldCheck, Scale, ScrollText } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceSelection from '@/components/ServiceSelection'
+import { serviceSearchContent, serviceSelectionQuestion } from '@/lib/serviceSearch'
+import LucknowChambers from '@/components/LucknowChambers'
 import FirmCredentials from '@/components/FirmCredentials'
 import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
@@ -12,18 +15,19 @@ import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
 import { divorceStages, divorceStatutes, divorceToc } from '@/lib/guides/divorceLucknow'
 import { getBlogPostsBySlugs } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
-import { CHAMBER_TEL } from '@/lib/contactLinks'
+import { CHAMBER_TEL, LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const searchContent = serviceSearchContent['divorce-lawyer-lucknow']
 const PAGE_PATH = '/services/divorce-lawyer-lucknow'
 const divorceLead = teamMembers.find((member) => member.slug === 'aishwarya-pandey')
 const divorceTeam = ['jitendra-tiwari', 'akhilesh-yadav', 'prerna-yaduvanshi']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
 
 export const metadata: Metadata = {
-  title: { absolute: 'Divorce Lawyer in Lucknow | Mutual Consent & Contested Divorce' },
-  description: 'Divorce Lawyer in Lucknow at Family Court Kaiserbagh & Allahabad High Court (Chamber D-311). Mutual consent divorce (Sec 13B), contested divorce & alimony.',
-  keywords: ['Divorce Advocate in Lucknow', 'Divorce Lawyer in Lucknow', 'Mutual Consent Divorce Lawyer Lucknow', 'Contested Divorce Lawyer Lucknow', 'Alimony Lawyer Lucknow', 'Child Custody Lawyer Lucknow', 'Family Court Advocate Lucknow'],
+  title: { absolute: searchContent.title },
+  description: searchContent.description,
+  keywords: [searchContent.attorneyKeyword, 'Divorce Advocate in Lucknow', 'Divorce Lawyer in Lucknow', 'Mutual Consent Divorce Lawyer Lucknow', 'Contested Divorce Lawyer Lucknow', 'Alimony Lawyer Lucknow', 'Child Custody Lawyer Lucknow', 'Family Court Advocate Lucknow'],
   alternates: { canonical: PAGE_PATH },
   openGraph: {
     title: 'Divorce Advocate & Lawyer in Lucknow | Sumanjari & Co.',
@@ -113,6 +117,7 @@ const faqs = [
 const structuredData = [
   {
     '@context': 'https://schema.org', '@type': 'LegalService',
+    ...LUCKNOW_SERVICE_LOCATION,
     name: 'Sumanjari & Co. Advocates - Divorce Advocate & Lawyer in Lucknow',
     url: `${SITE_URL}${PAGE_PATH}`, description: metadata.description,
     telephone: CHAMBER_TEL.replace('tel:', ''),
@@ -122,7 +127,10 @@ const structuredData = [
   },
   {
     '@context': 'https://schema.org', '@type': 'FAQPage',
-    mainEntity: faqs.map(({ question, answer }) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })),
+    mainEntity: [
+      ...faqs.map(({ question, answer }) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })),
+      serviceSelectionQuestion(searchContent),
+    ],
   },
   {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
@@ -212,6 +220,9 @@ export default async function DivorceLawyerPage() {
             </p>
             <TeamCarousel members={divorceTeam} label="Divorce and matrimonial team members" />
           </section>
+
+          <LucknowChambers />
+          <ServiceSelection content={searchContent} />
 
           <section className="mb-16">
             <h2 className={headingClass}>Clear Advice at a Difficult Turning Point</h2>

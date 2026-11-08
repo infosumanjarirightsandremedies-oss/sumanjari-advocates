@@ -223,14 +223,27 @@ const services: Service[] = [
   {
     id: 'banking-recovery',
     icon: Banknote,
-    title: 'Banking, Recovery & Negotiable Instruments Matters',
-    description: 'Representation in bank loan recovery, DRT proceedings, and negotiable instruments disputes.',
+    title: 'Banking & Recovery Matters',
+    description: 'Representation in bank loan recovery, One-Time Settlement, and negotiable instruments disputes.',
     href: '/services/banking-recovery-lawyer-lucknow',
     items: [
-      'Debts Recovery Tribunal (DRT) proceedings',
-      'SARFAESI Act matters',
-      'Bank loan recovery & settlement',
+      'Bank loan recovery & settlement (OTS)',
       'Negotiable instruments & cheque-related recovery',
+      'Guarantor & third-party liability',
+      'Commercial recovery suits',
+    ],
+  },
+  {
+    id: 'drt-sarfaesi',
+    icon: Landmark,
+    title: 'DRT & SARFAESI Matters',
+    description: 'Representation before the Debts Recovery Tribunal and DRAT Allahabad in SARFAESI enforcement, possession, and bank auction disputes.',
+    href: '/services/drt-lawyer-lucknow',
+    items: [
+      'Debts Recovery Tribunal (DRT) proceedings',
+      'SARFAESI Act matters & possession disputes',
+      'Bank auction (e-auction) challenges',
+      'DRAT Allahabad appeals',
     ],
   },
   {

@@ -20,6 +20,9 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceSelection from '@/components/ServiceSelection'
+import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
+import LucknowChambers from '@/components/LucknowChambers'
 import FirmCredentials from '@/components/FirmCredentials'
 import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
@@ -28,9 +31,10 @@ import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
 import { serviceStages, serviceStatutes, serviceToc, serviceForumJurisdiction } from '@/lib/guides/serviceLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
-import { CHAMBER_TEL } from '@/lib/contactLinks'
+import { CHAMBER_TEL, LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const searchContent = serviceSearchContent['service-lawyer-lucknow']
 const serviceLead = teamMembers.find((member) => member.slug === 'jitendra-tiwari')
 const serviceTeam = ['aditya-narayan-shukla', 'devesh-tiwari', 'abhishek-mishra']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
@@ -49,10 +53,10 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'Service Matter Lawyer in Lucknow | CAT, UPPST & High Court' },
-  description:
-    'Service Matter Advocate in Lucknow before CAT Lucknow Bench, UP Public Services Tribunal (Indira Bhawan) & Allahabad High Court (Writ-A). Suspension & pension.',
+  title: { absolute: searchContent.title },
+  description: searchContent.description,
   keywords: [
+    searchContent.attorneyKeyword,
     'Service Lawyer Lucknow',
     'Service Matter Advocate Lucknow',
     'Service Tribunal Lawyer Lucknow',
@@ -94,6 +98,7 @@ export const metadata: Metadata = {
 const serviceMattersJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
+  ...LUCKNOW_SERVICE_LOCATION,
   name: 'Sumanjari & Co. Advocates — Service & Employment Matters',
   url: `${SITE_URL}/services/service-lawyer-lucknow`,
   description:
@@ -320,7 +325,7 @@ export default async function ServiceEmploymentMattersPage() {
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceFaqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(withServiceSelectionFaq(serviceFaqJsonLd, searchContent)) }}
       />
       <script
         type="application/ld+json"
@@ -392,6 +397,9 @@ export default async function ServiceEmploymentMattersPage() {
             </p>
             <TeamCarousel members={serviceTeam} label="Service and employment team members" />
           </section>
+
+          <LucknowChambers />
+          <ServiceSelection content={searchContent} />
 
           <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>

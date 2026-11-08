@@ -16,6 +16,9 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceSelection from '@/components/ServiceSelection'
+import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
+import LucknowChambers from '@/components/LucknowChambers'
 import FirmCredentials from '@/components/FirmCredentials'
 import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
@@ -24,9 +27,10 @@ import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
 import { civilStages, civilStatutes, civilToc } from '@/lib/guides/civilLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
-import { CHAMBER_TEL } from '@/lib/contactLinks'
+import { CHAMBER_TEL, LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const searchContent = serviceSearchContent['civil-lawyer-lucknow']
 const civilLead = teamMembers.find((member) => member.slug === 'jitendra-tiwari')
 const civilTeam = ['aditya-narayan-shukla', 'priyesh-dwivedi', 'adarsh-pratap-singh', 'devesh-tiwari']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
@@ -45,10 +49,10 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'Civil Lawyer in Lucknow | Recovery Suits, Injunctions & Appeals' },
-  description:
-    'Civil Lawyer in Lucknow at Civil Court Kaiserbagh & Allahabad High Court (Chamber D-311). Money recovery suits, Order 39 injunctions, partition & appeals.',
+  title: { absolute: searchContent.title },
+  description: searchContent.description,
   keywords: [
+    searchContent.attorneyKeyword,
     'Civil Lawyer Lucknow',
     'Civil Lawyer in Lucknow',
     'Civil Litigation Lawyer Lucknow',
@@ -81,6 +85,7 @@ export const metadata: Metadata = {
 const civilMattersJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
+  ...LUCKNOW_SERVICE_LOCATION,
   name: 'Sumanjari & Co. Advocates — Civil Advocate & Lawyer in Lucknow',
   url: `${SITE_URL}/services/civil-lawyer-lucknow`,
   description:
@@ -364,7 +369,7 @@ export default async function CivilMattersPage() {
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(civilFaqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(withServiceSelectionFaq(civilFaqJsonLd, searchContent)) }}
       />
       <script
         type="application/ld+json"
@@ -438,6 +443,9 @@ export default async function CivilMattersPage() {
             </p>
             <TeamCarousel members={civilTeam} label="Civil law team members" />
           </section>
+
+          <LucknowChambers />
+          <ServiceSelection content={searchContent} />
 
           <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>

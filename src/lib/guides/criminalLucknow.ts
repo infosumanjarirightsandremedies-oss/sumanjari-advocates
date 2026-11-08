@@ -127,6 +127,8 @@ export const criminalStages: GuideStage[] = [
 
 export const criminalToc: GuideTocItem[] = [
   { id: 'criminal-team', label: 'Our Team' },
+  { id: 'lucknow-chambers', label: 'Our Lucknow Chambers' },
+  { id: 'choosing-an-advocate', label: 'Choosing a Lawyer or Advocate' },
   { id: 'forums', label: 'Criminal Courts in Lucknow' },
   { id: 'statutory-framework', label: 'Statutory Framework: BNS, BNSS, BSA' },
   { id: 'bnss-cross-reference', label: 'IPC/CrPC vs. BNS/BNSS Cross-Reference' },

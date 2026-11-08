@@ -16,6 +16,9 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceSelection from '@/components/ServiceSelection'
+import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
+import LucknowChambers from '@/components/LucknowChambers'
 import FirmCredentials from '@/components/FirmCredentials'
 import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
@@ -23,10 +26,11 @@ import TeamCarousel from '@/components/TeamCarousel'
 import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
 import { taxLucknowStages, taxLucknowStatutes, taxLucknowToc } from '@/lib/guides/taxLucknow'
 import { teamMembers } from '@/lib/team'
-import { CHAMBER_TEL } from '@/lib/contactLinks'
+import { CHAMBER_TEL, LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const searchContent = serviceSearchContent['tax-lawyer-lucknow']
 
 const taxLead = teamMembers.find((member) => member.slug === 'aditya-narayan-shukla')
 const taxTeam = ['arti-dwivedi', 'jitendra-tiwari', 'prabhash-yadav', 'vinod-arya', 'abhishek-mishra']
@@ -46,10 +50,10 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'Tax Lawyer & GST Advocate in Lucknow | ITAT, GSTAT & Stamp' },
-  description:
-    'Tax Lawyer & GST Advocate in Lucknow. Representation before ITAT Lucknow Bench, GSTAT, CGST/UPGST Authorities, Sec 148 Income Tax, Stamp Sec 47-A & High Court.',
+  title: { absolute: searchContent.title },
+  description: searchContent.description,
   keywords: [
+    searchContent.attorneyKeyword,
     'Tax & Revenue Advocate and Lawyer in Lucknow',
     'Tax Advocate Lucknow',
     'Revenue Advocate Lucknow',
@@ -87,6 +91,7 @@ export const metadata: Metadata = {
 const taxMattersJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
+  ...LUCKNOW_SERVICE_LOCATION,
   name: 'Sumanjari & Co. Advocates — Tax & Revenue Advocate and Lawyer in Lucknow',
   url: `${SITE_URL}/services/tax-lawyer-lucknow`,
   description:
@@ -267,7 +272,7 @@ export default async function TaxRevenueMattersPage() {
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(taxFaqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(withServiceSelectionFaq(taxFaqJsonLd, searchContent)) }}
       />
       <script
         type="application/ld+json"
@@ -340,6 +345,9 @@ export default async function TaxRevenueMattersPage() {
             </p>
             <TeamCarousel members={taxTeam} label="Tax and revenue team members" />
           </section>
+
+          <LucknowChambers />
+          <ServiceSelection content={searchContent} />
 
           <div id="tax-overview" className="mb-16 scroll-mt-28 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>

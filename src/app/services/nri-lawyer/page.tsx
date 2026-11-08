@@ -4,23 +4,27 @@ import type { Metadata } from 'next'
 import { ArrowLeft, ArrowUpRight, Globe2, Home, ScrollText, Users, Heart, Scale, FileCheck2, Phone } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceSelection from '@/components/ServiceSelection'
+import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
+import LucknowChambers from '@/components/LucknowChambers'
 import FirmCredentials from '@/components/FirmCredentials'
 import ServiceStats from '@/components/ServiceStats'
 import TeamCarousel from '@/components/TeamCarousel'
 import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
 import { nriStages, nriStatutes, nriToc } from '@/lib/guides/nriLucknow'
 import { teamMembers } from '@/lib/team'
-import { CHAMBER_TEL, whatsappUrl } from '@/lib/contactLinks'
+import { CHAMBER_TEL, LUCKNOW_SERVICE_LOCATION, whatsappUrl } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const searchContent = serviceSearchContent['nri-lawyer']
 const nriLead = teamMembers.find((member) => member.slug === 'aishwarya-pandey')
 const nriTeam = ['jitendra-tiwari', 'shishir-pandey']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
 
 export const metadata: Metadata = {
-  title: { absolute: 'NRI Lawyer in Lucknow | NRI Property Disputes, POA & Divorce' },
-  description: 'NRI Lawyer in Lucknow & UP for overseas Indians. Remote representation in NRI property disputes, illegal possession, Power of Attorney (POA) & NRI divorce.',
-  keywords: ['NRI Lawyer', 'NRI Advocate', 'NRI Legal Services', 'NRI Lawyer in Lucknow', 'NRI Property Dispute Lawyer', 'NRI Power of Attorney', 'NRI Inheritance Lawyer', 'NRI Divorce Lawyer'],
+  title: { absolute: searchContent.title },
+  description: searchContent.description,
+  keywords: [searchContent.attorneyKeyword, 'NRI Lawyer', 'NRI Advocate', 'NRI Legal Services', 'NRI Lawyer in Lucknow', 'NRI Property Dispute Lawyer', 'NRI Power of Attorney', 'NRI Inheritance Lawyer', 'NRI Divorce Lawyer'],
   alternates: { canonical: '/services/nri-lawyer' },
   twitter: {
     card: 'summary_large_image',
@@ -191,6 +195,7 @@ const faqs = [
 const serviceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
+  ...LUCKNOW_SERVICE_LOCATION,
   name: 'Sumanjari & Co. Advocates — NRI Lawyer in Lucknow',
   url: `${SITE_URL}/services/nri-lawyer`,
   description: 'Legal assistance for Non-Resident Indians with property disputes, inheritance, powers of attorney, family matters, and litigation in Lucknow, Uttar Pradesh and across India.',
@@ -242,7 +247,7 @@ export default function NriLegalServicesPage() {
   return (
     <main className="relative min-h-screen">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(withServiceSelectionFaq(faqJsonLd, searchContent)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <Navbar />
       <section className="py-24 md:py-32">
@@ -258,7 +263,7 @@ export default function NriLegalServicesPage() {
                 <span className="font-caps text-xs uppercase tracking-widest">NRI Legal Services</span>
               </div>
               <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-                NRI Lawyer &amp; Legal Services <em className="text-gold-gradient">in Lucknow</em> — Property Disputes, Power of Attorney &amp; Matrimonial Representation
+                NRI Lawyer &amp; Advocate, Legal Services <em className="text-gold-gradient">in Lucknow</em> — Property Disputes, Power of Attorney &amp; Matrimonial Representation
               </h1>
               <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
                 Living abroad should not leave your legal affairs in Lucknow and India unattended. Our NRI lawyers and advocates in Lucknow assist Non-Resident Indians with property disputes, inheritance, family disputes, documentation, and litigation, with Adv. Aishwarya Pandey as lead advocate.
@@ -311,6 +316,9 @@ export default function NriLegalServicesPage() {
             </p>
             <TeamCarousel members={nriTeam} label="NRI legal services team members" />
           </section>
+
+          <LucknowChambers />
+          <ServiceSelection content={searchContent} />
 
           <section id="nri-forums" aria-labelledby="nri-forums-heading" className="mb-16 scroll-mt-28">
             <h2 id="nri-forums-heading" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Which Court or Authority Can Hear Your Matter?</h2>

@@ -1,6 +1,7 @@
 // Shared by /llms.txt, /llms-full.txt, and /llms/<area>.txt.
 import { FIRM_EMAIL, officeLabels, teamMembers } from '@/lib/team'
 import { FIRM_BACKGROUND, FIRM_CREDENTIALS } from '@/lib/firm'
+import { LUCKNOW_CHAMBER_ADDRESS } from '@/lib/contactLinks'
 
 export const SITE_URL = 'https://www.sumanjariadvocates.com'
 
@@ -22,6 +23,7 @@ export const CONTACT_LINES = [
   '- Phone: +91-83024-71764.',
   '- Email: info.sumanjarirightsandremedies@gmail.com.',
   '- Lucknow chamber: Block D-311, Allahabad High Court, Lucknow Bench.',
+  `- Additional Lucknow chamber: ${LUCKNOW_CHAMBER_ADDRESS.street}, ${LUCKNOW_CHAMBER_ADDRESS.city}.`,
 ]
 
 // Mirrors the LegalService JSON-LD in app/layout.tsx so engines see one consistent entity.
@@ -30,6 +32,7 @@ export const KEY_FACTS = [
   '- Type: Law firm (advocates) in India',
   ...FIRM_CREDENTIALS.map(({ value, label }) => `- ${label}: ${value}`),
   '- Chamber: Chamber No. Block D-311, Allahabad High Court, Lucknow Bench, Lucknow, Uttar Pradesh, India',
+  `- Lucknow chamber: ${LUCKNOW_CHAMBER_ADDRESS.street}, ${LUCKNOW_CHAMBER_ADDRESS.city}, Uttar Pradesh, India`,
   `- Offices: ${Object.values(officeLabels)
     .map((office) => `${office.title} — ${office.subtitle}`)
     .join(' ')}`,
@@ -133,7 +136,12 @@ export const SERVICE_LINKS: LlmsLink[] = [
   {
     path: '/services/banking-recovery-lawyer-lucknow',
     title: 'Banking & Recovery Matters',
-    description: 'DRT, SARFAESI, and bank recovery matters for banks, borrowers, and guarantors, led by Adv. Jitendra Tiwari.',
+    description: 'Loan recovery, One-Time Settlement (OTS), and negotiable instruments (cheque bounce) matters for banks, borrowers, and guarantors, led by Adv. Jitendra Tiwari.',
+  },
+  {
+    path: '/services/drt-lawyer-lucknow',
+    title: 'DRT & SARFAESI Matters',
+    description: 'Debts Recovery Tribunal proceedings, SARFAESI enforcement, possession and bank auction disputes, and DRAT Allahabad appeals.',
   },
   {
     path: '/services/high-court-lawyer-lucknow',
@@ -221,7 +229,7 @@ export const PRACTICE_AREA_GUIDES: PracticeAreaGuide[] = [
   {
     slug: 'banking-recovery',
     title: 'Banking & Recovery Matters',
-    servicePaths: ['/services/banking-recovery-lawyer-lucknow'],
+    servicePaths: ['/services/banking-recovery-lawyer-lucknow', '/services/drt-lawyer-lucknow'],
     categories: ['Banking & Recovery Matters'],
   },
 ]

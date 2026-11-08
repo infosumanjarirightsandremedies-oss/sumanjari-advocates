@@ -93,6 +93,8 @@ export const highCourtStages: GuideStage[] = [
 
 export const highCourtToc: GuideTocItem[] = [
   { id: 'hc-team', label: 'Our Team' },
+  { id: 'lucknow-chambers', label: 'Our Lucknow Chambers' },
+  { id: 'choosing-an-advocate', label: 'Choosing a Lawyer or Advocate' },
   { id: 'about-bench', label: 'About the Lucknow Bench' },
   { id: 'districts', label: 'Districts Under the Lucknow Bench' },
   { id: 'matters', label: 'Matters We Handle at the Lucknow Bench' },

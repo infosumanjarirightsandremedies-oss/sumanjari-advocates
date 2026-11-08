@@ -120,6 +120,8 @@ export const divorceStages: GuideStage[] = [
 
 export const divorceToc: GuideTocItem[] = [
   { id: 'divorce-team', label: 'Our Team' },
+  { id: 'lucknow-chambers', label: 'Our Lucknow Chambers' },
+  { id: 'choosing-an-advocate', label: 'Choosing a Lawyer or Advocate' },
   { id: 'courts', label: 'Courts, Jurisdiction & Representation' },
   { id: 'statutory-framework', label: 'Which Law Applies to Your Marriage?' },
   { id: 'mutual-vs-contested', label: 'Mutual Consent or Contested Divorce?' },

@@ -17,6 +17,9 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceSelection from '@/components/ServiceSelection'
+import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
+import LucknowChambers from '@/components/LucknowChambers'
 import FirmCredentials from '@/components/FirmCredentials'
 import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
@@ -25,9 +28,10 @@ import { GuideToc, GuideStages, StatuteTable } from '@/components/LucknowGuide'
 import { consumerLucknowStages, consumerLucknowToc, consumerLucknowStatutes } from '@/lib/guides/consumerLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
-import { CHAMBER_TEL } from '@/lib/contactLinks'
+import { CHAMBER_TEL, LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const searchContent = serviceSearchContent['consumer-motor-accident-lawyer-lucknow']
 const consumerLead = teamMembers.find((member) => member.slug === 'jitendra-tiwari')
 const consumerTeam = ['prerna-yaduvanshi', 'aditya-narayan-shukla', 'priyesh-dwivedi']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
@@ -46,10 +50,10 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'Consumer Court & MACT Lawyer in Lucknow | Insurance Claims' },
-  description:
-    'Consumer Court Lawyer & MACT Advocate in Lucknow. Representation before District/State Consumer Commission (SCDRC UP), MACT Lucknow & Insurance Disputes.',
+  title: { absolute: searchContent.title },
+  description: searchContent.description,
   keywords: [
+    searchContent.attorneyKeyword,
     'Consumer Lawyer Lucknow',
     'Consumer Forum Advocate Lucknow',
     'Consumer Protection Act Lawyer Lucknow',
@@ -83,6 +87,7 @@ export const metadata: Metadata = {
 const consumerMattersJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
+  ...LUCKNOW_SERVICE_LOCATION,
   name: 'Sumanjari & Co. Advocates — Consumer & Motor Accident Matters',
   url: `${SITE_URL}/services/consumer-motor-accident-lawyer-lucknow`,
   description:
@@ -243,7 +248,7 @@ export default async function ConsumerMotorAccidentMattersPage() {
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(consumerFaqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(withServiceSelectionFaq(consumerFaqJsonLd, searchContent)) }}
       />
       <script
         type="application/ld+json"
@@ -312,6 +317,9 @@ export default async function ConsumerMotorAccidentMattersPage() {
             </p>
             <TeamCarousel members={consumerTeam} label="Consumer and accident claims team members" />
           </section>
+
+          <LucknowChambers />
+          <ServiceSelection content={searchContent} />
 
           <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>

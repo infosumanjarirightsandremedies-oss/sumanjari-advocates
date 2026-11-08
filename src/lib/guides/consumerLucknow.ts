@@ -66,6 +66,8 @@ export const consumerLucknowStages: GuideStage[] = [
 
 export const consumerLucknowToc: GuideTocItem[] = [
   { id: 'consumer-team', label: 'Our Team' },
+  { id: 'lucknow-chambers', label: 'Our Lucknow Chambers' },
+  { id: 'choosing-an-advocate', label: 'Choosing a Lawyer or Advocate' },
   { id: 'consumer-statutes', label: 'Applicable Laws and Forums' },
   { id: 'consumer-procedure', label: 'Complaint and Claim Procedure', children: consumerLucknowStages.map(({ id, title }) => ({ id, label: title })) },
   { id: 'consumer-mact-multiplier-fafo', label: 'MACT Compensation & FAFO Appeals' },

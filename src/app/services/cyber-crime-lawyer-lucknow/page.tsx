@@ -19,6 +19,9 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceSelection from '@/components/ServiceSelection'
+import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
+import LucknowChambers from '@/components/LucknowChambers'
 import FirmCredentials from '@/components/FirmCredentials'
 import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
@@ -27,9 +30,10 @@ import { GuideToc, GuideStages, StatuteTable } from '@/components/LucknowGuide'
 import { cyberCrimeLucknowStages, cyberCrimeLucknowToc, cyberCrimeLucknowStatutes } from '@/lib/guides/cyberCrimeLucknow'
 import { getBlogPostsByCategories } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
-import { CHAMBER_TEL } from '@/lib/contactLinks'
+import { CHAMBER_TEL, LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const searchContent = serviceSearchContent['cyber-crime-lawyer-lucknow']
 const cyberCrimeLead = teamMembers.find((member) => member.slug === 'aishwarya-pandey')
 const cyberCrimeTeam = ['jitendra-tiwari', 'abhishek-mishra']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
@@ -48,10 +52,10 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'Cyber Crime Lawyer in Lucknow | Bank Account Unfreeze & IT Act' },
-  description:
-    'Cyber Crime Lawyer in Lucknow at Cyber Thana Gomti Nagar & High Court. Bank account freeze/lien removal (Sec 106/503 BNSS), cyber fraud bail & IT Act defence.',
+  title: { absolute: searchContent.title },
+  description: searchContent.description,
   keywords: [
+    searchContent.attorneyKeyword,
     'Cyber Crime Lawyer Lucknow',
     'Cyber Crime Complaint Lucknow',
     'Cyber Thana Lucknow',
@@ -85,6 +89,7 @@ export const metadata: Metadata = {
 const cyberCrimeJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
+  ...LUCKNOW_SERVICE_LOCATION,
   name: 'Sumanjari & Co. Advocates — Cyber Crime Matters',
   url: `${SITE_URL}/services/cyber-crime-lawyer-lucknow`,
   description:
@@ -314,7 +319,7 @@ export default async function CyberCrimeLawyerAdvocatePage() {
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(cyberCrimeFaqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(withServiceSelectionFaq(cyberCrimeFaqJsonLd, searchContent)) }}
       />
       <script
         type="application/ld+json"
@@ -342,7 +347,7 @@ export default async function CyberCrimeLawyerAdvocatePage() {
                 <div className="h-px w-12 bg-gold-500" />
               </div>
               <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-                Cyber Crime Lawyer in Lucknow — <em className="text-gold-gradient">Bank Account Unfreeze, Cyber Fraud &amp; IT Act Defence</em>
+                Cyber Crime Lawyer &amp; Advocate in Lucknow — <em className="text-gold-gradient">Bank Account Unfreeze, Cyber Fraud &amp; IT Act Defence</em>
               </h1>
               <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
                 Our cyber crime lawyers and advocates in Lucknow assist with complaints, bank account freeze &amp; unfreeze
@@ -382,6 +387,9 @@ export default async function CyberCrimeLawyerAdvocatePage() {
             </p>
             <TeamCarousel members={cyberCrimeTeam} label="Cyber crime team members" />
           </section>
+
+          <LucknowChambers />
+          <ServiceSelection content={searchContent} />
 
           <section className="mb-16 border-y border-gold-500/25 py-8" aria-labelledby="urgent-cyber-fraud">
             <h2 id="urgent-cyber-fraud" className="mb-4 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">

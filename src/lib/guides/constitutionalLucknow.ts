@@ -82,6 +82,8 @@ export const constitutionalStages: GuideStage[] = [
 
 export const constitutionalToc: GuideTocItem[] = [
   { id: 'constitutional-team', label: 'Our Team' },
+  { id: 'lucknow-chambers', label: 'Our Lucknow Chambers' },
+  { id: 'choosing-an-advocate', label: 'Choosing a Lawyer or Advocate' },
   { id: 'constitutional-forums', label: 'High Court and Statutory Forums' },
   { id: 'constitutional-statutory-framework', label: 'Constitutional and Procedural Framework' },
   { id: 'writ-categories', label: 'Writ Categories at the Lucknow Bench' },

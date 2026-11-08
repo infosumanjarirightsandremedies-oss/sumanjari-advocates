@@ -66,6 +66,8 @@ export const cyberCrimeLucknowStages: GuideStage[] = [
 
 export const cyberCrimeLucknowToc: GuideTocItem[] = [
   { id: 'cyber-crime-team', label: 'Our Team' },
+  { id: 'lucknow-chambers', label: 'Our Lucknow Chambers' },
+  { id: 'choosing-an-advocate', label: 'Choosing a Lawyer or Advocate' },
   { id: 'urgent-cyber-fraud', label: 'Immediate Fraud Reporting' },
   { id: 'cyber-complaint-lucknow', label: 'Complaint and FIR Routes' },
   { id: 'frozen-bank-account', label: 'Bank Freeze and Release Authority' },

@@ -25,7 +25,7 @@ import TeamCarousel from '@/components/TeamCarousel'
 import { GuideToc } from '@/components/LucknowGuide'
 import { FIRM_BACKGROUND, FIRM_CREDENTIALS } from '@/lib/firm'
 import { teamMembers } from '@/lib/team'
-import { CHAMBER_TEL } from '@/lib/contactLinks'
+import { CHAMBER_TEL, LUCKNOW_CHAMBER_ADDRESS } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
 const PAGE_PATH = '/law-firm-in-lucknow'
@@ -82,6 +82,7 @@ const practiceAreas = [
   { icon: Briefcase, title: 'Service Lawyer in Lucknow', href: '/services/service-lawyer-lucknow' },
   { icon: FileWarning, title: 'Tax Lawyer in Lucknow', href: '/services/tax-lawyer-lucknow' },
   { icon: Banknote, title: 'Banking & Recovery Matters', href: '/services/banking-recovery-lawyer-lucknow' },
+  { icon: Landmark, title: 'DRT & SARFAESI Matters', href: '/services/drt-lawyer-lucknow' },
   { icon: Building2, title: 'Company & Corporate Matters', href: '/services/company-corporate-lawyer-lucknow' },
   { icon: ShieldCheck, title: 'Consumer & Motor Accident Matters', href: '/services/consumer-motor-accident-lawyer-lucknow' },
   { icon: Scale, title: 'Constitutional & Writ Matters', href: '/services/constitutional-writ-lawyer-lucknow' },
@@ -93,7 +94,7 @@ const practiceAreas = [
 
 const faqs = [
   { question: 'What does Sumanjari & Co. Advocates handle as a law firm in Lucknow?', answer: 'We handle civil, criminal, family and matrimonial, property, cyber crime, service and employment, tax and revenue, RERA, banking recovery (DRT), company and corporate, constitutional and writ, and consumer and motor accident matters before the Civil Court, the Family Court, and the Allahabad High Court, Lucknow Bench.' },
-  { question: 'Where is your Lucknow chamber located?', answer: 'Our chamber is at Block D-311, Allahabad High Court, Lucknow Bench, Vibhuti Khand, Gomti Nagar, Lucknow. We also appear before the Civil Court, Kaiserbagh and the Family Court on Wala Qadar Road, Qaiserbagh, depending on the matter.' },
+  { question: 'Where is your Lucknow chamber located?', answer: `Our Lucknow chamber is at ${LUCKNOW_CHAMBER_ADDRESS.street}, ${LUCKNOW_CHAMBER_ADDRESS.city}. Our High Court chamber remains at Block D-311, Allahabad High Court, Lucknow Bench, Vibhuti Khand, Gomti Nagar, Lucknow. We also appear before the Civil Court, Kaiserbagh and the Family Court on Wala Qadar Road, Qaiserbagh, depending on the matter.` },
   { question: 'Which courts do you appear before in Lucknow?', answer: 'Our advocates appear before the Allahabad High Court, Lucknow Bench, the Civil Court at Kaiserbagh (Civil Judge, Sessions Court, and District Judge), the Family Court, Lucknow, the Commercial Court, Lucknow, and before UP-RERA, consumer commissions, and tribunals seated in Lucknow.' },
   { question: 'Do you only practice in Lucknow, or also elsewhere in Uttar Pradesh and NCR?', answer: 'Our Lucknow team practises across Uttar Pradesh, including the districts under the Allahabad High Court, Lucknow Bench, and the Principal Seat at Prayagraj. We also have advocates handling matters in Delhi NCR; see our team directory for each advocate\'s specific courts and locations.' },
   { question: 'How do I book a consultation with your Lucknow team?', answer: 'You can call or WhatsApp the chamber directly, or use the contact form on this site. Share a brief description of your matter and relevant documents so the right advocate can be identified for an initial consultation.' },
@@ -129,13 +130,13 @@ const approachSteps = [
 ]
 
 const toc = [
+  { id: 'team', label: 'Our Team' },
+  { id: 'offices', label: 'Our Lucknow Chambers' },
   { id: 'about', label: 'About the Firm' },
-  { id: 'offices', label: 'Our Offices in Lucknow' },
   { id: 'forums', label: 'Courts & Forums We Appear Before' },
   { id: 'practice-areas', label: 'Practice Areas We Handle in Lucknow' },
   { id: 'who-we-serve', label: 'Who We Represent' },
   { id: 'approach', label: 'Our Approach to Representation' },
-  { id: 'team', label: 'Our Lucknow Team' },
   { id: 'faqs', label: 'FAQs' },
   { id: 'contact', label: 'Speak to Our Lucknow Team' },
 ]
@@ -148,6 +149,17 @@ const structuredData = [
     description: metadata.description,
     telephone: CHAMBER_TEL.replace('tel:', ''),
     email: 'info.sumanjarirightsandremedies@gmail.com',
+    location: {
+      '@type': 'Place',
+      name: 'Lucknow Chamber',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: LUCKNOW_CHAMBER_ADDRESS.street,
+        addressLocality: LUCKNOW_CHAMBER_ADDRESS.city,
+        addressRegion: 'Uttar Pradesh',
+        addressCountry: 'IN',
+      },
+    },
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'Chamber No. Block D – 311, Allahabad High Court, Lucknow Bench, Vibhuti Khand, Gomti Nagar',
@@ -250,26 +262,6 @@ export default async function LawFirmInLucknowPage() {
             </div>
           </section>
 
-          <section id="offices" className="mb-16 scroll-mt-28">
-            <h2 className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Our Offices in Lucknow</h2>
-            <div className="grid gap-5 sm:grid-cols-2">
-              <div className="glass-card rounded-sm border border-gold-500/20 p-6 dark:border-gold-500/15">
-                <div className="mb-3 flex items-center gap-2">
-                  <MapPin className="h-5 w-5 text-gold-600 dark:text-gold-400" />
-                  <h3 className="font-display text-base font-bold text-navy-900 dark:text-cream">Chamber, Allahabad High Court, Lucknow Bench</h3>
-                </div>
-                <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">Block D-311, Vibhuti Khand, Gomti Nagar, Lucknow — for writs, bail, quashing, and civil, criminal, family and service appeals before the Lucknow Bench.</p>
-              </div>
-              <div className="glass-card rounded-sm border border-gold-500/20 p-6 dark:border-gold-500/15">
-                <div className="mb-3 flex items-center gap-2">
-                  <MapPin className="h-5 w-5 text-gold-600 dark:text-gold-400" />
-                  <h3 className="font-display text-base font-bold text-navy-900 dark:text-cream">Civil Court & Family Court, Kaiserbagh</h3>
-                </div>
-                <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">We appear before the Civil Judge, Sessions Court and District Judge at the Civil Court, Kaiserbagh, and before the Family Court on Wala Qadar Road, Qaiserbagh, for trial-stage matters.</p>
-              </div>
-            </div>
-          </section>
-
           <section id="forums" className="mb-16 scroll-mt-28">
             <h2 className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Courts & Forums We Appear Before</h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
@@ -343,6 +335,33 @@ export default async function LawFirmInLucknowPage() {
               Each advocate below handles a defined set of practice areas; visit a profile for their individual experience and the courts they appear before.
             </p>
             <TeamCarousel members={lucknowTeam} label="Lucknow team members" />
+          </section>
+
+          <section id="offices" className="mb-16 scroll-mt-28">
+            <h2 className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Our Lucknow Chambers</h2>
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div className="glass-card rounded-sm border border-gold-500/20 p-6 dark:border-gold-500/15">
+                <div className="mb-3 flex items-center gap-2">
+                  <MapPin className="h-5 w-5 text-gold-600 dark:text-gold-400" />
+                  <h3 className="font-display text-base font-bold text-navy-900 dark:text-cream">Lucknow Chamber</h3>
+                </div>
+                <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">{LUCKNOW_CHAMBER_ADDRESS.street}, {LUCKNOW_CHAMBER_ADDRESS.city}</p>
+              </div>
+              <div className="glass-card rounded-sm border border-gold-500/20 p-6 dark:border-gold-500/15">
+                <div className="mb-3 flex items-center gap-2">
+                  <MapPin className="h-5 w-5 text-gold-600 dark:text-gold-400" />
+                  <h3 className="font-display text-base font-bold text-navy-900 dark:text-cream">Chamber, Allahabad High Court, Lucknow Bench</h3>
+                </div>
+                <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">Block D-311, Vibhuti Khand, Gomti Nagar, Lucknow — for writs, bail, quashing, and civil, criminal, family and service appeals before the Lucknow Bench.</p>
+              </div>
+              <div className="glass-card rounded-sm border border-gold-500/20 p-6 dark:border-gold-500/15">
+                <div className="mb-3 flex items-center gap-2">
+                  <MapPin className="h-5 w-5 text-gold-600 dark:text-gold-400" />
+                  <h3 className="font-display text-base font-bold text-navy-900 dark:text-cream">Civil Court & Family Court, Kaiserbagh</h3>
+                </div>
+                <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">We appear before the Civil Judge, Sessions Court and District Judge at the Civil Court, Kaiserbagh, and before the Family Court on Wala Qadar Road, Qaiserbagh, for trial-stage matters.</p>
+              </div>
+            </div>
           </section>
 
           <section id="faqs" className="mb-16 scroll-mt-28">

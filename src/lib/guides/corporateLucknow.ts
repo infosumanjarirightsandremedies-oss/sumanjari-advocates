@@ -84,6 +84,8 @@ export const corporateLucknowStatutes: StatuteRow[] = [
 
 export const corporateLucknowToc: GuideTocItem[] = [
   { id: 'corporate-team', label: 'Our Team' },
+  { id: 'lucknow-chambers', label: 'Our Lucknow Chambers' },
+  { id: 'choosing-an-advocate', label: 'Choosing a Lawyer or Advocate' },
   { id: 'corporate-overview', label: 'Company and commercial practice' },
   { id: 'corporate-statutes', label: 'Statutory framework' },
   { id: 'corporate-forums', label: 'Competent forums' },

@@ -18,6 +18,9 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceSelection from '@/components/ServiceSelection'
+import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
+import LucknowChambers from '@/components/LucknowChambers'
 import FirmCredentials from '@/components/FirmCredentials'
 import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
@@ -26,9 +29,10 @@ import { GuideToc, GuideStages, StatuteTable } from '@/components/LucknowGuide'
 import { familyLucknowStages, familyLucknowToc, familyLucknowStatutes } from '@/lib/guides/familyLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
-import { CHAMBER_TEL } from '@/lib/contactLinks'
+import { CHAMBER_TEL, LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const searchContent = serviceSearchContent['family-advocate']
 const familyLead = teamMembers.find((member) => member.slug === 'aishwarya-pandey')
 const familyTeam = ['akhilesh-yadav', 'prerna-yaduvanshi']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
@@ -47,10 +51,10 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'Family Court Lawyer in Lucknow | Custody, Maintenance & DV Act' },
-  description:
-    'Family Court Lawyer in Lucknow (Kaiserbagh) & High Court (Chamber D-311). Child custody, Sec 144 BNSS / 125 CrPC maintenance, Domestic Violence & 498A defence.',
+  title: { absolute: searchContent.title },
+  description: searchContent.description,
   keywords: [
+    searchContent.attorneyKeyword,
     'Family Advocate Lucknow',
     'Family Advocate & Lawyer in Lucknow',
     'Aishwarya Pandey Family Lawyer',
@@ -89,6 +93,7 @@ export const metadata: Metadata = {
 const familyServiceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
+  ...LUCKNOW_SERVICE_LOCATION,
   '@id': `${SITE_URL}/services/family-advocate#legal-service`,
   name: 'Sumanjari & Co. Advocates — Family Advocate & Lawyer in Lucknow',
   url: `${SITE_URL}/services/family-advocate`,
@@ -296,7 +301,7 @@ export default async function FamilyMatrimonialServicePage() {
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(familyFaqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(withServiceSelectionFaq(familyFaqJsonLd, searchContent)) }}
       />
       <Navbar />
       <script
@@ -364,6 +369,9 @@ export default async function FamilyMatrimonialServicePage() {
             </p>
             <TeamCarousel members={familyTeam} label="Family law team members" />
           </section>
+
+          <LucknowChambers />
+          <ServiceSelection content={searchContent} />
 
           <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <h2 className="font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">

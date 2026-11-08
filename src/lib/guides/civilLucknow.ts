@@ -118,6 +118,8 @@ export const civilStages: GuideStage[] = [
 
 export const civilToc: GuideTocItem[] = [
   { id: 'civil-team', label: 'Our Team' },
+  { id: 'lucknow-chambers', label: 'Our Lucknow Chambers' },
+  { id: 'choosing-an-advocate', label: 'Choosing a Lawyer or Advocate' },
   { id: 'forums', label: 'Forums We Appear Before' },
   { id: 'statutory-framework', label: 'Statutory Framework for Civil Disputes' },
   { id: 'civil-core-matters', label: 'Core Civil Litigation Matters' },

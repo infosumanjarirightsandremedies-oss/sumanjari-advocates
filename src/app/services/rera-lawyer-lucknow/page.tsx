@@ -29,6 +29,10 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceSelection from '@/components/ServiceSelection'
+import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
+import LucknowChambers from '@/components/LucknowChambers'
+import { LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 import FirmCredentials from '@/components/FirmCredentials'
 import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
@@ -39,6 +43,7 @@ import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const searchContent = serviceSearchContent['rera-lawyer-lucknow']
 const reraTeam = ['jyotish-raj', 'aniket-bose', 'prerna-yaduvanshi']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
 
@@ -126,10 +131,10 @@ const reraRights = [
 ]
 
 export const metadata: Metadata = {
-  title: { absolute: 'UP RERA Lawyer in Lucknow | Builder Disputes, REAT & Refunds' },
-  description:
-    'UP RERA Lawyer in Lucknow at UP-RERA Bench (Kalakankar House), RERA Appellate Tribunal (REAT) & High Court (Chamber D-311). Sec 18 refund, delay interest & RC.',
+  title: { absolute: searchContent.title },
+  description: searchContent.description,
   keywords: [
+    searchContent.attorneyKeyword,
     'Real Estate Advocate & Lawyer',
     'Real Estate Advocate',
     'Real Estate Lawyer',
@@ -170,6 +175,7 @@ export const metadata: Metadata = {
 const reraServiceJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
+  ...LUCKNOW_SERVICE_LOCATION,
   name: 'RERA & Real Estate Legal Services in Lucknow',
   url: `${SITE_URL}/services/rera-lawyer-lucknow`,
   description:
@@ -297,7 +303,7 @@ export default async function ReraServicePage() {
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(reraFaqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(withServiceSelectionFaq(reraFaqJsonLd, searchContent)) }}
       />
       <script
         type="application/ld+json"
@@ -321,7 +327,7 @@ export default async function ReraServicePage() {
                 UP-RERA &amp; Appellate Tribunal
               </span>
               <h1 className="mt-4 font-display text-4xl font-bold leading-[1.12] text-navy-900 dark:text-cream md:text-[3.25rem]">
-                UP RERA Lawyer in Lucknow —{' '}
+                UP RERA Lawyer &amp; Advocate in Lucknow —{' '}
                 <em className="text-gold-gradient">Builder-Buyer Disputes, RERA Complaint Filing &amp; REAT Appeals</em>
               </h1>
               <p className="mt-4 max-w-xl font-body text-lg font-semibold leading-relaxed text-navy-900 dark:text-cream">
@@ -430,6 +436,9 @@ export default async function ReraServicePage() {
             </p>
             <TeamCarousel members={reraTeam} label="RERA and real estate team members" />
           </section>
+
+          <LucknowChambers />
+          <ServiceSelection content={searchContent} />
 
           <div className="mb-16">
             <h2 className="sr-only">Why Clients Choose Us</h2>

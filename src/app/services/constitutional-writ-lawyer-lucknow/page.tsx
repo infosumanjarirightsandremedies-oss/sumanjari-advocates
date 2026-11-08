@@ -16,6 +16,9 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceSelection from '@/components/ServiceSelection'
+import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
+import LucknowChambers from '@/components/LucknowChambers'
 import FirmCredentials from '@/components/FirmCredentials'
 import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
@@ -24,9 +27,10 @@ import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
 import { constitutionalStages, constitutionalStatutes, constitutionalToc } from '@/lib/guides/constitutionalLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
-import { CHAMBER_TEL } from '@/lib/contactLinks'
+import { CHAMBER_TEL, LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const searchContent = serviceSearchContent['constitutional-writ-lawyer-lucknow']
 const constitutionalLead = teamMembers.find((member) => member.slug === 'aishwarya-pandey')
 const constitutionalTeam = ['jitendra-tiwari', 'prabhash-yadav', 'abhishek-mishra', 'priyesh-dwivedi']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
@@ -45,10 +49,10 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'Writ Petition Lawyer High Court Lucknow | Art 226 & 227 Writs' },
-  description:
-    'Constitutional & Writ Petition Lawyer at Allahabad High Court, Lucknow Bench (Chamber D-311). Article 226/227 writs, Mandamus, Certiorari, Habeas Corpus & PIL.',
+  title: { absolute: searchContent.title },
+  description: searchContent.description,
   keywords: [
+    searchContent.attorneyKeyword,
     'Constitutional Lawyer Lucknow',
     'Writ Petition Lawyer Lucknow',
     'Article 226 Lawyer Lucknow',
@@ -83,6 +87,7 @@ export const metadata: Metadata = {
 const constitutionalJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
+  ...LUCKNOW_SERVICE_LOCATION,
   name: 'Sumanjari & Co. Advocates — Constitutional & Writ Matters',
   url: `${SITE_URL}/services/constitutional-writ-lawyer-lucknow`,
   description:
@@ -301,7 +306,7 @@ export default async function ConstitutionalWritMattersPage() {
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(constitutionalFaqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(withServiceSelectionFaq(constitutionalFaqJsonLd, searchContent)) }}
       />
       <script
         type="application/ld+json"
@@ -329,7 +334,7 @@ export default async function ConstitutionalWritMattersPage() {
               <div className="h-px w-12 bg-gold-500" />
             </div>
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-              Constitutional &amp; Writ Petition Lawyer at{' '}
+              Constitutional &amp; Writ Petition Lawyer &amp; Advocate at{' '}
               <em className="text-gold-gradient">Allahabad High Court, Lucknow Bench</em>
             </h1>
             <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
@@ -371,6 +376,9 @@ export default async function ConstitutionalWritMattersPage() {
             </p>
             <TeamCarousel members={constitutionalTeam} label="Constitutional and writ team members" />
           </section>
+
+          <LucknowChambers />
+          <ServiceSelection content={searchContent} />
 
           <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>

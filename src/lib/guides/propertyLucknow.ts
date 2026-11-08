@@ -82,6 +82,8 @@ export const propertyStages: GuideStage[] = [
 
 export const propertyToc: GuideTocItem[] = [
   { id: 'property-team', label: 'Our Team' },
+  { id: 'lucknow-chambers', label: 'Our Lucknow Chambers' },
+  { id: 'choosing-an-advocate', label: 'Choosing a Lawyer or Advocate' },
   { id: 'property-forums', label: 'Civil and Revenue Forums' },
   { id: 'property-court-jurisdiction', label: 'Civil Court vs. Revenue Court Jurisdiction in Lucknow' },
   { id: 'property-title-verification', label: 'Pre-Purchase Title Verification & 30-Year Due Diligence' },

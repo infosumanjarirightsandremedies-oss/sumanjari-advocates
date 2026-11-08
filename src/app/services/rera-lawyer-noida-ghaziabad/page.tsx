@@ -4,6 +4,8 @@ import type { Metadata } from 'next'
 import { ArrowLeft, ArrowUpRight, Building2, FileCheck, MapPin, MessageCircle, Phone, ScrollText } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceSelection from '@/components/ServiceSelection'
+import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
 import FirmCredentials from '@/components/FirmCredentials'
 import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
@@ -16,6 +18,7 @@ import { CHAMBER_TEL, CHAMBER_CALL_DISPLAY, NCR_CHAMBER_ADDRESS, whatsappUrl } f
 import { teamMembers } from '@/lib/team'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const searchContent = serviceSearchContent['rera-lawyer-noida-ghaziabad']
 const PAGE_PATH = '/services/rera-lawyer-noida-ghaziabad'
 const reraAdvocate = teamMembers.find((member) => member.slug === 'shishir-pandey')
 const pageTeam = ['prerna-yaduvanshi', 'jyotish-raj', 'aniket-bose']
@@ -35,10 +38,10 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'RERA Lawyer in Noida, Greater Noida & Ghaziabad | UP-RERA' },
-  description: 'RERA Lawyer for Noida, Greater Noida & Ghaziabad projects. Representation before UP-RERA Greater Noida Bench, UP-REAT Lucknow, RC Execution & NCLT by NCR team.',
+  title: { absolute: searchContent.title },
+  description: searchContent.description,
   alternates: { canonical: PAGE_PATH },
-  keywords: ['RERA Lawyer Noida', 'RERA Lawyer Ghaziabad', 'UP RERA Greater Noida Lawyer', 'Builder Buyer Dispute Noida', 'Delayed Possession Lawyer Ghaziabad', 'RERA Refund Claim Noida', 'UP RERA Order Enforcement NCR', 'RERA Appeal Lawyer Uttar Pradesh'],
+  keywords: [searchContent.attorneyKeyword, 'RERA Lawyer Noida', 'RERA Lawyer Ghaziabad', 'UP RERA Greater Noida Lawyer', 'Builder Buyer Dispute Noida', 'Delayed Possession Lawyer Ghaziabad', 'RERA Refund Claim Noida', 'UP RERA Order Enforcement NCR', 'RERA Appeal Lawyer Uttar Pradesh'],
   twitter: {
     card: 'summary_large_image',
     title: 'RERA Lawyer in Noida & Ghaziabad | Builder Claims',
@@ -162,7 +165,7 @@ export default async function NoidaGhaziabadReraPage() {
   return (
     <main className="relative min-h-screen">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(withServiceSelectionFaq(faqSchema, searchContent)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Navbar />
       <div className="mx-auto max-w-7xl px-6 pb-20 pt-32 md:pt-36">
@@ -174,7 +177,7 @@ export default async function NoidaGhaziabadReraPage() {
           <div>
             <span className="font-caps text-xs uppercase tracking-[0.25em] text-gold-700 dark:text-gold-400">UP-RERA &amp; Appellate Matters</span>
             <h1 className="mt-4 font-display text-4xl font-bold leading-[1.12] text-navy-900 dark:text-cream md:text-[3.25rem]">
-              RERA Lawyer in Noida, Greater Noida &amp; Ghaziabad —{' '}
+              RERA Lawyer &amp; Advocate in Noida, Greater Noida &amp; Ghaziabad —{' '}
               <em className="text-gold-gradient">UP-RERA NCR Bench &amp; UP-REAT Appeals</em>
             </h1>
             <p className="mt-5 max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
@@ -217,6 +220,8 @@ export default async function NoidaGhaziabadReraPage() {
           </p>
           <TeamCarousel members={pageTeam} label="RERA team members" />
         </section>
+
+        <ServiceSelection content={searchContent} />
 
         <section className="mb-16" aria-labelledby="ncr-lucknow-advantage">
           <h2 id="ncr-lucknow-advantage" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">

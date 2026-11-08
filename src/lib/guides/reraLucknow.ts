@@ -71,6 +71,8 @@ export const reraLucknowStages: GuideStage[] = [
 
 export const reraLucknowToc: GuideTocItem[] = [
   { id: 'rera-team', label: 'Our Team' },
+  { id: 'lucknow-chambers', label: 'Our Lucknow Chambers' },
+  { id: 'choosing-an-advocate', label: 'Choosing a Lawyer or Advocate' },
   { id: 'overview', label: 'RERA and builder-buyer disputes' },
   { id: 'cities', label: 'Lucknow, regional forums and appeals' },
   { id: 'services', label: 'RERA matters we handle' },

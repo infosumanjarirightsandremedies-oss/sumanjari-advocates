@@ -82,6 +82,7 @@ export const reraNoidaGhaziabadStages: GuideStage[] = [
 
 export const reraNoidaGhaziabadToc: GuideTocItem[] = [
   { id: 'delhi-team', label: 'Our Team' },
+  { id: 'choosing-an-advocate', label: 'Choosing a Lawyer or Advocate' },
   { id: 'ncr-lucknow-advantage', label: 'NCR to Lucknow RERA advantage' },
   { id: 'project-locations', label: 'Project location and the appropriate forum' },
   { id: 'rera-matters', label: 'Builder-buyer and RERA matters' },

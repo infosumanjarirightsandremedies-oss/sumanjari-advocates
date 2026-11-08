@@ -95,6 +95,8 @@ export const taxLucknowStatutes: StatuteRow[] = [
 
 export const taxLucknowToc: GuideTocItem[] = [
   { id: 'tax-revenue-team', label: 'Our Team' },
+  { id: 'lucknow-chambers', label: 'Our Lucknow Chambers' },
+  { id: 'choosing-an-advocate', label: 'Choosing a Lawyer or Advocate' },
   { id: 'tax-overview', label: 'Tax and revenue practice' },
   { id: 'tax-statutes', label: 'Separate statutory tracks' },
   { id: 'tax-forums', label: 'Competent forums' },

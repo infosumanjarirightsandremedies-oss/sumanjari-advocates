@@ -18,6 +18,9 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceSelection from '@/components/ServiceSelection'
+import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
+import LucknowChambers from '@/components/LucknowChambers'
 import FirmCredentials from '@/components/FirmCredentials'
 import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
@@ -26,9 +29,10 @@ import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
 import { propertyForumJurisdiction, propertyStages, propertyStatutes, propertyToc } from '@/lib/guides/propertyLucknow'
 import { getBlogPostsBySlugs } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
-import { CHAMBER_TEL } from '@/lib/contactLinks'
+import { CHAMBER_TEL, LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const searchContent = serviceSearchContent['property-lawyer-lucknow']
 const propertyLead = teamMembers.find((member) => member.slug === 'jitendra-tiwari')
 const propertyTeam = ['vinod-arya', 'akhilesh-yadav', 'abhishek-mishra']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
@@ -47,10 +51,10 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'Property Lawyer in Lucknow | Land Disputes, Title & Revenue' },
-  description:
-    'Property Lawyer in Lucknow for land disputes, 30-year title verification, partition suits, mutation, UP Revenue Code 2006, LDA matters & High Court writs.',
+  title: { absolute: searchContent.title },
+  description: searchContent.description,
   keywords: [
+    searchContent.attorneyKeyword,
     'Property Lawyer Lucknow',
     'Land Dispute Lawyer Lucknow',
     'Property Advocate Lucknow',
@@ -85,6 +89,7 @@ export const metadata: Metadata = {
 const propertyMattersJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
+  ...LUCKNOW_SERVICE_LOCATION,
   name: 'Sumanjari & Co. Advocates — Property & Land Matters',
   url: `${SITE_URL}/services/property-lawyer-lucknow`,
   description:
@@ -311,7 +316,7 @@ export default async function PropertyLandMattersPage() {
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(propertyFaqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(withServiceSelectionFaq(propertyFaqJsonLd, searchContent)) }}
       />
       <script
         type="application/ld+json"
@@ -339,7 +344,7 @@ export default async function PropertyLandMattersPage() {
               <div className="h-px w-12 bg-gold-500" />
             </div>
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-              Property &amp; Land Dispute Lawyer in <em className="text-gold-gradient">Lucknow</em> — Title Verification, Civil Suits &amp; Revenue Courts
+              Property &amp; Land Dispute Lawyer &amp; Advocate in <em className="text-gold-gradient">Lucknow</em> — Title Verification, Civil Suits &amp; Revenue Courts
             </h1>
             <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
               Our property lawyers and land dispute advocates provide advice and representation for title verification, partition,
@@ -379,6 +384,9 @@ export default async function PropertyLandMattersPage() {
             </p>
             <TeamCarousel members={propertyTeam} label="Property and land team members" />
           </section>
+
+          <LucknowChambers />
+          <ServiceSelection content={searchContent} />
 
           <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>

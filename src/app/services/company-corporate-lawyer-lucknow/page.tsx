@@ -16,6 +16,9 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceSelection from '@/components/ServiceSelection'
+import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
+import LucknowChambers from '@/components/LucknowChambers'
 import FirmCredentials from '@/components/FirmCredentials'
 import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
@@ -24,9 +27,10 @@ import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
 import { corporateLucknowStages, corporateLucknowStatutes, corporateLucknowToc } from '@/lib/guides/corporateLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
-import { CHAMBER_TEL } from '@/lib/contactLinks'
+import { CHAMBER_TEL, LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const searchContent = serviceSearchContent['company-corporate-lawyer-lucknow']
 const corporateLead = teamMembers.find((member) => member.slug === 'jitendra-tiwari')
 const corporateTeam = ['aniket-bose', 'prerna-yaduvanshi', 'aditya-narayan-shukla', 'shishir-pandey']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
@@ -45,10 +49,10 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'Corporate Lawyer in Lucknow | NCLT, Commercial Disputes & M&A' },
-  description:
-    'Corporate Lawyer in Lucknow for company registration, commercial disputes, arbitration, shareholder petitions & NCLT Allahabad / Commercial Court litigation.',
+  title: { absolute: searchContent.title },
+  description: searchContent.description,
   keywords: [
+    searchContent.attorneyKeyword,
     'Corporate Lawyer Lucknow',
     'Company Law Advocate Lucknow',
     'NCLT Lawyer Lucknow',
@@ -82,6 +86,7 @@ export const metadata: Metadata = {
 const companyMattersJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
+  ...LUCKNOW_SERVICE_LOCATION,
   name: 'Sumanjari & Co. Advocates — Company & Corporate Matters',
   url: `${SITE_URL}/services/company-corporate-lawyer-lucknow`,
   description:
@@ -329,7 +334,7 @@ export default async function CompanyCorporateMattersPage() {
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(companyFaqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(withServiceSelectionFaq(companyFaqJsonLd, searchContent)) }}
       />
       <script
         type="application/ld+json"
@@ -357,7 +362,7 @@ export default async function CompanyCorporateMattersPage() {
               <div className="h-px w-12 bg-gold-500" />
             </div>
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-              Corporate &amp; Company Lawyer in Lucknow{' '}
+              Corporate &amp; Company Lawyer &amp; Advocate in Lucknow{' '}
               <em className="text-gold-gradient">— NCLT, Commercial Disputes &amp; Advisory</em>
             </h1>
             <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
@@ -398,6 +403,9 @@ export default async function CompanyCorporateMattersPage() {
             </p>
             <TeamCarousel members={corporateTeam} label="Company and commercial team members" />
           </section>
+
+          <LucknowChambers />
+          <ServiceSelection content={searchContent} />
 
           <div id="corporate-overview" className="mb-16 scroll-mt-28 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>

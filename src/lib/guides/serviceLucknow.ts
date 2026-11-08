@@ -82,6 +82,8 @@ export const serviceStages: GuideStage[] = [
 
 export const serviceToc: GuideTocItem[] = [
   { id: 'service-team', label: 'Our Team' },
+  { id: 'lucknow-chambers', label: 'Our Lucknow Chambers' },
+  { id: 'choosing-an-advocate', label: 'Choosing a Lawyer or Advocate' },
   { id: 'service-forums', label: 'Departmental, Tribunal and Court Forums' },
   { id: 'service-forum-jurisdiction', label: 'Statutory framework and forum jurisdiction' },
   { id: 'service-statutory-framework', label: 'Service and Employment Law Framework' },

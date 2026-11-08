@@ -18,6 +18,9 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceSelection from '@/components/ServiceSelection'
+import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
+import LucknowChambers from '@/components/LucknowChambers'
 import FirmCredentials from '@/components/FirmCredentials'
 import ServiceStats from '@/components/ServiceStats'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
@@ -26,9 +29,10 @@ import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
 import { aftMiningStages, aftMiningStatutes, aftMiningToc } from '@/lib/guides/aftMiningLucknow'
 import { getBlogPostsByCategories, getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
-import { CHAMBER_TEL } from '@/lib/contactLinks'
+import { CHAMBER_TEL, LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const searchContent = serviceSearchContent['armed-forces-tribunal-mining-lawyer-lucknow']
 const PAGE_PATH = '/services/armed-forces-tribunal-mining-lawyer-lucknow'
 const aftMiningLead = teamMembers.find((member) => member.slug === 'abhishek-mishra')
 const aftMiningTeam = ['jitendra-tiwari', 'aditya-narayan-shukla', 'vinod-arya']
@@ -48,10 +52,10 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'Armed Forces Tribunal (AFT) & Mining Lawyer in Lucknow | Sumanjari' },
-  description:
-    'Armed Forces Tribunal (AFT) Lucknow Bench & Mining Lawyer in Lucknow. Representation in disability pension, court-martial, OA filing & UP mining lease disputes.',
+  title: { absolute: searchContent.title },
+  description: searchContent.description,
   keywords: [
+    searchContent.attorneyKeyword,
     'Armed Forces Tribunal Lawyer Lucknow',
     'AFT Lucknow Bench Advocate',
     'Disability Pension Lawyer Lucknow',
@@ -80,6 +84,7 @@ export const metadata: Metadata = {
 const aftMiningJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
+  ...LUCKNOW_SERVICE_LOCATION,
   name: 'Sumanjari & Co. Advocates — Armed Forces Tribunal & Mining Lawyer in Lucknow',
   url: `${SITE_URL}${PAGE_PATH}`,
   description:
@@ -267,7 +272,7 @@ export default async function ArmedForcesTribunalMiningMattersPage() {
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(aftMiningFaqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(withServiceSelectionFaq(aftMiningFaqJsonLd, searchContent)) }}
       />
       <script
         type="application/ld+json"
@@ -295,7 +300,7 @@ export default async function ArmedForcesTribunalMiningMattersPage() {
                 <div className="h-px w-12 bg-gold-500" />
               </div>
               <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-                Armed Forces Tribunal (AFT Lucknow Bench) &amp; Mining Lawyer <em className="text-gold-gradient">in Lucknow</em>
+                Armed Forces Tribunal (AFT Lucknow Bench) &amp; Mining Lawyer &amp; Advocate <em className="text-gold-gradient">in Lucknow</em>
               </h1>
               <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
                 Sumanjari &amp; Co. Advocates represents serving and retired Army, Navy, and Air Force personnel before the Armed Forces Tribunal (AFT), Regional Bench Lucknow (Rafi Ahmed Kidwai Marg, Cantonment) in Original Applications (s.14), Court-Martial Appeals (s.15), disability pension broad-banding, and PCDA (P) execution matters, alongside representing mining lessees before the Directorate of Geology &amp; Mining (Khanij Bhawan, Lucknow), Mining Tribunal, and Allahabad High Court, Lucknow Bench (Chamber Block D-311).
@@ -335,6 +340,9 @@ export default async function ArmedForcesTribunalMiningMattersPage() {
             </p>
             <TeamCarousel members={aftMiningTeam} label="Armed Forces Tribunal and mining team members" />
           </section>
+
+          <LucknowChambers />
+          <ServiceSelection content={searchContent} />
 
           <div className="mb-16 space-y-4 font-body leading-relaxed text-navy-800 dark:text-cream/75">
             <p>

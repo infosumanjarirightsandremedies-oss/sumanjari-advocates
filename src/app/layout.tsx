@@ -3,6 +3,7 @@ import { Cormorant_SC, EB_Garamond, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import Disclaimer from '@/components/Disclaimer'
+import { LUCKNOW_CHAMBER_ADDRESS } from '@/lib/contactLinks'
 
 const playfair = Playfair_Display({ subsets: ['latin'], style: ['normal', 'italic'], display: 'swap', variable: '--font-playfair' })
 const ebGaramond = EB_Garamond({ subsets: ['latin'], style: ['normal', 'italic'], display: 'swap', variable: '--font-eb-garamond' })
@@ -159,6 +160,17 @@ const legalServiceJsonLd = {
   logo: `${SITE_URL}/favicon.png`,
   description:
     'Sumanjari & Co. Advocates practises before the Allahabad High Court, Lucknow Bench, serving clients across Lucknow, Kanpur, Ayodhya, Prayagraj, Sultanpur, Ambedkar Nagar, Noida, and Delhi — handling civil, criminal, family, property, consumer, tax, RERA, banking recovery (DRT), armed forces tribunal (AFT), and mining matters.',
+  location: {
+    '@type': 'Place',
+    name: 'Lucknow Chamber',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: LUCKNOW_CHAMBER_ADDRESS.street,
+      addressLocality: LUCKNOW_CHAMBER_ADDRESS.city,
+      addressRegion: 'Uttar Pradesh',
+      addressCountry: 'IN',
+    },
+  },
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Chamber No. Block D – 311, Allahabad High Court, Lucknow Bench, Vibhuti Khand, Gomti Nagar',

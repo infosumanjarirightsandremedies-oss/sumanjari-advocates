@@ -79,6 +79,8 @@ export const familyLucknowStages: GuideStage[] = [
 
 export const familyLucknowToc: GuideTocItem[] = [
   { id: 'family-team', label: 'Our Team' },
+  { id: 'lucknow-chambers', label: 'Our Lucknow Chambers' },
+  { id: 'choosing-an-advocate', label: 'Choosing a Lawyer or Advocate' },
   { id: 'family-statutes', label: 'Statutory Framework Governing Family & Matrimonial Litigation in Lucknow' },
   { id: 'family-procedure', label: 'How a Family & Matrimonial Case Proceeds in Lucknow: Stage 1 to Stage 7', children: familyLucknowStages.map(({ id, title }) => ({ id, label: title })) },
   { id: 'family-documents', label: 'First-Consultation Checklist' },
