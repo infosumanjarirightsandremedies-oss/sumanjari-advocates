@@ -19,3 +19,4 @@ scripts/supabase-blog-cache/__pycache__/
 !/tests/production/
 /tests/production/*
 !/tests/production/divorce-seo.test.cjs
+!/tests/production/routes.test.cjs

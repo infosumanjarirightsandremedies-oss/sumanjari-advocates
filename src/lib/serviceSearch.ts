@@ -36,10 +36,10 @@ export const serviceSearchContent = {
     answer: 'Start by identifying whether your matter involves mutual consent, contested grounds, maintenance or child custody. Ask about Family Court practice, eligibility and jurisdiction, settlement terms, financial disclosure and connected proceedings. Clarify who will appear, when personal attendance may be required, and how fees are divided across stages. A suitable divorce advocate explains options and risks without promising a fixed completion date or a particular alimony outcome.',
   },
   'tax-lawyer-lucknow': {
-    title: 'Tax Lawyer & GST Advocate in Lucknow | Notices & Appeals',
-    description: 'Experienced tax lawyers, GST advocates & attorneys in Lucknow for income tax notices, statutory appeals, stamp duty and revenue disputes. Review deadlines and forums.',
+    title: 'Tax & GST Lawyer / Advocate in Lucknow | ITAT & High Court',
+    description: 'Tax lawyers & GST advocates in Lucknow: notices, ITAT appeals, GSTAT proceedings and tax writs before the Allahabad High Court, Lucknow Bench.',
     attorneyKeyword: 'Tax Attorney Lucknow',
-    question: 'How do I choose the best tax lawyer or GST advocate in Lucknow?',
+    question: 'How do I choose a tax lawyer or GST advocate in Lucknow?',
     answer: 'Match the advocate to the tax involved and the stage: notice response, assessment, statutory appeal or judicial review. Ask about the competent authority or tribunal, limitation, deposits and coordination with your accountant. Share the notice, return, assessment order and proof of service. Check the scope of drafting, representation and fees. Tax, GST and stamp-duty disputes follow different procedures; no adviser can guarantee cancellation of a demand.',
   },
   'service-lawyer-lucknow': {

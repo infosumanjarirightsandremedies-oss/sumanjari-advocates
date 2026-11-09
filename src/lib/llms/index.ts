@@ -113,9 +113,9 @@ export const SERVICE_LINKS: LlmsLink[] = [
   },
   {
     path: '/services/tax-lawyer-lucknow',
-    title: 'Tax Lawyer in Lucknow',
+    title: 'Tax Lawyers & GST Advocates in Lucknow',
     description:
-      'Stamp duty and registration, property tax, circle rate valuation, income tax, and GST disputes, led by Adv. Jitendra Tiwari.',
+      'GST notices, refunds and appeals, income-tax and ITAT proceedings, tax writs, stamp duty and revenue disputes. Tax and revenue practice led by Adv. Aditya Narayan Shukla.',
   },
   {
     path: '/services/company-corporate-lawyer-lucknow',

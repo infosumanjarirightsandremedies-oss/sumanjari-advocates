@@ -125,6 +125,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${SITE_URL}/services/tax-lawyer-lucknow`,
+      lastModified: new Date('2026-11-09'),
       changeFrequency: 'weekly',
       priority: 0.7,
     },
