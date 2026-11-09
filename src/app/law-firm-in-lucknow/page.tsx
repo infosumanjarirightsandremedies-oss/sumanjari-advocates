@@ -407,7 +407,6 @@ export default async function LawFirmInLucknowPage() {
                 </div>
                 <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">{HIGH_COURT_CHAMBER_ADDRESS.street}, {HIGH_COURT_CHAMBER_ADDRESS.city} - 226010.</p>
               </div>
-              <p className="mt-5 font-body text-sm text-navy-700 dark:text-cream/65">Chamber hours: Monday to Saturday, 10:00 to 19:00. Court and tribunal hours are separate; confirm advocate availability before visiting.</p>
               <div className="glass-card rounded-sm border border-gold-500/20 p-6 dark:border-gold-500/15">
                 <div className="mb-3 flex items-center gap-2">
                   <MapPin className="h-5 w-5 text-gold-600 dark:text-gold-400" />
@@ -416,6 +415,7 @@ export default async function LawFirmInLucknowPage() {
                 <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">We appear before the Civil Judge, Sessions Court and District Judge at the Civil Court, Kaiserbagh, and before the Family Court on Wala Qadar Road, Qaiserbagh, for trial-stage matters.</p>
               </div>
             </div>
+            <p className="mt-5 font-body text-sm text-navy-700 dark:text-cream/65">Chamber hours: Monday to Saturday, 10:00 to 19:00. Court and tribunal hours are separate; confirm advocate availability before visiting.</p>
           </section>
 
           <section id="faqs" className="mb-16 scroll-mt-28">

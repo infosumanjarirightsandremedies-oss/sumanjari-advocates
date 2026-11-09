@@ -1,6 +1,7 @@
 node_modules
 .next
 .next-dev
+.tsupgrader/
 out
 .claude
 mcp-server.log
