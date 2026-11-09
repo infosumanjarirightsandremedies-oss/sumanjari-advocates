@@ -17,18 +17,23 @@ import {
   Building2,
   FileWarning,
   ShieldHalf,
+  ScrollText,
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import FirmCredentials from '@/components/FirmCredentials'
 import TeamCarousel from '@/components/TeamCarousel'
+import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import { GuideToc } from '@/components/LucknowGuide'
 import { FIRM_BACKGROUND, FIRM_CREDENTIALS } from '@/lib/firm'
 import { teamMembers } from '@/lib/team'
-import { CHAMBER_TEL, LUCKNOW_CHAMBER_ADDRESS } from '@/lib/contactLinks'
+import { getBlogPosts } from '@/lib/blogs'
+import { CHAMBER_TEL, HIGH_COURT_CHAMBER_ADDRESS, LUCKNOW_CHAMBER_ADDRESS } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
 const PAGE_PATH = '/law-firm-in-lucknow'
+const PAGE_TITLE = 'Law Firm in Lucknow | Sumanjari & Co. Advocates | High Court'
+const PAGE_DESCRIPTION = 'Sumanjari & Co. Advocates is a law firm in Lucknow representing clients before the Allahabad High Court (Lucknow Bench), District Courts and UP-RERA.'
 const lucknowTeam = teamMembers.filter((member) => member.office === 'lucknow')
 const firmLead = teamMembers.find((member) => member.slug === 'jitendra-tiwari')
 
@@ -46,9 +51,8 @@ function ConsultationActions({ className }: { className: string }) {
 }
 
 export const metadata: Metadata = {
-  title: { absolute: 'Law Firm in Lucknow | Sumanjari & Co. Advocates' },
-  description:
-    'Sumanjari & Co. Advocates is a law firm in Lucknow handling civil, criminal, family, property, cyber crime, service, tax, RERA and banking matters before the Civil Court, Family Court, and the Allahabad High Court, Lucknow Bench.',
+  title: { absolute: PAGE_TITLE },
+  description: PAGE_DESCRIPTION,
   keywords: [
     'Law Firm in Lucknow',
     'Law Firm Lucknow',
@@ -60,17 +64,39 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: PAGE_PATH },
   openGraph: {
-    title: 'Law Firm in Lucknow | Sumanjari & Co. Advocates',
-    description:
-      'A second-generation law firm in Lucknow handling civil, criminal, family, property, cyber crime, service, tax, RERA and banking matters.',
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
     url: PAGE_PATH,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Law Firm in Lucknow | Sumanjari & Co. Advocates',
-    description: 'Civil, criminal, family, property, cyber crime, service, tax, RERA and banking matters in Lucknow.',
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
   },
 }
+
+const practiceGroups = [
+  {
+    title: 'Civil Litigation & Property Disputes',
+    description: 'Title verification, revenue records (Khatauni and Khasra), partition suits, injunctions and civil appeals.',
+    href: '/services/property-lawyer-lucknow',
+  },
+  {
+    title: 'Criminal Defence & Appellate Practice',
+    description: 'Bail applications, criminal trials, appeals, revisions and quashing petitions before the High Court, subject to jurisdiction and maintainability.',
+    href: '/services/criminal-lawyer-lucknow',
+  },
+  {
+    title: 'High Court Writ Jurisdiction & Service Law',
+    description: 'Petitions under Article 226 and supervisory proceedings under Article 227 of the Constitution, government service disputes and pension matters.',
+    href: '/services/constitutional-writ-lawyer-lucknow',
+  },
+  {
+    title: 'Regulatory, RERA & Commercial Disputes',
+    description: 'Proceedings before UP-RERA and the Debts Recovery Tribunal (DRT), commercial disputes and cheque dishonour complaints under Section 138 of the Negotiable Instruments Act.',
+    href: '/services/rera-lawyer-lucknow',
+  },
+]
 
 const practiceAreas = [
   { icon: Gavel, title: 'Criminal Lawyer in Lucknow', href: '/services/criminal-lawyer-lucknow' },
@@ -93,9 +119,11 @@ const practiceAreas = [
 ]
 
 const faqs = [
+  { question: 'Which courts does Sumanjari & Co. Advocates practice in across Lucknow?', answer: 'Our advocates appear before the Allahabad High Court (Lucknow Bench), District & Sessions Court at Qaisar Bagh, Family Court, UP-RERA, the Debts Recovery Tribunal (DRT), the Central Administrative Tribunal (CAT), and consumer commissions, according to the subject matter and jurisdiction of each case.' },
+  { question: 'What documents are required to file a Writ Petition before the Allahabad High Court, Lucknow Bench?', answer: 'A petition under Article 226, or a supervisory petition under Article 227, typically requires the impugned order or notice, relevant representations and responses, supporting records, an affidavit, identity details and a vakalatnama. Article 227 proceedings may also require certified copies of subordinate court orders and pleadings. Appeals and revisions are separate remedies with their own requirements. The applicable rules, territorial jurisdiction and registry directions determine the final filing checklist.' },
+  { question: 'What is the procedure for filing a complaint before UP-RERA in Lucknow?', answer: 'A complaint is generally submitted online through the official UP-RERA portal with project and party details, the relief requested, the prescribed fee and supporting documents such as the builder-buyer agreement, allotment letter, payment receipts, correspondence and evidence of project status. The competent bench and whether relief belongs before the Authority or the adjudicating officer must be checked. Follow the portal and registry directions for scrutiny, service and hearing.' },
   { question: 'What does Sumanjari & Co. Advocates handle as a law firm in Lucknow?', answer: 'We handle civil, criminal, family and matrimonial, property, cyber crime, service and employment, tax and revenue, RERA, banking recovery (DRT), company and corporate, constitutional and writ, and consumer and motor accident matters before the Civil Court, the Family Court, and the Allahabad High Court, Lucknow Bench.' },
   { question: 'Where is your Lucknow chamber located?', answer: `Our Lucknow chamber is at ${LUCKNOW_CHAMBER_ADDRESS.street}, ${LUCKNOW_CHAMBER_ADDRESS.city}. Our High Court chamber remains at Block D-311, Allahabad High Court, Lucknow Bench, Vibhuti Khand, Gomti Nagar, Lucknow. We also appear before the Civil Court, Kaiserbagh and the Family Court on Wala Qadar Road, Qaiserbagh, depending on the matter.` },
-  { question: 'Which courts do you appear before in Lucknow?', answer: 'Our advocates appear before the Allahabad High Court, Lucknow Bench, the Civil Court at Kaiserbagh (Civil Judge, Sessions Court, and District Judge), the Family Court, Lucknow, the Commercial Court, Lucknow, and before UP-RERA, consumer commissions, and tribunals seated in Lucknow.' },
   { question: 'Do you only practice in Lucknow, or also elsewhere in Uttar Pradesh and NCR?', answer: 'Our Lucknow team practises across Uttar Pradesh, including the districts under the Allahabad High Court, Lucknow Bench, and the Principal Seat at Prayagraj. We also have advocates handling matters in Delhi NCR; see our team directory for each advocate\'s specific courts and locations.' },
   { question: 'How do I book a consultation with your Lucknow team?', answer: 'You can call or WhatsApp the chamber directly, or use the contact form on this site. Share a brief description of your matter and relevant documents so the right advocate can be identified for an initial consultation.' },
   { question: 'Do you handle cases for NRIs connected to Lucknow?', answer: 'Yes. We assist non-resident Indians with property, inheritance, power of attorney, and family matters connected to Lucknow and Uttar Pradesh, including representation where personal appearance is difficult. See our NRI legal services page for details.' },
@@ -107,12 +135,12 @@ const faqs = [
 ]
 
 const forums = [
-  { icon: Landmark, title: 'Allahabad High Court, Lucknow Bench', blurb: 'Writ petitions, bail and quashing applications, and civil, criminal, family and service appeals, argued from our chambers at Block D-311, Gomti Nagar.' },
-  { icon: Scale, title: 'Civil Court, Kaiserbagh', blurb: 'Civil Judge (Junior/Senior Division), Sessions Court and District Judge — recovery suits, bail, criminal trials, and first appeals.' },
-  { icon: HeartHandshake, title: 'Family Court, Lucknow', blurb: 'Divorce, maintenance, custody and guardianship matters before the Principal Judge and Additional Principal Judges, Qaiserbagh.' },
-  { icon: Briefcase, title: 'Commercial Court, Lucknow', blurb: 'Commercial disputes of specified value under the Commercial Courts Act, 2015, including mandatory pre-institution mediation.' },
-  { icon: Building2, title: 'Revenue Courts & UP-RERA', blurb: 'Tehsildar, SDM, Commissioner (Lucknow Division) and the Board of Revenue for agricultural land; UP-RERA and its Appellate Tribunal for builder-buyer disputes.' },
-  { icon: Banknote, title: 'DRT, Consumer Commission & Tribunals', blurb: 'Debts Recovery Tribunal, the District Consumer Disputes Redressal Commission, and special courts and tribunals seated in Lucknow.' },
+  { icon: Landmark, title: 'High Court of Judicature at Allahabad, Lucknow Bench', address: 'Faizabad Road, Vibhuti Khand, Gomti Nagar, Lucknow - 226010.', href: 'https://www.allahabadhighcourt.in/', blurb: 'Writ petitions, bail, quashing applications and appeals within the jurisdiction of the Lucknow Bench. Our High Court chamber is Block D-311.' },
+  { icon: Scale, title: 'District & Sessions Court, Lucknow', address: 'Qaisar Bagh (Kaiserbagh), P.S. Wazeerganj, Lucknow - 226001.', href: 'https://lucknow.dcourts.gov.in/contact-us/', blurb: 'Civil suits, injunctions, criminal trials, bail and appeals before the competent district and subordinate courts.' },
+  { icon: HeartHandshake, title: 'Family Court, Lucknow', address: 'Qaiserbagh, Lucknow. Confirm the assigned courtroom and current entrance with the registry.', href: 'https://lucknow.dcourts.gov.in/', blurb: 'Divorce, maintenance, custody and guardianship proceedings before the competent Family Court.' },
+  { icon: Building2, title: 'Uttar Pradesh Real Estate Regulatory Authority (UP-RERA)', address: 'Naveen Bhavan, Rajya Niyojan Sansthan, Kala Kankar House, Old Hyderabad, Lucknow - 226007.', href: 'https://www.up-rera.in/ContactUs', blurb: 'Builder-buyer complaints and regulatory proceedings. Check the project location and bench allocation; appeals lie before a separate Appellate Tribunal.' },
+  { icon: Banknote, title: 'Debts Recovery Tribunal (DRT), Lucknow', address: '600/1, University Road, near Hanuman Setu Mandir, Lucknow - 226001. Confirm the assigned tribunal and venue from the cause list.', href: 'https://drt.gov.in/', blurb: 'Bank recovery proceedings and applications challenging SARFAESI measures, subject to statutory jurisdiction.' },
+  { icon: Briefcase, title: 'Central Administrative Tribunal (CAT), Lucknow Bench', address: 'Vipin Khand, Gomti Nagar, Lucknow. Confirm the current filing and hearing venue with the registry.', href: 'https://cgat.gov.in/', blurb: 'Service matters involving employees and organisations covered by the Administrative Tribunals Act, 1985 and applicable notifications.' },
 ]
 
 const whoWeServe = [
@@ -133,19 +161,24 @@ const toc = [
   { id: 'team', label: 'Our Team' },
   { id: 'offices', label: 'Our Lucknow Chambers' },
   { id: 'about', label: 'About the Firm' },
-  { id: 'forums', label: 'Courts & Forums We Appear Before' },
-  { id: 'practice-areas', label: 'Practice Areas We Handle in Lucknow' },
+  { id: 'forums', label: 'Courts & Tribunals in Lucknow' },
+  { id: 'practice-areas', label: 'Practice Areas in Lucknow & Uttar Pradesh' },
   { id: 'who-we-serve', label: 'Who We Represent' },
   { id: 'approach', label: 'Our Approach to Representation' },
   { id: 'faqs', label: 'FAQs' },
+  { id: 'blogs', label: 'Legal Articles & Updates' },
   { id: 'contact', label: 'Speak to Our Lucknow Team' },
 ]
 
 const structuredData = [
   {
     '@context': 'https://schema.org', '@type': 'LegalService',
-    name: 'Sumanjari & Co. Advocates — Law Firm in Lucknow',
+    '@id': `${SITE_URL}${PAGE_PATH}#legalservice`,
+    name: 'Sumanjari & Co. Advocates',
+    branchOf: { '@id': `${SITE_URL}/#organization` },
     url: `${SITE_URL}${PAGE_PATH}`,
+    image: `${SITE_URL}/images/lady-justice.jpeg`,
+    priceRange: '$$',
     description: metadata.description,
     telephone: CHAMBER_TEL.replace('tel:', ''),
     email: 'info.sumanjarirightsandremedies@gmail.com',
@@ -162,10 +195,17 @@ const structuredData = [
     },
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Chamber No. Block D – 311, Allahabad High Court, Lucknow Bench, Vibhuti Khand, Gomti Nagar',
-      addressLocality: 'Lucknow',
+      streetAddress: HIGH_COURT_CHAMBER_ADDRESS.street,
+      addressLocality: HIGH_COURT_CHAMBER_ADDRESS.city,
       addressRegion: 'Uttar Pradesh',
+      postalCode: '226010',
       addressCountry: 'IN',
+    },
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      opens: '10:00',
+      closes: '19:00',
     },
     areaServed: [
       { '@type': 'City', name: 'Lucknow' },
@@ -187,6 +227,8 @@ const structuredData = [
 ]
 
 export default async function LawFirmInLucknowPage() {
+  const blogPosts = getBlogPosts()
+
   return (
     <main className="relative min-h-screen">
       <script
@@ -208,10 +250,10 @@ export default async function LawFirmInLucknowPage() {
                 <div className="h-px w-12 bg-gold-500" />
               </div>
               <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-                Law Firm <em className="text-gold-gradient">in Lucknow</em>
+                Sumanjari &amp; Co. Advocates — <em className="text-gold-gradient">Law Firm in Lucknow</em>
               </h1>
               <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
-                Sumanjari &amp; Co. Advocates is {FIRM_BACKGROUND}, practising civil, criminal, family, property, cyber crime, service, tax, RERA and banking matters before the Civil Court, the Family Court, and the Allahabad High Court, Lucknow Bench.
+                Sumanjari &amp; Co. Advocates is {FIRM_BACKGROUND}, representing clients before the High Court of Judicature at Allahabad, Lucknow Bench, District &amp; Sessions Courts, Family Court and statutory tribunals in matters within their jurisdiction.
               </p>
               <p className="mt-4 max-w-2xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
                 Our chamber is at Block D-311 inside the Lucknow Bench complex at Gomti Nagar. Below is an overview of the firm, our Lucknow team, and every practice area we handle, each linking to a detailed guide.
@@ -263,25 +305,36 @@ export default async function LawFirmInLucknowPage() {
           </section>
 
           <section id="forums" className="mb-16 scroll-mt-28">
-            <h2 className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Courts & Forums We Appear Before</h2>
+            <h2 className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Courts and Tribunals We Regularly Attend in Lucknow</h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
-              Which forum hears a matter depends on the subject and its value. The table below is an overview; each practice-area page above explains the specific forum for that dispute in more detail.
+              The competent forum depends on the subject, territorial jurisdiction and applicable law. These are court and tribunal locations, not branch offices of the firm. Check the official directory, registry and current cause list before travelling; venues and bench assignments can change.
             </p>
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {forums.map(({ icon: Icon, title, blurb }) => (
+              {forums.map(({ icon: Icon, title, address, href, blurb }) => (
                 <div key={title} className="glass-card rounded-sm border border-gold-500/20 p-6 dark:border-gold-500/15">
                   <div className="mb-3 flex items-center gap-2">
                     <Icon className="h-5 w-5 text-gold-600 dark:text-gold-400" />
                     <h3 className="font-display text-base font-bold text-navy-900 dark:text-cream">{title}</h3>
                   </div>
                   <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">{blurb}</p>
+                  <p className="mt-3 font-body text-sm leading-relaxed text-navy-700 dark:text-cream/70">{address}</p>
+                  <a href={href} className="mt-3 inline-flex font-body text-sm text-gold-700 underline dark:text-gold-400">Official court or tribunal website</a>
                 </div>
               ))}
             </div>
           </section>
 
           <section id="practice-areas" className="mb-16 scroll-mt-28">
-            <h2 className="mb-8 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Practice Areas We Handle in Lucknow</h2>
+            <h2 className="mb-8 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">Practice Areas in Lucknow &amp; Uttar Pradesh</h2>
+            <div className="mb-8 grid gap-5 sm:grid-cols-2">
+              {practiceGroups.map(({ title, description, href }) => (
+                <div key={title} className="border-l-2 border-gold-500/50 pl-5">
+                  <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">{title}</h3>
+                  <p className="font-body leading-relaxed text-navy-700 dark:text-cream/65">{description}</p>
+                  <Link href={href} className="mt-3 inline-flex font-body text-sm text-gold-700 underline dark:text-gold-400">Read the practice guide</Link>
+                </div>
+              ))}
+            </div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {practiceAreas.map(({ icon: Icon, title, href }) => (
                 <Link
@@ -329,10 +382,10 @@ export default async function LawFirmInLucknowPage() {
 
           <section id="team" className="mb-16 scroll-mt-28" aria-labelledby="lucknow-team-heading">
             <h2 id="lucknow-team-heading" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-              Our Lucknow Team
+              Our Advocates &amp; Professional Credentials
             </h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
-              Each advocate below handles a defined set of practice areas; visit a profile for their individual experience and the courts they appear before.
+              Each profile lists the advocate&apos;s published educational qualifications, practice areas and professional background. Our Lucknow chamber details follow below; individual experience and court coverage are described in the linked profiles.
             </p>
             <TeamCarousel members={lucknowTeam} label="Lucknow team members" />
           </section>
@@ -352,8 +405,9 @@ export default async function LawFirmInLucknowPage() {
                   <MapPin className="h-5 w-5 text-gold-600 dark:text-gold-400" />
                   <h3 className="font-display text-base font-bold text-navy-900 dark:text-cream">Chamber, Allahabad High Court, Lucknow Bench</h3>
                 </div>
-                <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">Block D-311, Vibhuti Khand, Gomti Nagar, Lucknow — for writs, bail, quashing, and civil, criminal, family and service appeals before the Lucknow Bench.</p>
+                <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">{HIGH_COURT_CHAMBER_ADDRESS.street}, {HIGH_COURT_CHAMBER_ADDRESS.city} - 226010.</p>
               </div>
+              <p className="mt-5 font-body text-sm text-navy-700 dark:text-cream/65">Chamber hours: Monday to Saturday, 10:00 to 19:00. Court and tribunal hours are separate; confirm advocate availability before visiting.</p>
               <div className="glass-card rounded-sm border border-gold-500/20 p-6 dark:border-gold-500/15">
                 <div className="mb-3 flex items-center gap-2">
                   <MapPin className="h-5 w-5 text-gold-600 dark:text-gold-400" />
@@ -368,7 +422,7 @@ export default async function LawFirmInLucknowPage() {
             <div className="mb-10 text-center">
               <span className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">From Our Desk</span>
               <h2 className="mb-3 mt-2 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-                Law Firm in Lucknow: <em className="text-gold-gradient">FAQs</em>
+                Legal Procedures &amp; Frequently Asked Questions <em className="text-gold-gradient">(FAQ)</em>
               </h2>
             </div>
             <div className="divide-y divide-gold-500/20 border-y border-gold-500/20">
@@ -381,6 +435,17 @@ export default async function LawFirmInLucknowPage() {
                 </details>
               ))}
             </div>
+          </section>
+
+          <section id="blogs" className="scroll-mt-28" aria-label="Legal articles">
+            <ServiceBlogs
+              posts={blogPosts}
+              fallbackIcon={<ScrollText className="h-5 w-5 text-gold-600 dark:text-gold-400" />}
+              eyebrow="From Our Desk"
+              heading="Legal Articles & Updates"
+              description="Procedural guides and legal updates across our practice areas."
+              viewAllHref="/blog"
+            />
           </section>
 
           <div id="contact" className="glass-card scroll-mt-28 rounded-sm border border-gold-500/25 p-8 text-center dark:border-gold-500/20 md:p-12">
