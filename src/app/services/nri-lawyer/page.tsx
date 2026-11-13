@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
-import { ArrowLeft, ArrowUpRight, Globe2, Home, ScrollText, Users, Heart, Scale, FileCheck2, Phone } from 'lucide-react'
+import { ArrowLeft, ArrowUpRight, Globe2, Home, ScrollText, Users, Heart, Scale, FileCheck2 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceContactLinks from '@/components/ServiceContactLinks'
 import ServiceSelection from '@/components/ServiceSelection'
 import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
 import LucknowChambers from '@/components/LucknowChambers'
@@ -236,9 +237,7 @@ function ConsultationActions() {
       <Link href="/#contact" className="btn-gold inline-flex items-center justify-center rounded-sm px-5 py-3.5 font-caps text-xs font-semibold uppercase tracking-wide text-navy-900 sm:px-8 sm:text-sm">
         Consult Now
       </Link>
-      <a href={CHAMBER_TEL} className="inline-flex items-center justify-center gap-2 rounded-sm border border-gold-500/40 px-5 py-3.5 font-caps text-xs font-semibold uppercase tracking-wide text-navy-800 transition-colors hover:border-gold-500 hover:text-gold-700 dark:text-cream/85 sm:text-sm">
-        <Phone className="h-4 w-4 shrink-0" /> Call Now
-      </a>
+      <ServiceContactLinks />
     </div>
   )
 }

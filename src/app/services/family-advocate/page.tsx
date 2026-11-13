@@ -4,7 +4,6 @@ import type { Metadata } from 'next'
 import {
   ArrowLeft,
   ArrowUpRight,
-  Phone,
   HeartCrack,
   HandCoins,
   Baby,
@@ -18,6 +17,7 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceContactLinks from '@/components/ServiceContactLinks'
 import ServiceSelection from '@/components/ServiceSelection'
 import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
 import LucknowChambers from '@/components/LucknowChambers'
@@ -29,7 +29,7 @@ import { GuideToc, GuideStages, StatuteTable } from '@/components/LucknowGuide'
 import { familyLucknowStages, familyLucknowToc, familyLucknowStatutes } from '@/lib/guides/familyLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
-import { CHAMBER_TEL, LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
+import { LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
 const searchContent = serviceSearchContent['family-advocate']
@@ -43,9 +43,7 @@ function ConsultationActions({ className }: { className: string }) {
       <a href="/#contact" className="btn-gold inline-flex items-center justify-center rounded-sm px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-900 sm:px-8 sm:text-sm sm:tracking-widest">
         Consult Now
       </a>
-      <a href={CHAMBER_TEL} className="inline-flex items-center justify-center gap-2 rounded-sm border border-gold-500/40 px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-800 transition-colors hover:border-gold-500 hover:text-gold-700 dark:text-cream/85 dark:hover:text-gold-300 sm:px-6 sm:text-sm sm:tracking-widest">
-        <Phone aria-hidden="true" className="h-4 w-4 shrink-0" /> Call Now
-      </a>
+      <ServiceContactLinks />
     </div>
   )
 }
@@ -54,7 +52,9 @@ export const metadata: Metadata = {
   title: { absolute: searchContent.title },
   description: searchContent.description,
   keywords: [
+    'Family Court Lawyer in Lucknow',
     searchContent.attorneyKeyword,
+    'Family Court Lawyer Lucknow',
     'Family Advocate Lucknow',
     'Family Advocate & Lawyer in Lucknow',
     'Aishwarya Pandey Family Lawyer',
@@ -64,7 +64,6 @@ export const metadata: Metadata = {
     'Child Custody Lawyer Lucknow',
     'Maintenance Lawyer Lucknow',
     'Domestic Violence Lawyer Lucknow',
-    'Family Court Lawyer Lucknow',
     'Mutual Consent Divorce Lawyer Lucknow',
     'Contested Divorce Lawyer Lucknow',
     'Alimony Lawyer Lucknow',
@@ -77,15 +76,15 @@ export const metadata: Metadata = {
     canonical: '/services/family-advocate',
   },
   openGraph: {
-    title: 'Family Advocate & Lawyer in Lucknow | Sumanjari & Co. Advocates',
+    title: 'Family Court Lawyer in Lucknow | Sumanjari & Co. Advocates',
     description:
-      'Representation in divorce, child custody, maintenance, domestic violence, and matrimonial disputes before the Family Court and Allahabad High Court, Lucknow Bench.',
+      'Representation in divorce, child custody, maintenance, domestic violence, and matrimonial disputes before the Family Court, Kaiserbagh and Allahabad High Court, Lucknow Bench.',
     url: '/services/family-advocate',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Family Advocate & Lawyer in Lucknow',
+    title: 'Family Court Lawyer in Lucknow',
     description: 'Divorce, child custody, maintenance and domestic violence representation led by Adv. Aishwarya Pandey at Sumanjari & Co. Advocates.',
   },
 }
@@ -106,11 +105,13 @@ const familyServiceJsonLd = {
     { '@type': 'State', name: 'Uttar Pradesh' },
   ],
   serviceType: 'Family & Matrimonial Legal Services',
+  knowsAbout: ['Family Court Litigation', 'Child Custody', 'Maintenance under Section 144 BNSS', 'Domestic Violence Act'],
   employee: familyLead ? {
     '@type': 'Person',
     name: familyLead.name,
     jobTitle: 'Family Law Practice Lead',
     url: `${SITE_URL}/team/${familyLead.slug}`,
+    knowsAbout: ['Family Court Litigation', 'Child Custody', 'Maintenance under Section 144 BNSS', 'Domestic Violence Act'],
   } : undefined,
 }
 
@@ -212,6 +213,49 @@ const jurisdiction = [
   },
 ]
 
+const courtJurisdictionTable = [
+  {
+    matter: 'Divorce, judicial separation, restitution of conjugal rights, Section 24/25 HMA maintenance, custody & guardianship',
+    law: 'Hindu Marriage Act, 1955 / Special Marriage Act, 1954 / Family Courts Act, 1984',
+    forum: 'Principal Judge / Additional Principal Judges, Family Court, Kaiserbagh',
+  },
+  {
+    matter: 'Summary maintenance for wife, children & parents, and enforcement of arrears',
+    law: 'Sections 144 & 147 BNSS (formerly Sections 125 & 128 CrPC)',
+    forum: 'Family Court, Kaiserbagh / concerned Judicial Magistrate',
+  },
+  {
+    matter: 'Domestic violence protection, residence, monetary relief & compensation',
+    law: 'Protection of Women from Domestic Violence Act, 2005',
+    forum: 'ACJM / Judicial Magistrate Courts, Lucknow',
+  },
+  {
+    matter: 'Matrimonial cruelty FIRs and connected dowry complaints',
+    law: 'Sections 85/86 BNS (formerly Section 498A IPC); Dowry Prohibition Act, 1961',
+    forum: 'Mahila Thana (CAW Cell), Hazratganj → Sessions Court, Lucknow',
+  },
+  {
+    matter: 'Mandatory pre-decree settlement conferences',
+    law: 'Section 9, Family Courts Act, 1984',
+    forum: 'Mediation & Conciliation Centre, Kaiserbagh / DLSA Lucknow Lok Adalat',
+  },
+  {
+    matter: 'Maintenance for senior citizens and dependent parents',
+    law: 'Maintenance and Welfare of Parents and Senior Citizens Act, 2007',
+    forum: 'SDM Maintenance Tribunal, Lucknow',
+  },
+  {
+    matter: 'Succession certificates, legal heirship & partition disputes',
+    law: 'Indian Succession Act, 1925',
+    forum: 'District Judge / Civil Judge, Lucknow; Sub-Registrar & revenue authorities',
+  },
+  {
+    matter: 'Family Court appeals and quashing of matrimonial FIRs',
+    law: 'Section 19, Family Courts Act, 1984; Section 528 BNSS (formerly Section 482 CrPC)',
+    forum: 'Allahabad High Court, Lucknow Bench, Gomti Nagar',
+  },
+]
+
 const familyInsights = [
   {
     icon: HeartCrack,
@@ -275,17 +319,161 @@ const familyInsights = [
   },
 ]
 
+const detailedFaqs = [
+  {
+    question: 'Where is the Family Court in Lucknow located, and which cases are filed there?',
+    answer: 'The Family Court, Lucknow is situated at 430, Wala Qadar Road, Kaiserbagh (near Parivartan Chowk). Under Section 7 of the Family Courts Act, 1984, it hears divorce, judicial separation, restitution of conjugal rights, maintenance under Section 144 BNSS (formerly Section 125 CrPC), child custody, and guardianship matters. Section 85 BNS (498A IPC) and Domestic Violence Act complaints are heard before the Judicial Magistrate at the Civil Court, Lucknow.',
+  },
+  {
+    question: 'If my child is under 5 years old, who gets custody in Lucknow Family Court — and how can a father get visitation rights?',
+    answer: 'Under Section 6(a) of the Hindu Minority and Guardianship Act, 1956, custody of a child below five years ordinarily remains with the mother unless the child\u2019s welfare requires otherwise. The Family Court, Lucknow treats the welfare of the child as paramount and can grant a non-custodial parent interim and regular visitation, including weekend, holiday, and supervised or virtual access.',
+  },
+  {
+    question: 'Can a working wife still claim maintenance in Lucknow Family Court, and is an income affidavit mandatory?',
+    answer: 'Yes — a working wife may still claim maintenance if her income is insufficient to maintain a standard of living comparable to the marriage, though voluntary unemployment or desertion without reasonable cause can reduce or bar a claim. Under Rajnesh v. Neha (2020), both spouses must additionally file sworn Affidavits of Assets, Income and Liabilities, in the prescribed format, before the Family Court, Lucknow, so that interim and final maintenance reflect disclosed income rather than assumption.',
+  },
+  {
+    question: 'What happens if a spouse refuses to pay court-ordered maintenance in Lucknow?',
+    answer: 'An aggrieved party can file an execution application under Section 147 BNSS (formerly Section 125(3)/128 CrPC) before the Family Court, Lucknow. For wilful default, the court can issue a distress warrant, attach salary or property, or order imprisonment until the arrears are paid, subject to the facts and the defaulting spouse\u2019s explanation.',
+  },
+  {
+    question: 'Can I file a Domestic Violence (PWDVA) case in Lucknow alongside a Family Court maintenance or divorce case?',
+    answer: 'Yes. An aggrieved woman can seek protection, residence, monetary relief, and temporary custody under Section 12 of the Protection of Women from Domestic Violence Act, 2005 before the Judicial Magistrate in Lucknow alongside Family Court proceedings. Courts generally adjust overlapping maintenance awards across the two proceedings to prevent double recovery.',
+  },
+  {
+    question: 'What should I do in Lucknow if a false 498A / Section 85 BNS or dowry complaint is threatened or filed?',
+    answer: 'At the Mahila Thana or Parivar Paramarsh Kendra stage, submit a structured written response and preserve relevant, lawfully obtained evidence. If an FIR is registered under Section 85 BNS (498A IPC), the police must follow the Arnesh Kumar safeguards and ordinarily issue a Section 35(3) BNSS notice before arrest. Depending on the facts, you may seek anticipatory bail or a Section 528 BNSS (formerly Section 482 CrPC) quashing petition before the Allahabad High Court, Lucknow Bench.',
+  },
+  {
+    question: 'How can Stridhan and marriage jewellery be legally recovered in Lucknow?',
+    answer: 'Stridhan can be pursued through an application under Section 27 of the Hindu Marriage Act, 1955, a Section 12 PWDVA petition before the Magistrate, or a complaint under Section 316 BNS (formerly Section 406 IPC) for criminal breach of trust — each supported by bills, photographs, and an itemised inventory wherever available.',
+  },
+  {
+    question: 'Can I file a family court case in Lucknow if my spouse lives in another city or abroad?',
+    answer: 'Yes, provided Lucknow satisfies the statutory jurisdiction requirements — such as where the marriage was solemnised, where the parties last resided together, where the respondent resides, or, for certain petitions, where the wife resides. To transfer a connected case within Uttar Pradesh, a Section 24 CPC transfer petition lies before the Allahabad High Court, Lucknow Bench.',
+  },
+  {
+    question: 'What if my spouse obtained an ex-parte decree in Lucknow Family Court, or I never received the notice?',
+    answer: 'You should promptly approach the same Family Court in Lucknow to explain the non-service and seek recall of the ex-parte proceedings. If an ex-parte decree has already been passed, an Order IX Rule 13 CPC application can be filed to set it aside for non-service of notice, or, where maintainable, an appeal can be filed under Section 19 of the Family Courts Act, 1984 before the Allahabad High Court, Lucknow Bench. Acting quickly matters, as limitation periods apply.',
+  },
+  {
+    question: 'Can parents or senior citizens claim maintenance from their adult children in Lucknow?',
+    answer: 'Yes. Parents who are unable to maintain themselves can claim monthly maintenance from adult sons and daughters under Section 144 BNSS before the Family Court, Lucknow, or before the Maintenance Tribunal constituted under the Maintenance and Welfare of Parents and Senior Citizens Act, 2007.',
+  },
+  {
+    question: 'Does a married daughter have an equal right in ancestral family property, and can a wife claim her husband\u2019s parents\u2019 house?',
+    answer: 'Following Vineeta Sharma v. Rakesh Sharma (2020), a daughter has equal coparcenary rights by birth in Hindu ancestral property, regardless of her marital status or the date of her father\u2019s death. A wife generally does not acquire ownership title in her in-laws\u2019 self-acquired property, though she may claim a right of residence in a shared household under Section 19 of the Domestic Violence Act, subject to the facts.',
+  },
+  {
+    question: 'Are advocates allowed in Family Court, Lucknow, and is a notarised stamp-paper divorce valid?',
+    answer: 'A marriage cannot be dissolved by a notarised stamp-paper agreement; only a decree from a competent court legally dissolves a marriage. While Section 13 of the Family Courts Act, 1984 does not give parties an automatic right to counsel, the Family Court, Lucknow routinely permits advocates to appear and represent clients with the leave of the court.',
+  },
+]
+
+const hindiFaqs = [
+  {
+    question: 'लखनऊ का फैमिली कोर्ट कहाँ स्थित है और वहाँ किन मामलों की सुनवाई होती है?',
+    answer: 'लखनऊ का फैमिली कोर्ट 430, वाला कदर रोड, कैसरबाग (क़ैसरबाग), लखनऊ, उत्तर प्रदेश 226001 में परिवर्तन चौक के पास स्थित है। फैमिली कोर्ट्स एक्ट, 1984 के तहत यहाँ तलाक, न्यायिक पृथक्करण, दाम्पत्य अधिकारों की पुनर्स्थापना, भरण-पोषण, बच्चों की अभिरक्षा और संरक्षकता संबंधी मामले सुने जाते हैं, जहाँ अदालत को क्षेत्राधिकार प्राप्त हो। अदालत जाने से पहले रजिस्ट्री या वाद-सूची से वर्तमान पता, कक्ष संख्या और कार्य समय की पुष्टि करें।',
+  },
+  {
+    question: 'धारा 144 BNSS के तहत भरण-पोषण का दावा कैसे दायर करें?',
+    answer: 'पत्नी, बच्चों या आश्रित माता-पिता के लिए संक्षिप्त भरण-पोषण भारतीय नागरिक सुरक्षा संहिता (BNSS) की धारा 144 (पूर्व में दंड प्रक्रिया संहिता की धारा 125) के तहत संबंधित न्यायिक मजिस्ट्रेट या फैमिली कोर्ट, कैसरबाग के समक्ष दायर किया जाता है। रजनेश बनाम नेहा (2020) के निर्देशानुसार दोनों पक्षों को निर्धारित प्रारूप में संपत्ति और देनदारियों का शपथ पत्र देना होता है। अवैतनिक राशि की वसूली धारा 147 BNSS के तहत कुर्की द्वारा की जा सकती है।',
+  },
+  {
+    question: 'लखनऊ फैमिली कोर्ट बच्चे की अभिरक्षा पर निर्णय कैसे लेता है?',
+    answer: 'अभिरक्षा और संरक्षकता के आवेदन अभिभावक और प्रतिपाल्य अधिनियम, 1890 तथा हिंदू अप्राप्तवयता एवं संरक्षकता अधिनियम, 1956 के तहत दायर किए जाते हैं। निर्णय में सबसे महत्वपूर्ण बात बच्चे का कल्याण है, न कि किसी एक माता-पिता का लिंग या आय। स्कूली शिक्षा, स्वास्थ्य, देखभाल की स्थिरता और मौजूदा मुलाक़ात व्यवस्था जैसे तथ्यों पर विचार किया जाता है; अंतरिम अभिरक्षा और मुलाक़ात अधिकार भी माँगे जा सकते हैं।',
+  },
+  {
+    question: 'घरेलू हिंसा अधिनियम के तहत पीड़ित महिला को क्या राहत मिल सकती है?',
+    answer: 'घरेलू हिंसा से महिलाओं का संरक्षण अधिनियम, 2005 की धारा 12 के तहत संबंधित मजिस्ट्रेट के समक्ष आवेदन करने पर धारा 18 में संरक्षण आदेश, धारा 19 में निवास आदेश, धारा 20 में आर्थिक राहत, धारा 21 में अस्थायी अभिरक्षा और धारा 22 में प्रतिकर दिया जा सकता है। तत्काल खतरे की स्थिति में धारा 23 के तहत अंतरिम या एकपक्षीय आदेश माँगा जा सकता है। गंभीर खतरे की स्थिति में तुरंत पुलिस या आपातकालीन सेवाओं से संपर्क करें।',
+  },
+  {
+    question: 'फैमिली कोर्ट में मध्यस्थता (मीडिएशन) अनिवार्य है क्या?',
+    answer: 'फैमिली कोर्ट्स एक्ट, 1984 की धारा 9 के तहत अदालत पक्षों को समझौते के प्रयास के लिए परामर्शदाता या कैसरबाग स्थित मध्यस्थता एवं सुलह केंद्र में भेज सकती है। भाग लेना सामान्यतः प्रक्रिया का हिस्सा है, परंतु कोई भी समझौता स्वेच्छा से ही होना चाहिए; दबाव में कोई समझौता पत्र पर हस्ताक्षर न करें। सुरक्षा या तत्काल भरण-पोषण की आवश्यकता होने पर पहले उपयुक्त अदालत से राहत माँगने की सलाह दी जाती है।',
+  },
+  {
+    question: 'फैमिली कोर्ट, लखनऊ के आदेश के विरुद्ध अपील कहाँ दायर होती है?',
+    answer: 'फैमिली कोर्ट्स एक्ट, 1984 की धारा 19 के तहत अपील योग्य निर्णय और आदेश के विरुद्ध इलाहाबाद हाईकोर्ट की लखनऊ बेंच, गोमती नगर में दो न्यायाधीशों की पीठ के समक्ष अपील दायर की जाती है। सहमति की डिक्री और अंतरिम आदेशों पर यह अपील लागू नहीं होती; कुछ भरण-पोषण आदेशों के लिए अलग समीक्षा प्रक्रिया है। प्रमाणित प्रति मिलते ही अपील की उपलब्धता और समय-सीमा की पुष्टि करें।',
+  },
+  {
+    question: 'यदि बच्चा 5 वर्ष से कम आयु का है तो लखनऊ फैमिली कोर्ट में अभिरक्षा किसे मिलती है, और पिता मुलाक़ात अधिकार कैसे प्राप्त कर सकता है?',
+    answer: 'हिंदू अप्राप्तवयता एवं संरक्षकता अधिनियम, 1956 की धारा 6(क) के अनुसार पाँच वर्ष से कम आयु के बच्चे की अभिरक्षा सामान्यतः माँ के पास रहती है, जब तक कि बच्चे का कल्याण अन्यथा की माँग न करे। फैमिली कोर्ट, लखनऊ बच्चे के कल्याण को सर्वोपरि मानता है और गैर-अभिरक्षक माता-पिता को अंतरिम व नियमित मुलाक़ात अधिकार दे सकता है, जिसमें सप्ताहांत, छुट्टियाँ और पर्यवेक्षित या वर्चुअल मुलाक़ात शामिल हो सकती है।',
+  },
+  {
+    question: 'कामकाजी पत्नी भी भरण-पोषण का दावा कर सकती है क्या, और क्या आय शपथ पत्र देना अनिवार्य है?',
+    answer: 'हाँ — यदि कामकाजी पत्नी की आय विवाह के समान जीवन-स्तर बनाए रखने के लिए पर्याप्त नहीं है, तो वह भी भरण-पोषण का दावा कर सकती है, हालाँकि स्वेच्छा से बेरोज़गार रहना या बिना उचित कारण परित्याग करना दावे को घटा या रोक सकता है। रजनेश बनाम नेहा (2020) के अनुसार दोनों पक्षों को निर्धारित प्रारूप में संपत्ति, आय और देनदारियों का शपथ पत्र फैमिली कोर्ट, लखनऊ के समक्ष दाखिल करना होता है, ताकि अंतरिम और अंतिम भरण-पोषण वास्तविक आय पर आधारित हो, अनुमान पर नहीं।',
+  },
+  {
+    question: 'यदि कोई पक्ष लखनऊ में अदालत द्वारा आदेशित भरण-पोषण देने से इनकार करे तो क्या होगा?',
+    answer: 'पीड़ित पक्ष धारा 147 BNSS (पूर्व में धारा 125(3)/128 CrPC) के तहत फैमिली कोर्ट, लखनऊ के समक्ष निष्पादन आवेदन दायर कर सकता है। जानबूझकर चूक करने पर अदालत कुर्की वारंट जारी कर सकती है, वेतन या संपत्ति कुर्क कर सकती है, या तथ्यों और बकायादार पक्ष के स्पष्टीकरण के अधीन, बकाया राशि चुकाए जाने तक कारावास का आदेश दे सकती है।',
+  },
+  {
+    question: 'क्या लखनऊ में घरेलू हिंसा (PWDVA) का मामला फैमिली कोर्ट के भरण-पोषण या तलाक के मामले के साथ-साथ दायर किया जा सकता है?',
+    answer: 'हाँ। पीड़ित महिला घरेलू हिंसा से महिलाओं का संरक्षण अधिनियम, 2005 की धारा 12 के तहत लखनऊ के संबंधित मजिस्ट्रेट के समक्ष फैमिली कोर्ट की कार्यवाही के साथ-साथ संरक्षण, निवास, आर्थिक राहत और अस्थायी अभिरक्षा की माँग कर सकती है। अदालतें सामान्यतः दोहरी वसूली रोकने के लिए दोनों कार्यवाहियों में भरण-पोषण राशि को समायोजित करती हैं।',
+  },
+  {
+    question: 'यदि लखनऊ में झूठी धारा 498A / धारा 85 BNS या दहेज शिकायत की धमकी दी जाए या दर्ज की जाए तो क्या करें?',
+    answer: 'महिला थाना या परिवार परामर्श केंद्र स्तर पर संरचित लिखित जवाब प्रस्तुत करें और प्रासंगिक, वैध रूप से प्राप्त साक्ष्य सुरक्षित रखें। यदि धारा 85 BNS (498A IPC) के तहत FIR दर्ज हो जाए, तो पुलिस को अर्नेश कुमार दिशा-निर्देशों का पालन करना होता है और गिरफ़्तारी से पहले सामान्यतः धारा 35(3) BNSS का नोटिस देना होता है। तथ्यों के अनुसार, अग्रिम जमानत या इलाहाबाद हाईकोर्ट की लखनऊ बेंच के समक्ष धारा 528 BNSS (पूर्व में धारा 482 CrPC) के तहत रद्दीकरण याचिका दायर की जा सकती है।',
+  },
+  {
+    question: 'लखनऊ में स्त्रीधन और विवाह के आभूषण कानूनी रूप से कैसे वापस प्राप्त किए जा सकते हैं?',
+    answer: 'स्त्रीधन की वापसी हिंदू विवाह अधिनियम, 1955 की धारा 27 के तहत आवेदन, मजिस्ट्रेट के समक्ष धारा 12 PWDVA याचिका, या आपराधिक विश्वासघात के लिए धारा 316 BNS (पूर्व में धारा 406 IPC) की शिकायत के माध्यम से माँगी जा सकती है — प्रत्येक के साथ उपलब्ध बिल, फ़ोटोग्राफ़ और मदवार सूची संलग्न करें।',
+  },
+  {
+    question: 'यदि पति या पत्नी किसी अन्य शहर या विदेश में रहते हों, तो क्या मैं लखनऊ में पारिवारिक मामला दायर कर सकता/सकती हूँ?',
+    answer: 'हाँ, बशर्ते लखनऊ वैधानिक क्षेत्राधिकार की शर्तें पूरी करे — जैसे जहाँ विवाह संपन्न हुआ, जहाँ पक्ष अंतिम बार साथ रहे, जहाँ प्रतिवादी रहता है, या कुछ याचिकाओं के लिए जहाँ पत्नी रहती है। उत्तर प्रदेश के भीतर संबंधित मामले को स्थानांतरित करने के लिए धारा 24 CPC की स्थानांतरण याचिका इलाहाबाद हाईकोर्ट की लखनऊ बेंच के समक्ष दायर की जा सकती है।',
+  },
+  {
+    question: 'यदि फैमिली कोर्ट में पति या पत्नी के विरुद्ध एकपक्षीय (ex-parte) डिक्री पारित हो गई हो, या नोटिस कभी प्राप्त न हुआ हो, तो क्या करें?',
+    answer: 'तुरंत उसी फैमिली कोर्ट, लखनऊ में उपस्थित होकर नोटिस की गैर-तामील स्पष्ट करें और एकपक्षीय कार्यवाही को वापस लेने (recall) का अनुरोध करें। यदि एकपक्षीय डिक्री पहले ही पारित हो चुकी है, तो नोटिस की गैर-तामील के आधार पर उसे रद्द करने के लिए आदेश IX नियम 13 CPC का आवेदन दायर किया जा सकता है, या जहाँ अपील योग्य हो, फैमिली कोर्ट्स एक्ट, 1984 की धारा 19 के तहत इलाहाबाद हाईकोर्ट की लखनऊ बेंच में अपील की जा सकती है। शीघ्र कार्रवाई महत्वपूर्ण है, क्योंकि समय-सीमा लागू होती है।',
+  },
+  {
+    question: 'क्या लखनऊ में माता-पिता या वरिष्ठ नागरिक अपने वयस्क बच्चों से भरण-पोषण का दावा कर सकते हैं?',
+    answer: 'हाँ। जो माता-पिता अपना भरण-पोषण करने में असमर्थ हैं, वे धारा 144 BNSS के तहत फैमिली कोर्ट, लखनऊ के समक्ष, या माता-पिता और वरिष्ठ नागरिक भरण-पोषण एवं कल्याण अधिनियम, 2007 के तहत गठित भरण-पोषण अधिकरण के समक्ष अपने वयस्क पुत्र-पुत्रियों से मासिक भरण-पोषण का दावा कर सकते हैं।',
+  },
+  {
+    question: 'क्या विवाहित बेटी को पैतृक संपत्ति में बेटे के बराबर अधिकार है, और क्या पत्नी अपने ससुराल के घर पर दावा कर सकती है?',
+    answer: 'विनीता शर्मा बनाम राकेश शर्मा (2020) के अनुसार, बेटी को जन्म से ही हिंदू पैतृक संपत्ति में समान सहदायिक (coparcenary) अधिकार प्राप्त है, चाहे उसकी वैवाहिक स्थिति या पिता की मृत्यु की तारीख कुछ भी हो। पत्नी को सामान्यतः ससुराल की स्वअर्जित संपत्ति में स्वामित्व अधिकार नहीं मिलता, हालाँकि तथ्यों के अनुसार वह घरेलू हिंसा अधिनियम की धारा 19 के तहत साझा गृहस्थी में निवास के अधिकार का दावा कर सकती है।',
+  },
+  {
+    question: 'क्या फैमिली कोर्ट, लखनऊ में अधिवक्ता की अनुमति है, और क्या नोटरी किए गए स्टाम्प-पेपर पर तलाक वैध है?',
+    answer: 'स्टाम्प-पेपर पर नोटरी किए गए समझौते से विवाह विच्छेद नहीं हो सकता; केवल सक्षम अदालत की डिक्री ही कानूनी रूप से विवाह भंग करती है। फैमिली कोर्ट्स एक्ट, 1984 की धारा 13 पक्षों को स्वतः अधिवक्ता का अधिकार नहीं देती, फिर भी फैमिली कोर्ट, लखनऊ सामान्यतः अदालत की अनुमति से अधिवक्ताओं को उपस्थित होने और प्रतिनिधित्व करने देता है।',
+  },
+]
+
 const familyFaqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: familyInsights.map(({ title, excerpt }) => ({
-    '@type': 'Question',
-    name: title,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: excerpt,
-    },
-  })),
+  inLanguage: ['en-IN', 'hi-IN'],
+  mainEntity: [
+    ...familyInsights.map(({ title, excerpt }) => ({
+      '@type': 'Question',
+      inLanguage: 'en-IN',
+      name: title,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: excerpt,
+      },
+    })),
+    ...detailedFaqs.map(({ question, answer }) => ({
+      '@type': 'Question',
+      inLanguage: 'en-IN',
+      name: question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: answer,
+      },
+    })),
+    ...hindiFaqs.map(({ question, answer }) => ({
+      '@type': 'Question',
+      inLanguage: 'hi-IN',
+      name: question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: answer,
+      },
+    })),
+  ],
 }
 
 export default async function FamilyMatrimonialServicePage() {
@@ -449,6 +637,35 @@ export default async function FamilyMatrimonialServicePage() {
             </div>
           </div>
 
+          <section id="family-court-jurisdiction-table" aria-labelledby="family-court-jurisdiction-heading" className="mb-16 scroll-mt-28">
+            <h2 id="family-court-jurisdiction-heading" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Which Lucknow Court Hears Your Family Matter?
+            </h2>
+            <p className="mb-6 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
+              Matrimonial, maintenance, custody, protection, and senior-citizen proceedings are distinct statutory tracks, each heard by a different Lucknow forum. This table is a quick reference; the facts of your matter and current court practice determine the correct forum.
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[640px] border-collapse text-left font-body text-sm">
+                <thead>
+                  <tr className="border-b border-gold-500/30 text-navy-900 dark:text-cream">
+                    <th scope="col" className="py-3 pr-4 font-semibold">Family Matter</th>
+                    <th scope="col" className="py-3 pr-4 font-semibold">Governing Law</th>
+                    <th scope="col" className="py-3 font-semibold">Forum in Lucknow</th>
+                  </tr>
+                </thead>
+                <tbody className="text-navy-800 dark:text-cream/75">
+                  {courtJurisdictionTable.map(({ matter, law, forum }) => (
+                    <tr key={matter} className="border-b border-gold-500/10 align-top">
+                      <th scope="row" className="py-3 pr-4 font-semibold">{matter}</th>
+                      <td className="py-3 pr-4">{law}</td>
+                      <td className="py-3">{forum}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
           <div className="mb-16">
             <h2 className="mb-8 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Types of Family &amp; Matrimonial Matters We Handle
@@ -544,12 +761,19 @@ export default async function FamilyMatrimonialServicePage() {
             </ul>
           </section>
 
-          <div className="mb-16">
+          <section aria-labelledby="family-interim-relief-review" className="mb-16 border-t border-gold-500/20 pt-10">
+            <h2 id="family-interim-relief-review" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream">Planning Custody, Visitation and Interim Support</h2>
+            <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">Family proceedings may require workable interim arrangements before a final decision. For custody and access, prepare a child-focused account of schooling, health, daily care, safety and existing contact arrangements. The child&apos;s welfare is central; neither parent should assume custody follows automatically from gender, income or allegations. We assess requests for interim custody, visitation, communication and travel in light of the record and any existing order.</p>
+            <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Financial disclosure and connected cases</h3>
+            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Bring income and asset records, bank statements, essential household and child-related expenses, marriage records and every pending maintenance or protection order. Disclose overlapping proceedings so relief and payments can be addressed consistently; support is not calculated by one universal percentage. Divorce, maintenance, domestic violence and guardianship may involve different provisions and forums. For marriage dissolution and settlement planning, see our <Link href="/services/divorce-lawyer-lucknow" className="text-gold-700 underline dark:text-gold-400">divorce lawyer page</Link>.</p>
+          </section>
+
+          <div id="family-faqs" className="mb-16 scroll-mt-28">
             <div className="mb-10 text-center">
               <span className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">
                 From Our Desk
               </span>
-              <h2 className="mb-3 mt-2 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              <h2 id="family-faqs-heading" className="mb-3 mt-2 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
                 Family Lawyers in Lucknow: <em className="text-gold-gradient">Frequently Asked Questions</em>
               </h2>
               <p className="mx-auto max-w-xl font-body text-navy-700 dark:text-cream/55">
@@ -583,11 +807,42 @@ export default async function FamilyMatrimonialServicePage() {
             </div>
           </div>
 
-          <section aria-labelledby="family-interim-relief-review" className="mb-16 border-t border-gold-500/20 pt-10">
-            <h2 id="family-interim-relief-review" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream">Planning Custody, Visitation and Interim Support</h2>
-            <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">Family proceedings may require workable interim arrangements before a final decision. For custody and access, prepare a child-focused account of schooling, health, daily care, safety and existing contact arrangements. The child&apos;s welfare is central; neither parent should assume custody follows automatically from gender, income or allegations. We assess requests for interim custody, visitation, communication and travel in light of the record and any existing order.</p>
-            <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Financial disclosure and connected cases</h3>
-            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Bring income and asset records, bank statements, essential household and child-related expenses, marriage records and every pending maintenance or protection order. Disclose overlapping proceedings so relief and payments can be addressed consistently; support is not calculated by one universal percentage. Divorce, maintenance, domestic violence and guardianship may involve different provisions and forums. For marriage dissolution and settlement planning, see our <Link href="/services/divorce-lawyer-lucknow" className="text-gold-700 underline dark:text-gold-400">divorce lawyer page</Link>.</p>
+          <section id="detailed-faqs" aria-labelledby="detailed-faqs-heading" className="mb-16 scroll-mt-28 border-t border-gold-500/20 pt-10">
+            <h2 id="detailed-faqs-heading" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Family Court Lawyer in Lucknow: More Questions, Answered
+            </h2>
+            <p className="mb-6 font-body leading-relaxed text-navy-700 dark:text-cream/70">
+              Practical, case-specific questions our family court lawyers in Lucknow are asked most often — on child custody, maintenance enforcement, domestic violence, Stridhan recovery, ex-parte orders, senior-citizen maintenance, and inheritance.
+            </p>
+            <div className="divide-y divide-gold-500/20 border-y border-gold-500/20">
+              {detailedFaqs.map(({ question, answer }) => (
+                <details key={question} className="py-5">
+                  <summary className="cursor-pointer font-display text-lg font-bold leading-relaxed text-navy-900 transition-colors hover:text-gold-700 focus-visible:outline-gold-500 dark:text-cream dark:hover:text-gold-400">
+                    {question}
+                  </summary>
+                  <p className="mt-3 font-body leading-relaxed text-navy-700 dark:text-cream/70">{answer}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+
+          <section id="hindi-faqs" lang="hi" aria-labelledby="hindi-faqs-heading" className="mb-16 scroll-mt-28 border-t border-gold-500/20 pt-10">
+            <h2 id="hindi-faqs-heading" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              लखनऊ फैमिली कोर्ट: हिंदी में सामान्य प्रश्न
+            </h2>
+            <p className="mb-6 font-body leading-relaxed text-navy-700 dark:text-cream/70">
+              यह सामान्य कानूनी जानकारी है, किसी विशेष मामले की सलाह नहीं। लागू कानून, तथ्यों और अदालत के आदेश के अनुसार प्रक्रिया बदल सकती है। किसी परिणाम या समय-सीमा की गारंटी नहीं है।
+            </p>
+            <div className="divide-y divide-gold-500/20 border-y border-gold-500/20">
+              {hindiFaqs.map(({ question, answer }) => (
+                <details key={question} className="py-5">
+                  <summary className="cursor-pointer font-display text-lg font-bold leading-relaxed text-navy-900 transition-colors hover:text-gold-700 focus-visible:outline-gold-500 dark:text-cream dark:hover:text-gold-400">
+                    {question}
+                  </summary>
+                  <p className="mt-3 font-body leading-relaxed text-navy-700 dark:text-cream/70">{answer}</p>
+                </details>
+              ))}
+            </div>
           </section>
 
           <ServiceBlogs

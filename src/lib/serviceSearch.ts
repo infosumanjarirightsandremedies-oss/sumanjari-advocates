@@ -22,9 +22,9 @@ export const serviceSearchContent = {
     answer: 'Choose according to the alleged offence, custody status and court involved. Ask about regular or anticipatory bail, FIR review, trial preparation and maintainable High Court remedies. Share the FIR, notices and prior orders so an advocate can identify urgent deadlines and explain risks. Confirm who handles hearings and the fee scope. Claims of guaranteed bail, FIR quashing or acquittal are not a reliable basis for choosing a criminal lawyer.',
   },
   'family-advocate': {
-    title: 'Family Lawyer & Advocate in Lucknow | Custody & Maintenance',
-    description: 'Experienced family lawyers, advocates & attorneys in Lucknow for child custody, maintenance and domestic violence matters. Understand Family Court options and records.',
-    attorneyKeyword: 'Family Attorney Lucknow',
+    title: 'Family Court Lawyer in Lucknow | Custody, Maintenance & Matrimonial',
+    description: 'Consult a Family Court lawyer in Lucknow at Sumanjari & Co. Advocates for custody, maintenance (Sec 144 BNSS), 498A, DV & divorce at Kaiserbagh Family Court.',
+    attorneyKeyword: 'Family Court Attorney Lucknow',
     question: 'How do I choose the best family court lawyer or advocate in Lucknow?',
     answer: 'Look for experience with the particular issue: custody, maintenance, domestic violence or connected matrimonial proceedings. Ask how the advocate assesses the appropriate forum, financial disclosures, interim relief and the interests of children. Discuss confidentiality, mediation, personal attendance and coordination with parallel cases. Obtain a clear explanation of professional fees and case updates. The best fit is matter-specific; custody or maintenance outcomes cannot be guaranteed.',
   },
@@ -64,8 +64,8 @@ export const serviceSearchContent = {
     answer: 'Look for an advocate who can distinguish a fraud complaint, bank lien or freeze, IT Act prosecution and bail application. Ask how the investigating authority, transaction trail and original electronic evidence will be identified, including multistate complaints. Bring bank communications, complaint references and prior orders; never share passwords or OTPs. Report ongoing financial fraud promptly rather than waiting for an appointment. No advocate can guarantee fund recovery or account release.',
   },
   'company-corporate-lawyer-lucknow': {
-    title: 'Corporate Lawyer & Advocate in Lucknow | Company & NCLT Matters',
-    description: 'Experienced corporate lawyers, company law advocates & attorneys in Lucknow for contracts, shareholder disputes, commercial litigation and NCLT matters. Review records.',
+    title: 'Corporate Lawyers in Lucknow — NCLT, M&A & Company Law | Sumanjari & Co.',
+    description: 'Corporate and company lawyers in Lucknow for M&A, contracts, startup advisory, ROC compliance, shareholder disputes and NCLT matters. Contact our chambers.',
     attorneyKeyword: 'Corporate Attorney Lucknow',
     question: 'How do I choose the best corporate lawyer or company law advocate in Lucknow?',
     answer: 'Choose for the actual issue: a commercial contract, shareholder dispute, corporate compliance or insolvency proceeding. Ask about the correct commercial court, arbitration clause or NCLT bench, rather than assuming every company dispute belongs before NCLT. Share incorporation records, agreements, notices and financial documents. Clarify responsibility for advisory work, pleadings and hearings, along with fees and confidentiality. Insolvency is not a guaranteed route to recover a disputed debt.',

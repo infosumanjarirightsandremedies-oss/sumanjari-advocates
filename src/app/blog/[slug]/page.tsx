@@ -278,6 +278,20 @@ export default async function BlogPostPage({ params }: PageProps) {
             <BlockList blocks={content} />
           </div>
 
+          {serviceSlug === 'company-corporate-lawyer-lucknow' && (
+            <p className="mb-8 font-body text-lg leading-relaxed text-navy-800 dark:text-cream/75">
+              For advice on a particular business matter, see our{' '}
+              <Link href={backHref} className="text-gold-700 underline underline-offset-4 dark:text-gold-400">
+                {/\bIBC\b|insolvency|NCLT/i.test(post.title)
+                  ? 'NCLT and corporate insolvency practice for Lucknow businesses'
+                  : /shareholder|oppression|director/i.test(post.title)
+                    ? 'company law and shareholder dispute advisory in Lucknow'
+                    : 'corporate lawyers in Lucknow for contracts and business advisory'}
+              </Link>.
+              The correct forum and remedy depend on the facts and applicable law.
+            </p>
+          )}
+
           <BlogCallbackCard />
 
           {relatedPosts.length > 0 && (

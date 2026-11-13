@@ -4,7 +4,6 @@ import type { Metadata } from 'next'
 import {
   ArrowLeft,
   ArrowUpRight,
-  Phone,
   Receipt,
   Home,
   MapPin,
@@ -16,6 +15,7 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceContactLinks from '@/components/ServiceContactLinks'
 import ServiceSelection from '@/components/ServiceSelection'
 import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
 import LucknowChambers from '@/components/LucknowChambers'
@@ -26,7 +26,7 @@ import TeamCarousel from '@/components/TeamCarousel'
 import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
 import { taxLucknowStages, taxLucknowStatutes, taxLucknowToc } from '@/lib/guides/taxLucknow'
 import { teamMembers } from '@/lib/team'
-import { CHAMBER_TEL, LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
+import { LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 import { getBlogPostsByCategory } from '@/lib/blogs'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
@@ -49,9 +49,7 @@ function ConsultationActions({ className }: { className: string }) {
       <a href="/#contact" className="btn-gold inline-flex items-center justify-center rounded-sm px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-900 sm:px-8 sm:text-sm sm:tracking-widest">
         Chamber Contact
       </a>
-      <a href={CHAMBER_TEL} className="inline-flex items-center justify-center gap-2 rounded-sm border border-gold-500/40 px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-800 transition-colors hover:border-gold-500 hover:text-gold-700 dark:text-cream/85 dark:hover:text-gold-300 sm:px-6 sm:text-sm sm:tracking-widest">
-        <Phone className="h-4 w-4 shrink-0" /> Call Chamber
-      </a>
+      <ServiceContactLinks />
     </div>
   )
 }

@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
-import { ArrowLeft, ArrowUpRight, Building2, FileCheck, MapPin, MessageCircle, Phone, ScrollText } from 'lucide-react'
+import { ArrowLeft, ArrowUpRight, Building2, FileCheck, MapPin, ScrollText } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import ServiceContactLinks from '@/components/ServiceContactLinks'
 import ServiceSelection from '@/components/ServiceSelection'
 import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
 import FirmCredentials from '@/components/FirmCredentials'
@@ -14,7 +15,7 @@ import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
 import { reraNoidaGhaziabadStages, reraNoidaGhaziabadToc } from '@/lib/guides/reraNoidaGhaziabad'
 import { reraStatutes } from '@/lib/guides/reraLucknow'
 import { getBlogPostsByCategory } from '@/lib/blogs'
-import { CHAMBER_TEL, CHAMBER_CALL_DISPLAY, NCR_CHAMBER_ADDRESS, whatsappUrl } from '@/lib/contactLinks'
+import { NCR_CHAMBER_ADDRESS, whatsappUrl } from '@/lib/contactLinks'
 import { teamMembers } from '@/lib/team'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
@@ -30,9 +31,7 @@ function ConsultationActions({ className }: { className: string }) {
       <a href="/#contact" className="btn-gold inline-flex items-center justify-center rounded-sm px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-900 sm:px-8 sm:text-sm sm:tracking-widest">
         Consult Now
       </a>
-      <a href={CHAMBER_TEL} className="inline-flex items-center justify-center gap-2 rounded-sm border border-gold-500/40 px-3 py-3.5 font-caps text-[11px] font-semibold uppercase tracking-wide text-navy-800 transition-colors hover:border-gold-500 hover:text-gold-700 dark:text-cream/85 dark:hover:text-gold-300 sm:px-6 sm:text-sm sm:tracking-widest">
-        <Phone className="h-4 w-4 shrink-0" /> Call Now
-      </a>
+      <ServiceContactLinks />
     </div>
   )
 }
@@ -442,8 +441,7 @@ export default async function NoidaGhaziabadReraPage() {
             </div>
           </div>
           <div className="mt-6 flex flex-wrap gap-4">
-            <a href={CHAMBER_TEL} className="inline-flex items-center gap-2 rounded-sm border border-gold-500/40 px-5 py-3 font-body font-semibold text-navy-900 dark:text-cream"><Phone className="h-4 w-4" /> +91 {CHAMBER_CALL_DISPLAY}</a>
-            <a href={whatsappUrl('Hello, I would like to discuss a RERA matter involving a project in Noida or Ghaziabad.')} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-sm border border-gold-500/40 px-5 py-3 font-body font-semibold text-navy-900 dark:text-cream"><MessageCircle className="h-4 w-4" /> WhatsApp</a>
+            <ServiceContactLinks whatsappHref={whatsappUrl('Hello, I would like to discuss a RERA matter involving a project in Noida or Ghaziabad.')} />
           </div>
           <p className="mt-6 font-body text-sm text-navy-700 dark:text-cream/60">
             For title, ownership or land disputes outside RERA, see{' '}

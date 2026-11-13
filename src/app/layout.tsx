@@ -188,6 +188,7 @@ const legalServiceJsonLd = {
   email: 'info.sumanjarirightsandremedies@gmail.com',
   telephone: '+91-83024-71764',
   sameAs: [
+    'https://www.linkedin.com/company/sumanjari-co-advocate/about/',
     'https://www.instagram.com/thelast_verdict',
     'https://www.reddit.com/user/Mean-Bicycle-5947/',
   ],

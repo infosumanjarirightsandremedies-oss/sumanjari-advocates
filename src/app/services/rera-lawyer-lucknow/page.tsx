@@ -29,6 +29,8 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import { ServicePhoneNumber } from '@/components/ServicePhoneLink'
+import ServiceContactLinks from '@/components/ServiceContactLinks'
 import ServiceSelection from '@/components/ServiceSelection'
 import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
 import LucknowChambers from '@/components/LucknowChambers'
@@ -355,20 +357,7 @@ export default async function ReraServicePage() {
                 >
                   Book a Consultation
                 </a>
-                <a
-                  href={CONTACT.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-sm border border-gold-500/40 px-6 py-3.5 font-caps text-sm font-semibold uppercase tracking-widest text-navy-800 transition-colors hover:border-gold-500 hover:text-gold-700 dark:text-cream/85 dark:hover:text-gold-300"
-                >
-                  <MessageCircle className="h-4 w-4" /> WhatsApp
-                </a>
-                <a
-                  href={CONTACT.phone[0].tel}
-                  className="inline-flex items-center gap-2 rounded-sm border border-gold-500/40 px-6 py-3.5 font-caps text-sm font-semibold uppercase tracking-widest text-navy-800 transition-colors hover:border-gold-500 hover:text-gold-700 dark:text-cream/85 dark:hover:text-gold-300"
-                >
-                  <Phone className="h-4 w-4" /> Call Now
-                </a>
+                <ServiceContactLinks phoneHref={CONTACT.phone[0].tel} phoneNumber={CONTACT.phone[0].display} whatsappHref={CONTACT.whatsapp} />
               </div>
             </div>
 
@@ -763,8 +752,8 @@ export default async function ReraServicePage() {
                 >
                   <Phone className="h-5 w-5 flex-shrink-0 text-gold-600 dark:text-gold-400" />
                   <span>
-                    <span className="block font-body text-sm font-semibold text-navy-900 dark:text-cream">
-                      {display}
+                    <span className="block text-navy-900 dark:text-cream">
+                      <ServicePhoneNumber number={display} />
                     </span>
                     <span className="block font-body text-xs text-navy-700/70 dark:text-cream/50">
                       {name}

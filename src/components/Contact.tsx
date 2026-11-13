@@ -200,7 +200,7 @@ export default function Contact() {
           </div>
 
           {/* Form */}
-          <div className="lg:col-span-3 glass-card rounded-sm p-8">
+          <div className="lg:col-span-3 self-start glass-card rounded-sm p-8">
             {status === 'success' ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-16">
                 <div className="w-16 h-16 rounded-full bg-gold-500/18 border border-gold-500/40 flex items-center justify-center mb-6">

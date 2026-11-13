@@ -1,5 +1,72 @@
 import type { GuideStage, GuideTocItem, StatuteRow } from './types'
 
+export const corporateLucknowFaqs = [
+  {
+    question: 'What is oppression and mismanagement under company law?',
+    answer: 'Sections 241 and 242 of the Companies Act, 2013 allow eligible members to seek NCLT relief for oppressive or prejudicial conduct of company affairs. Section 244 standing or waiver requirements must also be assessed. A disagreement or contractual breach alone does not establish oppression.',
+  },
+  {
+    question: 'Which NCLT bench hears company matters for Lucknow?',
+    answer: 'The NCLT Allahabad Bench ordinarily hears company and corporate insolvency matters for Uttar Pradesh, including Lucknow. Confirm the registered office, subject matter and current territorial allocation before filing. It is not a Lucknow tribunal, and NCLT appeals ordinarily follow the statutory NCLAT route.',
+  },
+  {
+    question: 'What qualifies as a commercial dispute in Lucknow?',
+    answer: 'The dispute must fall within Section 2(1)(c) of the Commercial Courts Act, 2015 and meet the applicable specified value, whose statutory minimum is ₹3 lakh. Territorial jurisdiction, local court allocation and any arbitration clause also matter. Section 12A pre-institution mediation ordinarily applies to suits not contemplating urgent interim relief.',
+  },
+  {
+    question: 'Where are company and LLP filings for Uttar Pradesh submitted?',
+    answer: 'Company and LLP incorporation and statutory filings for Uttar Pradesh are ordinarily submitted through the MCA system to the Registrar of Companies, Kanpur. Check the entity, registered office and current ROC allocation. Some work requires certification by a practising company secretary, chartered accountant or other authorised professional.',
+  },
+  {
+    question: 'What does M&A due diligence involve?',
+    answer: 'An acquisition review examines corporate authority, ownership and share title, financial and tax exposures with the relevant professionals, material contracts, litigation, employment obligations, intellectual property and regulatory approvals. Findings inform pricing, conditions precedent, disclosures, warranties and indemnities. A share purchase, asset purchase and joint venture need different documentation.',
+  },
+  {
+    question: 'How can a shareholder or board deadlock be addressed?',
+    answer: 'Review the articles, shareholder agreement, reserved matters, voting rights and any agreed escalation or exit mechanism first. Negotiation, mediation or a documented buyout may be appropriate. Arbitration depends on the agreement and arbitrability; statutory oppression or mismanagement relief requires its own grounds and standing. Deadlock does not automatically justify winding up.',
+  },
+  {
+    question: 'What are the MSME Samadhaan delayed-payment timelines?',
+    answer: 'For eligible micro and small enterprise suppliers, Section 15 of the MSMED Act limits an agreed payment period to 45 days from acceptance or deemed acceptance; without an agreement, the appointed-day rules apply. Section 18(5) provides for deciding a reference within 90 days, but that is not a guaranteed recovery date. Registration timing, eligibility, conciliation, arbitration and enforcement must be assessed separately.',
+  },
+  {
+    question: 'Can a company struck off by the ROC be restored?',
+    answer: 'Section 252 of the Companies Act provides distinct NCLT routes: an aggrieved person may appeal within three years of the ROC order, while a company, member, creditor or workman may seek restoration within twenty years of publication of the strike-off notice where the statutory conditions are met. The appropriate route, evidence and pending filing obligations need individual review.',
+  },
+  {
+    question: 'Does the IBC ₹1 crore threshold apply to every unpaid invoice?',
+    answer: 'The ordinary Part II corporate insolvency threshold under Section 4 is a minimum default of ₹1 crore. An invoice alone is insufficient: debt classification, limitation, exclusions and the operational-creditor demand process and pre-existing dispute defence must also be checked. Special regimes have separate conditions. Insolvency is not a substitute for ordinary debt recovery.',
+  },
+  {
+    question: 'What legal documents do startups and investors need?',
+    answer: 'Depending on the stage, review founder arrangements, incorporation documents, cap table, IP assignments, employment and consultancy terms, term sheets, share subscription and shareholder agreements. Seed, private equity and venture capital transactions require approval, valuation and filing checks. Foreign investment or India entry also needs sector-specific and FEMA review with the relevant professionals.',
+  },
+]
+
+export const corporateLucknowExamples = [
+  {
+    title: 'Unpaid supply invoices',
+    facts: 'A supplier has delivery records but the buyer alleges defective performance.',
+    forum: 'Eligible MSE Facilitation Council reference, commercial court or arbitration, depending on eligibility and the contract.',
+    statute: 'MSMED Act Sections 15-18; Commercial Courts Act Section 12A; Arbitration and Conciliation Act.',
+    assessment: 'Check the dispute record and registration timing; do not assume an IBC petition is maintainable.',
+  },
+  {
+    title: 'Disputed share allotment',
+    facts: 'A member alleges dilution after a meeting for which notice is disputed.',
+    forum: 'Competent NCLT, subject to statutory grounds and standing.',
+    statute: 'Companies Act Sections 59 and 241-244, as applicable.',
+    assessment: 'Preserve notices, minutes, registers and allotment filings before seeking targeted relief.',
+  },
+  {
+    title: 'Proposed business acquisition',
+    facts: 'A buyer proposes acquiring a private company with material customer contracts.',
+    forum: 'Transaction advisory; approvals or NCLT scheme jurisdiction only where the chosen structure requires them.',
+    statute: 'Companies Act, Indian Contract Act and applicable competition or foreign-investment rules.',
+    assessment: 'Check change-of-control clauses, share title, liabilities and approvals before signing or closing.',
+  },
+]
+
 export const corporateLucknowStages: GuideStage[] = [
   {
     id: 'corporate-stage-authority',
@@ -95,5 +162,6 @@ export const corporateLucknowToc: GuideTocItem[] = [
   { id: 'commercial-arbitration', label: 'Commercial Court & arbitration' },
   { id: 'corporate-procedure', label: 'Procedure and practical decisions', children: corporateLucknowStages.map(({ id, title }) => ({ id, label: title })) },
   { id: 'corporate-faqs', label: 'Frequently asked questions' },
+  { id: 'corporate-examples', label: 'Illustrative statutory scenarios' },
   { id: 'corporate-case-preparation', label: 'Documents for the first consultation' },
 ]
