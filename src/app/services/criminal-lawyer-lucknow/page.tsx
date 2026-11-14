@@ -5,6 +5,7 @@ import {
   ArrowLeft,
   ArrowUpRight,
   FileX,
+  FileSearch,
   KeyRound,
   Gavel,
   Scale,
@@ -119,6 +120,45 @@ const criminalBreadcrumbJsonLd = {
   ],
 }
 
+const urgentSituations = [
+  {
+    icon: MessageSquareWarning,
+    title: 'Received a Police Notice (Section 35(3) BNSS)',
+    blurb: 'A notice of appearance instead of arrest — respond correctly and on time.',
+    href: '#stage-2',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Apprehending Arrest — Anticipatory Bail',
+    blurb: 'Seek advance protection from the Sessions Court or High Court before arrest.',
+    href: '#stage-3',
+  },
+  {
+    icon: ShieldAlert,
+    title: 'Arrested — First 24 Hours & Remand',
+    blurb: 'Grounds of arrest, informing a relative, and the 24-hour production rule.',
+    href: '#stage-4',
+  },
+  {
+    icon: KeyRound,
+    title: 'In Custody — Regular Bail',
+    blurb: 'Bail before the Magistrate, Sessions Court, or High Court, Lucknow Bench.',
+    href: '#stage-5',
+  },
+  {
+    icon: FileX,
+    title: 'FIR or Chargesheet Quashing (Section 528 BNSS)',
+    blurb: 'Challenge an FIR, chargesheet, or summoning order at the Lucknow Bench.',
+    href: '#stage-7',
+  },
+  {
+    icon: Banknote,
+    title: 'Cheque Bounce Notice (Section 138 NI Act)',
+    blurb: 'Strict 30/15-day notice timelines apply — do not let the window lapse.',
+    href: '#cheque-bounce',
+  },
+]
+
 const matters = [
   {
     icon: FileX,
@@ -178,6 +218,15 @@ const matters = [
       'Defence and prosecution support in white-collar and other special-statute offences',
     ],
   },
+  {
+    icon: FileSearch,
+    title: 'Police Non-Registration & Protest Petitions',
+    points: [
+      'Representations under Section 173(4) BNSS to the Deputy Commissioner of Police where a police station refuses to register an FIR',
+      'Applications to the Magistrate under Section 175(3) BNSS directing registration and investigation',
+      'Protest petitions against a closure report, and private complaints under Section 223 BNSS',
+    ],
+  },
 ]
 
 const whyIssues = [
@@ -198,12 +247,12 @@ const jurisdiction = [
   {
     title: 'Magistrate & Sessions Courts, Lucknow',
     blurb:
-      'Bail applications and trial representation before the Magistrate and Sessions Courts.',
+      'Bail applications and trial representation before the Magistrate and Sessions Courts at the Civil Court, Kaiserbagh — 226001.',
   },
   {
     title: 'Allahabad High Court, Lucknow Bench',
     blurb:
-      'FIR quashing, anticipatory bail, appeals, and revisions, arguing from our chambers at Block D-311.',
+      'FIR quashing, anticipatory bail, appeals, and revisions, arguing from our chambers at Block D-311, Vibhuti Khand, Gomti Nagar — 226010.',
   },
   {
     title: 'Special & Fast-Track Courts',
@@ -386,6 +435,27 @@ export default async function CriminalMattersPage() {
 
           <GuideToc items={criminalToc} />
 
+          <section className="mb-16 scroll-mt-28" id="urgent-situations" aria-labelledby="urgent-situations-heading">
+            <h2 id="urgent-situations-heading" className="mb-6 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Immediate Criminal Defence Situations in Lucknow
+            </h2>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {urgentSituations.map(({ icon: Icon, title, blurb, href }) => (
+                <a
+                  key={title}
+                  href={href}
+                  className="glass-card group flex flex-col gap-2 rounded-sm border border-gold-500/25 p-5 transition-colors hover:border-gold-500/50 dark:border-gold-500/20"
+                >
+                  <Icon className="h-5 w-5 shrink-0 text-gold-600 dark:text-gold-400" />
+                  <h3 className="font-display text-base font-bold leading-snug text-navy-900 group-hover:text-gold-700 dark:text-cream dark:group-hover:text-gold-400">
+                    {title}
+                  </h3>
+                  <p className="font-body text-sm leading-relaxed text-navy-700/85 dark:text-cream/60">{blurb}</p>
+                </a>
+              ))}
+            </div>
+          </section>
+
           <section className="mb-16" aria-labelledby="criminal-team">
             <h2 id="criminal-team" className="mb-4 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
               Our Criminal Law Team
@@ -529,7 +599,8 @@ export default async function CriminalMattersPage() {
                   U.P. Gangsters Act, 1986 &amp; Goonda Act Defense
                 </h3>
                 <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">
-                  We challenge defective Gang Charts prepared under the U.P. Gangsters and Anti-Social Activities (Prevention) Rules, 2021, move bail applications under Section 19(4) of the Gangsters Act, and defend against District Magistrate property attachment under Section 14(1). We also contest externment orders passed under the U.P. Control of Goondas Act, 1970.
+                  We challenge defective Gang Charts prepared under the U.P. Gangsters and Anti-Social Activities (Prevention) Rules, 2021, move bail applications under Section 19(4) of the Gangsters Act, and defend against District Magistrate property attachment under Section 14(1). We also contest externment orders passed under the U.P. Control of Goondas Act, 1970. See our{' '}
+                  <Link href="/blog/up-gangsters-act-control-of-goondas-act-defense" className="text-gold-700 underline underline-offset-4 dark:text-gold-400">detailed guide to Gangsters Act and Goonda Act defence</Link>.
                 </p>
               </div>
               <div className="border-l-2 border-gold-500/50 pl-5">
@@ -545,7 +616,8 @@ export default async function CriminalMattersPage() {
                   White-Collar Crime, CBI Anti-Corruption &amp; PMLA (ED) Special Court Lucknow
                 </h3>
                 <p className="font-body leading-relaxed text-navy-800 dark:text-cream/75">
-                  Led by Adv. Aditya Narayan Shukla and Adv. Shishir Pandey, we represent public servants, executives and businesses before the Special Judge (CBI/PMLA/Anti-Corruption), Lucknow — covering Prevention of Corruption Act prosecutions, CBI investigations, and Enforcement Directorate PMLA proceedings, including bail and attachment challenges.
+                  Led by Adv. Aditya Narayan Shukla and Adv. Shishir Pandey, we represent public servants, executives and businesses before the Special Judge (CBI/PMLA/Anti-Corruption), Lucknow — covering Prevention of Corruption Act prosecutions, CBI investigations, and Enforcement Directorate PMLA proceedings, including bail and attachment challenges. Read more on our{' '}
+                  <Link href="/blog/specialized-white-collar-criminal-defenses" className="text-gold-700 underline underline-offset-4 dark:text-gold-400">white-collar and economic offence defence strategies</Link>.
                 </p>
               </div>
             </div>
@@ -635,7 +707,7 @@ export default async function CriminalMattersPage() {
             stages={criminalStages}
           />
 
-          <div className="glass-card mb-16 rounded-sm border border-gold-500/20 p-6 md:p-8">
+          <div id="cheque-bounce" className="glass-card mb-16 scroll-mt-28 rounded-sm border border-gold-500/20 p-6 md:p-8">
             <h3 className="mb-3 font-display text-lg font-bold text-navy-900 dark:text-cream">Track B: Cheque Bounce (Section 138 NI Act) in Lucknow</h3>
             <p className="mb-3 font-body leading-relaxed text-navy-800 dark:text-cream/75">
               A cheque-bounce complaint follows its own track outside the ten stages above. After the bank returns a cheque unpaid, a legal notice must be sent within 30 days of the return memo, demanding payment within 15 days. If payment is not made, the complaint must be filed before a Magistrate court at the Civil Court, Lucknow within one month after that window closes, under Section 142 of the Negotiable Instruments Act.

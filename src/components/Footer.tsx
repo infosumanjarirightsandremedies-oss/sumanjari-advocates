@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { Scale, Instagram, Linkedin, Phone, Mail, MapPin, ChevronDown, ChevronUp } from 'lucide-react'
+import { Scale, Facebook, Instagram, Linkedin, Phone, Mail, MapPin, ChevronDown, ChevronUp } from 'lucide-react'
 import { LUCKNOW_CHAMBER_ADDRESS, NCR_CHAMBER_ADDRESS } from '@/lib/contactLinks'
 
 // lucide-react has no Reddit icon, so the mark is inlined here (matches the
@@ -50,6 +50,11 @@ const links = [
 ]
 
 const social = [
+  {
+    icon: Facebook,
+    href: "https://www.facebook.com/people/Sumanjari-Co-Advocate/61596295031741/",
+    label: "Facebook",
+  },
   {
     icon: Linkedin,
     href: "https://www.linkedin.com/company/sumanjari-co-advocate/about/",

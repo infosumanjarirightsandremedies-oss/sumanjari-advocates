@@ -1,6 +1,6 @@
 ﻿import Link from 'next/link'
 import ProfileLayout from '@/components/ProfileLayout'
-import { ArrowLeft, Phone, Mail, GraduationCap, Linkedin } from 'lucide-react'
+import { ArrowLeft, Phone, Mail, GraduationCap, Linkedin, ExternalLink } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -73,6 +73,17 @@ export default function AishwaryaPandeyPage() {
                 className="font-body text-navy-800 dark:text-cream/85 hover:text-gold-600 dark:hover:text-gold-400 transition-colors"
               >
                 LinkedIn Profile
+              </a>
+            </div>
+            <div className="flex items-center gap-3">
+              <ExternalLink className="w-4 h-4 text-gold-600 dark:text-gold-400 flex-shrink-0" />
+              <a
+                href="https://lawrato.com/advocate-aishwarya-panday"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-body text-navy-800 dark:text-cream/85 hover:text-gold-600 dark:hover:text-gold-400 transition-colors"
+              >
+                LawRato Profile
               </a>
             </div>
           </div>

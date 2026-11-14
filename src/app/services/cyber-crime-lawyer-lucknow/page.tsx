@@ -28,7 +28,7 @@ import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
 import { GuideToc, GuideStages, StatuteTable } from '@/components/LucknowGuide'
 import { cyberCrimeLucknowStages, cyberCrimeLucknowToc, cyberCrimeLucknowStatutes } from '@/lib/guides/cyberCrimeLucknow'
-import { getBlogPostsByCategories } from '@/lib/blogs'
+import { getBlogPostsBySlugs } from '@/lib/blogs'
 import { teamMembers } from '@/lib/team'
 import { LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 
@@ -166,6 +166,24 @@ const matters = [
       'Challenging chargesheets filed in cyber crime investigations',
     ],
   },
+  {
+    icon: FileX,
+    title: 'Corporate Data Theft & Employee Cyber Offences',
+    points: [
+      'Complaints and civil claims for unauthorised access, data theft, and damage to computer systems under Section 43 of the IT Act, 2000',
+      'Representation in disputes involving employee or competitor data theft, trade-secret misuse, and unauthorised copying of source code',
+      'Cheating and criminal breach of trust involving a computer resource under Section 318 BNS (formerly Section 420 IPC) and related provisions',
+    ],
+  },
+  {
+    icon: Landmark,
+    title: 'DPDP Act, 2023 & IT Rules 2021 Compliance Advisory',
+    points: [
+      'Advisory on data-protection obligations, breach notification, and grievance-redressal requirements under the Digital Personal Data Protection Act, 2023',
+      'Compliance review for intermediaries and businesses under the IT Rules, 2021, including due-diligence and grievance-officer requirements',
+      'Drafting and review of privacy policies, data-processing agreements, and internal data-handling protocols',
+    ],
+  },
 ]
 
 const whyIssues = [
@@ -230,6 +248,12 @@ const cyberCrimeInsights = [
     title: 'Can You Get Bail in a Cyber Fraud Case?',
     excerpt:
       'Bail depends on the offences alleged, the accused person\u2019s role, the money trail, and the need for custody. Regular bail is sought before the competent court; anticipatory bail may be sought before the Sessions Court or High Court where maintainable. A complaint or account freeze alone does not determine the outcome.',
+  },
+  {
+    icon: FileX,
+    title: 'Digital Evidence: The Section 63 BSA Certificate',
+    excerpt:
+      'Screenshots, call records, and electronic messages require a certificate under Section 63 of the Bharatiya Sakshya Adhiniyam (formerly Section 65B of the Evidence Act) before a court can read them in evidence — absence of this certificate is a common, avoidable ground of objection in cyber crime matters.',
   },
 ]
 
@@ -305,7 +329,18 @@ const cyberCrimeFaqJsonLd = {
 }
 
 export default async function CyberCrimeLawyerAdvocatePage() {
-  const cyberCrimeBlogPosts = getBlogPostsByCategories(['Criminal Matters', 'Banking & Recovery Matters'], 8)
+  // No dedicated "Cyber Crime Matters" sheet category exists yet, so — rather
+  // than pulling the full Criminal/Banking & Recovery categories (which mixes
+  // in unrelated SARFAESI/DRT posts) — hand-pick the posts that are genuinely
+  // on-topic for a cyber fraud / bank-freeze reader.
+  const cyberCrimeBlogPosts = getBlogPostsBySlugs([
+    'digital-lending-harassment-defenses-loan-apps',
+    'pre-arrest-rights-police-investigation-anticipatory-bail',
+    'quashing-firs-criminal-proceedings-lucknow-bench',
+    'specialized-white-collar-criminal-defenses',
+    'criminal-defense-banking-defaults-ni-138-ipc-420',
+    'regular-bail-default-statutory-bail-lucknow-bench',
+  ])
 
   return (
     <main className="relative min-h-screen">

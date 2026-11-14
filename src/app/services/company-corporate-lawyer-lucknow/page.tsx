@@ -92,7 +92,10 @@ const companyMattersJsonLd = {
   url: `${SITE_URL}/services/company-corporate-lawyer-lucknow`,
   description: searchContent.description,
   hasMap: LUCKNOW_CHAMBERS.map(({ street, city }) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${street}, ${city}, Uttar Pradesh, India`)}`),
-  sameAs: ['https://www.linkedin.com/company/sumanjari-co-advocate/about/'],
+  sameAs: [
+    'https://www.facebook.com/people/Sumanjari-Co-Advocate/61596295031741/',
+    'https://www.linkedin.com/company/sumanjari-co-advocate/about/',
+  ],
   telephone: '+91-83024-71764',
   email: 'info.sumanjarirightsandremedies@gmail.com',
   areaServed: [
