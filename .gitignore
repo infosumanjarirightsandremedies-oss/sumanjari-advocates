@@ -23,3 +23,9 @@ scripts/supabase-blog-cache/__pycache__/
 !/tests/production/routes.test.cjs
 !/tests/production/corporate-seo.test.cjs
 !/tests/production/service-contact.test.cjs
+/tests/production/bail-seo.test.cjs
+/tests/production/service-hindi.test.cjs
+/tests/production/family-hindi.test.cjs
+/tests/production/divorce-hindi.test.cjs
+/tests/production/translated-faqs.test.cjs
+/tests/production/criminal-hindi.test.cjs

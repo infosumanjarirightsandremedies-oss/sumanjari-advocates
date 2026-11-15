@@ -98,7 +98,6 @@ export const serviceToc: GuideTocItem[] = [
     children: serviceStages.map((stage, index) => ({ id: stage.id, label: `Stage ${index + 1}: ${stage.title}` })),
   },
   { id: 'service-faqs', label: 'Frequently Asked Questions' },
-  { id: 'hindi-faqs', label: 'Service Matters: Hindi FAQs' },
   { id: 'service-disciplinary-record-review', label: 'Charge Sheet and Adverse Order Review' },
   { id: 'service-consultation', label: 'Discuss Your Employment Matter' },
 ]

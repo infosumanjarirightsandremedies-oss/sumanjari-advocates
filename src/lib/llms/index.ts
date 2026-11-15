@@ -60,6 +60,21 @@ export const SERVICE_LINKS: LlmsLink[] = [
     description: 'Bail, anticipatory bail, FIR quashing, trial defence, and criminal appeals.',
   },
   {
+    path: '/services/criminal-lawyer-lucknow/hindi',
+    title: 'आपराधिक मामले — हिंदी',
+    description: 'Hindi criminal defence guide: FIR quashing, bail, trial, appeals, cheque bounce and special-statute matters.',
+  },
+  {
+    path: '/services/bail-lawyer-lucknow',
+    title: 'Bail & Anticipatory Bail in Lucknow',
+    description: 'Regular, anticipatory and default bail, NBW recall, bail conditions and court jurisdiction; a separate Hindi guide is available.',
+  },
+  {
+    path: '/services/bail-lawyer-lucknow/hindi',
+    title: 'लखनऊ में जमानत और अग्रिम जमानत — हिंदी',
+    description: 'Bail guide in straightforward Hindi, with English legal terms, notice and arrest safeguards, filing steps, court jurisdiction and release conditions.',
+  },
+  {
     path: '/services/cyber-crime-lawyer-lucknow',
     title: 'Cyber Crime Lawyer in Lucknow',
     description:
@@ -77,10 +92,20 @@ export const SERVICE_LINKS: LlmsLink[] = [
     description: 'Divorce, child custody, maintenance, and domestic violence matters, led by Adv. Aishwarya Pandey.',
   },
   {
+    path: '/services/family-advocate/hindi',
+    title: 'Family Court और पारिवारिक मामले — हिंदी',
+    description: 'Hindi family guide covering maintenance, custody, domestic violence, succession, court jurisdiction, procedural stages and all original Hindi FAQs.',
+  },
+  {
     path: '/services/divorce-lawyer-lucknow',
     title: 'Divorce Lawyer in Lucknow',
     description:
       'Mutual consent and contested divorce, maintenance, alimony, and custody, led by Adv. Aishwarya Pandey.',
+  },
+  {
+    path: '/services/divorce-lawyer-lucknow/hindi',
+    title: 'तलाक और वैवाहिक मामले — हिंदी',
+    description: 'Hindi divorce guide with mutual consent and contested routes, maintenance, custody, procedure, documents and all original Hindi FAQs.',
   },
   {
     path: '/services/nri-lawyer',
@@ -110,6 +135,11 @@ export const SERVICE_LINKS: LlmsLink[] = [
     title: 'Service Lawyer in Lucknow',
     description:
       'Departmental inquiries, wrongful termination, promotion and seniority disputes, pension matters, and POSH Act proceedings.',
+  },
+  {
+    path: '/services/service-lawyer-lucknow/hindi',
+    title: 'सेवा और रोजगार मामले — हिंदी',
+    description: 'Hindi guide to service and employment matters, departmental inquiries, CAT and UPPST coverage, pension, deadlines and remedies.',
   },
   {
     path: '/services/tax-lawyer-lucknow',
@@ -169,7 +199,7 @@ export type PracticeAreaGuide = { slug: string; title: string; servicePaths: str
 
 export const PRACTICE_AREA_GUIDES: PracticeAreaGuide[] = [
   { slug: 'civil-matters', title: 'Civil Matters', servicePaths: ['/services/civil-lawyer-lucknow'], categories: ['Civil Matters'] },
-  { slug: 'criminal-matters', title: 'Criminal Matters', servicePaths: ['/services/criminal-lawyer-lucknow'], categories: ['Criminal Matters'] },
+  { slug: 'criminal-matters', title: 'Criminal Matters', servicePaths: ['/services/criminal-lawyer-lucknow', '/services/criminal-lawyer-lucknow/hindi', '/services/bail-lawyer-lucknow', '/services/bail-lawyer-lucknow/hindi'], categories: ['Criminal Matters'] },
   { slug: 'cyber-crime', title: 'Cyber Crime Matters', servicePaths: ['/services/cyber-crime-lawyer-lucknow'], categories: ['Cyber Crime Matters'] },
   {
     slug: 'aft-mining',
@@ -180,7 +210,7 @@ export const PRACTICE_AREA_GUIDES: PracticeAreaGuide[] = [
   {
     slug: 'family-matrimonial',
     title: 'Family, Matrimonial & Divorce Matters',
-    servicePaths: ['/services/family-advocate', '/services/divorce-lawyer-lucknow'],
+    servicePaths: ['/services/family-advocate', '/services/family-advocate/hindi', '/services/divorce-lawyer-lucknow', '/services/divorce-lawyer-lucknow/hindi'],
     categories: ['Family & Matrimonial Matters'],
   },
   { slug: 'nri-legal-services', title: 'NRI Legal Services', servicePaths: ['/services/nri-lawyer'], categories: [] },
@@ -199,7 +229,7 @@ export const PRACTICE_AREA_GUIDES: PracticeAreaGuide[] = [
   {
     slug: 'service-employment',
     title: 'Service & Employment Matters',
-    servicePaths: ['/services/service-lawyer-lucknow'],
+    servicePaths: ['/services/service-lawyer-lucknow', '/services/service-lawyer-lucknow/hindi'],
     categories: ['Service & Employment Matters'],
   },
   {

@@ -88,7 +88,6 @@ export const familyLucknowToc: GuideTocItem[] = [
   { id: 'family-interim-relief-review', label: 'Custody, Support and Connected Proceedings' },
   { id: 'family-faqs', label: 'Family Lawyers in Lucknow: Frequently Asked Questions' },
   { id: 'detailed-faqs', label: 'Family Court Lawyer in Lucknow: More Questions, Answered' },
-  { id: 'hindi-faqs', label: 'हिंदी में सामान्य प्रश्न (FAQs in Hindi)' },
 ]
 
 export const familyLucknowStatutes: StatuteRow[] = [

@@ -128,6 +128,14 @@ const services: Service[] = [
     ],
   },
   {
+    id: 'bail',
+    icon: Key,
+    title: 'Bail & Anticipatory Bail',
+    description: 'Regular, anticipatory and default bail, NBW recall, and bail conditions before the competent Lucknow courts.',
+    href: '/services/bail-lawyer-lucknow',
+    items: ['Anticipatory bail', 'Regular and default bail', 'NBW recall', 'Bail bond and condition review'],
+  },
+  {
     id: 'family',
     icon: Heart,
     title: 'Family & Matrimonial Matters',

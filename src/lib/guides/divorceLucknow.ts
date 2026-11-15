@@ -145,7 +145,6 @@ export const divorceToc: GuideTocItem[] = [
   { id: 'documents', label: 'Documents to Prepare' },
   { id: 'settlement-children', label: "Financial Settlements & Child's Welfare" },
   { id: 'faqs', label: 'FAQs' },
-  { id: 'hindi-faqs', label: 'हिंदी में कानूनी जानकारी' },
   { id: 'contact', label: 'Speak to a Divorce Advocate in Lucknow' },
 ]
 

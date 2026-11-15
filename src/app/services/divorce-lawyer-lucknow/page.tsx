@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowUpRight, HeartCrack, HeartHandshake, HandCoins, Baby, S
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ServiceContactLinks from '@/components/ServiceContactLinks'
+import ServiceLanguageSwitch from '@/components/ServiceLanguageSwitch'
 import ServiceSelection from '@/components/ServiceSelection'
 import { serviceSearchContent, serviceSelectionQuestion } from '@/lib/serviceSearch'
 import LucknowChambers from '@/components/LucknowChambers'
@@ -30,11 +31,13 @@ export const metadata: Metadata = {
   title: { absolute: searchContent.title },
   description: searchContent.description,
   keywords: [searchContent.attorneyKeyword, 'Divorce Advocate in Lucknow', 'Divorce Lawyer in Lucknow', 'Mutual Consent Divorce Lawyer Lucknow', 'Contested Divorce Lawyer Lucknow', 'Alimony Lawyer Lucknow', 'Child Custody Lawyer Lucknow', 'Family Court Advocate Lucknow'],
-  alternates: { canonical: PAGE_PATH },
+  alternates: { canonical: PAGE_PATH, languages: { en: PAGE_PATH, hi: `${PAGE_PATH}/hindi`, 'x-default': PAGE_PATH } },
   openGraph: {
     title: 'Divorce Advocate & Lawyer in Lucknow | Sumanjari & Co.',
     description: 'Divorce and matrimonial representation led by Adv. Aishwarya Pandey: mutual consent divorce, contested proceedings, maintenance, and child custody in Lucknow.',
     url: PAGE_PATH,
+    locale: 'en_IN',
+    alternateLocale: ['hi_IN'],
   },
   twitter: {
     card: 'summary_large_image',
@@ -115,65 +118,11 @@ const faqs = [
   { question: 'Can an NRI spouse take part in a Lucknow divorce by video-conference?', answer: 'Courts have increasingly permitted appearance and evidence by video-conference where travel is impractical, but this is allowed at the court\'s discretion and is not an automatic right. We assess whether video-conference participation is realistic for a given hearing, and coordinate service and representation where one spouse lives abroad. Our NRI legal services team can also assist with related cross-border issues.' },
   { question: 'Where do appeals from the Lucknow Family Court lie?', answer: 'Appeals from appealable judgments and orders of the Family Court, Lucknow lie before a Division Bench of the Allahabad High Court, Lucknow Bench at Gomti Nagar under Section 19 of the Family Courts Act, 1984. Consent decrees and interlocutory orders are excluded; certain maintenance orders have a different review route. Confirm maintainability and the applicable limitation period promptly from the certified copy rather than assuming that every order can be appealed.' },
   { question: 'What should I check before my first Family Court hearing in Lucknow?', answer: 'Check the case number, cause list, assigned courtroom, hearing date and current venue. Confirm working hours, filing-counter cut-off times and any mediation referral with the Family Court registry; these can change with notices and holidays. Carry original government-issued photo identification, copies of filed papers and court orders, and photographs or other documents if directed. Statutory court fees are separate from professional fees and other expenses.' },
-]
-
-const hindiFaqs = [
-  {
-    question: 'लखनऊ फैमिली कोर्ट में आपसी सहमति से तलाक की क्या प्रक्रिया है?',
-    answer: 'हिंदू विवाह अधिनियम की धारा 13B के तहत सामान्यतः कम से कम एक वर्ष से अलग रह रहे पति-पत्नी संयुक्त याचिका और समझौते की शर्तें प्रस्तुत करते हैं। पहले मोशन में बयान दर्ज होते हैं। दूसरा मोशन सामान्यतः याचिका प्रस्तुत होने के छह महीने बाद और अठारह महीने के भीतर होता है। अमरदीप सिंह बनाम हरवीन कौर (2017) के अनुसार अदालत उचित मामलों में छह महीने की अवधि से छूट दे सकती है। अलगाव, सुलह के प्रयास, भरण-पोषण, बच्चों की देखभाल और संबंधित विवादों के वास्तविक समझौते पर विचार होता है। छूट स्वतः नहीं मिलती; डिक्री तक दोनों की स्वैच्छिक सहमति बनी रहनी चाहिए।',
-  },
-  {
-    question: 'क्या भरण-पोषण तय करने के लिए आय का शपथ पत्र देना अनिवार्य है?',
-    answer: 'रजनेश बनाम नेहा (2020) में सर्वोच्च न्यायालय ने भरण-पोषण मामलों में दोनों पक्षों से निर्धारित प्रारूप में संपत्ति और देनदारियों का विस्तृत शपथ पत्र दाखिल करने का निर्देश दिया है। इसमें आय, खर्च, संपत्ति, ऋण और आश्रितों का सही विवरण तथा उपलब्ध दस्तावेज दिए जाते हैं। पहले से मिले भरण-पोषण आदेश भी बताने चाहिए। अदालत के निर्देश और लागू प्रारूप की जाँच करें; हर तलाक याचिका में अपने आप ऐसा दावा नहीं होता।',
-  },
-  {
-    question: 'फैमिली कोर्ट के आदेश के खिलाफ अपील कहाँ होती है?',
-    answer: 'लखनऊ फैमिली कोर्ट के अपील योग्य निर्णय और आदेश के विरुद्ध फैमिली कोर्ट्स एक्ट, 1984 की धारा 19 के तहत इलाहाबाद हाईकोर्ट की लखनऊ बेंच, गोमती नगर में दो न्यायाधीशों की पीठ के समक्ष अपील होती है। सहमति की डिक्री और अंतरिम प्रकृति के आदेशों पर धारा 19 की अपील नहीं होती; कुछ भरण-पोषण आदेशों के लिए अलग समीक्षा प्रक्रिया है। प्रमाणित प्रति लेकर अपील की उपलब्धता और समय-सीमा तुरंत जाँचें।',
-  },
-  {
-    question: 'लखनऊ का फैमिली कोर्ट कहाँ है और वहाँ कौन-से मामले सुने जाते हैं?',
-    answer: 'लखनऊ का फैमिली कोर्ट 430, वाला कदर रोड, कैसरबाग, लखनऊ, उत्तर प्रदेश 226001 में परिवर्तन चौक के पास स्थित है। फैमिली कोर्ट्स एक्ट, 1984 के तहत यहाँ विवाह-विच्छेद, न्यायिक पृथक्करण, दाम्पत्य अधिकारों की पुनर्स्थापना, भरण-पोषण, बच्चों की अभिरक्षा और संरक्षकता जैसे मामले सुने जाते हैं, जहाँ अदालत को क्षेत्राधिकार हो। अदालत जाने से पहले वर्तमान पता, कक्ष संख्या और कार्य समय रजिस्ट्री या वाद-सूची से सुनिश्चित करें।',
-  },
-  {
-    question: 'क्या लखनऊ में रहने भर से मैं वहाँ तलाक की याचिका दायर कर सकता या सकती हूँ?',
-    answer: 'हमेशा नहीं। हिंदू विवाह अधिनियम की धारा 19 के अनुसार याचिका वहाँ दायर हो सकती है जहाँ विवाह संपन्न हुआ, जहाँ प्रतिवादी रहता है, जहाँ पति-पत्नी अंतिम बार साथ रहे, और पत्नी द्वारा याचिका दायर करने पर जहाँ वह याचिका के समय रह रही है। विशेष विवाह अधिनियम की धारा 31 में अलग प्रावधान है। लखनऊ जिले के पते के साथ भी अधिकार-क्षेत्र का वैधानिक आधार होना चाहिए। अन्य जिलों के निवासी प्रायः अपने जिले के फैमिली कोर्ट में जाते हैं।',
-  },
-  {
-    question: 'आपसी सहमति से तलाक में क्या एक वर्ष अलग रहना ज़रूरी है?',
-    answer: 'हिंदू विवाह अधिनियम की धारा 13B के अनुसार सामान्यतः पति-पत्नी को याचिका प्रस्तुत करने से पहले कम से कम एक वर्ष से अलग रह रहा होना चाहिए, साथ रहना संभव न होना चाहिए और तलाक के लिए आपसी सहमति होनी चाहिए। "अलग रहना" का अर्थ वैवाहिक संबंध की स्थिति से है और हर मामले में अलग पते का होना आवश्यक नहीं। विवाह के पहले वर्ष में धारा 14 की रोक भी जाँचनी होती है। अन्य विवाह कानूनों की शर्तें अलग से देखी जाती हैं।',
-  },
-  {
-    question: 'अगर पति या पत्नी बीच में सहमति वापस ले ले या अदालत न आए तो क्या होगा?',
-    answer: 'आपसी सहमति की डिक्री के लिए डिक्री पारित होने तक सहमति बनी रहनी चाहिए। सुरेष्टा देवी बनाम ओम प्रकाश (1991) के अनुसार कोई भी पक्ष डिक्री से पहले सहमति वापस ले सकता है, और केवल संयुक्त याचिका के आधार पर किसी को तलाक के लिए बाध्य नहीं किया जा सकता। ऐसी स्थिति में उपलब्ध प्रक्रियात्मक विकल्पों का आकलन करना होता है। विवादित (कंटेस्टेड) याचिका अपने आप विकल्प नहीं बनती; उसके लिए धारा 13 के तहत वैधानिक आधार सिद्ध करना आवश्यक है।',
-  },
-  {
-    question: 'विवादित तलाक के मुख्य आधार क्या हैं?',
-    answer: 'हिंदू विवाह अधिनियम की धारा 13 के तहत क्रूरता, परित्याग और जारकर्म (एडल्टरी) जैसे आधार हैं। परित्याग में सामान्यतः याचिका से ठीक पहले कम से कम दो वर्ष की निरंतर अवधि आवश्यक होती है; केवल अलग रहना पर्याप्त नहीं है, इरादा, सहमति और उचित कारण भी देखे जाते हैं। क्रूरता में आचरण और उसके संदर्भ को परखा जाता है; साधारण मतभेद स्वतः क्रूरता नहीं होते। केवल लंबे समय का अलगाव सामान्य फैमिली कोर्ट में "असुधार्य विघटन" का स्वतंत्र आधार नहीं है। साक्ष्य वैध तरीके से जुटाए जाने चाहिए।',
-  },
-  {
-    question: 'स्थायी गुजारा भत्ता (एलिमनी) और अंतरिम भरण-पोषण कैसे तय होता है?',
-    answer: 'अदालत दोनों पक्षों की आय, कमाने की क्षमता, संपत्ति, उचित आवश्यकताओं, आश्रितों और परिस्थितियों को देखती है; कोई निश्चित प्रतिशत या स्वतः अधिकार नहीं है। मुकदमा लंबित रहने पर धारा 24 के तहत अंतरिम भरण-पोषण और मुकदमे का खर्च माँगा जा सकता है, जबकि स्थायी गुजारा भत्ता धारा 25 के तहत तय होता है, जो एकमुश्त या किस्तों में हो सकता है। पहले से चल रहे भरण-पोषण के आदेश अदालत को बताने चाहिए।',
-  },
-  {
-    question: 'तलाक के बाद बच्चों की कस्टडी किसे मिलती है?',
-    answer: 'बच्चे का कल्याण सबसे महत्वपूर्ण कारक है। अदालत देखभाल, स्थिरता, शिक्षा, सुरक्षा और उचित मामलों में बच्चे की इच्छा जैसे तथ्यों पर विचार करती है। कस्टडी केवल माता-पिता के लिंग या आय से तय नहीं होती। मुकदमे के दौरान अंतरिम कस्टडी और मुलाकात की व्यवस्था धारा 26 जैसे प्रावधानों के तहत माँगी जा सकती है। मुलाकात का अधिकार और बच्चे का खर्च अलग से भी तय हो सकता है।',
-  },
-  {
-    question: 'क्या तलाक में संपत्ति अपने आप बराबर बँट जाती है? स्त्रीधन का क्या होता है?',
-    answer: 'नहीं, भारत में तलाक पर सारी संपत्ति अपने आप बराबर नहीं बँटती। स्वामित्व, योगदान, संपत्ति की प्रकृति, लागू कानून और आपसी समझौते की शर्तें महत्वपूर्ण होती हैं। स्त्रीधन संयुक्त संपत्ति से अलग माना जाता है, और समझौते में उसकी वापसी तथा हर संपत्ति के हस्तांतरण के चरण स्पष्ट लिखे जाने चाहिए। विवाह के समय या उसके आसपास दी गई संपत्ति पर धारा 27 के तहत आदेश माँगा जा सकता है; संयुक्त रूप से खरीदी गई संपत्ति के लिए प्रायः अलग समाधान चाहिए।',
-  },
-  {
-    question: 'क्या एनआरआई पति या पत्नी वीडियो कॉन्फ्रेंसिंग से लखनऊ की तलाक कार्यवाही में शामिल हो सकते हैं?',
-    answer: 'अदालतें यात्रा कठिन होने पर कई मामलों में वीडियो कॉन्फ्रेंसिंग से उपस्थिति या साक्ष्य की अनुमति देती हैं, लेकिन यह अदालत के विवेक पर है, स्वतः अधिकार नहीं। नोटिस की तामील, वकील के माध्यम से प्रतिनिधित्व और सुनवाई की तारीख की व्यावहारिकता का पहले आकलन करना चाहिए। अनुमति और सुनवाई के निर्देश रजिस्ट्री या अदालत के आदेश से पुष्टि करें।',
-  },
-  {
-    question: 'क्या तलाक के समझौते से जुड़े आपराधिक मामले अपने आप खत्म हो जाते हैं?',
-    answer: 'नहीं। तलाक की डिक्री या निजी समझौता किसी आपराधिक शिकायत या घरेलू हिंसा की कार्यवाही को स्वतः समाप्त नहीं करता। मामले की प्रकृति के अनुसार समझौता, वापसी या हाईकोर्ट में धारा 528 BNSS (पूर्व में धारा 482 CrPC) के तहत निरस्तीकरण जैसे वैधानिक उपाय अपनाने पड़ सकते हैं, जो अदालत की अनुमति और कानून की उपलब्धता पर निर्भर हैं। पुलिस को केवल निजी वापसी-पत्र देने से मामला समाप्त नहीं होता।',
-  },
-  {
-    question: 'पहली परामर्श बैठक में कौन-से दस्तावेज़ लेकर आना चाहिए?',
-    answer: 'विवाह प्रमाणपत्र या विवाह का अन्य प्रमाण, पहचान और पते के दस्तावेज़, अलगाव की तारीखों का क्रमवार विवरण, आय के कागज़ात (वेतन पर्ची, आयकर रिटर्न, बैंक विवरण), संपत्ति और देनदारियों की जानकारी, बच्चों के जन्म प्रमाणपत्र और स्कूल रिकॉर्ड, तथा पहले से मिले नोटिस, शिकायतें, याचिकाएँ और अदालती आदेश साथ लाएँ। सभी साक्ष्य वैध तरीके से प्राप्त किए गए होने चाहिए, और मूल दस्तावेज़ सुरक्षित रखें। कोई दस्तावेज़ उपलब्ध न हो तो परामर्श में उस पर चर्चा हो सकती है।',
-  },
+  { question: 'What is the mutual consent divorce filing process in Lucknow?', answer: 'Identify the governing marriage law and jurisdiction, confirm eligibility and continuing voluntary consent, and prepare a settlement covering finances, parenting and connected proceedings. File the joint petition and supporting records, follow first- and second-motion requirements and seek a cooling-off waiver only where legally available. A private settlement alone is not a divorce decree; the court must grant the applicable relief.' },
+  { question: 'Is an income and asset affidavit mandatory for maintenance proceedings?', answer: 'Follow the prescribed financial-disclosure directions in Rajnesh v. Neha, including affidavits of assets, income and liabilities and supporting records where required. Both sides must disclose relevant finances and connected maintenance orders accurately. The court assesses actual means, reasonable needs and facts rather than one universal income percentage.' },
+  { question: 'What are the main grounds for a contested divorce?', answer: 'The grounds depend on the governing marriage law. Under the Hindu Marriage Act, cruelty, desertion and adultery are recognised grounds subject to their statutory conditions. Desertion ordinarily requires at least two continuous years immediately before filing and more than separate addresses alone. Ordinary disagreements do not automatically establish cruelty; irretrievable breakdown is not an independent ground for the ordinary Family Court merely because separation has lasted a long time.' },
+  { question: 'What documents should I bring to my first divorce consultation?', answer: 'Bring marriage and identity records, jurisdiction-related addresses, a dated relationship and separation history, existing notices, petitions, orders and settlements. Include income, assets, liabilities and expenses, children’s schooling and care records, and available stridhan or property inventories. Preserve communications lawfully; do not postpone urgent advice solely because a document is missing.' },
+  { question: 'What happens to stridhan and marriage jewellery during divorce?', answer: 'Identify ownership, custody and an itemised inventory supported by available bills, photographs and records. Divorce does not automatically divide all assets equally or transfer ownership. Stridhan recovery, shared-household residence and joint-property claims can require different remedies; the limited scope of Section 27 HMA and any PWDVA or civil remedy must be checked separately.' },
 ]
 
 const localityGroups = [
@@ -186,6 +135,11 @@ const localityGroups = [
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
+  {
+    '@type': 'WebPage', '@id': `${PAGE_URL}#webpage`, url: PAGE_URL,
+    name: searchContent.title, inLanguage: 'en',
+    workTranslation: { '@id': `${PAGE_URL}/hindi#webpage` },
+  },
   {
     '@type': 'LegalService',
     '@id': `${PAGE_URL}#legal-service`,
@@ -223,10 +177,9 @@ const structuredData = {
   {
     '@type': 'FAQPage',
     '@id': `${PAGE_URL}#faqs`,
-    inLanguage: ['en-IN', 'hi-IN'],
+    inLanguage: 'en-IN',
     mainEntity: [
       ...faqs.map(({ question, answer }) => ({ '@type': 'Question', inLanguage: 'en-IN', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })),
-      ...hindiFaqs.map(({ question, answer }) => ({ '@type': 'Question', inLanguage: 'hi-IN', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })),
       serviceSelectionQuestion(searchContent),
     ],
   },
@@ -291,7 +244,10 @@ export default async function DivorceLawyerPage() {
       <Navbar />
       <section className="py-24 md:py-32">
         <div className="mx-auto max-w-5xl px-6">
-          <Link href="/services/family-advocate" className="mb-10 inline-flex items-center gap-2 font-caps text-xs uppercase tracking-widest text-navy-700/70 transition-colors hover:text-gold-600 dark:text-cream/45 dark:hover:text-gold-400"><ArrowLeft aria-hidden="true" className="h-3.5 w-3.5 shrink-0" /> Family &amp; Matrimonial Matters</Link>
+          <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
+            <Link href="/services/family-advocate" className="inline-flex items-center gap-2 font-caps text-xs uppercase tracking-widest text-navy-700/70 transition-colors hover:text-gold-600 dark:text-cream/45 dark:hover:text-gold-400"><ArrowLeft aria-hidden="true" className="h-3.5 w-3.5 shrink-0" /> Family &amp; Matrimonial Matters</Link>
+            <ServiceLanguageSwitch basePath={PAGE_PATH} language="en" />
+          </div>
 
           <header className="mb-16 grid gap-10 md:grid-cols-[minmax(0,1fr)_252px]">
             <div className="min-w-0">
@@ -516,12 +472,6 @@ export default async function DivorceLawyerPage() {
           <section id="faqs" className="mb-16 scroll-mt-28">
             <h2 className={headingClass}>Frequently Asked Questions</h2>
             <div className="divide-y divide-gold-500/20 border-y border-gold-500/20">{faqs.map(({ question, answer }) => <details key={question} className="py-5"><summary className="cursor-pointer font-display text-lg font-bold leading-relaxed text-navy-900 transition-colors hover:text-gold-700 focus-visible:outline-gold-500 dark:text-cream dark:hover:text-gold-400">{question}</summary><p className={`mt-3 ${bodyClass}`}>{answer}</p></details>)}</div>
-          </section>
-
-          <section id="hindi-faqs" lang="hi" aria-labelledby="hindi-faqs-heading" className="mb-16 scroll-mt-28">
-            <h2 id="hindi-faqs-heading" className={headingClass}>लखनऊ में तलाक और फैमिली कोर्ट: हिंदी में सामान्य प्रश्न</h2>
-            <p className={`mb-6 ${bodyClass}`}>यह सामान्य कानूनी जानकारी है, किसी विशेष मामले की सलाह नहीं। लागू विवाह कानून, तथ्यों और अदालत के आदेश के अनुसार प्रक्रिया बदल सकती है। किसी परिणाम या समय-सीमा की गारंटी नहीं है।</p>
-            <div className="divide-y divide-gold-500/20 border-y border-gold-500/20">{hindiFaqs.map(({ question, answer }) => <details key={question} className="py-5"><summary className="cursor-pointer font-display text-lg font-bold leading-relaxed text-navy-900 transition-colors hover:text-gold-700 focus-visible:outline-gold-500 dark:text-cream dark:hover:text-gold-400">{question}</summary><p className={`mt-3 ${bodyClass}`}>{answer}</p></details>)}</div>
           </section>
 
           <section aria-labelledby="divorce-settlement-review" className="mb-16 border-t border-gold-500/20 pt-10">

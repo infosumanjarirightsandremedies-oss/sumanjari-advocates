@@ -175,6 +175,14 @@ export default async function BlogPostPage({ params }: PageProps) {
       : post.thumbnail
 
   const serviceSlug = getServiceSlugForCategory(post.category)
+  const isBailArticle = [
+    'pre-arrest-rights-police-investigation-anticipatory-bail',
+    'regular-bail-default-statutory-bail-lucknow-bench',
+  ].includes(post.slug)
+  let bailArticleSplit = Math.ceil(content.length / 2)
+  while (bailArticleSplit < content.length && content[bailArticleSplit].type === 'list-item') {
+    bailArticleSplit++
+  }
   const backHref = serviceSlug ? `/services/${serviceSlug}` : '/'
   const backLabel = serviceSlug ? `Back to ${post.category}` : 'Back to Home'
 
@@ -275,8 +283,26 @@ export default async function BlogPostPage({ params }: PageProps) {
           )}
 
           <div className="mb-10">
-            <BlockList blocks={content} />
+            {isBailArticle ? (
+              <>
+                <BlockList blocks={content.slice(0, bailArticleSplit)} />
+                <aside className="my-8 border-l-2 border-gold-500/40 pl-5 font-body text-lg leading-relaxed text-navy-800 dark:text-cream/75">
+                  A police notice, arrest or approaching custody deadline requires case-specific review.{' '}
+                  <Link href="/services/bail-lawyer-lucknow" className="text-gold-700 underline underline-offset-4 dark:text-gold-400">Consult our Lucknow Bail &amp; Anticipatory Bail Practice</Link>.
+                  Filing an application does not itself grant protection.
+                </aside>
+                <BlockList blocks={content.slice(bailArticleSplit)} />
+              </>
+            ) : <BlockList blocks={content} />}
           </div>
+
+          {isBailArticle && (
+            <p className="mb-8 font-body text-lg leading-relaxed text-navy-800 dark:text-cream/75">
+              For the available remedy, court forum and documents checklist, see our{' '}
+              <Link href="/services/bail-lawyer-lucknow" className="text-gold-700 underline underline-offset-4 dark:text-gold-400">Lucknow Bail &amp; Anticipatory Bail Practice</Link>.
+              The correct procedure depends on the offence, custody record and applicable law.
+            </p>
+          )}
 
           {serviceSlug === 'company-corporate-lawyer-lucknow' && (
             <p className="mb-8 font-body text-lg leading-relaxed text-navy-800 dark:text-cream/75">

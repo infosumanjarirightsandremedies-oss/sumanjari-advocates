@@ -26,6 +26,7 @@ import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSear
 import LucknowChambers from '@/components/LucknowChambers'
 import FirmCredentials from '@/components/FirmCredentials'
 import ServiceStats from '@/components/ServiceStats'
+import ServiceLanguageSwitch from '@/components/ServiceLanguageSwitch'
 import ServiceBlogs from '@/components/DeferredServiceBlogs'
 import TeamCarousel from '@/components/TeamCarousel'
 import { GuideStages, GuideToc, StatuteTable } from '@/components/LucknowGuide'
@@ -35,6 +36,8 @@ import { teamMembers } from '@/lib/team'
 import { LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const PAGE_PATH = '/services/criminal-lawyer-lucknow'
+const PAGE_URL = `${SITE_URL}${PAGE_PATH}`
 const searchContent = serviceSearchContent['criminal-lawyer-lucknow']
 const criminalLead = teamMembers.find((member) => member.slug === 'aditya-narayan-shukla')
 const criminalTeam = ['jitendra-tiwari', 'abhishek-mishra', 'shishir-pandey', 'priyesh-dwivedi']
@@ -58,12 +61,9 @@ export const metadata: Metadata = {
     searchContent.attorneyKeyword,
     'Criminal Lawyer in Lucknow',
     'Criminal Lawyer Lucknow',
-    'Bail Lawyer Lucknow',
-    'Anticipatory Bail Lawyer Lucknow',
     'FIR Quashing Lawyer Lucknow',
     'Criminal Defence Lawyer Lucknow',
     'Criminal Advocate Lucknow',
-    'Bail Advocate Lucknow',
     'Cheque Bounce Lawyer Lucknow',
     'Section 138 NI Act Lawyer Lucknow',
     '498A Lawyer Lucknow',
@@ -74,23 +74,35 @@ export const metadata: Metadata = {
     'Criminal Summons Lawyer Lucknow',
     'Section 528 BNSS Lawyer Lucknow',
     'Section 482 CrPC Quashing Lucknow',
-    'Anticipatory Bail Lucknow High Court',
     'Sessions Court Lucknow Lawyer',
   ],
   alternates: {
     canonical: '/services/criminal-lawyer-lucknow',
+    languages: { en: '/services/criminal-lawyer-lucknow', hi: '/services/criminal-lawyer-lucknow/hindi', 'x-default': '/services/criminal-lawyer-lucknow' },
   },
   openGraph: {
-    title: 'Criminal Lawyer in Lucknow | Bail & FIR Quashing | Sumanjari & Co.',
+    title: searchContent.title,
     description:
       'Consult a criminal lawyer in Lucknow for bail, FIR quashing, trial defence, and appeals before the District & Sessions Courts and the Allahabad High Court, Lucknow Bench.',
     url: '/services/criminal-lawyer-lucknow',
+    locale: 'en_IN',
+    alternateLocale: ['hi_IN'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Criminal Lawyer in Lucknow | Bail & FIR Quashing',
+    title: searchContent.title,
     description: 'Advice on police notices, arrest, bail, FIR quashing, trial defence and criminal appeals in Lucknow.',
   },
+}
+
+const criminalWebPageJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${PAGE_URL}#webpage`,
+  url: PAGE_URL,
+  name: searchContent.title,
+  inLanguage: 'en',
+  workTranslation: { '@id': `${PAGE_URL}/hindi#webpage` },
 }
 
 const criminalMattersJsonLd = {
@@ -131,7 +143,7 @@ const urgentSituations = [
     icon: ShieldCheck,
     title: 'Apprehending Arrest — Anticipatory Bail',
     blurb: 'Seek advance protection from the Sessions Court or High Court before arrest.',
-    href: '#stage-3',
+    href: '/services/bail-lawyer-lucknow#bail-remedies',
   },
   {
     icon: ShieldAlert,
@@ -143,7 +155,7 @@ const urgentSituations = [
     icon: KeyRound,
     title: 'In Custody — Regular Bail',
     blurb: 'Bail before the Magistrate, Sessions Court, or High Court, Lucknow Bench.',
-    href: '#stage-5',
+    href: '/services/bail-lawyer-lucknow#bail-remedies',
   },
   {
     icon: FileX,
@@ -159,7 +171,7 @@ const urgentSituations = [
   },
 ]
 
-const matters = [
+const matters: { icon: typeof FileX; title: string; points: string[]; href?: string }[] = [
   {
     icon: FileX,
     title: 'FIR & Chargesheet Quashing Petitions',
@@ -172,6 +184,7 @@ const matters = [
   {
     icon: KeyRound,
     title: 'Bail Matters',
+    href: '/services/bail-lawyer-lucknow',
     points: [
       'Regular bail applications before the Magistrate, Sessions Court, and High Court',
       'Anticipatory bail under Section 482 BNSS (formerly Section 438 CrPC)',
@@ -365,7 +378,12 @@ export default async function CriminalMattersPage() {
   const criminalBlogPosts = getBlogPostsByCategory('Criminal Matters')
 
   return (
-    <main className="relative min-h-screen">
+    <main lang="en" className="relative min-h-screen">
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(criminalWebPageJsonLd) }}
+      />
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
@@ -385,12 +403,15 @@ export default async function CriminalMattersPage() {
 
       <section className="py-24 md:py-32">
         <div className="mx-auto max-w-5xl px-6">
-          <Link
-            href="/#services"
-            className="mb-10 inline-flex items-center gap-2 font-caps text-xs uppercase tracking-widest text-navy-700/70 transition-colors hover:text-gold-600 dark:text-cream/45 dark:hover:text-gold-400"
-          >
-            <ArrowLeft className="h-3.5 w-3.5" /> Back to Services
-          </Link>
+          <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
+            <Link
+              href="/#services"
+              className="inline-flex items-center gap-2 font-caps text-xs uppercase tracking-widest text-navy-700/70 transition-colors hover:text-gold-600 dark:text-cream/45 dark:hover:text-gold-400"
+            >
+              <ArrowLeft className="h-3.5 w-3.5" /> Back to Services
+            </Link>
+            <ServiceLanguageSwitch basePath={PAGE_PATH} language="en" />
+          </div>
 
           <div className="mb-12 grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_280px]">
             <div className="min-w-0">
@@ -402,7 +423,7 @@ export default async function CriminalMattersPage() {
               <div className="h-px w-12 bg-gold-500" />
             </div>
             <h1 className="mb-4 font-display text-4xl font-bold text-navy-900 dark:text-cream md:text-5xl">
-              Criminal Lawyer &amp; Advocate in Lucknow — <em className="text-gold-gradient">Anticipatory Bail, FIR Quashing &amp; Trial Defence</em>
+              Criminal Lawyer &amp; Advocate in Lucknow — <em className="text-gold-gradient">FIR Quashing, Trial Defence &amp; Appeals</em>
             </h1>
             <p className="max-w-2xl font-body text-lg leading-relaxed text-navy-700 dark:text-cream/60">
               Facing an FIR, a police notice, or an arrest in Lucknow?
@@ -562,16 +583,22 @@ export default async function CriminalMattersPage() {
               Types of Criminal Matters We Handle
             </h2>
             <div className="grid gap-5 sm:grid-cols-2">
-              {matters.map(({ icon: Icon, title, points }) => (
+              {matters.map(({ icon: Icon, title, points, href }) => (
                 <div
                   key={title}
-                  className="glass-card rounded-sm border border-gold-500/20 p-6 dark:border-gold-500/15"
+                  className={`glass-card relative rounded-sm border border-gold-500/20 p-6 dark:border-gold-500/15 ${href ? 'transition-colors hover:border-gold-500/60 focus-within:ring-2 focus-within:ring-gold-500' : ''}`}
                 >
                   <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-sm border border-gold-500/40">
                     <Icon className="h-5 w-5 text-gold-600 dark:text-gold-400" />
                   </div>
                   <h3 className="mb-3 font-display text-lg font-bold text-navy-900 dark:text-cream">
-                    {title}
+                    {href ? (
+                      <Link href={href} className="inline-flex items-center gap-2 focus:outline-none">
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {title}
+                        <ArrowUpRight aria-hidden="true" className="h-4 w-4 shrink-0 text-gold-600 dark:text-gold-400" />
+                      </Link>
+                    ) : title}
                   </h3>
                   <ul className="space-y-2">
                     {points.map((point) => (
@@ -584,6 +611,7 @@ export default async function CriminalMattersPage() {
                 </div>
               ))}
             </div>
+            <p className="mt-6 font-body text-navy-700 dark:text-cream/65">For custody status, police notices, bail applications and surety requirements, see <Link href="/services/bail-lawyer-lucknow" className="text-gold-700 underline underline-offset-4 dark:text-gold-400">Anticipatory &amp; Regular Bail Lawyers in Lucknow</Link>.</p>
           </div>
 
           <section id="special-statute-defence" aria-labelledby="special-statute-defence-heading" className="mb-16 scroll-mt-28 border-t border-gold-500/20 pt-10">

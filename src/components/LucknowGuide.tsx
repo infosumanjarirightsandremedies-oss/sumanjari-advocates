@@ -3,10 +3,10 @@ import type { GuideStage, GuideTocItem, StatuteRow } from '@/lib/guides/types'
 
 const linkClass = 'underline-offset-4 hover:text-gold-700 hover:underline dark:hover:text-gold-400'
 
-export function GuideToc({ items }: { items: GuideTocItem[] }) {
+export function GuideToc({ items, language = 'en' }: { items: GuideTocItem[]; language?: 'en' | 'hi' }) {
   return (
-    <nav aria-label="Table of contents" className="glass-card mb-16 rounded-sm border border-gold-500/20 p-6 md:p-8">
-      <p className="mb-4 font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">Table of Contents</p>
+    <nav aria-label={language === 'hi' ? 'इस पेज की जानकारी' : 'Table of contents'} className="glass-card mb-16 rounded-sm border border-gold-500/20 p-6 md:p-8">
+      <p className={`mb-4 text-gold-700 dark:text-gold-400 ${language === 'hi' ? 'font-body text-base font-semibold' : 'font-caps text-xs uppercase tracking-[0.3em]'}`}>{language === 'hi' ? 'इस पेज में क्या मिलेगा' : 'Table of Contents'}</p>
       <ol className="list-decimal space-y-2 pl-5 font-body text-navy-800 dark:text-cream/75">
         {items.map((item) => (
           <li key={item.id}>
@@ -27,7 +27,7 @@ export function GuideToc({ items }: { items: GuideTocItem[] }) {
   )
 }
 
-export function GuideStages({ id, heading, intro, stages }: { id: string; heading: string; intro: string; stages: GuideStage[] }) {
+export function GuideStages({ id, heading, intro, stages, language = 'en' }: { id: string; heading: string; intro: string; stages: GuideStage[]; language?: 'en' | 'hi' }) {
   return (
     <section id={id} aria-labelledby={`${id}-heading`} className="mb-16 scroll-mt-28">
       <h2 id={`${id}-heading`} className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">{heading}</h2>
@@ -35,9 +35,9 @@ export function GuideStages({ id, heading, intro, stages }: { id: string; headin
       <ol className="space-y-10 border-l border-gold-500/30 pl-6 md:pl-8">
         {stages.map((stage, index) => (
           <li key={stage.id} id={stage.id} className="scroll-mt-28">
-            <p className="font-caps text-xs uppercase tracking-[0.3em] text-gold-700 dark:text-gold-400">Stage {index + 1}</p>
+            <p className={`text-gold-700 dark:text-gold-400 ${language === 'hi' ? 'font-body text-sm font-semibold' : 'font-caps text-xs uppercase tracking-[0.3em]'}`}>{language === 'hi' ? 'चरण' : 'Stage'} {index + 1}</p>
             <h3 className="mb-2 mt-1 font-display text-xl font-bold text-navy-900 dark:text-cream">{stage.title}</h3>
-            <p className="mb-3 font-body text-sm text-navy-700 dark:text-cream/60"><strong>Forum:</strong> {stage.forum}</p>
+            <p className="mb-3 font-body text-sm text-navy-700 dark:text-cream/60"><strong>{language === 'hi' ? 'संबंधित अधिकारी / मंच:' : 'Forum:'}</strong> {stage.forum}</p>
             {stage.body.map((paragraph, i) => {
               const links = (stage.bodyLinks ?? [])
                 .filter((link) => link.paragraph === i)
@@ -54,7 +54,7 @@ export function GuideStages({ id, heading, intro, stages }: { id: string; headin
               })
               return <p key={i} className="mb-3 font-body leading-relaxed text-navy-800 dark:text-cream/75">{content}{paragraph.slice(end)}</p>
             })}
-            <p className="font-body text-sm text-navy-700 dark:text-cream/60"><strong>Key provisions:</strong> {stage.provisions.join('; ')}</p>
+            <p className="font-body text-sm text-navy-700 dark:text-cream/60"><strong>{language === 'hi' ? 'मुख्य प्रावधान:' : 'Key provisions:'}</strong> {stage.provisions.join('; ')}</p>
             {stage.checklist && (
               <ul className="mt-3 list-disc space-y-1 pl-5 font-body text-sm text-navy-700 dark:text-cream/60">
                 {stage.checklist.map((point) => <li key={point}>{point}</li>)}
@@ -67,7 +67,7 @@ export function GuideStages({ id, heading, intro, stages }: { id: string; headin
   )
 }
 
-export function StatuteTable({ id, heading, intro, rows }: { id: string; heading: string; intro: string; rows: StatuteRow[] }) {
+export function StatuteTable({ id, heading, intro, rows, language = 'en' }: { id: string; heading: string; intro: string; rows: StatuteRow[]; language?: 'en' | 'hi' }) {
   return (
     <section id={id} aria-labelledby={`${id}-heading`} className="mb-16 scroll-mt-28">
       <h2 id={`${id}-heading`} className="mb-3 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">{heading}</h2>
@@ -76,9 +76,9 @@ export function StatuteTable({ id, heading, intro, rows }: { id: string; heading
         <table className="w-full min-w-[640px] border-collapse text-left font-body text-sm">
           <thead>
             <tr className="border-b border-gold-500/30 text-navy-900 dark:text-cream">
-              <th scope="col" className="py-3 pr-4 font-semibold">Law</th>
-              <th scope="col" className="py-3 pr-4 font-semibold">Key provisions</th>
-              <th scope="col" className="py-3 font-semibold">Where it matters</th>
+              <th scope="col" className="py-3 pr-4 font-semibold">{language === 'hi' ? 'कानून' : 'Law'}</th>
+              <th scope="col" className="py-3 pr-4 font-semibold">{language === 'hi' ? 'मुख्य प्रावधान' : 'Key provisions'}</th>
+              <th scope="col" className="py-3 font-semibold">{language === 'hi' ? 'कहाँ लागू होता है' : 'Where it matters'}</th>
             </tr>
           </thead>
           <tbody className="text-navy-800 dark:text-cream/75">

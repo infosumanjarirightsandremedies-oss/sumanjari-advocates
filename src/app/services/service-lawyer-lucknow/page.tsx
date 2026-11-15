@@ -20,6 +20,7 @@ import {
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ServiceContactLinks from '@/components/ServiceContactLinks'
+import ServiceLanguageSwitch from '@/components/ServiceLanguageSwitch'
 import ServiceSelection from '@/components/ServiceSelection'
 import { serviceSearchContent, serviceSelectionQuestion } from '@/lib/serviceSearch'
 import LucknowChambers from '@/components/LucknowChambers'
@@ -81,12 +82,15 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: PAGE_PATH,
+    languages: { en: PAGE_PATH, hi: `${PAGE_PATH}/hindi`, 'x-default': PAGE_PATH },
   },
   openGraph: {
     title: 'Service Matter Advocate in Lucknow | Sumanjari & Co.',
     description:
       'Representation for government, public sector, and private sector employees in service disputes, departmental inquiries, and employment litigation before CAT, the Service Tribunal, CGIT, and the Allahabad High Court, Lucknow Bench.',
     url: PAGE_PATH,
+    locale: 'en_IN',
+    alternateLocale: ['hi_IN'],
   },
   twitter: {
     card: 'summary_large_image',
@@ -300,75 +304,72 @@ const serviceInsights = [
     excerpt:
       'Fees depend on the records to review, the forum, urgency, drafting, and the stages of representation required. Ask for the proposed scope, professional fees, and separate filing or incidental expenses before instructing counsel. The likely duration depends on the proceedings and cannot be promised in advance.',
   },
-]
-
-const hindiFaqs = [
   {
-    question: 'लखनऊ में सेवा विवाद के लिए CAT, राज्य सेवा अधिकरण या हाईकोर्ट में कहाँ जाएँ?',
-    answer: 'सही मंच नियोक्ता, पद, लागू सेवा नियमों और विवाद के प्रकार पर निर्भर करता है। CAT में अधिनियम के दायरे में आने वाले केंद्रीय कर्मचारियों और अधिसूचित संस्थाओं के मामले जाते हैं। उत्तर प्रदेश लोक सेवा अधिकरण में उसके कानून के अंतर्गत आने वाले लोक सेवकों के दावे जाते हैं। निजी रोजगार और श्रम विवादों की प्रक्रिया अलग हो सकती है। अधिकरण के अधिकार क्षेत्र वाले मामलों में सामान्यतः पहले वहीं जाना होता है; हाईकोर्ट की न्यायिक समीक्षा अलग प्रक्रिया है। केवल लखनऊ में रहने से हर मामले का अधिकार क्षेत्र यहाँ नहीं बनता।',
+    icon: ShieldAlert,
+    title: 'What should I check after receiving a suspension order?',
+    excerpt: 'Preserve the order, receipt date, applicable service rules and any review or extension orders. Review the charge-sheet status, subsistence allowance requirements and available departmental remedies. Central and State suspension rules differ; neither a representation nor filing a case automatically stays the order.',
   },
   {
-    question: 'विभागीय आरोप पत्र या निलंबन आदेश मिलने पर क्या करना चाहिए?',
-    answer: 'आदेश मिलने की तारीख और जवाब की अंतिम तारीख लिखें। पूरा आरोप पत्र, संलग्न दस्तावेज, नियुक्ति पत्र और लागू सेवा नियम सुरक्षित रखें। हर आरोप का रिकॉर्ड के आधार पर जवाब तैयार करें और आवश्यक दस्तावेज माँगें। समय चाहिए तो विस्तार का अनुरोध करें, लेकिन स्वीकृति अपने आप मिली हुई न मानें। निलंबन की समीक्षा और निर्वाह भत्ते के नियम कर्मचारी की सेवा के अनुसार अलग होते हैं। अपील या मुकदमा दाखिल करने से आदेश अपने आप स्थगित नहीं होता।',
+    icon: Repeat2,
+    title: 'Can I challenge a transfer or posting order?',
+    excerpt: 'Transfer is ordinarily an incident of service, and inconvenience alone does not invalidate it. Review the competent authority, statutory rules, specific allegations of mala fides and the nature of the order. A departure from policy is not always a ground for judicial intervention. Continue following the order unless the competent authority or forum grants relief.',
   },
   {
-    question: 'पेंशन, पदोन्नति या सेवा आदेश को चुनौती देने की समय-सीमा क्या है?',
-    answer: 'सभी सेवा विवादों की एक जैसी समय-सीमा नहीं है। विभागीय अपील, CAT की अर्जी और राज्य अधिकरण के दावे की अवधि अलग हो सकती है। आदेश की प्रति, प्राप्ति का प्रमाण, सेवा पुस्तिका, वेतन या पेंशन रिकॉर्ड और पहले किए गए आवेदन साथ रखें। बार-बार प्रार्थना पत्र देने से समय-सीमा अपने आप नहीं बढ़ती। देरी माफ करने की शक्ति भी मंच के अनुसार बदलती है, इसलिए जल्द मामले की समीक्षा कराएँ। किसी लाभ, स्थगन या निर्णय की गारंटी नहीं दी जा सकती।',
+    icon: ScrollText,
+    title: 'What if inquiry documents or the inquiry report are not supplied?',
+    excerpt: 'Request relied-upon documents and necessary records in writing and retain requests, replies and hearing objections. Check the applicable rights to examine evidence, question witnesses and respond to an adverse report. The consequence of a procedural defect depends on its effect, the rules and facts; every omission does not automatically invalidate a penalty.',
   },
   {
-    question: 'क्या स्थानांतरण या तबादले के आदेश को चुनौती दी जा सकती है?',
-    answer: 'स्थानांतरण सामान्यतः सेवा का हिस्सा है और केवल असुविधा होने से आदेश रद्द नहीं होता। सक्षम अधिकारी का अधिकार, लागू वैधानिक नियम, दुर्भावना के ठोस तथ्य और आदेश की वास्तविक प्रकृति की समीक्षा की जा सकती है। स्थानांतरण आदेश, नीति, सेवा नियम और संबंधित पत्राचार सुरक्षित रखें। केवल नीति से विचलन हर मामले में न्यायिक हस्तक्षेप का आधार नहीं होता। जब तक सक्षम अधिकारी या मंच स्थगन न दे, आदेश को अपने आप निष्प्रभावी न मानें।',
+    icon: HandCoins,
+    title: 'What if subsistence allowance is unpaid during suspension?',
+    excerpt: 'Eligibility, rates and required certificates depend on the applicable service rules. Collect the suspension order, pay and payment records and earlier requests. Raise the issue with the competent authority in writing and keep acknowledgment, including any effect on your ability to defend the inquiry. Further relief depends on the appropriate forum and facts.',
   },
   {
-    question: 'पदोन्नति न मिलने या वरिष्ठता सूची गलत होने पर क्या करें?',
-    answer: 'भर्ती और पदोन्नति नियम, पात्रता, रिक्तियाँ, वरिष्ठता सूची, सेवा रिकॉर्ड और विभागीय पदोन्नति समिति की प्रक्रिया देखें। सूची पर आपत्ति के लिए निर्धारित अवधि हो तो उसके भीतर तथ्य और दस्तावेज सहित आपत्ति दें। पात्रता होने से पदोन्नति अपने आप सुनिश्चित नहीं होती। यदि किसी अन्य कर्मचारी की वरिष्ठता या पदोन्नति प्रभावित होगी, तो कार्यवाही में आवश्यक पक्षकारों का भी ध्यान रखना पड़ता है। उपलब्ध उपाय और समय-सीमा की अलग समीक्षा कराएँ।',
+    icon: UserX,
+    title: 'Does dismissal automatically entitle me to reinstatement and back wages?',
+    excerpt: 'No. Review the appointment, termination grounds, inquiry fairness, governing law and relief claimed. Preserve the final order, inquiry record and appeal papers. Setting aside an order, reconsideration, reinstatement and back wages are distinct questions; other employment and consequential benefits may also need examination.',
   },
   {
-    question: 'विभागीय जाँच में दस्तावेज या जाँच रिपोर्ट नहीं मिले तो क्या करें?',
-    answer: 'आरोपों के समर्थन में जिन दस्तावेजों पर भरोसा किया गया है, उनकी प्रतियाँ और आवश्यक रिकॉर्ड लिखित रूप से माँगें। अनुरोध, जवाब और सुनवाई में उठाई गई आपत्तियों का प्रमाण रखें। लागू नियमों के अनुसार गवाहों से प्रश्न करने, अपना पक्ष रखने और प्रतिकूल जाँच रिपोर्ट पर जवाब देने का अवसर जाँचा जाता है। किसी प्रक्रियात्मक कमी का परिणाम उसके प्रभाव, लागू नियमों और मामले के तथ्यों पर निर्भर करता है; हर कमी से दंड आदेश अपने आप रद्द नहीं होता।',
+    icon: HandCoins,
+    title: 'Are pension withholding and recovery of excess payments the same issue?',
+    excerpt: 'No. Review the pension payment order, calculations, service record and the stated withholding or recovery reasons. Applicable pension rules, pending proceedings and the authority’s powers matter. Rafiq Masih concerns specified excess-payment recovery situations, not every pension or gratuity withholding case. Arrears or interest depend on law and facts.',
   },
   {
-    question: 'निलंबन के दौरान निर्वाह भत्ता नहीं मिल रहा हो तो क्या उपाय है?',
-    answer: 'निर्वाह भत्ते की पात्रता और दर लागू सेवा नियमों तथा आवश्यक प्रमाणपत्रों पर निर्भर करती है। निलंबन आदेश, वेतन विवरण, भुगतान रिकॉर्ड और विभाग को दिए गए आवेदन इकट्ठा करें। भुगतान न होने या गलत गणना की लिखित शिकायत सक्षम अधिकारी को दें और प्राप्ति का प्रमाण रखें। यदि इससे जाँच में अपना बचाव करने में कठिनाई हो रही है, तो उसे भी रिकॉर्ड पर रखें। आगे की राहत सही मंच और तथ्य देखकर तय होती है।',
+    icon: Landmark,
+    title: 'Can a private-company employee approach CAT or the U.P. Service Tribunal?',
+    excerpt: 'Not merely because the dispute concerns employment. Actual duties, the contract, establishment status and governing law determine the remedy. A labour forum, designated statutory authority or civil court may be appropriate; a writ against a private employer is not automatic. CAT and U.P. Tribunal coverage must be established separately.',
   },
   {
-    question: 'बर्खास्तगी या सेवा से हटाए जाने के बाद बहाली और पिछला वेतन मिलेगा?',
-    answer: 'बहाली और पिछला वेतन हर मामले में स्वतः नहीं मिलता। नियुक्ति की प्रकृति, सेवा समाप्ति का कारण, जाँच की निष्पक्षता, लागू कानून और माँगी गई राहत की समीक्षा करनी होती है। अंतिम आदेश, जाँच रिकॉर्ड, नियुक्ति पत्र और अपील से संबंधित कागजात रखें। सक्षम मंच आदेश रद्द करने, पुनर्विचार, बहाली या अन्य राहत पर विचार कर सकता है। पिछला वेतन, अन्य रोजगार और परिणामी लाभ अलग प्रश्न हैं; किसी निश्चित परिणाम का वादा नहीं किया जा सकता।',
+    icon: UserSearch,
+    title: 'What can I do after rejection of a compassionate appointment application?',
+    excerpt: 'Compassionate appointment is not ordinary recruitment or an automatic entitlement. Check the scheme, dependant eligibility, family finances, deadlines and rejection reasons. Bring the death certificate, service and family records, income details and applications. A family relationship alone does not guarantee appointment.',
   },
   {
-    question: 'पेंशन या ग्रेच्युटी रुकी हो, या अधिक भुगतान की वसूली हो रही हो, तो क्या करें?',
-    answer: 'पेंशन या ग्रेच्युटी रोकना और पहले हुए अधिक भुगतान की वसूली अलग कानूनी प्रश्न हैं। पेंशन भुगतान आदेश, गणना पत्र, सेवा रिकॉर्ड, रोकने या वसूली का आदेश और विभाग का कारण देखें। संबंधित पेंशन नियम, लंबित कार्यवाही और आदेश देने वाले अधिकारी की शक्ति की जाँच जरूरी है। रफीक मसीह का निर्णय कुछ परिस्थितियों में अधिक भुगतान की वसूली से संबंधित है; उसे हर पेंशन रोकने के मामले पर लागू न मानें। बकाया या ब्याज की राहत लागू कानून और तथ्यों पर निर्भर करती है।',
+    icon: ScrollText,
+    title: 'Does long contractual or daily-wage service create a right to regularisation?',
+    excerpt: 'Not automatically. Review the appointment process, sanctioned post, qualifications, governing scheme and binding judgments. Keep appointment and renewal letters, payment records and service-duration evidence. Equal pay, arrears and regularisation are separate claims with different legal requirements.',
   },
   {
-    question: 'क्या निजी कंपनी का कर्मचारी भी CAT या राज्य सेवा अधिकरण में जा सकता है?',
-    answer: 'सामान्य निजी रोजगार विवाद केवल नौकरी से संबंधित होने के कारण CAT या राज्य सेवा अधिकरण के अधिकार क्षेत्र में नहीं आता। वास्तविक कार्य, नियुक्ति अनुबंध, प्रतिष्ठान का स्वरूप और लागू श्रम कानून देखकर सही प्रक्रिया चुनी जाती है। कुछ विवाद श्रम मंच, वैधानिक प्राधिकारी या दीवानी अदालत में जा सकते हैं; निजी नियोक्ता के खिलाफ रिट भी अपने आप उपलब्ध नहीं होती। नियुक्ति पत्र, वेतन पर्चियाँ, समाप्ति नोटिस और पत्राचार साथ रखें।',
+    icon: ShieldAlert,
+    title: 'Can an advocate represent a party in a POSH Internal Committee inquiry?',
+    excerpt: 'The POSH Rules prohibit representation by a legal practitioner during the Internal Committee inquiry. An advocate may advise on complaint or reply preparation, documents, procedural review and available appeals. Preserve the record, maintain confidentiality and promptly check complaint or appeal deadlines and the competent authority.',
   },
   {
-    question: 'अनुकंपा नियुक्ति का आवेदन अस्वीकार होने पर क्या किया जा सकता है?',
-    answer: 'अनुकंपा नियुक्ति सामान्य भर्ती का विकल्प या स्वतः मिलने वाला अधिकार नहीं है। लागू योजना, आश्रित की पात्रता, परिवार की आर्थिक स्थिति, आवेदन की अवधि और अस्वीकृति के कारण देखें। मृत्यु प्रमाणपत्र, सेवा विवरण, परिवार और आय से संबंधित रिकॉर्ड तथा आवेदन और आदेश की प्रतियाँ रखें। समीक्षा में नियमों के पालन और निर्णय के कारणों को परखा जाता है; केवल पारिवारिक संबंध होने से नियुक्ति सुनिश्चित नहीं होती।',
+    icon: Gavel,
+    title: 'What if the department does not implement a favourable tribunal or court order?',
+    excerpt: 'Check the operative directions, compliance period and any later stay. Communicate the order through the proper channel and preserve acknowledgment. Claim only the reinstatement, seniority, pay or pension benefits granted. Compliance, execution or contempt remedies depend on the forum’s powers and circumstances; filing an appeal does not itself stay the order.',
   },
   {
-    question: 'क्या संविदा या दैनिक वेतन पर लंबे समय तक काम करने से नियमित नियुक्ति मिल जाती है?',
-    answer: 'लंबे समय तक काम करने से नियमितीकरण अपने आप नहीं होता। नियुक्ति की प्रक्रिया, स्वीकृत पद, योग्यता, लागू नियम या योजना और बाध्यकारी न्यायिक निर्णय देखना जरूरी है। नियुक्ति और नवीनीकरण पत्र, भुगतान रिकॉर्ड, काम की अवधि और पद से संबंधित उपलब्ध दस्तावेज रखें। समान वेतन, बकाया भुगतान और नियमितीकरण अलग दावे हो सकते हैं; प्रत्येक की कानूनी शर्तों की अलग समीक्षा की जाती है।',
-  },
-  {
-    question: 'क्या POSH की आंतरिक समिति की जाँच में वकील साथ बैठ सकता है?',
-    answer: 'POSH नियमों के तहत आंतरिक समिति की जाँच में कोई भी पक्ष विधिक व्यवसायी के माध्यम से प्रतिनिधित्व नहीं कर सकता। वकील शिकायत या जवाब तैयार करने, दस्तावेज समझने, प्रक्रिया की समीक्षा और उपलब्ध अपील पर सलाह दे सकता है। शिकायत, जवाब, समिति के नोटिस, रिपोर्ट और संचार सुरक्षित रखें तथा कार्यवाही की गोपनीयता का पालन करें। शिकायत या अपील की समय-सीमा और सही प्राधिकारी की तुरंत जाँच करें।',
-  },
-  {
-    question: 'अधिकरण या अदालत से अनुकूल आदेश मिलने के बाद विभाग पालन न करे तो क्या करें?',
-    answer: 'पहले आदेश के वास्तविक निर्देश, पालन की अवधि और किसी बाद के स्थगन आदेश को देखें। आदेश विभाग को उचित माध्यम से भेजें और प्राप्ति का प्रमाण रखें। वेतन, वरिष्ठता, बहाली या पेंशन के लाभ उतने ही माँगें जितने आदेश में दिए गए हैं। अनुपालन आवेदन, निष्पादन या अवमानना जैसे उपाय संबंधित मंच की शक्तियों और परिस्थितियों पर निर्भर करते हैं। केवल अपील दाखिल होने से आदेश अपने आप स्थगित नहीं होता।',
-  },
-  {
-    question: 'सेवा विवाद की पहली कानूनी सलाह के लिए कौन से कागजात और खर्च की जानकारी चाहिए?',
-    answer: 'नियुक्ति पत्र, लागू सेवा नियम, विवादित आदेश और उसकी प्राप्ति का प्रमाण, संबंधित वेतन या पेंशन रिकॉर्ड, पहले किए गए आवेदन और अदालत के आदेश लाएँ। घटनाओं और आगामी तारीखों की छोटी सूची भी उपयोगी है। कोई दस्तावेज न हो तो केवल उसी कारण सलाह लेने में देरी न करें। काम का दायरा, सलाह और ड्राफ्टिंग की फीस, सुनवाई का खर्च तथा अलग दाखिला या प्रतिलिपि शुल्क पहले स्पष्ट कर लें। फीस और मामले की अवधि एक जैसी नहीं होती।',
+    icon: ScrollText,
+    title: 'What documents should I bring to a service-law consultation?',
+    excerpt: 'Bring the appointment letter, service rules, challenged order and receipt proof, relevant pay or pension records, earlier representations and court orders. Prepare a short chronology and upcoming deadlines. Do not delay advice solely because a document is missing. Clarify advice, drafting, hearing and separate filing or copying costs before instructing counsel.',
   },
 ]
 
 const serviceFaqJsonLd = {
   '@type': 'FAQPage',
   '@id': `${PAGE_URL}#service-faqs`,
-  inLanguage: ['en-IN', 'hi-IN'],
+  inLanguage: 'en-IN',
   mainEntity: [
     ...serviceInsights.map(({ title, excerpt }) => ({
       '@type': 'Question',
@@ -378,10 +379,6 @@ const serviceFaqJsonLd = {
         '@type': 'Answer',
         text: excerpt,
       },
-    })),
-    ...hindiFaqs.map(({ question, answer }) => ({
-      '@type': 'Question', inLanguage: 'hi-IN', name: question,
-      acceptedAnswer: { '@type': 'Answer', text: answer },
     })),
     serviceSelectionQuestion(searchContent),
   ],
@@ -399,6 +396,11 @@ const serviceBreadcrumbJsonLd = {
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
+    {
+      '@type': 'WebPage', '@id': `${PAGE_URL}#webpage`, url: PAGE_URL,
+      name: searchContent.title, inLanguage: 'en',
+      workTranslation: { '@id': `${PAGE_URL}/hindi#webpage` },
+    },
     serviceMattersJsonLd,
     ...(serviceLead ? [{
       '@type': 'Person',
@@ -435,12 +437,15 @@ export default async function ServiceEmploymentMattersPage() {
 
       <section className="py-24 md:py-32">
         <div className="mx-auto max-w-5xl px-6">
+          <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
           <Link
             href="/#services"
-            className="mb-10 inline-flex items-center gap-2 font-caps text-xs uppercase tracking-widest text-navy-700/70 transition-colors hover:text-gold-600 dark:text-cream/45 dark:hover:text-gold-400"
+            className="inline-flex items-center gap-2 font-caps text-xs uppercase tracking-widest text-navy-700/70 transition-colors hover:text-gold-600 dark:text-cream/45 dark:hover:text-gold-400"
           >
             <ArrowLeft className="h-3.5 w-3.5" /> Back to Services
           </Link>
+          <ServiceLanguageSwitch basePath={PAGE_PATH} language="en" />
+          </div>
 
           <header className="mb-12 grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_280px]">
             <div className="min-w-0">
@@ -742,19 +747,6 @@ export default async function ServiceEmploymentMattersPage() {
               ))}
             </div>
           </div>
-
-          <section id="hindi-faqs" lang="hi" aria-labelledby="hindi-faqs-heading" className="mb-16 scroll-mt-28">
-            <h2 id="hindi-faqs-heading" className="mb-6 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">लखनऊ में सेवा और रोजगार विवाद: हिंदी में सामान्य प्रश्न</h2>
-            <p className="mb-6 font-body leading-relaxed text-navy-700 dark:text-cream/60">यह सामान्य कानूनी जानकारी है, किसी विशेष मामले की सलाह नहीं। लागू सेवा नियमों, तथ्यों और संबंधित मंच के आदेश के अनुसार प्रक्रिया बदल सकती है।</p>
-            <div className="divide-y divide-gold-500/20 border-y border-gold-500/20">
-              {hindiFaqs.map(({ question, answer }) => (
-                <details key={question} className="py-5">
-                  <summary className="cursor-pointer font-display text-lg font-bold leading-relaxed text-navy-900 transition-colors hover:text-gold-700 focus-visible:outline-gold-500 dark:text-cream dark:hover:text-gold-400">{question}</summary>
-                  <p className="mt-3 font-body leading-relaxed text-navy-700 dark:text-cream/60">{answer}</p>
-                </details>
-              ))}
-            </div>
-          </section>
 
           <section aria-labelledby="service-disciplinary-record-review" className="mb-16 border-t border-gold-500/20 pt-10">
             <h2 id="service-disciplinary-record-review" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream">Facing a Charge Sheet, Suspension or Adverse Service Order?</h2>

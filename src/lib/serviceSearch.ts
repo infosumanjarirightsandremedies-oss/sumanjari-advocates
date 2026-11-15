@@ -15,11 +15,18 @@ export const serviceSearchContent = {
     answer: 'The best fit depends on the claim, court and stage of your dispute, not a search ranking. Ask about civil trial experience, limitation, interim injunctions, documentary evidence and decree execution. Check who will draft and appear, whether settlement is appropriate, and the written scope and fees. A civil advocate should explain the difference between trial, appeal and execution; no lawyer can guarantee recovery or a favourable decree.',
   },
   'criminal-lawyer-lucknow': {
-    title: 'Criminal Lawyer & Advocate in Lucknow | Bail & FIR Quashing',
-    description: 'Experienced criminal lawyers, advocates & attorneys in Lucknow for bail, FIR quashing and trial defence in Sessions Courts and the High Court. Review urgent options.',
+    title: 'Criminal Lawyer & Advocate in Lucknow | FIR Quashing & Trial Defence',
+    description: 'Criminal representation in Lucknow for FIR quashing, trial defence and appeals before Sessions Courts and the Allahabad High Court, Lucknow Bench.',
     attorneyKeyword: 'Criminal Attorney Lucknow',
     question: 'How do I choose the best criminal lawyer or bail advocate in Lucknow?',
     answer: 'Choose according to the alleged offence, custody status and court involved. Ask about regular or anticipatory bail, FIR review, trial preparation and maintainable High Court remedies. Share the FIR, notices and prior orders so an advocate can identify urgent deadlines and explain risks. Confirm who handles hearings and the fee scope. Claims of guaranteed bail, FIR quashing or acquittal are not a reliable basis for choosing a criminal lawyer.',
+  },
+  'bail-lawyer-lucknow': {
+    title: 'Bail & Anticipatory Bail Lawyers in Lucknow | Sumanjari & Co.',
+    description: 'Legal representation for anticipatory bail (482 BNSS), regular bail, default bail and NBW recall before Lucknow Sessions Court & Allahabad HC Lucknow Bench.',
+    attorneyKeyword: 'Bail Attorney Lucknow',
+    question: 'How do I choose a bail or anticipatory bail advocate in Lucknow?',
+    answer: 'Match the advocate to the offence, custody status, court and applicable statute. Share the FIR, police notice, remand papers and prior rejection orders. Ask about available remedies, surety requirements, who will appear and the written fee scope. No advocate can guarantee bail or a fixed hearing date.',
   },
   'family-advocate': {
     title: 'Family Court Lawyer in Lucknow | Custody, Maintenance & Matrimonial',

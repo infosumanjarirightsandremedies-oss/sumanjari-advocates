@@ -24,6 +24,7 @@ const services = [
   { label: 'Constitutional & Writ Lawyer in Lucknow', href: '/services/constitutional-writ-lawyer-lucknow' },
   { label: 'Consumer Court & MACT Lawyer in Lucknow', href: '/services/consumer-motor-accident-lawyer-lucknow' },
   { label: 'Criminal Lawyer in Lucknow', href: '/services/criminal-lawyer-lucknow' },
+  { label: 'Bail & Anticipatory Bail in Lucknow', href: '/services/bail-lawyer-lucknow' },
   { label: 'Cyber Crime Lawyer in Lucknow', href: '/services/cyber-crime-lawyer-lucknow' },
   { label: 'Divorce Lawyer in Lucknow', href: '/services/divorce-lawyer-lucknow' },
   { label: 'Family Court Lawyer in Lucknow', href: '/services/family-advocate' },

@@ -16,15 +16,15 @@ export const SERVICE_STATS = {
   armedForcesTribunal: { years: '7+', cases: '500+' },
 } as const
 
-export default function ServiceStats({ service }: { service: keyof typeof SERVICE_STATS }) {
+export default function ServiceStats({ service, language = 'en' }: { service: keyof typeof SERVICE_STATS; language?: 'en' | 'hi' }) {
   const { years, cases } = SERVICE_STATS[service]
   const stats = [
-    { value: years, label: 'Years of experience (lead advocate)' },
-    { value: cases, label: 'Cases handled by our team' },
+    { value: years, label: language === 'hi' ? 'मुख्य वकील का अनुभव (वर्ष)' : 'Years of experience (lead advocate)' },
+    { value: cases, label: language === 'hi' ? 'हमारी टीम ने संभाले मामले' : 'Cases handled by our team' },
   ]
 
   return (
-    <dl aria-label="Lead advocate experience and team cases handled" className="mt-7 flex flex-wrap gap-x-8 gap-y-3">
+    <dl aria-label={language === 'hi' ? 'मुख्य वकील का अनुभव और टीम के मामले' : 'Lead advocate experience and team cases handled'} className="mt-7 flex flex-wrap gap-x-8 gap-y-3">
       {stats.map(({ value, label }) => (
         <div key={label} className="flex items-baseline gap-2">
           <dt className="order-last max-w-[8rem] font-body text-sm leading-snug text-navy-700/75 dark:text-cream/55">

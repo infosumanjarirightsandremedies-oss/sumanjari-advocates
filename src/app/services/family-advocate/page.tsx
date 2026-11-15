@@ -18,6 +18,7 @@ import {
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ServiceContactLinks from '@/components/ServiceContactLinks'
+import ServiceLanguageSwitch from '@/components/ServiceLanguageSwitch'
 import ServiceSelection from '@/components/ServiceSelection'
 import { serviceSearchContent, withServiceSelectionFaq } from '@/lib/serviceSearch'
 import LucknowChambers from '@/components/LucknowChambers'
@@ -32,6 +33,7 @@ import { teamMembers } from '@/lib/team'
 import { LUCKNOW_SERVICE_LOCATION } from '@/lib/contactLinks'
 
 const SITE_URL = 'https://www.sumanjariadvocates.com'
+const PAGE_PATH = '/services/family-advocate'
 const searchContent = serviceSearchContent['family-advocate']
 const familyLead = teamMembers.find((member) => member.slug === 'aishwarya-pandey')
 const familyTeam = ['akhilesh-yadav', 'prerna-yaduvanshi']
@@ -74,6 +76,7 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: '/services/family-advocate',
+    languages: { en: PAGE_PATH, hi: `${PAGE_PATH}/hindi`, 'x-default': PAGE_PATH },
   },
   openGraph: {
     title: 'Family Court Lawyer in Lucknow | Sumanjari & Co. Advocates',
@@ -81,6 +84,8 @@ export const metadata: Metadata = {
       'Representation in divorce, child custody, maintenance, domestic violence, and matrimonial disputes before the Family Court, Kaiserbagh and Allahabad High Court, Lucknow Bench.',
     url: '/services/family-advocate',
     type: 'website',
+    locale: 'en_IN',
+    alternateLocale: ['hi_IN'],
   },
   twitter: {
     card: 'summary_large_image',
@@ -368,83 +373,24 @@ const detailedFaqs = [
     question: 'Are advocates allowed in Family Court, Lucknow, and is a notarised stamp-paper divorce valid?',
     answer: 'A marriage cannot be dissolved by a notarised stamp-paper agreement; only a decree from a competent court legally dissolves a marriage. While Section 13 of the Family Courts Act, 1984 does not give parties an automatic right to counsel, the Family Court, Lucknow routinely permits advocates to appear and represent clients with the leave of the court.',
   },
-]
-
-const hindiFaqs = [
   {
-    question: 'लखनऊ का फैमिली कोर्ट कहाँ स्थित है और वहाँ किन मामलों की सुनवाई होती है?',
-    answer: 'लखनऊ का फैमिली कोर्ट 430, वाला कदर रोड, कैसरबाग (क़ैसरबाग), लखनऊ, उत्तर प्रदेश 226001 में परिवर्तन चौक के पास स्थित है। फैमिली कोर्ट्स एक्ट, 1984 के तहत यहाँ तलाक, न्यायिक पृथक्करण, दाम्पत्य अधिकारों की पुनर्स्थापना, भरण-पोषण, बच्चों की अभिरक्षा और संरक्षकता संबंधी मामले सुने जाते हैं, जहाँ अदालत को क्षेत्राधिकार प्राप्त हो। अदालत जाने से पहले रजिस्ट्री या वाद-सूची से वर्तमान पता, कक्ष संख्या और कार्य समय की पुष्टि करें।',
+    question: 'How do I file a maintenance claim under Section 144 BNSS in Lucknow?',
+    answer: 'Check eligibility and jurisdiction before filing before the competent Family Court or Judicial Magistrate. Bring relationship, income, expense and existing-order records, and follow the financial-disclosure directions in Rajnesh v. Neha. Saved CrPC proceedings and connected awards need separate review. Enforcement under Section 147 BNSS is a different step after an unpaid order.',
   },
   {
-    question: 'धारा 144 BNSS के तहत भरण-पोषण का दावा कैसे दायर करें?',
-    answer: 'पत्नी, बच्चों या आश्रित माता-पिता के लिए संक्षिप्त भरण-पोषण भारतीय नागरिक सुरक्षा संहिता (BNSS) की धारा 144 (पूर्व में दंड प्रक्रिया संहिता की धारा 125) के तहत संबंधित न्यायिक मजिस्ट्रेट या फैमिली कोर्ट, कैसरबाग के समक्ष दायर किया जाता है। रजनेश बनाम नेहा (2020) के निर्देशानुसार दोनों पक्षों को निर्धारित प्रारूप में संपत्ति और देनदारियों का शपथ पत्र देना होता है। अवैतनिक राशि की वसूली धारा 147 BNSS के तहत कुर्की द्वारा की जा सकती है।',
+    question: 'Is mediation mandatory in the Family Court, Lucknow?',
+    answer: 'Section 9 of the Family Courts Act requires efforts at settlement where appropriate, and the court may refer parties to counselling or mediation. Follow applicable attendance directions, but any settlement must be voluntary. Do not sign under pressure; urgent safety or support needs may require court protection before settlement discussions.',
   },
   {
-    question: 'लखनऊ फैमिली कोर्ट बच्चे की अभिरक्षा पर निर्णय कैसे लेता है?',
-    answer: 'अभिरक्षा और संरक्षकता के आवेदन अभिभावक और प्रतिपाल्य अधिनियम, 1890 तथा हिंदू अप्राप्तवयता एवं संरक्षकता अधिनियम, 1956 के तहत दायर किए जाते हैं। निर्णय में सबसे महत्वपूर्ण बात बच्चे का कल्याण है, न कि किसी एक माता-पिता का लिंग या आय। स्कूली शिक्षा, स्वास्थ्य, देखभाल की स्थिरता और मौजूदा मुलाक़ात व्यवस्था जैसे तथ्यों पर विचार किया जाता है; अंतरिम अभिरक्षा और मुलाक़ात अधिकार भी माँगे जा सकते हैं।',
-  },
-  {
-    question: 'घरेलू हिंसा अधिनियम के तहत पीड़ित महिला को क्या राहत मिल सकती है?',
-    answer: 'घरेलू हिंसा से महिलाओं का संरक्षण अधिनियम, 2005 की धारा 12 के तहत संबंधित मजिस्ट्रेट के समक्ष आवेदन करने पर धारा 18 में संरक्षण आदेश, धारा 19 में निवास आदेश, धारा 20 में आर्थिक राहत, धारा 21 में अस्थायी अभिरक्षा और धारा 22 में प्रतिकर दिया जा सकता है। तत्काल खतरे की स्थिति में धारा 23 के तहत अंतरिम या एकपक्षीय आदेश माँगा जा सकता है। गंभीर खतरे की स्थिति में तुरंत पुलिस या आपातकालीन सेवाओं से संपर्क करें।',
-  },
-  {
-    question: 'फैमिली कोर्ट में मध्यस्थता (मीडिएशन) अनिवार्य है क्या?',
-    answer: 'फैमिली कोर्ट्स एक्ट, 1984 की धारा 9 के तहत अदालत पक्षों को समझौते के प्रयास के लिए परामर्शदाता या कैसरबाग स्थित मध्यस्थता एवं सुलह केंद्र में भेज सकती है। भाग लेना सामान्यतः प्रक्रिया का हिस्सा है, परंतु कोई भी समझौता स्वेच्छा से ही होना चाहिए; दबाव में कोई समझौता पत्र पर हस्ताक्षर न करें। सुरक्षा या तत्काल भरण-पोषण की आवश्यकता होने पर पहले उपयुक्त अदालत से राहत माँगने की सलाह दी जाती है।',
-  },
-  {
-    question: 'फैमिली कोर्ट, लखनऊ के आदेश के विरुद्ध अपील कहाँ दायर होती है?',
-    answer: 'फैमिली कोर्ट्स एक्ट, 1984 की धारा 19 के तहत अपील योग्य निर्णय और आदेश के विरुद्ध इलाहाबाद हाईकोर्ट की लखनऊ बेंच, गोमती नगर में दो न्यायाधीशों की पीठ के समक्ष अपील दायर की जाती है। सहमति की डिक्री और अंतरिम आदेशों पर यह अपील लागू नहीं होती; कुछ भरण-पोषण आदेशों के लिए अलग समीक्षा प्रक्रिया है। प्रमाणित प्रति मिलते ही अपील की उपलब्धता और समय-सीमा की पुष्टि करें।',
-  },
-  {
-    question: 'यदि बच्चा 5 वर्ष से कम आयु का है तो लखनऊ फैमिली कोर्ट में अभिरक्षा किसे मिलती है, और पिता मुलाक़ात अधिकार कैसे प्राप्त कर सकता है?',
-    answer: 'हिंदू अप्राप्तवयता एवं संरक्षकता अधिनियम, 1956 की धारा 6(क) के अनुसार पाँच वर्ष से कम आयु के बच्चे की अभिरक्षा सामान्यतः माँ के पास रहती है, जब तक कि बच्चे का कल्याण अन्यथा की माँग न करे। फैमिली कोर्ट, लखनऊ बच्चे के कल्याण को सर्वोपरि मानता है और गैर-अभिरक्षक माता-पिता को अंतरिम व नियमित मुलाक़ात अधिकार दे सकता है, जिसमें सप्ताहांत, छुट्टियाँ और पर्यवेक्षित या वर्चुअल मुलाक़ात शामिल हो सकती है।',
-  },
-  {
-    question: 'कामकाजी पत्नी भी भरण-पोषण का दावा कर सकती है क्या, और क्या आय शपथ पत्र देना अनिवार्य है?',
-    answer: 'हाँ — यदि कामकाजी पत्नी की आय विवाह के समान जीवन-स्तर बनाए रखने के लिए पर्याप्त नहीं है, तो वह भी भरण-पोषण का दावा कर सकती है, हालाँकि स्वेच्छा से बेरोज़गार रहना या बिना उचित कारण परित्याग करना दावे को घटा या रोक सकता है। रजनेश बनाम नेहा (2020) के अनुसार दोनों पक्षों को निर्धारित प्रारूप में संपत्ति, आय और देनदारियों का शपथ पत्र फैमिली कोर्ट, लखनऊ के समक्ष दाखिल करना होता है, ताकि अंतरिम और अंतिम भरण-पोषण वास्तविक आय पर आधारित हो, अनुमान पर नहीं।',
-  },
-  {
-    question: 'यदि कोई पक्ष लखनऊ में अदालत द्वारा आदेशित भरण-पोषण देने से इनकार करे तो क्या होगा?',
-    answer: 'पीड़ित पक्ष धारा 147 BNSS (पूर्व में धारा 125(3)/128 CrPC) के तहत फैमिली कोर्ट, लखनऊ के समक्ष निष्पादन आवेदन दायर कर सकता है। जानबूझकर चूक करने पर अदालत कुर्की वारंट जारी कर सकती है, वेतन या संपत्ति कुर्क कर सकती है, या तथ्यों और बकायादार पक्ष के स्पष्टीकरण के अधीन, बकाया राशि चुकाए जाने तक कारावास का आदेश दे सकती है।',
-  },
-  {
-    question: 'क्या लखनऊ में घरेलू हिंसा (PWDVA) का मामला फैमिली कोर्ट के भरण-पोषण या तलाक के मामले के साथ-साथ दायर किया जा सकता है?',
-    answer: 'हाँ। पीड़ित महिला घरेलू हिंसा से महिलाओं का संरक्षण अधिनियम, 2005 की धारा 12 के तहत लखनऊ के संबंधित मजिस्ट्रेट के समक्ष फैमिली कोर्ट की कार्यवाही के साथ-साथ संरक्षण, निवास, आर्थिक राहत और अस्थायी अभिरक्षा की माँग कर सकती है। अदालतें सामान्यतः दोहरी वसूली रोकने के लिए दोनों कार्यवाहियों में भरण-पोषण राशि को समायोजित करती हैं।',
-  },
-  {
-    question: 'यदि लखनऊ में झूठी धारा 498A / धारा 85 BNS या दहेज शिकायत की धमकी दी जाए या दर्ज की जाए तो क्या करें?',
-    answer: 'महिला थाना या परिवार परामर्श केंद्र स्तर पर संरचित लिखित जवाब प्रस्तुत करें और प्रासंगिक, वैध रूप से प्राप्त साक्ष्य सुरक्षित रखें। यदि धारा 85 BNS (498A IPC) के तहत FIR दर्ज हो जाए, तो पुलिस को अर्नेश कुमार दिशा-निर्देशों का पालन करना होता है और गिरफ़्तारी से पहले सामान्यतः धारा 35(3) BNSS का नोटिस देना होता है। तथ्यों के अनुसार, अग्रिम जमानत या इलाहाबाद हाईकोर्ट की लखनऊ बेंच के समक्ष धारा 528 BNSS (पूर्व में धारा 482 CrPC) के तहत रद्दीकरण याचिका दायर की जा सकती है।',
-  },
-  {
-    question: 'लखनऊ में स्त्रीधन और विवाह के आभूषण कानूनी रूप से कैसे वापस प्राप्त किए जा सकते हैं?',
-    answer: 'स्त्रीधन की वापसी हिंदू विवाह अधिनियम, 1955 की धारा 27 के तहत आवेदन, मजिस्ट्रेट के समक्ष धारा 12 PWDVA याचिका, या आपराधिक विश्वासघात के लिए धारा 316 BNS (पूर्व में धारा 406 IPC) की शिकायत के माध्यम से माँगी जा सकती है — प्रत्येक के साथ उपलब्ध बिल, फ़ोटोग्राफ़ और मदवार सूची संलग्न करें।',
-  },
-  {
-    question: 'यदि पति या पत्नी किसी अन्य शहर या विदेश में रहते हों, तो क्या मैं लखनऊ में पारिवारिक मामला दायर कर सकता/सकती हूँ?',
-    answer: 'हाँ, बशर्ते लखनऊ वैधानिक क्षेत्राधिकार की शर्तें पूरी करे — जैसे जहाँ विवाह संपन्न हुआ, जहाँ पक्ष अंतिम बार साथ रहे, जहाँ प्रतिवादी रहता है, या कुछ याचिकाओं के लिए जहाँ पत्नी रहती है। उत्तर प्रदेश के भीतर संबंधित मामले को स्थानांतरित करने के लिए धारा 24 CPC की स्थानांतरण याचिका इलाहाबाद हाईकोर्ट की लखनऊ बेंच के समक्ष दायर की जा सकती है।',
-  },
-  {
-    question: 'यदि फैमिली कोर्ट में पति या पत्नी के विरुद्ध एकपक्षीय (ex-parte) डिक्री पारित हो गई हो, या नोटिस कभी प्राप्त न हुआ हो, तो क्या करें?',
-    answer: 'तुरंत उसी फैमिली कोर्ट, लखनऊ में उपस्थित होकर नोटिस की गैर-तामील स्पष्ट करें और एकपक्षीय कार्यवाही को वापस लेने (recall) का अनुरोध करें। यदि एकपक्षीय डिक्री पहले ही पारित हो चुकी है, तो नोटिस की गैर-तामील के आधार पर उसे रद्द करने के लिए आदेश IX नियम 13 CPC का आवेदन दायर किया जा सकता है, या जहाँ अपील योग्य हो, फैमिली कोर्ट्स एक्ट, 1984 की धारा 19 के तहत इलाहाबाद हाईकोर्ट की लखनऊ बेंच में अपील की जा सकती है। शीघ्र कार्रवाई महत्वपूर्ण है, क्योंकि समय-सीमा लागू होती है।',
-  },
-  {
-    question: 'क्या लखनऊ में माता-पिता या वरिष्ठ नागरिक अपने वयस्क बच्चों से भरण-पोषण का दावा कर सकते हैं?',
-    answer: 'हाँ। जो माता-पिता अपना भरण-पोषण करने में असमर्थ हैं, वे धारा 144 BNSS के तहत फैमिली कोर्ट, लखनऊ के समक्ष, या माता-पिता और वरिष्ठ नागरिक भरण-पोषण एवं कल्याण अधिनियम, 2007 के तहत गठित भरण-पोषण अधिकरण के समक्ष अपने वयस्क पुत्र-पुत्रियों से मासिक भरण-पोषण का दावा कर सकते हैं।',
-  },
-  {
-    question: 'क्या विवाहित बेटी को पैतृक संपत्ति में बेटे के बराबर अधिकार है, और क्या पत्नी अपने ससुराल के घर पर दावा कर सकती है?',
-    answer: 'विनीता शर्मा बनाम राकेश शर्मा (2020) के अनुसार, बेटी को जन्म से ही हिंदू पैतृक संपत्ति में समान सहदायिक (coparcenary) अधिकार प्राप्त है, चाहे उसकी वैवाहिक स्थिति या पिता की मृत्यु की तारीख कुछ भी हो। पत्नी को सामान्यतः ससुराल की स्वअर्जित संपत्ति में स्वामित्व अधिकार नहीं मिलता, हालाँकि तथ्यों के अनुसार वह घरेलू हिंसा अधिनियम की धारा 19 के तहत साझा गृहस्थी में निवास के अधिकार का दावा कर सकती है।',
-  },
-  {
-    question: 'क्या फैमिली कोर्ट, लखनऊ में अधिवक्ता की अनुमति है, और क्या नोटरी किए गए स्टाम्प-पेपर पर तलाक वैध है?',
-    answer: 'स्टाम्प-पेपर पर नोटरी किए गए समझौते से विवाह विच्छेद नहीं हो सकता; केवल सक्षम अदालत की डिक्री ही कानूनी रूप से विवाह भंग करती है। फैमिली कोर्ट्स एक्ट, 1984 की धारा 13 पक्षों को स्वतः अधिवक्ता का अधिकार नहीं देती, फिर भी फैमिली कोर्ट, लखनऊ सामान्यतः अदालत की अनुमति से अधिवक्ताओं को उपस्थित होने और प्रतिनिधित्व करने देता है।',
+    question: 'Where can I appeal a Family Court order from Lucknow?',
+    answer: 'Appealable judgments and orders may be challenged under Section 19 of the Family Courts Act before the competent Division Bench of the Allahabad High Court, Lucknow Bench. Consent decrees and interlocutory orders are excluded from that appeal, and some maintenance orders follow a separate review route. Obtain the certified order and promptly check maintainability and limitation.',
   },
 ]
 
 const familyFaqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  inLanguage: ['en-IN', 'hi-IN'],
+  inLanguage: 'en-IN',
   mainEntity: [
     ...familyInsights.map(({ title, excerpt }) => ({
       '@type': 'Question',
@@ -464,15 +410,6 @@ const familyFaqJsonLd = {
         text: answer,
       },
     })),
-    ...hindiFaqs.map(({ question, answer }) => ({
-      '@type': 'Question',
-      inLanguage: 'hi-IN',
-      name: question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: answer,
-      },
-    })),
   ],
 }
 
@@ -481,6 +418,12 @@ export default async function FamilyMatrimonialServicePage() {
 
   return (
     <main className="relative min-h-screen">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org', '@type': 'WebPage',
+        '@id': `${SITE_URL}${PAGE_PATH}#webpage`, url: `${SITE_URL}${PAGE_PATH}`,
+        name: searchContent.title, inLanguage: 'en',
+        workTranslation: { '@id': `${SITE_URL}${PAGE_PATH}/hindi#webpage` },
+      }).replace(/</g, '\\u003c') }} />
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
@@ -499,12 +442,15 @@ export default async function FamilyMatrimonialServicePage() {
 
       <section className="py-24 md:py-32">
         <div className="mx-auto max-w-5xl px-6">
+          <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
           <Link
             href="/#services"
-            className="mb-10 inline-flex items-center gap-2 font-caps text-xs uppercase tracking-widest text-navy-700/70 transition-colors hover:text-gold-600 dark:text-cream/45 dark:hover:text-gold-400"
+            className="inline-flex items-center gap-2 font-caps text-xs uppercase tracking-widest text-navy-700/70 transition-colors hover:text-gold-600 dark:text-cream/45 dark:hover:text-gold-400"
           >
             <ArrowLeft className="h-3.5 w-3.5" /> Back to Services
           </Link>
+          <ServiceLanguageSwitch basePath={PAGE_PATH} language="en" />
+          </div>
 
           <div className="mb-12 grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_280px]">
             <div className="min-w-0">
@@ -816,25 +762,6 @@ export default async function FamilyMatrimonialServicePage() {
             </p>
             <div className="divide-y divide-gold-500/20 border-y border-gold-500/20">
               {detailedFaqs.map(({ question, answer }) => (
-                <details key={question} className="py-5">
-                  <summary className="cursor-pointer font-display text-lg font-bold leading-relaxed text-navy-900 transition-colors hover:text-gold-700 focus-visible:outline-gold-500 dark:text-cream dark:hover:text-gold-400">
-                    {question}
-                  </summary>
-                  <p className="mt-3 font-body leading-relaxed text-navy-700 dark:text-cream/70">{answer}</p>
-                </details>
-              ))}
-            </div>
-          </section>
-
-          <section id="hindi-faqs" lang="hi" aria-labelledby="hindi-faqs-heading" className="mb-16 scroll-mt-28 border-t border-gold-500/20 pt-10">
-            <h2 id="hindi-faqs-heading" className="mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
-              लखनऊ फैमिली कोर्ट: हिंदी में सामान्य प्रश्न
-            </h2>
-            <p className="mb-6 font-body leading-relaxed text-navy-700 dark:text-cream/70">
-              यह सामान्य कानूनी जानकारी है, किसी विशेष मामले की सलाह नहीं। लागू कानून, तथ्यों और अदालत के आदेश के अनुसार प्रक्रिया बदल सकती है। किसी परिणाम या समय-सीमा की गारंटी नहीं है।
-            </p>
-            <div className="divide-y divide-gold-500/20 border-y border-gold-500/20">
-              {hindiFaqs.map(({ question, answer }) => (
                 <details key={question} className="py-5">
                   <summary className="cursor-pointer font-display text-lg font-bold leading-relaxed text-navy-900 transition-colors hover:text-gold-700 focus-visible:outline-gold-500 dark:text-cream dark:hover:text-gold-400">
                     {question}
