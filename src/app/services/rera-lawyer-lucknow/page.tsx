@@ -329,7 +329,7 @@ export default async function ReraServicePage() {
                 UP-RERA &amp; Appellate Tribunal
               </span>
               <h1 className="mt-4 font-display text-4xl font-bold leading-[1.12] text-navy-900 dark:text-cream md:text-[3.25rem]">
-                UP RERA Lawyer &amp; Advocate in Lucknow —{' '}
+                UP RERA Advocate in Lucknow —{' '}
                 <em className="text-gold-gradient">Builder-Buyer Disputes, RERA Complaint Filing &amp; REAT Appeals</em>
               </h1>
               <p className="mt-4 max-w-xl font-body text-lg font-semibold leading-relaxed text-navy-900 dark:text-cream">
@@ -525,9 +525,9 @@ export default async function ReraServicePage() {
               City (Shaheed Path), Gomti Nagar Extension, Vrindavan Yojna,
               Sultanpur Road, Faizabad Road, Sitapur Road, and Kanpur Road in
               Lucknow. For projects in Noida, Greater Noida or Ghaziabad, use
-              our dedicated NCR page linked below.
+              our dedicated NCR pages linked below.
             </p>
-            <div className="mt-6 grid gap-5 md:grid-cols-2">
+            <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               <Link href="#services" className="glass-card group block rounded-sm border border-gold-500/20 p-6 transition-colors hover:border-gold-500/50 dark:border-gold-500/15">
                 <h3 className="flex items-center justify-between gap-4 font-display text-xl font-bold text-navy-900 dark:text-cream">
                   RERA Lawyer in Lucknow
@@ -540,15 +540,26 @@ export default async function ReraServicePage() {
                   at Block D-311, Allahabad High Court, Lucknow Bench.
                 </p>
               </Link>
-              <Link href="/services/rera-lawyer-noida-ghaziabad" className="glass-card group block rounded-sm border border-gold-500/20 p-6 transition-colors hover:border-gold-500/50 dark:border-gold-500/15">
+              <Link href="/services/rera-lawyer-noida" className="glass-card group block rounded-sm border border-gold-500/20 p-6 transition-colors hover:border-gold-500/50 dark:border-gold-500/15">
                 <h3 className="flex items-center justify-between gap-4 font-display text-xl font-bold text-navy-900 dark:text-cream">
-                  RERA Advocate &amp; Lawyer in Noida &amp; Ghaziabad
+                  RERA Advocate &amp; Lawyer in Noida
                   <ArrowUpRight className="h-5 w-5 shrink-0 text-gold-600 dark:text-gold-400" />
                 </h3>
                 <p className="mt-3 font-body text-sm leading-relaxed text-navy-700 dark:text-cream/60">
                   Meet our Delhi/NCR team and explore representation for builder-buyer
                   disputes, delayed possession and refund claims involving projects
-                  in Noida and Ghaziabad.
+                  in Noida and Greater Noida.
+                </p>
+              </Link>
+              <Link href="/services/rera-lawyer-ghaziabad" className="glass-card group block rounded-sm border border-gold-500/20 p-6 transition-colors hover:border-gold-500/50 dark:border-gold-500/15">
+                <h3 className="flex items-center justify-between gap-4 font-display text-xl font-bold text-navy-900 dark:text-cream">
+                  RERA Advocate &amp; Lawyer in Ghaziabad
+                  <ArrowUpRight className="h-5 w-5 shrink-0 text-gold-600 dark:text-gold-400" />
+                </h3>
+                <p className="mt-3 font-body text-sm leading-relaxed text-navy-700 dark:text-cream/60">
+                  Meet our Delhi/NCR team and explore representation for builder-buyer
+                  disputes, delayed possession and refund claims involving
+                  Ghaziabad projects, including Indirapuram and Raj Nagar Extension.
                 </p>
               </Link>
             </div>
@@ -717,7 +728,7 @@ export default async function ReraServicePage() {
             <h2 id="rera-remedy-document-review" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream">Prepare Your UP-RERA Complaint Around the Relief You Need</h2>
             <p className="mb-5 font-body leading-relaxed text-navy-700 dark:text-cream/70">A homebuyer seeking possession with delay interest may need a different case strategy from one seeking withdrawal and refund. Compensation, interest, project compliance, appeals and enforcement also have distinct statutory requirements. We review the agreement, project registration, promised possession date, extensions, payments and earlier proceedings before identifying the competent authority and available relief. Filing a complaint does not guarantee an immediate refund or possession.</p>
             <h3 className="mb-2 font-display text-xl font-bold text-navy-900 dark:text-cream">Prepare a project and payment chronology</h3>
-            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Share the allotment letter, builder-buyer agreement, receipts, demand letters, possession communications, project details and any settlement or prior order. Record what was promised, paid, delivered and disputed, with dates. An unpaid order may require enforcement rather than a fresh complaint; an appeal has its own deadline and requirements. For projects in the NCR region, see our dedicated <Link href="/services/rera-lawyer-noida-ghaziabad" className="text-gold-700 underline dark:text-gold-400">Noida and Ghaziabad RERA service</Link>.</p>
+            <p className="font-body leading-relaxed text-navy-700 dark:text-cream/70">Share the allotment letter, builder-buyer agreement, receipts, demand letters, possession communications, project details and any settlement or prior order. Record what was promised, paid, delivered and disputed, with dates. An unpaid order may require enforcement rather than a fresh complaint; an appeal has its own deadline and requirements. For projects in the NCR region, see our dedicated <Link href="/services/rera-lawyer-noida" className="text-gold-700 underline dark:text-gold-400">Noida and Greater Noida RERA service</Link> or our <Link href="/services/rera-lawyer-ghaziabad" className="text-gold-700 underline dark:text-gold-400">Ghaziabad RERA service</Link>.</p>
           </section>
 
           <ServiceBlogs

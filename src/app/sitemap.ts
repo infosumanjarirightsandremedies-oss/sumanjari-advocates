@@ -59,7 +59,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
-      url: `${SITE_URL}/services/rera-lawyer-noida-ghaziabad`,
+      url: `${SITE_URL}/services/rera-lawyer-noida`,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/services/rera-lawyer-ghaziabad`,
       changeFrequency: 'weekly',
       priority: 0.7,
     },

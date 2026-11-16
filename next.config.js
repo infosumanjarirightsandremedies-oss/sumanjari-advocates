@@ -110,6 +110,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/services/rera-lawyer-noida-ghaziabad',
+        destination: '/services/rera-lawyer-noida',
+        permanent: true,
+      },
+      {
         source: '/services/high-court-lawyer',
         destination: '/services/high-court-lawyer-lucknow',
         permanent: true,

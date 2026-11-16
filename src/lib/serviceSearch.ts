@@ -133,11 +133,18 @@ export const serviceSearchContent = {
     question: 'How do I choose the best RERA lawyer or real estate advocate in Lucknow?',
     answer: 'Ask about the project registration, agreement, promised possession date and the relief you want: possession, refund, delay interest or compensation. A suitable advocate should explain the Authority, adjudicating officer and appellate routes, along with deposits, deadlines and order enforcement. Share payment records and any settlement or previous order. Confirm drafting, hearings and fees. No lawyer can guarantee a refund amount, recovery date or outcome against a builder.',
   },
-  'rera-lawyer-noida-ghaziabad': {
-    title: 'RERA Lawyer & Advocate in Noida & Ghaziabad | UP-RERA',
-    description: 'Experienced RERA lawyers, advocates & attorneys for Noida, Greater Noida and Ghaziabad projects. Review builder disputes, delayed possession, refunds and UP-RERA complaints.',
-    attorneyKeyword: 'RERA Attorney Noida Ghaziabad',
-    question: 'How do I choose the best RERA lawyer or advocate for Noida or Ghaziabad?',
+  'rera-lawyer-noida': {
+    title: 'RERA Lawyer & Advocate in Noida & Greater Noida | UP-RERA',
+    description: 'Experienced RERA lawyers, advocates & attorneys for Noida and Greater Noida projects. Review builder disputes, delayed possession, refunds and UP-RERA complaints.',
+    attorneyKeyword: 'RERA Attorney Noida',
+    question: 'How do I choose the best RERA lawyer or advocate for a Noida project?',
+    answer: 'Check the project location, registration and phase before comparing advocates. Ask about the UP-RERA route for the project, the distinction between possession, refund and compensation, and later UP-REAT proceedings in Lucknow where applicable. Preserve the agreement, payment trail and existing orders. Confirm how the NCR team coordinates documents, hearings and enforcement, together with fees. An office address does not determine jurisdiction, and no advocate can guarantee recovery from a developer.',
+  },
+  'rera-lawyer-ghaziabad': {
+    title: 'RERA Lawyer & Advocate in Ghaziabad | UP-RERA',
+    description: 'Experienced RERA lawyers, advocates & attorneys for Ghaziabad projects, including Indirapuram and Raj Nagar Extension. Review builder disputes, delayed possession, refunds and UP-RERA complaints.',
+    attorneyKeyword: 'RERA Attorney Ghaziabad',
+    question: 'How do I choose the best RERA lawyer or advocate for a Ghaziabad project?',
     answer: 'Check the project location, registration and phase before comparing advocates. Ask about the UP-RERA route for the project, the distinction between possession, refund and compensation, and later UP-REAT proceedings in Lucknow where applicable. Preserve the agreement, payment trail and existing orders. Confirm how the NCR team coordinates documents, hearings and enforcement, together with fees. An office address does not determine jurisdiction, and no advocate can guarantee recovery from a developer.',
   },
 } satisfies Record<string, ServiceSearchContent>

@@ -125,10 +125,16 @@ export const SERVICE_LINKS: LlmsLink[] = [
     description: 'Builder-buyer disputes, possession delays, refunds, and appeals before UP-RERA and the Appellate Tribunal.',
   },
   {
-    path: '/services/rera-lawyer-noida-ghaziabad',
-    title: 'RERA Advocate in Noida & Ghaziabad',
+    path: '/services/rera-lawyer-noida',
+    title: 'RERA Advocate in Noida & Greater Noida',
     description:
-      'Builder-buyer disputes, delayed possession, refund claims, and project compliance for Noida and Ghaziabad projects.',
+      'Builder-buyer disputes, delayed possession, refund claims, and project compliance for Noida and Greater Noida projects.',
+  },
+  {
+    path: '/services/rera-lawyer-ghaziabad',
+    title: 'RERA Advocate in Ghaziabad',
+    description:
+      'Builder-buyer disputes, delayed possession, refund claims, and project compliance for Ghaziabad projects, including Indirapuram and Raj Nagar Extension.',
   },
   {
     path: '/services/service-lawyer-lucknow',
@@ -223,7 +229,7 @@ export const PRACTICE_AREA_GUIDES: PracticeAreaGuide[] = [
   {
     slug: 'rera',
     title: 'RERA & Real Estate Matters',
-    servicePaths: ['/services/rera-lawyer-lucknow', '/services/rera-lawyer-noida-ghaziabad'],
+    servicePaths: ['/services/rera-lawyer-lucknow', '/services/rera-lawyer-noida', '/services/rera-lawyer-ghaziabad'],
     categories: ['RERA'],
   },
   {
