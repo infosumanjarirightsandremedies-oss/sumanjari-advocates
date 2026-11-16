@@ -28,7 +28,7 @@ const PAGE_PATH = `${ENGLISH_PATH}/hindi`
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`
 const DIVORCE_PATH = '/services/divorce-lawyer-lucknow/hindi'
 const familyLead = teamMembers.find(member => member.slug === 'aishwarya-pandey')
-const familyTeam = ['akhilesh-yadav', 'prerna-yaduvanshi'].flatMap(slug => teamMembers.filter(member => member.slug === slug))
+const familyTeam = ['akhilesh-yadav', 'namrata-pandey', 'prerna-yaduvanshi'].flatMap(slug => teamMembers.filter(member => member.slug === slug))
 const headingClass = 'mb-5 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl'
 const bodyClass = 'font-body leading-relaxed text-navy-700 dark:text-cream/65'
 
@@ -126,7 +126,7 @@ export default function HindiFamilyPage() {
             { id: 'family-faqs', label: 'अक्सर पूछे जाने वाले सवाल' },
           ]} />
           <section id="family-team" className="mb-16 scroll-mt-28">
-            <h2 className={headingClass}>पारिवारिक और वैवाहिक मामलों की टीम</h2><p className={`mb-8 ${bodyClass}`}>अधिवक्ता ऐश्वर्या पांडेय पारिवारिक मामलों का नेतृत्व करती हैं। अधिवक्ता अखिलेश यादव और अधिवक्ता प्रेरणा यदुवंशी सहयोग करते हैं। हर वकील की प्रोफाइल में उनके अपने कार्यक्षेत्र दिए गए हैं।</p>
+            <h2 className={headingClass}>पारिवारिक और वैवाहिक मामलों की टीम</h2><p className={`mb-8 ${bodyClass}`}>अधिवक्ता ऐश्वर्या पांडेय पारिवारिक मामलों का नेतृत्व करती हैं। अधिवक्ता अखिलेश यादव, अधिवक्ता नम्रता पांडेय और अधिवक्ता प्रेरणा यदुवंशी सहयोग करते हैं। हर वकील की प्रोफाइल में उनके अपने कार्यक्षेत्र दिए गए हैं।</p>
             <div lang="en"><TeamCarousel members={familyTeam} label="Family and matrimonial team members" /></div>
           </section>
           <LucknowChambers language="hi" />

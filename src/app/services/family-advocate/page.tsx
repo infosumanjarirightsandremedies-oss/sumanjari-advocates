@@ -36,7 +36,7 @@ const SITE_URL = 'https://www.sumanjariadvocates.com'
 const PAGE_PATH = '/services/family-advocate'
 const searchContent = serviceSearchContent['family-advocate']
 const familyLead = teamMembers.find((member) => member.slug === 'aishwarya-pandey')
-const familyTeam = ['akhilesh-yadav', 'prerna-yaduvanshi']
+const familyTeam = ['akhilesh-yadav', 'namrata-pandey', 'prerna-yaduvanshi']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
 
 function ConsultationActions({ className }: { className: string }) {
@@ -497,7 +497,7 @@ export default async function FamilyMatrimonialServicePage() {
             </h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
               Adv. Aishwarya Pandey leads our family and matrimonial practice in Lucknow,
-              supported by Adv. Akhilesh Yadav in family matters. Adv. Prerna Yaduvanshi,
+              supported by Adv. Akhilesh Yadav and Adv. Namrata Pandey in family matters. Adv. Prerna Yaduvanshi,
               based in Delhi, handles matrimonial disputes, domestic violence, maintenance
               and child custody matters. Each profile sets out the advocate&apos;s practice areas and location.
             </p>

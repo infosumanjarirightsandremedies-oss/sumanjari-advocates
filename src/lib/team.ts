@@ -107,9 +107,65 @@ export const teamMembers: TeamMember[] = [
           ],
         },
       ],
-      phone: '9839935033',
       memberships: ['Bar Council of Uttar Pradesh'],
       education: ['LL.B., University of Lucknow', 'B.A., University of Lucknow'],
+    },
+  },
+  {
+    slug: 'namrata-pandey',
+    name: 'Adv. Namrata Pandey',
+    role: 'Associate Advocate',
+    office: 'lucknow',
+    location: 'Lucknow',
+    credentials: 'B.Com. LL.B., LL.M.',
+    expertise: ['Family & Divorce Matters', 'Property Matters', 'Banking & SARFAESI Matters', 'Service Matters'],
+    img: '/images/Adv. Namrata Pandey.webp',
+    focus: '50% 15%',
+    profile: {
+      summary:
+        'Associate Advocate practising before the Allahabad High Court, Lucknow Bench since 2022, and Lecturer in Law at TRC Law College, Barabanki since February 2021.',
+      bio: [
+        'Namrata Pandey is an Associate Advocate at Sumanjari & Co. Advocates, based in Lucknow and supporting the family and divorce practice. She has been practising independently before the Allahabad High Court, Lucknow Bench since 2022, with experience in property matters, banking and SARFAESI matters, and service matters.',
+        'Her litigation work includes legal drafting, case preparation, legal research and case-law analysis. Alongside her legal practice, she has been working as a Lecturer in Law at TRC Law College, Barabanki since February 2021.',
+        'She holds an LL.M. from Government Law College, Bikaner and a five-year integrated B.Com. LL.B. from Banasthali Vidyapith, Jaipur.',
+      ],
+      sections: [
+        {
+          title: 'Professional Objective',
+          items: [
+            'To contribute legal knowledge, litigation experience and academic skills in a professional environment that encourages learning, responsibility and career growth.',
+          ],
+        },
+        {
+          title: 'Professional Experience',
+          items: [
+            'Advocate - Independent Legal Practice, Allahabad High Court, Lucknow Bench (2022 - Present): legal drafting, case preparation, legal research and litigation-related work in property, banking and SARFAESI, and service matters.',
+            'Lecturer in Law, TRC Law College, Barabanki (February 2021 - Present).',
+          ],
+        },
+        {
+          title: 'Skills',
+          items: ['Legal research and case-law analysis', 'Legal drafting', 'Case preparation', 'Computer knowledge'],
+        },
+        {
+          title: 'Internship & Activities',
+          items: [
+            'Internship under Advocate Mr. Jitendra Singh: researched cases, statutes, precedents and legal topics; reviewed and discussed cases with legal professionals; assisted with filing and clerical tasks; and drafted content for legal booklets, journals and related resources.',
+          ],
+        },
+        {
+          title: 'Interests',
+          items: ['Social activities', 'Photography', 'Travelling'],
+        },
+      ],
+      memberships: [],
+      education: [
+        'LL.M., Government Law College, Bikaner (2021)',
+        'B.Com. LL.B. (Integrated, 5-year programme), Banasthali Vidyapith, Jaipur (2019)',
+        'Class XII (CBSE), Rani Lakshmi Bai Memorial Group of Schools, Lucknow (2014)',
+        'Class X (CBSE), Rani Lakshmi Bai Memorial Group of Schools (2012)',
+      ],
+      languages: ['Hindi', 'English'],
     },
   },
   {

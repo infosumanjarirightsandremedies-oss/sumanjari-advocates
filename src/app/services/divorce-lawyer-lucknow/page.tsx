@@ -24,7 +24,7 @@ const searchContent = serviceSearchContent['divorce-lawyer-lucknow']
 const PAGE_PATH = '/services/divorce-lawyer-lucknow'
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`
 const divorceLead = teamMembers.find((member) => member.slug === 'aishwarya-pandey')
-const divorceTeam = ['jitendra-tiwari', 'akhilesh-yadav', 'prerna-yaduvanshi']
+const divorceTeam = ['jitendra-tiwari', 'akhilesh-yadav', 'namrata-pandey', 'prerna-yaduvanshi']
   .flatMap((slug) => teamMembers.filter((member) => member.slug === slug))
 
 export const metadata: Metadata = {
@@ -283,7 +283,8 @@ export default async function DivorceLawyerPage() {
               Divorce &amp; Matrimonial Support Team
             </h2>
             <p className="mb-8 max-w-3xl font-body leading-relaxed text-navy-700 dark:text-cream/60">
-              Adv. Aishwarya Pandey leads our divorce practice. Supporting
+              Adv. Aishwarya Pandey leads our divorce practice, supported by
+              Adv. Namrata Pandey and the advocates below. Supporting
               advocates bring recorded experience in family, matrimonial and
               connected civil proceedings, with allocation based on the needs
               of the case.

@@ -27,7 +27,7 @@ const ENGLISH_PATH = '/services/divorce-lawyer-lucknow'
 const PAGE_PATH = `${ENGLISH_PATH}/hindi`
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`
 const divorceLead = teamMembers.find(member => member.slug === 'aishwarya-pandey')
-const divorceTeam = ['jitendra-tiwari', 'akhilesh-yadav', 'prerna-yaduvanshi']
+const divorceTeam = ['jitendra-tiwari', 'akhilesh-yadav', 'namrata-pandey', 'prerna-yaduvanshi']
   .flatMap(slug => teamMembers.filter(member => member.slug === slug))
 const serviceIcons = [HeartHandshake, HeartCrack, HandCoins, Baby, ShieldCheck, Scale]
 const headingClass = 'mb-6 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl'

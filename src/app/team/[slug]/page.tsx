@@ -92,17 +92,19 @@ export default async function TeamMemberPage({ params }: PageProps) {
                 <p className="font-body text-navy-800 dark:text-cream/85 text-sm">{member.location}</p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
-              <Scale className={iconClass} />
-              <div>
-                <div className={labelClass}>Professional Memberships</div>
-                <ul className="font-body text-navy-800 dark:text-cream/85 text-sm space-y-1">
-                  {profile.memberships.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
+            {profile.memberships.length > 0 && (
+              <div className="flex items-start gap-3">
+                <Scale className={iconClass} />
+                <div>
+                  <div className={labelClass}>Professional Memberships</div>
+                  <ul className="font-body text-navy-800 dark:text-cream/85 text-sm space-y-1">
+                    {profile.memberships.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </div>
+            )}
           </div>
           <div className="space-y-4">
             <div className="flex items-start gap-3">
