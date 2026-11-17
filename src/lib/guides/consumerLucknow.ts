@@ -73,6 +73,7 @@ export const consumerLucknowToc: GuideTocItem[] = [
   { id: 'consumer-mact-multiplier-fafo', label: 'MACT Compensation & FAFO Appeals' },
   { id: 'consumer-edakhil-filing', label: 'DCDRC & SCDRC E-Daakhil Filing' },
   { id: 'consumer-documents', label: 'First-Consultation Checklist' },
+  { id: 'car-accident-faqs', label: 'Car Accident Lawyer FAQs' },
   { id: 'consumer-mact-claim-review', label: 'Consumer or MACT: Choosing the Route' },
 ]
 

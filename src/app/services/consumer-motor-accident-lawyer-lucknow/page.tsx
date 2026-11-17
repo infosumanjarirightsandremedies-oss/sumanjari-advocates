@@ -220,10 +220,53 @@ const consumerInsights = [
   },
 ]
 
+const carAccidentFaqs = [
+  {
+    title: 'How can a car accident lawyer in Lucknow help with a compensation claim?',
+    excerpt:
+      'A car accident lawyer can review police and medical records, identify the appropriate driver, owner and insurer to include, assess the available compensation route and represent you before the competent Motor Accident Claims Tribunal (MACT). Our Lucknow team reviews jurisdiction, evidence and filing requirements before advising on a claim. Engaging a lawyer does not guarantee compensation or a particular outcome.',
+  },
+  {
+    title: 'What should I do after a car accident before making a claim?',
+    excerpt:
+      'Seek medical attention and contact emergency services where needed, then report the accident to the police and notify the relevant insurer promptly under the policy terms. If safe, preserve photographs, vehicle registration details and witness contacts. Keep treatment records, bills and police acknowledgments. Avoid signing a blank document or full-and-final settlement without understanding its effect.',
+  },
+  {
+    title: 'What documents should I bring to a car accident lawyer?',
+    excerpt:
+      'Bring the FIR or other available police records, accident date and location, vehicle registration and insurance details, medical reports, discharge summaries and treatment bills. Income and age proof, disability assessments and evidence of work-related loss may also be relevant. For a fatal accident, bring available death and dependency records. Seek timely advice even if some documents are still awaited.',
+  },
+  {
+    title: 'Can an injured passenger or pedestrian claim car accident compensation?',
+    excerpt:
+      'An injured passenger or pedestrian may be eligible to seek compensation arising from the use of a motor vehicle. In a fatal accident, eligible legal representatives may bring a claim. The appropriate route, parties, policy coverage and evidence depend on the facts; being involved in an accident does not by itself establish every requirement for compensation.',
+  },
+  {
+    title: 'What compensation can be claimed for car accident injuries?',
+    excerpt:
+      'Depending on the evidence and applicable law, a claim may include medical expenses, loss of earnings during recovery, future treatment needs, pain and suffering, and reduced earning capacity caused by disability. Fatal accident claims involve different heads, including loss of dependency where applicable. A disability percentage alone does not determine lost earning capacity, and no fixed payout can be promised.',
+  },
+  {
+    title: 'Can I file a car accident claim in Lucknow if the accident happened elsewhere?',
+    excerpt:
+      'The accident location is not the only jurisdictional connection considered for a MACT claim. The residence or business of the claimant and the residence of the defendant may also be relevant under the applicable statutory provisions. A lawyer should check the facts and supporting documents before filing; choosing a Lucknow lawyer alone does not give the Lucknow Tribunal jurisdiction.',
+  },
+  {
+    title: 'Can a car accident lawyer help if the insurance company rejects my claim?',
+    excerpt:
+      'A lawyer can review the policy, rejection letter, accident evidence and reasons for refusal to identify the appropriate remedy. A third-party injury claim before MACT is different from an own-damage claim for repairs to your car. Depending on the dispute and eligibility, a policy complaint may require an insurer grievance process, the Insurance Ombudsman or a Consumer Commission rather than MACT. Rejection does not automatically end every remedy or establish entitlement.',
+  },
+  {
+    title: 'How are car accident lawyer fees and claim timelines decided?',
+    excerpt:
+      'Ask for the proposed professional fees, filing expenses and scope of representation at the initial consultation. Costs depend on the work required. The claim timeline depends on service of notice, disputed liability, medical evidence, hearings and any appeal or settlement. No lawyer can guarantee a payment date or award; have the applicable filing deadline checked promptly instead of waiting for all records to arrive.',
+  },
+]
+
 const consumerFaqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: consumerInsights.map(({ title, excerpt }) => ({
+  mainEntity: [...consumerInsights, ...carAccidentFaqs].map(({ title, excerpt }) => ({
     '@type': 'Question',
     name: title,
     acceptedAnswer: {
@@ -518,6 +561,27 @@ export default async function ConsumerMotorAccidentMattersPage() {
               ))}
             </div>
           </div>
+
+          <section id="car-accident-faqs" aria-labelledby="car-accident-faqs-heading" className="mb-16 scroll-mt-28 border-t border-gold-500/20 pt-10">
+            <h2 id="car-accident-faqs-heading" className="mb-4 font-display text-2xl font-bold text-navy-900 dark:text-cream md:text-3xl">
+              Car Accident Lawyer in Lucknow: Frequently Asked Questions
+            </h2>
+            <p className="mb-6 font-body leading-relaxed text-navy-700 dark:text-cream/70">
+              Answers about car accident compensation, insurance disputes and MACT claims. This is general information, not individual legal advice; the available remedy depends on your records and the applicable law.
+            </p>
+            <div className="divide-y divide-gold-500/20 border-y border-gold-500/20">
+              {carAccidentFaqs.map(({ title, excerpt }) => (
+                <details key={title} className="py-5">
+                  <summary className="cursor-pointer font-display text-lg font-bold text-navy-900 dark:text-cream">
+                    {title}
+                  </summary>
+                  <p className="mt-3 font-body leading-relaxed text-navy-700 dark:text-cream/70">
+                    {excerpt}
+                  </p>
+                </details>
+              ))}
+            </div>
+          </section>
 
           <section aria-labelledby="consumer-mact-claim-review" className="mb-16 border-t border-gold-500/20 pt-10">
             <h2 id="consumer-mact-claim-review" className="mb-5 scroll-mt-28 font-display text-2xl font-bold text-navy-900 dark:text-cream">Consumer Complaint or Motor Accident Claim: Which Route Applies?</h2>

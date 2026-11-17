@@ -22,6 +22,7 @@ scripts/supabase-blog-cache/__pycache__/
 !/tests/production/divorce-seo.test.cjs
 !/tests/production/routes.test.cjs
 !/tests/production/corporate-seo.test.cjs
+/tests/production/car-accident-seo.test.cjs
 !/tests/production/service-contact.test.cjs
 /tests/production/bail-seo.test.cjs
 /tests/production/service-hindi.test.cjs
